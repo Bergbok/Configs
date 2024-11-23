@@ -1,0 +1,422 @@
+/* Extension IDs: about:debugging#/runtime/this-firefox */
+
+/* STG */
+@-moz-document 	url("moz-extension://STG-ID-HERE/popup/popup.html"),
+                url("moz-extension://STG-ID-HERE/options/options.html"),
+				url("moz-extension://LAPTOP-STG-ID-HERE/popup/popup.html"),
+				url("moz-extension://LAPTOP-STG-ID-HERE/options/options.html") {
+    :root {
+        --color-hr: #191919 !important;
+        --fill-color: #c8c8c8 !important;
+        --in-content-border-focus: #c8c8c8 !important;
+        --background-color: #212121 !important;
+        --text-color: #c8c8c8 !important;
+        --input-background-color: #191919 !important;
+        --item-background-color-active: #212121 !important;
+        --item-background-color-hover: #191919 !important;
+    }
+
+    .search-input {
+		background-color: white !important;
+        filter: invert(87%) sepia(1%) saturate(0%) hue-rotate(63deg) brightness(92%) contrast(97%) !important;
+    }
+
+    .v-context-menu {
+        background: #191919 !important;
+        border: 1px solid #c8c8c8 !important;
+    }
+
+    #stg-popup .item.is-active-element {
+        background-color: #191919 !important;
+    }
+
+    input,
+    select,
+    button,
+    .button.is-warning,
+    .button.is-success {
+        color: #c8c8c8 !important;
+        background-color: #191919 !important;
+        border-radius: 4px !important;
+        border-color: #c8c8c8 !important;
+    }
+
+    .label {
+        border-color: #c8c8c8 !important;
+    }
+
+    a:hover,
+    .checkbox:hover,
+    select:hover,
+    .radio:hover {
+        color: white !important;
+    }
+
+    .tabs li.is-active a {
+        color: #212121 !important;
+    }
+}
+
+.DxApd {
+	background-color: #212121 !important;
+}
+
+@-moz-document url("about:newtab"), url("about:home") {
+	:root {
+		--newtab-wordmark-color: #c8c8c8 !important;
+		--newtab-text-primary-color: white !important;
+		--newtab-background-color-secondary: #191919 !important;
+		--icon-color: #c8c8c8 !important;
+	}
+
+	body {
+		background-color: #212121 !important;
+	}
+}
+
+@-moz-document url-prefix("about:debugging") {
+	:root {
+		--in-content-text-color: #c8c8c8 !important;
+		--box-background: #191919 !important;
+		--category-text: #c8c8c8 !important;
+		--button-color: #c8c8c8 !important;
+		--button-background-color: #191919 !important;
+	}
+
+	.icon-label--info {
+		--icon-color: #c8c8c8 !important;
+	}
+
+	body {
+		background-color: #212121 !important;
+	}
+
+	.card {
+		background-color: #191919 !important;
+	}
+}
+
+@-moz-document url-prefix("about:preferences") {
+	:root {
+		--background-color-box: #191919 !important;
+		--in-content-text-color: #c8c8c8 !important;
+		--in-content-box-background: #191919 !important;
+		--in-content-box-info-background: #191919 !important;
+	}
+
+	body,
+	#searchInput,
+	.sticky-container {
+		color: #c8c8c8 !important;
+		background-color: #212121 !important;
+	}
+
+	button {
+		background-color: #191919 !important;
+	}
+
+	button,
+	#categories>.category {
+		color: #c8c8c8 !important;
+	}
+}
+
+@-moz-document url-prefix("about:logins") {
+	:root {
+		--in-content-page-color: #c8c8c8 !important;
+		--in-content-box-background: #191919 !important;
+		--in-content-border-color: #f9f9fa40 !important;
+	}
+
+	body,
+	.meta,
+	.filter,
+	.listHeader,
+	body>header:nth-child(1),
+	.container>ol:nth-child(1) {
+		background-color: #212121 !important
+	}
+
+	.list-item.selected {
+		background-color: #191919 !important
+	}
+}
+
+@-moz-document url-prefix("about:config") {
+	:root {
+		--in-content-page-color: #c8c8c8 !important;
+		--background-color-box: #191919 !important;
+		--background-color-canvas: #212121 !important;
+	}
+}
+
+@-moz-document url-prefix("about:addons") {
+	:root {
+		color: #c8c8c8 !important;
+		background-color: #212121 !important;
+		--in-content-text-color: #c8c8c8 !important;
+		--background-color-canvas: #212121 !important;
+		--in-content-box-background: #191919 !important;
+	}
+}
+
+@-moz-document domain("youtube.com") {
+	body {
+		background-color: #212121 !important;
+	}
+}
+
+@-moz-document domain("reddit.com") {
+	.post-background-image-filter {
+		display: none !important;
+	}
+}
+
+@-moz-document domain("google.com") {
+	.sfbg {
+		background: #212121 !important;
+		box-shadow: none !important;
+		margin-top: -26px !important;
+		height: 90px !important;
+	}
+}
+
+@-moz-document domain("twitch.tv") {
+	:root {
+		--color-twitch-purple-6: #191919;
+		--color-twitch-purple-8: transparent !important;
+		--color-twitch-purple-9: transparent !important;
+		--color-hinted-grey-1: #101010 !important;
+		--color-hinted-grey-2: #212121 !important;
+		--color-hinted-grey-3: #191919 !important;
+		--color-background-progress: transparent !important;
+		--color-background-progress-status: #c8c8c8 !important;
+		--color-text-overlay: #c8c8c8 !important;
+	}
+
+	.hcBory {
+		background-color: #212121 !important
+	}
+
+	.hJIJkw {
+		color: pink !important;
+	}
+
+	.announcement-line {
+		border-left: none !important;
+		border-right: none !important;
+	}
+
+	.bvXvLX {
+		border-color: transparent !important;
+	}
+
+	.text-fragment::selection {
+		background: #c8c8c8 !important;
+	}
+
+	div.tw-mg-x-05 {
+		margin-left: -0.42rem !important;
+	}
+
+	input::placeholder {
+		opacity: 0 !important;
+	}
+
+	#channel-player-disclosures,
+	.dRGOOY {
+		margin-bottom: 55px !important;
+	}
+
+	.metadata-layout__secondary-button-spacing {
+		margin-left: -1.8rem !important;
+	}
+
+	.lmNILC {
+		gap: 0px !important;
+	}
+
+	.gLgEjK {
+		flex-wrap: nowrap !important;
+	}
+
+	.jqCeVt {
+		box-shadow: none !important;
+	}
+
+	.fiHaCw {
+		border-bottom: none !important;
+	}
+
+	.gGbkYh {
+		border-left: none !important;
+	}
+
+	.haGrcr {
+		border-top: none !important;
+	}
+
+	.eSFFfM,
+	.storiesLeftNavSectionCollapsedButton--txKvw {
+		background-color: transparent !important;
+	}
+
+	.kLMGYG>div:nth-child(1)>button:nth-child(1) {
+		color: transparent !important;
+	}
+
+	.stream-chat-header {
+		height: 0 !important;
+	}
+
+	.pMQwv {
+		border-bottom: transparent !important;
+	}
+
+	.gScvvJ {
+		padding-left: 10px !important;
+		padding-right: 10px !important;
+	}
+
+	.user-notice-line {
+		border-left-color: transparent !important;
+	}
+
+	.ffz--reply-mention {
+		background-color: #191919 !important;
+		padding: 0.25rem 1rem 0.5rem 0.5rem !important;
+	}
+
+	.ffz--chat-card .ffz-accent-card {
+		border-right: none !important;
+	}
+
+	.ffz--rich-header {
+		margin-left: 0.5rem !important;
+		margin-right: 0.5rem !important;
+	}
+
+	.ffz__tooltip {
+		color: #c8c8c8 !important;
+		background: #191919 !important;
+	}
+
+	.tw-elevation-1 {
+		box-shadow: none !important;
+	}
+
+	div[aria-label="Channel is Live"]>div>div {
+		--color-accent: transparent !important;
+	}
+
+	.video-chat__message-list-wrapper {
+		scrollbar-width: none !important;
+	}
+
+	.cFdOrq,
+	.tc-upsell,
+	.onsite-notifications__badge,
+	[data-tooltip-type="blocked"],
+	div.Layout-sc-1xcs6mc-0 czRfnU,
+	li:has(a[href="/settings/prime"]),
+	a.side-nav-card[href="/slwalekop"],
+	.tw-mg-t-05.tw-border-t.tw-pd-t-05 {
+		display: none !important;
+	}
+}
+
+@-moz-document domain("7tv.app") {
+	[censor="true"] {
+		filter: none !important;
+		image-rendering: auto !important;
+	}
+}
+
+@-moz-document domain("web.whatsapp.com") {
+	.app-wrapper-web ._aigs {
+		top: 0 !important;
+		width: 100% !important;
+		height: 100% !important;
+		margin: 0 !important;
+		max-width: none !important;
+	}
+
+	._al_d,
+	.xz9dl7a,
+	span.x1okw0bk>div:nth-child(1)>span:nth-child(1)>div:nth-child(1)>div:nth-child(1) {
+		display: none !important;
+	}
+}
+
+@-moz-document domain("instagram.com") {
+	html {
+		--ig-primary-background: 33, 33, 33 !important;
+	}
+}
+
+@-moz-document domain("gemini.google.com") {
+	.sidenav-with-history-container,
+	bard-sidenav-container.ng-star-inserted>bard-sidenav-content:nth-child(2) {
+		background-color: #212121 !important;
+	}
+
+	.capabilities-disclaimer {
+		opacity: 0 !important;
+	}
+
+	zero-state-v2,
+	announcement-banner,
+	.xap-count-badge-dot {
+		display: none !important;
+	}
+}
+
+@-moz-document domain("mail.google.com") {
+    .z0>.L3 {
+		background-color: #595959 !important;
+	}
+    
+    .WR .z0>.L3 {
+		min-width: 208px !important;
+		color: white !important;
+	}
+
+	.z0>.L3::before {
+		background-image: url('https://www.gstatic.com/images/icons/material/colored_icons/1x/create_32dp.png') !important;
+	}
+}
+
+/* 600% Volume Boost */
+/* @-moz-document  url("moz-extension://VOLUME-BOOST-ID-HERE/popup/index.html"),
+                url("moz-extension://LAPTOP-VOLUME-BOOST-ID-HERE/popup/index.html") {
+	body {
+		background-color: #212121 !important;
+	}
+    .header__name {
+        display: none !important;
+    }
+	.header__description {
+		display: none !important;
+	}
+	.volume-slider > button:nth-child(1) {
+		display: none !important;
+	}
+	.volume-slider > button:nth-child(2) {
+		display: none !important;
+	}
+	.volume-info__volume-current {
+		color: #c8c8c8 !important;
+	}
+	#app > footer:nth-child(6) {
+		display: none !important;
+	}
+	.tabs__title {
+		color: #c8c8c8 !important;
+	}
+	.tabs {
+		margin-top: 0.69em !important;
+	}
+	.tab__title {
+		color: #c8c8c8 !important;
+	}
+} */
