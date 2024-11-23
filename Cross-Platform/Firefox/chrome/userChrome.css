@@ -1,0 +1,192 @@
+/*
+Linux: ~/.mozilla/firefox/-/chrome
+Windows: %APPDATA%\Mozilla\Firefox\Profiles\-\chrome
+
+https://mozilla.design/firefox/#color
+*/
+
+:root {
+	--toolbarbutton-icon-fill: #c8c8c8 !important;
+	--toolbox-non-lwt-textcolor: #c8c8c8 !important;
+	--toolbox-non-lwt-textcolor-inactive: #c8c8c8 !important;
+	--inactive-titlebar-opacity: 1 !important;
+	--toolbarbutton-hover-background: #191919 !important;
+	--color-accent-primary: #c8c8c8 !important;
+	--arrowpanel-color: #c8c8c8 !important;
+	--button-background-color-active: #cfcfd866 !important;
+	--arrowpanel-border-color: #c8c8c8 !important;
+}
+
+#identity-icon-box {
+	background-color: transparent !important;
+}
+
+#appMenu-libraryView,
+#appMenu-protonMainView {
+	--arrowpanel-background: #191919 !important;
+	color: white !important;
+}
+
+#TabsToolbar,
+#PersonalToolbar {
+	background-color: #212121 !important;
+}
+
+toolbarbutton#downloads-button>stack.toolbarbutton-badge-stack>box>image {
+	fill: #00b3f5 !important;
+}
+
+#PersonalToolbar .toolbarbutton-text {
+	color: #c8c8c8 !important;
+}
+
+.urlbarView-row[label]::before {
+	color: white !important;
+}
+
+#alltabs-button,
+#unified-extensions-view>box:nth-child(1),
+#unified-extensions-view>toolbarseparator:nth-child(2) {
+	display: none !important;
+}
+
+browser,
+panelview,
+#urlbar-zoom-button {
+	background-color: #212121 !important;
+}
+
+#urlbar {
+	color: white !important;
+}
+
+#urlbar-background,
+#searchbar {
+	background-color: #191919 !important;
+	--toolbar-field-background-color: #191919 !important;
+}
+
+.titlebar-button {
+	stroke: #c8c8c8 !important;
+}
+
+.tabbrowser-tab .tab-label,
+.tabbrowser-tab .tab-close-button,
+.tabbrowser-tab .tab-icon-overlay,
+.tabbrowser-tab .tab-icon-sound-label {
+	color: #c8c8c8 !important;
+}
+
+#urlbar-background,
+.tabbrowser-tab[selected] .tab-label,
+.tabbrowser-tab[selected] .tab-close-button,
+.tabbrowser-tab[selected] .tab-icon-overlay,
+.tabbrowser-tab[selected] .tab-icon-sound-label {
+	color: black !important;
+}
+
+.toolbarbutton-icon[src="page-icon:https://www.icloud.com/"],
+.toolbarbutton-icon[src="page-icon:https://web.whatsapp.com/"],
+.toolbarbutton-icon[src="page-icon:http://radio.garden/search"],
+.toolbarbutton-icon[src="page-icon:http://pi-hostname-here.local/admin/"],
+.toolbarbutton-icon[src="page-icon:http://phone-hostname-here.local/"] {
+	width: 0 !important;
+	height: 0 !important;
+	padding: 0 0 16px 16px !important;
+}
+
+.toolbarbutton-icon[src="page-icon:https://github.com/"],
+.toolbarbutton-icon[src="page-icon:https://developer.spotify.com/documentation/web-api"] {
+	filter: invert()
+}
+
+.toolbarbutton-icon[src="page-icon:https://www.icloud.com/"] {
+	background: url("./Icons/apple.png") !important;
+}
+
+.toolbarbutton-icon[src="page-icon:https://web.whatsapp.com/"] {
+	background: url("./Icons/whatsapp.png") !important;
+}
+
+.toolbarbutton-icon[src="page-icon:http://radio.garden/search"] {
+	background: url("./Icons/radiogarden.png") !important;
+}
+
+.toolbarbutton-icon[src="page-icon:http://pi-hostname-here.local/admin/"] {
+	background: url("./Icons/pihole.svg") !important;
+}
+
+.toolbarbutton-icon[src="page-icon:http://phone-hostname-here.local/"] {
+	background: url("./Icons/vlc.ico") !important;
+}
+
+toolbarbutton#magnolia_12_34-BAP > stack > image,
+toolbarbutton#bypasspaywalls_bypasspaywalls-BAP > stack > image,
+toolbarbutton > image[src^="https://addons.mozilla.org/user-media/addon_icons/908/908541-32.png"],
+toolbarbutton > image[src^="https://addons.mozilla.org/user-media/addon_icons/1001/1001948-32.png"] {
+	filter: invert(87%) sepia(1%) saturate(0%) hue-rotate(63deg) brightness(92%) contrast(97%) !important;
+}
+
+#navigator-toolbox {
+	--toolbar-bgcolor: #212121 !important;
+	border-bottom: none !important;
+}
+
+#nav-bar {
+	--toolbar-bgcolor: #212121 !important;
+}
+
+#tabbrowser-tabs {
+	--tab-loading-fill: black !important;
+}
+
+.tabbrowser-tab:is([visuallyselected], [multiselected]),
+#TabsToolbar #firefox-view-button[open]>.toolbarbutton-icon {
+	color: #212121 !important;
+}
+
+.tab-background[selected] {
+	background: #c8c8c8 !important;
+}
+
+#urlbar-zoom-button {
+	color: #ffffff !important;
+}
+
+menupopup {
+	--panel-color: #c8c8c8 !important;
+	--panel-background: #191919 !important;
+}
+
+panelview {
+	--arrowpanel-background: #191919 !important;
+	color: #c8c8c8 !important;
+}
+
+#PlacesToolbar menupopup[placespopup="true"] {
+	--arrowpanel-background: #191919 !important;
+	--arrowpanel-color: #c8c8c8 !important;
+}
+
+.titlebar-close:hover {
+	background-color: #5d1c22 !important;
+}
+
+#appMenu-fxa-separator {
+	border-image: none !important;
+}
+
+#PlacesToolbarItems>toolbarseparator {
+	color: #c8c8c81c !important;
+}
+
+#_c4b582ec-4343-438c-bda2-2f691c16c262_-BAP>stack:nth-child(1)>image:nth-child(1) {
+	filter: brightness(0) saturate(100%) invert(94%) sepia(0%) saturate(0%) hue-rotate(162deg) brightness(88%) contrast(86%) !important;
+}
+
+.autoscroller {
+	--panel-background: transparent !important;
+	--panel-border-color: none !important;
+	--autoscroll-background-image: none !important;
+	background: transparent url('./Icons/all-scroll.png') no-repeat center !important;
+}
