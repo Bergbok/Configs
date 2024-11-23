@@ -1,0 +1,70 @@
+a[href='/shop'],
+.actionButton_e01b91,
+[aria-label='GET_PREMIUM'],
+[class*='burstReactionTooltipUpsell'],
+[class*='burstReactionTooltipSpacer'],
+[class*='reactionEmojiDetailsDivider'],
+[aria-label='super reaction tooltip upsell'],
+[aria-label='A better way to react on Discord'],
+div.scroller_c47fa9.thin_eed6a8.scrollerBase_eed6a8.fade_eed6a8 > ul > li:nth-child(n+3):nth-child(-n+4),
+div.flex_dc333f.horizontal_dc333f.justifyCenter_ec1a20.alignCenter_ec1a20.wrap_ec1a20.otherEmojisContainer_e58351 > button,
+#app-mount > div.appAsidePanelWrapper_bd26cc > div.notAppAsidePanel_bd26cc > div.app_bd26cc > div > div.layers_d4b6c5.layers_a01fb1 > div:nth-child(2) > div > div.sidebarRegion_c25c6d > div > nav > div > div.premiumTab_c10c74.item_a0.themed_a0 > div.premiumLabel_ae3c77 > div {
+    display: none !important;
+}
+
+.notice_be03aa,
+[class*='header'],							/* Line between server title and Events */
+[class*='searchBar'] {						/* Line between "Find or start a conversation" and Friends */
+    box-shadow: none !important;
+}
+
+div[class*='friendsBadge'] {
+    background: none;
+}
+
+.bd-addon-error,
+[class*='outer'] {							/* Background of active users on friends tab */	
+    background-color: #191919 !important;
+}
+
+[class*='colorInfo'] {
+    background-color: #212121 !important;
+}
+
+[class*='fileNameLink'],
+div.reactionCount_ec6b19,
+.blockedSystemMessage_c09d0f:hover .blockedAction_c09d0f {
+    color: #c8c8c8 !important;
+}
+
+.operations_baf0d6 > a,
+.ephemeralMessage_eccadc a,
+#guild-context-invite-people > div,
+.reset_fa7401.lookLink_dd4f85.colorLink_dd4f85,
+.colorBrand_d90b3d:not(.focused_d90b3d):not(:active) {
+    color: var(--interactive-normal) !important;
+}
+
+/* # EMOTE PICKER */
+/* ## Nitro Hiding */
+[class*='upsellContainer'],					/* Nitro ad that appears when scrolling down */
+[class*='nitroBottomDivider'],				/* Thin line between servers */
+[class*='emojiLockIconContainer'],			/* Lock icons on emojis & darkening overlay */ 
+[class*='nitroTopDividerContainer'],		/* Divider between "Frequently Used" and server emojis */
+[class*='categoryItemLockIconContainer'] {	/* Lock icons on server icons */
+    display: none !important;
+}
+[class*='categorySectionNitroLocked'] {		/* Pink background */
+    background-color: transparent !important;
+}
+/* ## Misc */
+.emoji.jumboable {							/* Enlarge native (real) emojis */		
+    width:150px !important;
+    height:150px !important;
+}
+[class*='positionLayer'] {					/* Enlarge emoji/sticker/gif drawer */
+    height: calc(100vh - 220px) !important;
+}
+button[aria-label='Send a gift'] {
+    display: none !important;
+}
