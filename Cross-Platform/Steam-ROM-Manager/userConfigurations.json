@@ -1,0 +1,1103 @@
+[
+    {
+        "parserType": "Glob",
+        "configTitle": "Nintendo 64 - Ares",
+        "steamDirectory": "${steamdirglobal}",
+        "romDirectory": "roms-path-here\\N64",
+        "steamCategories": [
+            "Non-Steam"
+        ],
+        "executableArgs": "--system \"Nintendo 64\" \"${filePath}\"",
+        "executableModifier": "\"${exePath}\"",
+        "startInDirectory": "",
+        "titleModifier": "${fuzzyTitle}",
+        "steamInputEnabled": "1",
+        "imageProviders": [
+            "sgdb"
+        ],
+        "onlineImageQueries": [
+            "${fuzzyTitle}"
+        ],
+        "imagePool": "${fuzzyTitle}",
+        "drmProtect": false,
+        "userAccounts": {
+            "specifiedAccounts": [
+                "steam-account-name-here"
+            ]
+        },
+        "parserInputs": {
+            "glob": "${title}@(.7z|.7Z|.n64|.N64|.v64|.V64|.z64|.Z64|.zip|.ZIP)"
+        },
+        "executable": {
+            "path": "ares-executable-path-here",
+            "shortcutPassthrough": false,
+            "appendArgsToExecutable": true
+        },
+        "titleFromVariable": {
+            "limitToGroups": [],
+            "caseInsensitiveVariables": false,
+            "skipFileIfVariableWasNotFound": false
+        },
+        "fuzzyMatch": {
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "controllers": {
+            "ps4": null,
+            "ps5": null,
+            "ps5_edge": null,
+            "xbox360": null,
+            "xboxone": null,
+            "xboxelite": null,
+            "switch_joycon_left": null,
+            "switch_joycon_right": null,
+            "switch_pro": null,
+            "neptune": null,
+            "steamcontroller_gordon": null
+        },
+        "imageProviderAPIs": {
+            "sgdb": {
+                "nsfw": false,
+                "humor": false,
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": [],
+                "imageMotionTypes": [
+                    "static"
+                ],
+                "sizes": [],
+                "sizesHero": [],
+                "sizesIcon": []
+            }
+        },
+        "defaultImage": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "localImages": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "parserId": "171810750332432648",
+        "version": 25
+    },
+    {
+        "parserType": "Glob",
+        "configTitle": "Nintendo GameBoy - SameBoy",
+        "steamDirectory": "${steamdirglobal}",
+        "romDirectory": "roms-path-here\\Gameboy",
+        "executableArgs": "\"${filePath}\"",
+        "executableModifier": "\"${exePath}\"",
+        "startInDirectory": "",
+        "titleModifier": "${fuzzyTitle}",
+        "steamInputEnabled": "1",
+        "imageProviders": [
+            "sgdb"
+        ],
+        "imagePool": "${fuzzyTitle}",
+        "drmProtect": false,
+        "userAccounts": {
+            "specifiedAccounts": [
+                "steam-account-name-here"
+            ]
+        },
+        "executable": {
+            "path": "sameboy-executable-path-here",
+            "shortcutPassthrough": false,
+            "appendArgsToExecutable": true
+        },
+        "parserInputs": {
+            "glob": "${title}@(.gb|.gbc|.gba)"
+        },
+        "titleFromVariable": {
+            "caseInsensitiveVariables": false,
+            "skipFileIfVariableWasNotFound": false,
+            "limitToGroups": []
+        },
+        "fuzzyMatch": {
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "controllers": {
+            "ps4": null,
+            "ps5": null,
+            "ps5_edge": null,
+            "xbox360": null,
+            "xboxone": null,
+            "xboxelite": null,
+            "switch_joycon_left": null,
+            "switch_joycon_right": null,
+            "switch_pro": null,
+            "neptune": null,
+            "steamcontroller_gordon": null
+        },
+        "imageProviderAPIs": {
+            "sgdb": {
+                "nsfw": false,
+                "humor": false,
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": [],
+                "imageMotionTypes": [
+                    "static"
+                ],
+                "sizes": [],
+                "sizesHero": [],
+                "sizesIcon": []
+            }
+        },
+        "defaultImage": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "localImages": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "parserId": "171812950432985396",
+        "version": 25,
+        "steamCategories": [
+            "Non-Steam"
+        ],
+        "onlineImageQueries": [
+            "${fuzzyTitle}"
+        ],
+        "disabled": false
+    },
+    {
+        "parserType": "Glob",
+        "configTitle": "Nintendo GameCube - Dolphin",
+        "steamDirectory": "${steamdirglobal}",
+        "romDirectory": "roms-path-here\\GameCube",
+        "executableArgs": "-b -e \"${filePath}\"",
+        "executableModifier": "\"${exePath}\"",
+        "startInDirectory": "",
+        "titleModifier": "${fuzzyTitle}",
+        "steamInputEnabled": "1",
+        "imageProviders": [
+            "sgdb"
+        ],
+        "imagePool": "${fuzzyTitle}",
+        "drmProtect": false,
+        "userAccounts": {
+            "specifiedAccounts": [
+                "steam-account-name-here"
+            ]
+        },
+        "executable": {
+            "path": "dolphin-executable-path-here",
+            "shortcutPassthrough": false,
+            "appendArgsToExecutable": true
+        },
+        "parserInputs": {
+            "glob": "${title}@(.ciso|.CISO|.dol|.DOL|.elf|.ELF|.gcm|.GCM|.gcz|.GCZ|.iso|.ISO|.nkit.iso|.NKIT.ISO|.rvz|.RVZ|.wad|.WAD|.wia|.WIA)"
+        },
+        "titleFromVariable": {
+            "caseInsensitiveVariables": false,
+            "skipFileIfVariableWasNotFound": false,
+            "limitToGroups": []
+        },
+        "fuzzyMatch": {
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "controllers": {
+            "ps4": null,
+            "ps5": null,
+            "ps5_edge": null,
+            "xbox360": null,
+            "xboxone": null,
+            "xboxelite": null,
+            "switch_joycon_left": null,
+            "switch_joycon_right": null,
+            "switch_pro": null,
+            "neptune": null,
+            "steamcontroller_gordon": null
+        },
+        "imageProviderAPIs": {
+            "sgdb": {
+                "nsfw": false,
+                "humor": false,
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": [],
+                "imageMotionTypes": [
+                    "static"
+                ],
+                "sizes": [],
+                "sizesHero": [],
+                "sizesIcon": []
+            }
+        },
+        "defaultImage": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "localImages": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "parserId": "171810622420999254",
+        "version": 25,
+        "steamCategories": [
+            "Non-Steam"
+        ],
+        "onlineImageQueries": [
+            "${fuzzyTitle}"
+        ],
+        "disabled": false
+    },
+    {
+        "parserType": "Glob",
+        "configTitle": "Nintendo Switch - Ryujinx",
+        "steamDirectory": "${steamdirglobal}",
+        "romDirectory": "roms-path-here\\Switch",
+        "executableArgs": "--fullscreen \"${filePath}\"",
+        "executableModifier": "\"${exePath}\"",
+        "startInDirectory": "",
+        "titleModifier": "${fuzzyTitle}",
+        "steamInputEnabled": "1",
+        "imageProviders": [
+            "sgdb"
+        ],
+        "imagePool": "${fuzzyTitle}",
+        "drmProtect": false,
+        "userAccounts": {
+            "specifiedAccounts": [
+                "steam-account-name-here"
+            ]
+        },
+        "executable": {
+            "path": "ryujinx-executable-path-here",
+            "shortcutPassthrough": false,
+            "appendArgsToExecutable": true
+        },
+        "parserInputs": {
+            "glob": "*/${title}@(.nca|.NCA|.nro|.NRO|.nso|.NSO|.nsp|.NSP|.xci|.XCI)"
+        },
+        "titleFromVariable": {
+            "caseInsensitiveVariables": false,
+            "skipFileIfVariableWasNotFound": false,
+            "limitToGroups": []
+        },
+        "fuzzyMatch": {
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "controllers": {
+            "ps4": null,
+            "ps5": null,
+            "ps5_edge": null,
+            "xbox360": null,
+            "xboxone": null,
+            "xboxelite": null,
+            "switch_joycon_left": null,
+            "switch_joycon_right": null,
+            "switch_pro": null,
+            "neptune": null,
+            "steamcontroller_gordon": null
+        },
+        "imageProviderAPIs": {
+            "sgdb": {
+                "nsfw": false,
+                "humor": false,
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": [],
+                "imageMotionTypes": [
+                    "static"
+                ],
+                "sizes": [],
+                "sizesHero": [],
+                "sizesIcon": []
+            }
+        },
+        "defaultImage": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "localImages": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "parserId": "171810654455048556",
+        "version": 25,
+        "steamCategories": [
+            "Non-Steam"
+        ],
+        "onlineImageQueries": [
+            "${fuzzyTitle}"
+        ],
+        "disabled": false
+    },
+    {
+        "parserType": "Glob",
+        "configTitle": "Nintendo WiiU - Cemu (RPX - Installed)",
+        "steamDirectory": "${steamdirglobal}",
+        "romDirectory": "cemu-path-here\\mlc01\\usr\\title\\00050000",
+        "executableArgs": "-f -g \"${filePath}\"",
+        "executableModifier": "\"${exePath}\"",
+        "startInDirectory": "",
+        "titleModifier": "${fuzzyTitle}",
+        "steamInputEnabled": "1",
+        "imageProviders": [
+            "sgdb"
+        ],
+        "imagePool": "${fuzzyTitle}",
+        "drmProtect": false,
+        "userAccounts": {
+            "specifiedAccounts": [
+                "steam-account-name-here"
+            ]
+        },
+        "executable": {
+            "path": "cemu-executable-path-here",
+            "shortcutPassthrough": false,
+            "appendArgsToExecutable": true
+        },
+        "parserInputs": {
+            "glob": "${title}/*/*@(.rpx|.RPX)"
+        },
+        "titleFromVariable": {
+            "caseInsensitiveVariables": true,
+            "skipFileIfVariableWasNotFound": false,
+            "limitToGroups": [
+                "WIIU"
+            ]
+        },
+        "fuzzyMatch": {
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "controllers": {
+            "ps4": null,
+            "ps5": null,
+            "ps5_edge": null,
+            "xbox360": null,
+            "xboxone": null,
+            "xboxelite": null,
+            "switch_joycon_left": null,
+            "switch_joycon_right": null,
+            "switch_pro": null,
+            "neptune": null,
+            "steamcontroller_gordon": null
+        },
+        "imageProviderAPIs": {
+            "sgdb": {
+                "nsfw": false,
+                "humor": false,
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": [],
+                "imageMotionTypes": [
+                    "static"
+                ],
+                "sizes": [],
+                "sizesHero": [],
+                "sizesIcon": []
+            }
+        },
+        "defaultImage": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "localImages": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": "${dir}/../*${/\\[.*?\\]/g|${title}|}*/meta/iconTex.tga"
+        },
+        "parserId": "171810597343350437",
+        "version": 25,
+        "steamCategories": [
+            "Non-Steam"
+        ],
+        "onlineImageQueries": [
+            "${fuzzyTitle}"
+        ],
+        "disabled": false
+    },
+    {
+        "parserType": "Glob",
+        "configTitle": "Sony PlayStation 3 - RPCS3 (Extracted ISO)",
+        "steamDirectory": "${steamdirglobal}",
+        "romDirectory": "roms-path-here\\PS3",
+        "executableArgs": "--no-gui \"${filePath}\"",
+        "executableModifier": "\"${exePath}\"",
+        "startInDirectory": "",
+        "titleModifier": "${fuzzyTitle}",
+        "steamInputEnabled": "1",
+        "imageProviders": [
+            "sgdb"
+        ],
+        "imagePool": "${fuzzyTitle}",
+        "drmProtect": false,
+        "userAccounts": {
+            "specifiedAccounts": [
+                "steam-account-name-here"
+            ]
+        },
+        "executable": {
+            "path": "rpcs3-executable-path-here",
+            "shortcutPassthrough": false,
+            "appendArgsToExecutable": true
+        },
+        "parserInputs": {
+            "glob": "${title}/PS3_GAME/USRDIR/@(eboot.bin|EBOOT.BIN)"
+        },
+        "titleFromVariable": {
+            "caseInsensitiveVariables": false,
+            "skipFileIfVariableWasNotFound": false,
+            "limitToGroups": [
+                "PS3"
+            ]
+        },
+        "fuzzyMatch": {
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "controllers": {
+            "ps4": null,
+            "ps5": null,
+            "ps5_edge": null,
+            "xbox360": null,
+            "xboxone": null,
+            "xboxelite": null,
+            "switch_joycon_left": null,
+            "switch_joycon_right": null,
+            "switch_pro": null,
+            "neptune": null,
+            "steamcontroller_gordon": null
+        },
+        "imageProviderAPIs": {
+            "sgdb": {
+                "nsfw": false,
+                "humor": false,
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": [],
+                "imageMotionTypes": [
+                    "static"
+                ],
+                "sizes": [],
+                "sizesHero": [],
+                "sizesIcon": []
+            }
+        },
+        "defaultImage": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "localImages": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "parserId": "17181076286127758",
+        "version": 25,
+        "steamCategories": [
+            "Non-Steam"
+        ],
+        "onlineImageQueries": [
+            "${fuzzyTitle}"
+        ],
+        "disabled": false
+    },
+    {
+        "parserType": "Glob",
+        "configTitle": "Sony PlayStation Portable - PPSSPP",
+        "steamDirectory": "${steamdirglobal}",
+        "romDirectory": "roms-path-here\\PSP",
+        "executableArgs": "--fullscreen \"${filePath}\"",
+        "executableModifier": "\"${exePath}\"",
+        "startInDirectory": "",
+        "titleModifier": "${fuzzyTitle}",
+        "steamInputEnabled": "1",
+        "imageProviders": [
+            "sgdb"
+        ],
+        "imagePool": "${fuzzyTitle}",
+        "drmProtect": false,
+        "userAccounts": {
+            "specifiedAccounts": [
+                "steam-account-name-here"
+            ]
+        },
+        "executable": {
+            "path": "ppsspp-executable-path-here",
+            "shortcutPassthrough": false,
+            "appendArgsToExecutable": true
+        },
+        "parserInputs": {
+            "glob": "*/${title}@(.elf|.ELF|.cso|.CSO|.iso|.ISO|.pbp|.PBP|.prx|.PRX)"
+        },
+        "titleFromVariable": {
+            "caseInsensitiveVariables": false,
+            "skipFileIfVariableWasNotFound": false,
+            "limitToGroups": []
+        },
+        "fuzzyMatch": {
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "controllers": {
+            "ps4": null,
+            "ps5": null,
+            "ps5_edge": null,
+            "xbox360": null,
+            "xboxone": null,
+            "xboxelite": null,
+            "switch_joycon_left": null,
+            "switch_joycon_right": null,
+            "switch_pro": null,
+            "neptune": null,
+            "steamcontroller_gordon": null
+        },
+        "imageProviderAPIs": {
+            "sgdb": {
+                "nsfw": false,
+                "humor": false,
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": [],
+                "imageMotionTypes": [
+                    "static"
+                ],
+                "sizes": [],
+                "sizesHero": [],
+                "sizesIcon": []
+            }
+        },
+        "defaultImage": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "localImages": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "parserId": "171810740298232113",
+        "version": 25,
+        "steamCategories": [
+            "Non-Steam"
+        ],
+        "onlineImageQueries": [
+            "${fuzzyTitle}"
+        ],
+        "disabled": false
+    },
+    {
+        "parserType": "Steam",
+        "configTitle": "Steam - Demos",
+        "steamDirectory": "${steamdirglobal}",
+        "romDirectory": "",
+        "steamCategories": [],
+        "executableArgs": "",
+        "executableModifier": "",
+        "startInDirectory": "",
+        "titleModifier": "${/:/|${title}|}",
+        "steamInputEnabled": "1",
+        "imageProviders": [
+            "sgdb",
+            "steamCDN"
+        ],
+        "onlineImageQueries": [
+            "${title}"
+        ],
+        "imagePool": "${title}",
+        "drmProtect": false,
+        "userAccounts": {
+            "specifiedAccounts": [
+                "steam-account-name-here"
+            ]
+        },
+        "parserInputs": {
+            "appTypes": [
+                "demo"
+            ],
+            "onlyInstalled": null
+        },
+        "executable": {
+            "path": "",
+            "shortcutPassthrough": false,
+            "appendArgsToExecutable": true
+        },
+        "titleFromVariable": {
+            "limitToGroups": [],
+            "caseInsensitiveVariables": false,
+            "skipFileIfVariableWasNotFound": false
+        },
+        "fuzzyMatch": {
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "controllers": {
+            "ps4": null,
+            "ps5": null,
+            "ps5_edge": null,
+            "xbox360": null,
+            "xboxone": null,
+            "xboxelite": null,
+            "switch_joycon_left": null,
+            "switch_joycon_right": null,
+            "switch_pro": null,
+            "neptune": null,
+            "steamcontroller_gordon": null
+        },
+        "imageProviderAPIs": {
+            "sgdb": {
+                "nsfw": false,
+                "humor": false,
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": [],
+                "imageMotionTypes": [
+                    "static"
+                ],
+                "sizes": [],
+                "sizesHero": [],
+                "sizesIcon": []
+            }
+        },
+        "defaultImage": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "localImages": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "parserId": "173012833387118392",
+        "version": 25
+    },
+    {
+        "parserType": "Steam",
+        "configTitle": "Steam - Full Games",
+        "steamDirectory": "${steamdirglobal}",
+        "romDirectory": "",
+        "steamCategories": [],
+        "executableArgs": "",
+        "executableModifier": "",
+        "startInDirectory": "",
+        "titleModifier": "${/:/|${title}|}",
+        "steamInputEnabled": "1",
+        "imageProviders": [
+            "sgdb",
+            "steamCDN"
+        ],
+        "onlineImageQueries": [
+            "${title}"
+        ],
+        "imagePool": "${title}",
+        "drmProtect": false,
+        "userAccounts": {
+            "specifiedAccounts": [
+                "Global"
+            ]
+        },
+        "parserInputs": {
+            "appTypes": [
+                "game"
+            ],
+            "onlyInstalled": null
+        },
+        "executable": {
+            "path": "",
+            "shortcutPassthrough": false,
+            "appendArgsToExecutable": true
+        },
+        "titleFromVariable": {
+            "limitToGroups": [],
+            "caseInsensitiveVariables": false,
+            "skipFileIfVariableWasNotFound": false
+        },
+        "fuzzyMatch": {
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "controllers": {
+            "ps4": null,
+            "ps5": null,
+            "ps5_edge": null,
+            "xbox360": null,
+            "xboxone": null,
+            "xboxelite": null,
+            "switch_joycon_left": null,
+            "switch_joycon_right": null,
+            "switch_pro": null,
+            "neptune": null,
+            "steamcontroller_gordon": null
+        },
+        "imageProviderAPIs": {
+            "sgdb": {
+                "nsfw": false,
+                "humor": false,
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": [],
+                "imageMotionTypes": [
+                    "static"
+                ],
+                "sizes": [],
+                "sizesHero": [],
+                "sizesIcon": []
+            }
+        },
+        "defaultImage": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "localImages": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "parserId": "171813171295353586",
+        "version": 25
+    },
+    {
+        "parserType": "Steam",
+        "configTitle": "Steam - Source Mods",
+        "steamDirectory": "${steamdirglobal}",
+        "romDirectory": "",
+        "steamCategories": [],
+        "executableArgs": "",
+        "executableModifier": "",
+        "startInDirectory": "",
+        "titleModifier": "",
+        "steamInputEnabled": "1",
+        "imageProviders": [
+            "sgdb",
+            "steamCDN"
+        ],
+        "onlineImageQueries": [
+            "${fuzzyTitle}"
+        ],
+        "imagePool": "",
+        "drmProtect": false,
+        "userAccounts": {
+            "specifiedAccounts": [
+                "steam-account-name-here"
+            ]
+        },
+        "parserInputs": {
+            "appTypes": [
+                "application",
+                "sourcemods"
+            ],
+            "onlyInstalled": null
+        },
+        "executable": {
+            "path": "",
+            "shortcutPassthrough": false,
+            "appendArgsToExecutable": false
+        },
+        "titleFromVariable": {
+            "limitToGroups": [],
+            "caseInsensitiveVariables": false,
+            "skipFileIfVariableWasNotFound": false
+        },
+        "fuzzyMatch": {
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "controllers": {
+            "ps4": null,
+            "ps5": null,
+            "ps5_edge": null,
+            "xbox360": null,
+            "xboxone": null,
+            "xboxelite": null,
+            "switch_joycon_left": null,
+            "switch_joycon_right": null,
+            "switch_pro": null,
+            "neptune": null,
+            "steamcontroller_gordon": null
+        },
+        "imageProviderAPIs": {
+            "sgdb": {
+                "nsfw": false,
+                "humor": false,
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": [],
+                "imageMotionTypes": [
+                    "static"
+                ],
+                "sizes": [],
+                "sizesHero": [],
+                "sizesIcon": []
+            }
+        },
+        "defaultImage": {
+            "tall": null,
+            "long": null,
+            "hero": null,
+            "logo": null,
+            "icon": null
+        },
+        "localImages": {
+            "tall": null,
+            "long": null,
+            "hero": null,
+            "logo": null,
+            "icon": null
+        },
+        "parserId": "17301283693432321",
+        "version": 25
+    },
+    {
+        "parserType": "Steam",
+        "configTitle": "Steam - Tools",
+        "steamDirectory": "${steamdirglobal}",
+        "romDirectory": "",
+        "steamCategories": [],
+        "executableArgs": "",
+        "executableModifier": "",
+        "startInDirectory": "",
+        "titleModifier": "",
+        "steamInputEnabled": "1",
+        "imageProviders": [
+            "sgdb",
+            "steamCDN"
+        ],
+        "onlineImageQueries": [
+            "${fuzzyTitle}"
+        ],
+        "imagePool": "",
+        "drmProtect": false,
+        "userAccounts": {
+            "specifiedAccounts": [
+                "steam-account-name-here"
+            ]
+        },
+        "parserInputs": {
+            "appTypes": [
+                "application"
+            ],
+            "onlyInstalled": null
+        },
+        "executable": {
+            "path": "",
+            "shortcutPassthrough": false,
+            "appendArgsToExecutable": false
+        },
+        "titleFromVariable": {
+            "limitToGroups": [],
+            "caseInsensitiveVariables": false,
+            "skipFileIfVariableWasNotFound": false
+        },
+        "fuzzyMatch": {
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "controllers": {
+            "ps4": null,
+            "ps5": null,
+            "ps5_edge": null,
+            "xbox360": null,
+            "xboxone": null,
+            "xboxelite": null,
+            "switch_joycon_left": null,
+            "switch_joycon_right": null,
+            "switch_pro": null,
+            "neptune": null,
+            "steamcontroller_gordon": null
+        },
+        "imageProviderAPIs": {
+            "sgdb": {
+                "nsfw": false,
+                "humor": false,
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": [],
+                "imageMotionTypes": [
+                    "static"
+                ],
+                "sizes": [],
+                "sizesHero": [],
+                "sizesIcon": []
+            }
+        },
+        "defaultImage": {
+            "tall": null,
+            "long": null,
+            "hero": null,
+            "logo": null,
+            "icon": null
+        },
+        "localImages": {
+            "tall": null,
+            "long": null,
+            "hero": null,
+            "logo": null,
+            "icon": null
+        },
+        "parserId": "173012835416147760",
+        "version": 25
+    },
+    {
+        "parserType": "Glob",
+        "configTitle": "Windows Non-Steam",
+        "steamDirectory": "${steamdirglobal}",
+        "romDirectory": "windows-non-steam-games-path-here",
+        "steamCategories": [
+            "Non-Steam"
+        ],
+        "executableArgs": "",
+        "executableModifier": "",
+        "startInDirectory": "",
+        "titleModifier": "",
+        "steamInputEnabled": "1",
+        "imageProviders": [
+            "sgdb",
+            "steamCDN"
+        ],
+        "onlineImageQueries": [
+            "${fuzzyTitle}"
+        ],
+        "imagePool": "",
+        "drmProtect": false,
+        "userAccounts": {
+            "specifiedAccounts": [
+                "steam-account-name-here"
+            ]
+        },
+        "parserInputs": {
+            "glob": "${title}/{*,*/*}.@(exe|bat)"
+        },
+        "executable": {
+            "path": "",
+            "shortcutPassthrough": false,
+            "appendArgsToExecutable": false
+        },
+        "titleFromVariable": {
+            "limitToGroups": [],
+            "caseInsensitiveVariables": false,
+            "skipFileIfVariableWasNotFound": false
+        },
+        "fuzzyMatch": {
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "controllers": {
+            "ps4": null,
+            "ps5": null,
+            "ps5_edge": null,
+            "xbox360": null,
+            "xboxone": null,
+            "xboxelite": null,
+            "switch_joycon_left": null,
+            "switch_joycon_right": null,
+            "switch_pro": null,
+            "neptune": null,
+            "steamcontroller_gordon": null
+        },
+        "imageProviderAPIs": {
+            "sgdb": {
+                "nsfw": false,
+                "humor": false,
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": [],
+                "imageMotionTypes": [
+                    "static"
+                ],
+                "sizes": [],
+                "sizesHero": [],
+                "sizesIcon": []
+            }
+        },
+        "defaultImage": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "localImages": {
+            "tall": "",
+            "long": "",
+            "hero": "",
+            "logo": "",
+            "icon": ""
+        },
+        "parserId": "173013407300741153",
+        "disabled": false,
+        "version": 25
+    }
+]
