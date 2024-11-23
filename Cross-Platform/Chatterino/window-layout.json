@@ -1,0 +1,190 @@
+{
+    "windows": [
+        {
+            "emotePopup": {
+                "x": 831,
+                "y": 257
+            },
+            "height": 888,
+            "state": "maximized",
+            "tabs": [
+                {
+                    "highlightsEnabled": false,
+                    "selected": true,
+                    "splits2": {
+                        "data": {
+                            "name": "greatsphynx",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "gongo"
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "name": "jerma985",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "jerma"
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "name": "ster",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    }
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "name": "supertf",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "super"
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "name": "m0xyy",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "moxy"
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "name": "maya",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "maya"
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "name": "pokelawls",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "poke"
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "name": "peakofthegearedtv",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "topgear"
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "type": "mentions"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    }
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "type": "whispers"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    }
+                },
+                {
+                    "highlightsEnabled": true,
+                    "splits2": {
+                        "data": {
+                            "name": "bergbok",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "      "
+                }
+            ],
+            "type": "main",
+            "width": 1536,
+            "x": 463,
+            "y": -8
+        }
+    ]
+}
