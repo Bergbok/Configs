@@ -1,0 +1,10 @@
+.env
+venv
+tempCodeRunnerFile.*
+Windows/Setup.log
+Windows/Test*.ps1
+Windows/Configs/Notepad++/NppExec
+Windows/Configs/Notepad++/langs.xml
+Windows/Configs/Notepad++/stylers.xml
+Windows/Configs/Notepad++/userDefineLang.xml
+Windows/Configs/Notepad++/v852NoNeedShortcutsBackup.xml
