@@ -1,0 +1,477 @@
+{
+	"exceptionsVersion": 2,
+	"titles": {
+        "3D Pinball": {
+			"newTitle": "3D Pinball: Space Cadet",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1730120871345,
+			"exclude": false,
+			"excludeArtwork": false
+		},
+        "Aimlabs ${id:714010}": {
+			"newTitle": "Aim Lab",
+			"searchTitle": "${gameid:21860}",
+			"commandLineArguments": "",
+			"excludeArtwork": false,
+			"exclude": false,
+			"timeStamp": 1730137118211
+		},
+        "Baldur's Gate 3 ${id:1086940}": {
+			"newTitle": "Baldur's Gate III",
+			"searchTitle": "${gameid:5138060}",
+			"commandLineArguments": "",
+			"excludeArtwork": false,
+			"exclude": false,
+			"timeStamp": 1730141158342
+		},
+        "Call of Duty® ${id:1938090}": {
+			"newTitle": "Call of Duty",
+			"searchTitle": "${gameid:5419565}",
+			"commandLineArguments": "",
+			"excludeArtwork": false,
+			"exclude": false,
+			"timeStamp": 1730142717234
+		},
+		"Celeste Classic Practice Mod ${id:3639717380}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1731660124389,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+        "Celeste Classic Practice Mod ${id:3989619794}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1730132352751,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+        "Deadlock ${id:1422450}": {
+			"newTitle": "Deadlock",
+			"searchTitle": "${gameid:5453171}",
+			"commandLineArguments": "",
+			"excludeArtwork": false,
+			"exclude": false,
+			"timeStamp": 1730148393662
+		},
+		"DEADBOLT ${id:394970}": {
+			"newTitle": "Deadbolt",
+			"searchTitle": "${gameid:8789}",
+			"commandLineArguments": "",
+			"excludeArtwork": false,
+			"exclude": false,
+			"timeStamp": 1730148151900
+		},
+        "DOOM ${id:379720}": {
+			"newTitle": "Doom",
+			"searchTitle": "${gameid:8103}",
+			"commandLineArguments": "",
+			"excludeArtwork": false,
+			"exclude": false,
+			"timeStamp": 1730313492956
+		},
+        "Fatman Adventures": {
+			"newTitle": "Fatman Adventures",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1730120784797,
+			"exclude": false,
+			"excludeArtwork": true
+		},
+        "Fatman Adventures Uninstall ${id:2961207465}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1731659812489,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+		"Fatman Adventures Uninstall ${id:3775662277}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1730121545594,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+        "Fuser exe ${id:3126620806}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1730132524588,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+        "Fuser exe ${id:4209793317}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1731659893427,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+        "God of War ${id:1593500}": {
+			"newTitle": "God of War",
+			"searchTitle": "${gameid:5254321}",
+			"commandLineArguments": "",
+			"excludeArtwork": false,
+			"exclude": false,
+			"timeStamp": 1730317033298
+		},
+        "inFamous (USA) (En,Fr,Es) (v02.00)": {
+			"newTitle": "inFAMOUS",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"excludeArtwork": false,
+			"exclude": false,
+			"timeStamp": 1732376566976
+		},
+        "inFamous 2 (USA) (En,Fr,Es,Pt) (v02.00) ${id:3762197665}": {
+			"newTitle": "inFAMOUS 2",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"excludeArtwork": false,
+			"exclude": false,
+			"timeStamp": 1732376595456
+		},
+        "OverPowered ${id:3466980661}": {
+			"newTitle": "OverPowered",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"excludeArtwork": true,
+			"exclude": false,
+			"timeStamp": 1730209057900
+		},
+        "Pokemon - Blue Version (USA, Europe) (SGB Enhanced)": {
+			"newTitle": "Pokémon Blue",
+			"searchTitle": "",
+			"timeStamp": 1718129903458,
+			"commandLineArguments": "",
+			"exclude": false,
+			"excludeArtwork": false
+		},
+        "Pokemon - Crystal Version (USA, Europe) (Rev 1)": {
+			"newTitle": "Pokémon Crystal",
+			"searchTitle": "",
+			"timeStamp": 1718129926544,
+			"commandLineArguments": "",
+			"exclude": false,
+			"excludeArtwork": false
+		},
+        "Pokemon - Emerald Version (USA, Europe)": {
+			"newTitle": "Pokémon Emerald",
+			"searchTitle": "",
+			"timeStamp": 1718129943296,
+			"commandLineArguments": "",
+			"exclude": false,
+			"excludeArtwork": false
+		},
+        "Pokemon - FireRed Version (USA, Europe) (Rev 1)": {
+			"newTitle": "Pokémon FireRed",
+			"searchTitle": "",
+			"timeStamp": 1718129959172,
+			"commandLineArguments": "",
+			"exclude": false,
+			"excludeArtwork": false
+		},
+        "Pokemon - Gold Version (USA, Europe) (SGB Enhanced) (GB Compatible)": {
+			"newTitle": "Pokémon Gold",
+			"searchTitle": "",
+			"timeStamp": 1718129971084,
+			"commandLineArguments": "",
+			"exclude": false,
+			"excludeArtwork": false
+		},
+        "Pokemon - Red Version (USA, Europe) (SGB Enhanced)": {
+			"newTitle": "Pokémon Red",
+			"searchTitle": "",
+			"timeStamp": 1718129983939,
+			"commandLineArguments": "",
+			"exclude": false,
+			"excludeArtwork": false
+		},
+        "Pokemon - Yellow Version - Special Pikachu Edition (USA, Europe) (CGB+SGB Enhanced)": {
+			"newTitle": "Pokémon Yellow",
+			"searchTitle": "",
+			"timeStamp": 1718130002246,
+			"commandLineArguments": "",
+			"exclude": false,
+			"excludeArtwork": false
+		},
+        "Post Void ${id:1285670}": {
+			"newTitle": "Post Void",
+			"searchTitle": "${gameid:5258999}",
+			"commandLineArguments": "",
+			"excludeArtwork": false,
+			"exclude": false,
+			"timeStamp": 1730539095495
+		},
+        "PSYCHO ${id:1913970}": {
+			"newTitle": "PSYCHO",
+			"searchTitle": "${gameid:5320192}",
+			"commandLineArguments": "",
+			"excludeArtwork": false,
+			"exclude": false,
+			"timeStamp": 1730539374396
+		},
+		"Ratchet and Clank - Size Matters [UCES00420]": {
+			"newTitle": "Ratchet and Clank: Size Matters",
+			"searchTitle": "${gameid:33953}",
+			"timeStamp": 1718109110659,
+			"commandLineArguments": "",
+			"exclude": false,
+			"excludeArtwork": false
+		},
+        "Rivals of Aether II ${id:2217000}": {
+			"newTitle": "Rivals 2",
+			"searchTitle": "${gameid:5392633}",
+			"commandLineArguments": "",
+			"excludeArtwork": false,
+			"exclude": false,
+			"timeStamp": 1730228227947
+		},
+        "Rollcage ${id:3290203643}": {
+			"newTitle": "Rollcage",
+			"searchTitle": "${gameid:37400}",
+			"commandLineArguments": "",
+			"excludeArtwork": false,
+			"exclude": false,
+			"timeStamp": 1730541200646
+		},
+        "Rollcage Player ${id:3217969761}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1730132665758,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+		"Rollcage Player ${id:3459386650}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1731659718047,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+        "Sea of Stars ${id:1244090}": {
+			"newTitle": "Sea of Stars",
+			"searchTitle": "${gameid:5257712}",
+			"commandLineArguments": "",
+			"excludeArtwork": false,
+			"exclude": false,
+			"timeStamp": 1730231115740
+		},
+		"Sekiro Uninstall ${id:3741152226}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1730133930399,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+		"Sekiro Artwork / Mini Soundtrack ${id:2602296794}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1730133720573,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+        "Sekiro Artwork / Mini Soundtrack  ${id:3653045514}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1731660060680,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+        "Sekiro FPS Unlocker ${id:3776185820}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1730133798938,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+		"Sekiro FPS Unlocker ${id:4156638290}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1731660013357,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+        "Sekiro Save Manager ${id:2908571635}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1730133952949,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+		"Sekiro Save Manager ${id:3030410791}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1731659985791,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+		"Sekiro Uninstall ${id:3015174811}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1731659962777,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+        "Ship of Harkinian": {
+			"newTitle": "The Legend of Zelda: Ocarina of Time",
+			"searchTitle": "The Legend of Zelda: Ocarina of Time",
+			"commandLineArguments": "",
+			"timeStamp": 1730120627081,
+			"exclude": false,
+			"excludeArtwork": false
+		},
+        "Skylanders - Spyro's Adventure (USA) (En,Fr)": {
+			"newTitle": "Skylanders: Spyro's Adventure",
+			"searchTitle": "${gameid:5249398}",
+			"timeStamp": 1718192916473,
+			"commandLineArguments": "",
+			"exclude": false,
+			"excludeArtwork": false
+		},
+		"Skylanders - Imaginators (USA) (En,Fr,Es,Pt)": {
+			"newTitle": "Skylanders: Imaginators",
+			"searchTitle": "${gameid:5256177}",
+			"timeStamp": 1718132618164,
+			"commandLineArguments": "",
+			"exclude": false,
+			"excludeArtwork": false
+		},
+        "Smalland: Survive the Wilds ${id:768200}": {
+			"newTitle": "SMALLAND",
+			"searchTitle": "${gameid:24162}",
+			"commandLineArguments": "",
+			"excludeArtwork": false,
+			"exclude": false,
+			"timeStamp": 1730543452761
+		},
+        "Super Mario 3D All-Stars [010049900F546000] [USA] [v0]": {
+			"newTitle": "",
+			"searchTitle": "",
+			"timeStamp": 1718111324385,
+			"commandLineArguments": "",
+			"exclude": false,
+			"excludeArtwork": false
+		},
+		"Super Smash Bros. 64 (USA)": {
+			"newTitle": "Super Smash Bros. 64",
+			"searchTitle": "${gameid:33624}",
+			"timeStamp": 1718109110659,
+			"commandLineArguments": "",
+			"exclude": false,
+			"excludeArtwork": false
+		},
+        "THATCHER'S TECHBASE ${id:2438805643}": {
+			"newTitle": "THATCHER'S TECHBASE",
+			"searchTitle": "",
+			"commandLineArguments": "-iwad doom2.wad -file thatcher.wad",
+			"timeStamp": 1730120488656,
+			"exclude": false,
+			"excludeArtwork": false
+		},
+        "THATCHER'S TECHBASE ${id:3702357213}": {
+			"newTitle": "THATCHER'S TECHBASE ",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1731659621865,
+			"exclude": false,
+			"excludeArtwork": false
+		},
+        "THATCHER'S TECHBASE prboom-plus-game-server ${id:2244794802}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1730120462408,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+		"THATCHER'S TECHBASE prboom-plus-game-server ${id:4267710552}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1731659316296,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+        "The Pathless ${id:1492680}": {
+			"newTitle": "The Pathless",
+			"searchTitle": "${gameid:5270664}",
+			"commandLineArguments": "",
+			"excludeArtwork": false,
+			"exclude": false,
+			"timeStamp": 1730239379704
+		},
+        "TOTK [0100F2C0115B6000][v0]": {
+			"newTitle": "The Legend of Zelda: Tears of the Kingdom",
+			"searchTitle": "${gameid:5303117}",
+			"commandLineArguments": "",
+			"excludeArtwork": false,
+			"exclude": false,
+			"timeStamp": 1718632951393
+		},
+		"Will Rock Registration  ${id:3207141354}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1731659241235,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+		"Will Rock dgVoodooCpl ${id:4262114253}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1731659188616,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+		"Will Rock dgVoodooCpl ${id:3705554060}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1730133494779,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+		"Will Rock Registration ${id:4120030405}": {
+			"newTitle": "",
+			"searchTitle": "",
+			"commandLineArguments": "",
+			"timeStamp": 1730133078510,
+			"exclude": true,
+			"excludeArtwork": false
+		},
+        "Zelda 64 Recomplied": {
+			"newTitle": "The Legend of Zelda: Majora's Mask",
+			"searchTitle": "${gameid:34302}",
+			"commandLineArguments": "",
+			"timeStamp": 1730133339366,
+			"exclude": false,
+			"excludeArtwork": false
+		},
+        "スイカゲーム [0100800015926000][v0]": {
+			"newTitle": "Suika Game",
+			"searchTitle": "${gameid:5432530}",
+			"timeStamp": 1718109110659,
+			"commandLineArguments": "",
+			"exclude": false,
+			"excludeArtwork": false
+		}
+	}
+}
