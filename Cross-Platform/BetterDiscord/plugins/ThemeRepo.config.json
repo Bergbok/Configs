@@ -1,0 +1,16 @@
+{
+	"all": {
+		"cached": "",
+		"filters": {
+			"updated": true,
+			"outdated": true,
+			"downloadable": true
+		},
+		"general": {
+			"notifyOutdated": true,
+			"notifyNewEntries": false,
+			"startDownloaded": false,
+			"startUpdated": false
+		}
+	}
+}
