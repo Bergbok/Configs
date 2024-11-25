@@ -1,0 +1,10 @@
+c=clear
+cmder=%CMDER_ROOT%\vendor\init.bat
+e=exit
+p="powershell-path-here" -ExecutionPolicy Bypass -NoLogo
+ps="powershell-path-here" -ExecutionPolicy Bypass -NoLogo
+pwsh="powershell-path-here" -ExecutionPolicy Bypass -NoLogo
+powershell="powershell-path-here" -ExecutionPolicy Bypass -NoLogo
+powershell.exe="powershell-path-here" -ExecutionPolicy Bypass -NoLogo
+sleepo=psshutdown64.exe -d -t 0
+kys=shutdown /s /t 0
