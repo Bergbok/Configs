@@ -1,0 +1,222 @@
+{
+  "custom-layouts": [
+    {
+      "uuid": "{B7BEF48D-14CC-45E1-B93A-403A0C03177B}",
+      "name": "Uniform 2x2",
+      "type": "grid",
+      "info": {
+        "rows": 2,
+        "columns": 2,
+        "rows-percentage": [
+          5000,
+          5000
+        ],
+        "columns-percentage": [
+          4999,
+          5001
+        ],
+        "cell-child-map": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ],
+        "show-spacing": false,
+        "spacing": 16,
+        "sensitivity-radius": 20
+      }
+    },
+    {
+      "uuid": "{F0F5C36E-4C59-4335-96CB-C01BAE631664}",
+      "name": "Uniform 2x1",
+      "type": "grid",
+      "info": {
+        "rows": 1,
+        "columns": 2,
+        "rows-percentage": [
+          10000
+        ],
+        "columns-percentage": [
+          4999,
+          5001
+        ],
+        "cell-child-map": [
+          [
+            0,
+            1
+          ]
+        ],
+        "show-spacing": false,
+        "spacing": 16,
+        "sensitivity-radius": 20
+      }
+    },
+    {
+      "uuid": "{BA3855A4-8FDF-4AC5-92FD-882BE5090D54}",
+      "name": "Uniform 3x1",
+      "type": "grid",
+      "info": {
+        "rows": 1,
+        "columns": 3,
+        "rows-percentage": [
+          10000
+        ],
+        "columns-percentage": [
+          3333,
+          3333,
+          3334
+        ],
+        "cell-child-map": [
+          [
+            0,
+            1,
+            2
+          ]
+        ],
+        "show-spacing": false,
+        "spacing": 16,
+        "sensitivity-radius": 20
+      }
+    },
+    {
+      "uuid": "{AE10B0C5-69B2-405F-8C11-BC89906E3250}",
+      "name": "Uniform 1x3",
+      "type": "grid",
+      "info": {
+        "rows": 3,
+        "columns": 1,
+        "rows-percentage": [
+          3362,
+          3277,
+          3361
+        ],
+        "columns-percentage": [
+          10000
+        ],
+        "cell-child-map": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "show-spacing": false,
+        "spacing": 16,
+        "sensitivity-radius": 20
+      }
+    },
+    {
+      "uuid": "{80C95F55-F36F-4C2C-A4BD-D914CC211558}",
+      "name": "Uniform 1x2",
+      "type": "grid",
+      "info": {
+        "rows": 2,
+        "columns": 1,
+        "rows-percentage": [
+          5000,
+          5000
+        ],
+        "columns-percentage": [
+          10000
+        ],
+        "cell-child-map": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ],
+        "show-spacing": false,
+        "spacing": 16,
+        "sensitivity-radius": 20
+      }
+    },
+    {
+      "uuid": "{867648F0-0023-4839-84AF-0AD6798713D6}",
+      "name": "Uniform 6x6",
+      "type": "grid",
+      "info": {
+        "rows": 6,
+        "columns": 6,
+        "rows-percentage": [
+          1723,
+          1640,
+          1637,
+          1638,
+          1638,
+          1724
+        ],
+        "columns-percentage": [
+          1698,
+          1651,
+          1650,
+          1652,
+          1650,
+          1699
+        ],
+        "cell-child-map": [
+          [
+            0,
+            6,
+            12,
+            18,
+            24,
+            30
+          ],
+          [
+            1,
+            7,
+            13,
+            19,
+            25,
+            31
+          ],
+          [
+            2,
+            8,
+            14,
+            20,
+            26,
+            32
+          ],
+          [
+            3,
+            9,
+            15,
+            21,
+            27,
+            33
+          ],
+          [
+            4,
+            10,
+            16,
+            22,
+            28,
+            34
+          ],
+          [
+            5,
+            11,
+            17,
+            23,
+            29,
+            35
+          ]
+        ],
+        "show-spacing": false,
+        "spacing": 16,
+        "sensitivity-radius": 20
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "default-layouts": [
+    {
+      "monitor-configuration": "horizontal",
+      "layout": {
+        "uuid": "{F0F5C36E-4C59-4335-96CB-C01BAE631664}",
+        "type": "custom",
+        "show-spacing": false,
+        "spacing": 16,
+        "zone-count": 0,
+        "sensitivity-radius": 0
+      }
+    },
+    {
+      "monitor-configuration": "vertical",
+      "layout": {
+        "uuid": "{80C95F55-F36F-4C2C-A4BD-D914CC211558}",
+        "type": "custom",
+        "show-spacing": false,
+        "spacing": 16,
+        "zone-count": 0,
+        "sensitivity-radius": 0
+      }
+    }
+  ]
+}

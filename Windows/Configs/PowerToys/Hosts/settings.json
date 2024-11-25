@@ -1,0 +1,17 @@
+{
+    "properties": {
+        "ShowStartupWarning": {
+            "value": false
+        },
+        "LaunchAdministrator": {
+            "value": true
+        },
+        "LoopbackDuplicates": {
+            "value": false
+        },
+        "AdditionalLinesPosition": 0,
+        "Encoding": 0
+    },
+    "name": "Hosts",
+    "version": "1.0"
+}
