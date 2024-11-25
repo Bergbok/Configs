@@ -1,0 +1,48 @@
+<Configuration ID="8bd27b55-7968-422a-8520-7056509371c6">
+  <Add OfficeClientEdition="64" Channel="Current" MigrateArch="TRUE">
+    <Product ID="O365ProPlusRetail">
+      <Language ID="MatchOS" />
+      <ExcludeApp ID="Access" />
+      <ExcludeApp ID="Groove" />
+      <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="OneDrive" />
+      <ExcludeApp ID="OneNote" />
+      <ExcludeApp ID="Outlook" />
+      <ExcludeApp ID="Publisher" />
+      <ExcludeApp ID="Teams" />
+      <ExcludeApp ID="Bing" />
+    </Product>
+  </Add>
+  <Updates Enabled="FALSE" />
+  <RemoveMSI />
+  <AppSettings>
+    <User Key="software\microsoft\office\16.0\common\sharepointintegration" Name="hidelearnmorelink" Value="1" Type="REG_DWORD" App="office16" Id="L_HideTheLearnMoreAboutSharePointHyperlink" />
+    <User Key="software\microsoft\office\16.0\common\autocorrect" Name="correcttwoinitialcapitals" Value="0" Type="REG_DWORD" App="office16" Id="L_CorrectTWoINitialCApitals" />
+    <User Key="software\microsoft\office\16.0\common\autocorrect" Name="capitalizesentence" Value="0" Type="REG_DWORD" App="office16" Id="L_Capitalizefirstletterofsentence" />
+    <User Key="software\microsoft\office\16.0\common\internet" Name="donotcheckifofficeishtmleditor" Value="1" Type="REG_DWORD" App="office16" Id="L_CheckifOfficeisthedefaulteditorforWebpagescreatedinOffice" />
+    <User Key="software\microsoft\office\16.0\common\internet" Name="allowpng" Value="1" Type="REG_DWORD" App="office16" Id="L_AllowPNGasanoutputformat" />
+    <User Key="software\microsoft\office\16.0\common" Name="sendcustomerdata" Value="0" Type="REG_DWORD" App="office16" Id="L_Sendcustomerdata" />
+    <User Key="software\microsoft\office\16.0\common\internet" Name="useonlinecontent" Value="0" Type="REG_DWORD" App="office16" Id="L_Onlinecontentoptions" />
+    <User Key="software\microsoft\shared tools\proofing tools\1.0\office" Name="ignoreuppercase" Value="1" Type="REG_DWORD" App="office16" Id="L_IgnorewordsinUPPERCASE" />
+    <User Key="software\microsoft\shared tools\proofing tools\1.0\office" Name="ignorewordswithnumbers" Value="1" Type="REG_DWORD" App="office16" Id="L_Ignorewordswithnumbers" />
+    <User Key="software\microsoft\shared tools\proofing tools\1.0\office" Name="ignoreinternetfileaddresses" Value="1" Type="REG_DWORD" App="office16" Id="L_IgnoreInternetandfileaddresses" />
+    <User Key="software\microsoft\office\16.0\common\ptwatson" Name="ptwoptin" Value="0" Type="REG_DWORD" App="office16" Id="L_ImproveProofingTools" />
+    <User Key="software\microsoft\office\16.0\common\general" Name="shownfirstrunoptin" Value="1" Type="REG_DWORD" App="office16" Id="L_DisableOptinWizard" />
+    <User Key="software\microsoft\office\16.0\common" Name="qmenable" Value="0" Type="REG_DWORD" App="office16" Id="L_EnableCustomerExperienceImprovementProgram" />
+    <User Key="software\microsoft\office\16.0\common" Name="updatereliabilitydata" Value="0" Type="REG_DWORD" App="office16" Id="L_UpdateReliabilityPolicy" />
+    <User Key="software\microsoft\office\16.0\excel\options" Name="developertools" Value="1" Type="REG_DWORD" App="excel16" Id="L_DisplayDeveloperTab" />
+    <User Key="software\microsoft\office\16.0\excel\options" Name="defaultformat" Value="60" Type="REG_DWORD" App="excel16" Id="L_SaveExcelfilesas" />
+    <User Key="software\microsoft\office\16.0\powerpoint\options" Name="defaultformat" Value="52" Type="REG_DWORD" App="ppt16" Id="L_SavePowerPointfilesas" />
+    <User Key="software\microsoft\office\16.0\powerpoint\options" Name="developertools" Value="1" Type="REG_DWORD" App="ppt16" Id="L_DisplayDeveloperTab" />
+    <User Key="software\microsoft\office\16.0\word\options\assist" Name="ftwoinitialcaps_24_1" Value="0" Type="REG_DWORD" App="word16" Id="L_CorrectTWoINitialCApitals" />
+    <User Key="software\microsoft\office\16.0\word\options\assist" Name="finitialcap_32_1" Value="0" Type="REG_DWORD" App="word16" Id="L_Capitalizefirstletterofsentence" />
+    <User Key="software\microsoft\office\16.0\word\options\assist" Name="fcapslock_40_1" Value="1" Type="REG_DWORD" App="word16" Id="L_CorrectaccidentalusageofcAPSLOCKkey" />
+    <User Key="software\microsoft\office\16.0\word\options\assist" Name="fbolditalic_120_1" Value="1" Type="REG_DWORD" App="word16" Id="L_Boldand_italic_withrealformatting" />
+    <User Key="software\microsoft\office\16.0\word\options" Name="developertools" Value="1" Type="REG_DWORD" App="word16" Id="L_DisplayDeveloperTab" />
+    <User Key="software\microsoft\office\16.0\word\options" Name="showhiddentext" Value="1" Type="REG_DWORD" App="word16" Id="L_Hiddentext" />
+    <User Key="software\microsoft\office\16.0\word\options" Name="defaultformat" Value="ODT" Type="REG_SZ" App="word16" Id="L_SaveWordfilesas" />
+    <User Key="software\microsoft\office\16.0\word\options" Name="ctrlclickhyperlink" Value="1" Type="REG_DWORD" App="word16" Id="L_UseCTRLClicktofollowhyperlink" />
+    <User Key="software\microsoft\office\16.0\word\options" Name="insforpaste" Value="0" Type="REG_DWORD" App="word16" Id="L_UsetheINSkeyforpaste" />
+  </AppSettings>
+  <Display Level="Full" AcceptEULA="TRUE" />
+</Configuration>
