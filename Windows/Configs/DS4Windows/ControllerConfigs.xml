@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Controller config data. 07/15/2024 16:13:08 -->
+
+<Controllers>
+  <Controller Mac="4C:B9:9B:30:B3:A9" ControllerType="DualSense">
+    <DualSenseSupportSettings>
+      <LEDBarMode>MultipleControllers</LEDBarMode>
+      <MuteLEDMode>Off</MuteLEDMode>
+    </DualSenseSupportSettings>
+  </Controller>
+  <Controller Mac="48:18:8D:05:36:84" ControllerType="DualSense">
+    <DualSenseSupportSettings>
+      <LEDBarMode>MultipleControllers</LEDBarMode>
+      <MuteLEDMode>Off</MuteLEDMode>
+    </DualSenseSupportSettings>
+  </Controller>
+</Controllers>

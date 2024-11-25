@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Special Actions Configuration Data. 05/18/2024 00:58:42 -->
+
+<Actions>
+  <Action Name="Disconnect Controller">
+    <Trigger>PS/Options</Trigger>
+    <Type>DisconnectBT</Type>
+    <Details>0</Details>
+  </Action>
+  <Action Name="Load Default">
+    <Trigger>PS/Up</Trigger>
+    <Type>Profile</Type>
+    <Details>Default</Details>
+  </Action>
+  <Action Name="Load Desktop">
+    <Trigger>PS/Up</Trigger>
+    <Type>Profile</Type>
+    <Details>Desktop</Details>
+  </Action>
+  <Action Name="Lower Sens">
+    <Trigger>L3</Trigger>
+    <Type>Profile</Type>
+    <Details>Desktop (Low Sens)</Details>
+    <UnloadTrigger>AutomaticUntrigger</UnloadTrigger>
+  </Action>
+  <Action Name="Middle Mouse">
+    <Trigger>R1/L1</Trigger>
+    <Type>Macro</Type>
+    <Details>258</Details>
+  </Action>
+  <Action Name="Spam Cross">
+    <Trigger>Cross</Trigger>
+    <Type>Macro</Type>
+    <Details>261/301/261</Details>
+    <Extras>Repeat</Extras>
+  </Action>
+  <Action Name="Spam Triangle">
+    <Trigger>Triangle</Trigger>
+    <Type>Macro</Type>
+    <Details>264/301/264</Details>
+    <Extras>Repeat</Extras>
+  </Action>
+  <Action Name="Spam Circle">
+    <Trigger>Circle</Trigger>
+    <Type>Macro</Type>
+    <Details>262/301/262</Details>
+    <Extras>Repeat</Extras>
+  </Action>
+  <Action Name="Spam Square">
+    <Trigger>Square</Trigger>
+    <Type>Macro</Type>
+    <Details>263/301/263</Details>
+    <Extras>Repeat</Extras>
+  </Action>
+  <Action Name="R">
+    <Trigger>R3</Trigger>
+    <Type>Key</Type>
+    <Details>82</Details>
+  </Action>
+</Actions>
