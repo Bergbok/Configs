@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Settings component="Explorer" version="4.4.191">
+	<TreeStyle value="Vista"/>
+	<NoFadeButtons value="1"/>
+	<DisableBreadcrumbs value="0"/>
+	<AddressBarHistory value="NormalHistory"/>
+	<HideSearch value="0"/>
+	<UseBigButtons value="0"/>
+	<SameSizeButtons value="1"/>
+	<ResizeableToolbar value="1"/>
+	<ToolbarItems>
+		<Line>Items=DetailsPaneItem,PreviewPaneItem,SEPARATOR,HiddenFilesItem,SystemFilesItem</Line>
+		<Line>DetailsPaneItem.Command=details_pane</Line>
+		<Line>DetailsPaneItem.Tip=$Toolbar.DetailsPane</Line>
+		<Line>DetailsPaneItem.Icon=shell32.dll,16814</Line>
+		<Line>PreviewPaneItem.Command=preview_pane</Line>
+		<Line>PreviewPaneItem.Tip=$Toolbar.PreviewPane</Line>
+		<Line>PreviewPaneItem.Icon=shell32.dll,16757</Line>
+		<Line>HiddenFilesItem.Command=hidden_files</Line>
+		<Line>HiddenFilesItem.Tip=Show hidden files</Line>
+		<Line>HiddenFilesItem.Icon=shell32.dll, 16822</Line>
+		<Line>SystemFilesItem.Command=system_files</Line>
+		<Line>SystemFilesItem.Tip=Show system files</Line>
+		<Line>SystemFilesItem.Icon=shell32.dll, 16777</Line>
+	</ToolbarItems>
+	<ShowStatusBar value="0"/>
+	<ShareOverlay value="0"/>
+	<ShowHeaders value="0"/>
+</Settings>
