@@ -1,0 +1,7 @@
+{
+    "post_update": true,
+    "gamedir": "gamedir-here",
+    "steamid": "steamid-here",
+    "seamless-coop": false,
+    "custom_ids": {}
+}
