@@ -1,4 +1,5 @@
 #Requires AutoHotkey v2.0
+#SingleInstance Force
 
 ; modified from: https://blog.danskingdom.com/Bring-up-the-Windows-Terminal-in-a-keystroke
 
