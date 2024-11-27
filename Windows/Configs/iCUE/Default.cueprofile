@@ -3097,6 +3097,45 @@
 																</value1>
 																<value2>
 																	<first>
+																		<polymorphic_id>35</polymorphic_id>
+																		<ptr_wrapper>
+																			<id>2147483690</id>
+																			<data>
+																				<base>
+																					<name>Braille Blank</name>
+																					<id>{07296e0b-a735-4f4a-8c82-89cd49b47fcf}</id>
+																					<repeatOptions>
+																						<repeatCount>1</repeatCount>
+																						<repeatMode>NoRepeat</repeatMode>
+																						<delay>0</delay>
+																						<delayMode>Constant</delayMode>
+																						<randomDelayFrom>0</randomDelayFrom>
+																						<randomDelayTo>0</randomDelayTo>
+																					</repeatOptions>
+																					<executionHints>
+																						<terminateOnSecondExec>false</terminateOnSecondExec>
+																						<restartOnSecondExec>false</restartOnSecondExec>
+																						<execHint>OnPress</execHint>
+																						<retainOriginalKeyOutput>false</retainOriginalKeyOutput>
+																					</executionHints>
+																					<actionLighting>{00000000-0000-0000-0000-000000000000}</actionLighting>
+																					<actionSoundPath></actionSoundPath>
+																					<attachedActions size="dynamic"/>
+																				</base>
+																				<text>⠀</text>
+																				<delayBetweenCharacters>0</delayBetweenCharacters>
+																			</data>
+																		</ptr_wrapper>
+																	</first>
+																	<second>
+																		<key>G3</key>
+																		<layer>StandardLayer</layer>
+																		<event>Click</event>
+																		<distance>0</distance>
+																	</second>
+																</value2>
+																<value3>
+																	<first>
 																		<polymorphic_id>2147483684</polymorphic_id>
 																		<polymorphic_name>KeyRemapAction</polymorphic_name>
 																		<ptr_wrapper>
