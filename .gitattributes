@@ -9,4 +9,5 @@
 *.txt linguist-detectable
 *.vdf linguist-detectable
 *.xml linguist-detectable
+Windows/Configs/WinSetView/WinViewBak.reg linguist-generated
 *.inc linguist-language=INI
