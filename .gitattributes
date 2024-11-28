@@ -1,0 +1,12 @@
+.gitattributes linguist-detectable
+*requirements.txt linguist-detectable
+*.cfg linguist-detectable
+*.env linguist-detectable
+*.inc linguist-detectable
+*.ini linguist-detectable
+*.json linguist-detectable
+*.reg linguist-detectable
+*.txt linguist-detectable
+*.vdf linguist-detectable
+*.xml linguist-detectable
+*.inc linguist-language=INI
