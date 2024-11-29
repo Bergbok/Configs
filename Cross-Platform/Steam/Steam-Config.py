@@ -10,39 +10,83 @@ def print_keys_recursively(d, parent_key=''):
             print(full_key)
             print_keys_recursively(value, full_key)
 
+def update_vdf_dict(vdf_dict, tweaks):
+    for key, value in tweaks.items():
+        if isinstance(value, dict):
+            if key not in vdf_dict:
+                vdf_dict[key] = vdf.VDFDict()
+            update_vdf_dict(vdf_dict[key], value)
+        else:
+            vdf_dict.remove_all_for(key)
+            vdf_dict[key] = value
+
 def edit_install_config(install_config_path):
     config_string = open(install_config_path, encoding='utf-8').read()
     config = vdf.loads(config_string, mapper=vdf.VDFDict)
-    config["InstallConfigStore"]["Software"]["Valve"]["Steam"]["DownloadThrottleKbps"] = "20000"
-    print_keys_recursively(config)
+    config_tweaks = {
+        "InstallConfigStore": {
+            "Software": {
+                "Valve": {
+                    "Steam": {
+                        "DownloadThrottleKbps": "20000"
+                    }
+                }
+            }
+        }
+    }
+    update_vdf_dict(config, config_tweaks)
+    vdf.dump(config, open(install_config_path, 'w', encoding='utf-8'), pretty=True)
+    # print_keys_recursively(config)
 
 def edit_local_config(localconfig_path):
     config_string = open(localconfig_path, encoding='utf-8').read()
     config = vdf.loads(config_string, mapper=vdf.VDFDict)
-    config["UserLocalConfigStore"]["friends"]["Notifications_ShowIngame"] = "0"
-    config["UserLocalConfigStore"]["friends"]["Notifications_ShowOnline"] = "0"
-    config["UserLocalConfigStore"]["friends"]["Notifications_ShowMessage"] = "1"
-    config["UserLocalConfigStore"]["friends"]["Notifications_EventsAndAnnouncements"] = "1"
-    config["UserLocalConfigStore"]["friends"]["Sounds_PlayIngame"] = "0"
-    config["UserLocalConfigStore"]["friends"]["Sounds_PlayOnline"] = "0"
-    config["UserLocalConfigStore"]["friends"]["Sounds_PlayMessage"] = "1"
-    config["UserLocalConfigStore"]["friends"]["Sounds_EventsAndAnnouncements"] = "0"
-    config["UserLocalConfigStore"]["friends"]["ChatFlashMode"] = "0"
-    config["UserLocalConfigStore"]["friends"]["DoNotDisturb"] = "0"
-    config["UserLocalConfigStore"]["friends"]["SignIntoFriends"] = "1"
-    config["UserLocalConfigStore"]["system"]["JumplistSettings"] = "12112"
-    config["UserLocalConfigStore"]["system"]["JumplistSettingsKnown"] = "262143"
-    config["UserLocalConfigStore"]["system"]["displayratesasbits"] = "0"
-    config["UserLocalConfigStore"]["system"]["GameOverlayHomePage"] = "https://duckduckgo.com"
-    config["UserLocalConfigStore"]["news"]["NotifyAvailableGames"] = "0"
-    # vdf.dump(config, open(localconfig_path, 'w', encoding='utf-8'), pretty=True)
+    config_tweaks = { 
+        "UserLocalConfigStore": {
+            "friends": {
+                "ChatFlashMode": "0",
+                "DoNotDisturb": "0",
+                "Notifications_ShowIngame": "0",
+                "Notifications_ShowOnline": "0",
+                "Notifications_ShowMessage": "1",
+                "Notifications_EventsAndAnnouncements": "1",
+                "SignIntoFriends": "1",
+                "Sounds_PlayIngame": "0",
+                "Sounds_PlayOnline": "0",
+                "Sounds_PlayMessage": "1",
+                "Sounds_EventsAndAnnouncements": "0"
+            },
+            "news": { 
+                "NotifyAvailableGames": "0" 
+            },
+            "system": {
+                "displayratesasbits": "0",
+                "JumplistSettings": "12112",
+                "JumplistSettingsKnown": "262143",
+                "GameOverlayHomePage": "https://duckduckgo.com"
+            }
+        } 
+    }
+    update_vdf_dict(config, config_tweaks)
+    vdf.dump(config, open(localconfig_path, 'w', encoding='utf-8'), pretty=True)
     # print_keys_recursively(config)
 
 def edit_shared_config(sharedconfig_path):
     config_string = open(sharedconfig_path, encoding='utf-8').read()
     config = vdf.loads(config_string, mapper=vdf.VDFDict)
-    config["UserRoamingConfigStore"]["Software"]["Valve"]["Steam"]["SteamDefaultDialog"] = "#app_games"
-    # vdf.dump(config, open(sharedconfig_path, 'w', encoding='utf-8'), pretty=True)
+    config_tweaks = {
+        "UserRoamingConfigStore" : {
+            "Software": {
+                "Valve": {
+                    "Steam": {
+                        "SteamDefaultDialog": "#app_games"
+                    }
+                }
+            }
+        }
+    }
+    update_vdf_dict(config, config_tweaks)
+    vdf.dump(config, open(sharedconfig_path, 'w', encoding='utf-8'), pretty=True)
     # print_keys_recursively(config)
     
 def main():
