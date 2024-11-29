@@ -2,6 +2,7 @@
 venv
 tempCodeRunnerFile.*
 Windows/Setup.log
+Windows/Verbose.log
 Windows/Test*.ps1
 Windows/Configs/Notepad++/NppExec
 Windows/Configs/Notepad++/langs.xml
