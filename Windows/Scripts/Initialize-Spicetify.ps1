@@ -41,12 +41,10 @@ spicetify config disable_sentry 1
 spicetify config disable_ui_logging 1
 spicetify config remove_rtl_rule 1
 spicetify config expose_apis 1
-spicetify config disable_upgrade_check 1
 spicetify config sidebar_config 1
 spicetify config experimental_features 1
 spicetify config inject_css 1
 spicetify config replace_colors 1
-spicetify config check_spicetify_upgrade 1
 spicetify config check_spicetify_update 1
 spicetify config always_enable_devtools 1
 Stop-Process -Name "Spotify" -Force -ErrorAction SilentlyContinue
@@ -110,7 +108,8 @@ function Initialize-CustomApps {
     Invoke-WebRequest "https://github.com/Bergbok/Spicetify-Creations/archive/refs/heads/dist/playlist-tags.zip" -OutFile ".\playlist-tags.zip"
     Expand-Archive ".\playlist-tags.zip"
     Remove-Item ".\playlist-tags.zip"
-    Rename-Item ".\Spicetify-Creations-dist-playlist-tags" -NewName "playlist-tags" -Force
+    Copy-Item ".\playlist-tags\Spicetify-Creations-dist-playlist-tags\*" -Destination ".\playlist-tags" -Recurse -Force
+    Remove-Item ".\playlist-tags\Spicetify-Creations-dist-playlist-tags" -Recurse -Force
     if (Test-Path "$spicetifyConfigDir\CustomApps\playlist-tags") {
         Remove-Item "$spicetifyConfigDir\CustomApps\playlist-tags" -Recurse -Force
     }
@@ -121,7 +120,8 @@ function Initialize-CustomApps {
     Invoke-WebRequest "https://github.com/Bergbok/Spicetify-Creations/archive/refs/heads/dist/history-in-sidebar.zip" -OutFile ".\history-in-sidebar.zip"
     Expand-Archive ".\history-in-sidebar.zip"
     Remove-Item ".\history-in-sidebar.zip"
-    Rename-Item ".\Spicetify-Creations-dist-history-in-sidebar" -NewName "history-in-sidebar" -Force
+    Copy-Item ".\history-in-sidebar\Spicetify-Creations-dist-history-in-sidebar\*" -Destination ".\history-in-sidebar" -Recurse -Force
+    Remove-Item ".\history-in-sidebar\Spicetify-Creations-dist-history-in-sidebar" -Recurse -Force
     if (Test-Path "$spicetifyConfigDir\CustomApps\history-in-sidebar") {
         Remove-Item "$spicetifyConfigDir\CustomApps\history-in-sidebar" -Recurse -Force
     }
