@@ -1,5 +1,6 @@
 // https://arkenfox.github.io/gui/
 
+user_pref("apz.overscroll.enabled", false);
 user_pref("browser.display.background_color.dark", "#212121");
 user_pref("browser.display.background_color", "#212121");
 user_pref("browser.download.autohideButton", false);
