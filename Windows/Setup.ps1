@@ -606,7 +606,7 @@ $script:commands = @{
         "Start-Sleep -Seconds 4.2"
         "Start-Process `$firefox -Args `"-new-tab `$bypassPaywallsPath`""
         "if (Get-Command syncthing -ErrorAction SilentlyContinue) {
-            `$folderPath = `"`$(Get-ChildItem '$env:APPDATA\Mozilla\Firefox\Profiles' | Select-Object -First 1)\chrome`"
+            `$folderPath = `"`$((Get-ChildItem '$env:APPDATA\Mozilla\Firefox\Profiles' | Select-Object -First 1).FullName)\chrome`"
             syncthing cli config folders add --id 'xhfsq-nqpty' --label 'Firefox CSS' --path `$folderPath --paused
             script:Log 'Syncthing: Double check that the Firefox CSS folder is correct -> about:profiles'
         }"
@@ -1292,6 +1292,7 @@ $script:commands = @{
         "`$settings | Out-File '.\temp-QTTabBar-Settings.reg'"
         "reg import '.\temp-QTTabBar-Settings.reg' 2>`$null"
         "Remove-Item '.\temp-QTTabBar-Settings.reg'"
+        "script:Log 'QTTabBar: If appearance is off, go to Options -> Appearance and set tab image to `"$env:USERPROFILE\Pictures\System\QTTabBarTab.png`", disable `"Solid color`" under Toolbar Background and change text color/font.'"
     )
     "r2modman" = @(
         "scoop install games/r2modman"
@@ -2118,7 +2119,7 @@ $script:commands = @{
             `$destinationPath = `"`$((Get-ChildItem '$env:LOCALAPPDATA\Packages' -Filter 'Microsoft.WindowsTerminal*').FullName)\LocalState`"
         }"
         "New-Item -ItemType Directory `$destinationPath -Force | Out-Null"
-        "New-Item `"`$destinationPath\settings.json`" -Value `$config -Force | Out-Null"
+        "Set-Content `"`$destinationPath\settings.json`" -Value `$config -Force | Out-Null"
     )
     "WinRAR" = @(
         "choco install winrar -y"
