@@ -8,7 +8,7 @@
 		"filterProviders": true
 	},
 	"environmentVariables": {
-		"steamDirectory": "steam-dir-here",
+		"steamDirectory": "steam-path-here",
 		"userAccounts": [
 			"steam-account-name-here"
 		],
