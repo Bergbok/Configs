@@ -1142,6 +1142,10 @@ $script:commands = @{
         "choco install openwithview -y"
         "scoop install nirsoft/openwithview"
     )
+    "Orca" = @(
+        "choco install orca -y"
+        "scoop install extras/orca"
+    )
     "osu!" = @(
         "choco install osu -y"
         "scoop install games/osulazer"
@@ -2515,6 +2519,7 @@ $script:selection = @{
         "HeidiSQL"
         "Neofetch"
         "Node.js"
+        "Orca"
         "oh-my-posh"
         "onefetch"
         "PowerShell Update"
