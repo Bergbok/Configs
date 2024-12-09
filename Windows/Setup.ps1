@@ -832,6 +832,14 @@ $script:commands = @{
         "choco install iconsext -y"
         "scoop install nirsoft/iconsext"
     )
+    "iCloud" = @(
+        "choco install icloud -y"
+        "winget install --id=Apple.iCloud --exact --accept-source-agreements --accept-package-agreements"
+        "`$shell = New-Object -ComObject Shell.Application"
+        "(`$shell.Namespace('shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}').Items() | Where-Object {`$_.Path -eq '$env:USERPROFILE\iCloudDrive'}).InvokeVerb('unpinfromhome')"
+        "(`$shell.Namespace('shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}').Items() | Where-Object {`$_.Path -eq '::{20D04FE0-3AEA-1069-A2D8-08002B30309D}\::{F0D63F85-37EC-4097-B30D-61B4A8917118}'}).InvokeVerb('unpinfromhome')" # iCloud Photos, this might differ per install idk
+        "script:Log 'iCloud: If you get `"Your computer is missing Media features.`" even though it is installed you may need to use Orca to modify iCloud64.msi (remove the `"Installed OR MS_MEDIAFEATUREPACK_INSTALLED OR IGNORE_MEDIAFEATUREPACK`" condition from the LaunchCondition table). You can find iCloud64.msi in TEMP while the installer is running.'"
+    )
     "iCUE" = @(
         "choco install icue -y"
         "winget install --id=Corsair.iCUE.5 --exact --accept-source-agreements --accept-package-agreements"
@@ -2600,6 +2608,7 @@ $script:selection = @{
         "DisplayFusion"
         "Fan Control"
         "G.Skill Trident Z Lighting Control"
+        "iCloud"
         "iCUE"
         "iTunes"
         "Logitech G HUB"
