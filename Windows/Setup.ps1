@@ -114,6 +114,11 @@ $script:commands = @{
             script:Log 'After-Dark-CC-Theme: Skipped Quick Access icon change registry import, you can do it manually with - reg import '$env:USERPROFILE\Icons\iPack Icon\Windows 10 - Change Quick Access Icon\custom.reg''
         }"
     )
+    "AltServer" = @(
+        "choco install altserver -y"
+        "scoop install bergbok/altserver"
+        "winget install --id=RileyTestut.AltServer --exact --accept-source-agreements --accept-package-agreements"
+    )
     "Ares" = @(
         "scoop install games/ares"
     )
@@ -2589,6 +2594,7 @@ $script:selection = @{
         "Steam ROM Manager"
     )
     "Hardware" = @(
+        "AltServer"
         "CPUID HWMonitor"
         "DS4Windows"
         "DisplayFusion"
