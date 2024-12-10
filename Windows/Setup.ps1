@@ -838,6 +838,7 @@ $script:commands = @{
         "`$shell = New-Object -ComObject Shell.Application"
         "(`$shell.Namespace('shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}').Items() | Where-Object {`$_.Path -eq '$env:USERPROFILE\iCloudDrive'}).InvokeVerb('unpinfromhome')"
         "(`$shell.Namespace('shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}').Items() | Where-Object {`$_.Name -eq 'iCloud Photos'}).InvokeVerb('unpinfromhome')"
+        "Remove-Item 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{F0D63F85-37EC-4097-B30D-61B4A8917118}' -Force"
         "script:Log 'iCloud: If you get `"Your computer is missing Media features.`" even though it is installed you may need to use Orca to modify iCloud64.msi (remove the `"Installed OR MS_MEDIAFEATUREPACK_INSTALLED OR IGNORE_MEDIAFEATUREPACK`" condition from the LaunchCondition table). You can find iCloud64.msi in TEMP while the installer is running.'"
     )
     "iCUE" = @(
