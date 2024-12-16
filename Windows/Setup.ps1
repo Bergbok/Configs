@@ -873,6 +873,9 @@ $script:commands = @{
         "scoop install versions/jdownloader"
         "winget install --id=AppWork.JDownloader --exact --accept-source-agreements --accept-package-agreements"
     )
+    "Jitterbugpair" = @(
+        "scoop install bergbok/jitterbugpair"
+    )
     "KDE Connect" = @(
         "choco install kdeconnect-kde -y"
         "scoop install extras/kdeconnect"
@@ -2462,6 +2465,7 @@ $script:selection = @{
         "Firefox"
         "Flameshot"
         "GIMP"
+        "Jitterbugpair"
         "KeePassXC"
         "KDE Connect"
         "LibreOffice"
