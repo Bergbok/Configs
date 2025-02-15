@@ -2212,6 +2212,7 @@ $script:commands = @{
     )
     "WSL - Debian" = @(
         "wsl --install --no-launch --distribution Debian"
+        "script:Log 'Debian: You may need to run the following for internet connection: sudo setcap cap_net_raw+p /bin/ping^'"
     )
     "Yarn" = @(
         "choco install yarn -y"
