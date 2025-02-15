@@ -315,6 +315,11 @@ $script:commands = @{
     "CreamInstaller" = @(
         "scoop install bergbok/creaminstaller"
     )
+    "CUDA" = @(
+        "choco install cuda -y"
+        "scoop install main/cuda"
+        "winget install --id=Nvidia.CUDA --exact --accept-source-agreements --accept-package-agreements"
+    )
     "Cyberduck" = @(
         "choco install cyberduck -y"
         "scoop install extras/cyberduck"
@@ -2505,6 +2510,7 @@ $script:selection = @{
         "Bun"
         "Cmder"
         "Command Prompt Aliases"
+        "CUDA"
         "Deno"
         "Docker CLI"
         "Docker Completion"
