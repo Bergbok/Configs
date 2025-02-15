@@ -6,13 +6,15 @@ New-Item -ItemType Directory $path -Force | Out-Null
 
 if (Test-Path "$path\FreeTube") {
     Set-Location "$path\FreeTube"
+    git stash
     git pull
 } else {
     git clone "https://github.com/FreeTubeApp/FreeTube.git" $path\FreeTube
     Set-Location "$path\FreeTube"
 }
 
-git checkout master
+# git checkout master
+git checkout development
 
 $buildCommand = $null
 
@@ -46,13 +48,13 @@ $iconButtonContent = Get-Content $iconButtonPath -Raw
 $iconButtonContent = $iconButtonContent -replace 'background-color: var\(--side-nav-color\);', 'background-color: var(--primary-color);'
 Set-Content $iconButtonPath -Value $iconButtonContent
 
-$subscribeButtonPath = ".\renderer\components\ft-subscribe-button\ft-subscribe-button.scss"
+$subscribeButtonPath = ".\renderer\components\FtSubscribeButton\FtSubscribeButton.scss"
 $subscribeButtonContent = Get-Content $subscribeButtonPath -Raw
 $subscribeButtonContent = $subscribeButtonContent -replace 'background-color: var\(--side-nav-color\);', 'background-color: var(--primary-color);'
 $subscribeButtonContent = $subscribeButtonContent -replace 'border-inline-end: 2px solid var\(--primary-color-active\) !important;\r\n', ''
 Set-Content $subscribeButtonPath -Value $subscribeButtonContent
 
-$sideNavPath = ".\renderer\components\side-nav\side-nav.css"
+$sideNavPath = ".\renderer\components\SideNav\SideNav.css"
 $sideNavContent = Get-Content $sideNavPath -Raw
 $sideNavContent = $sideNavContent -replace 'background-color: var\(--side-nav-color\);', 'background-color: var(--primary-color);'
 $sideNavContent = $sideNavContent -replace 'box-shadow: 1px -1px 1px -1px var\(--primary-shadow-color\);\r\n', ''
@@ -60,7 +62,7 @@ $sideNavContent = $sideNavContent -replace 'color: inherit;', 'color: #c8c8c8;'
 $sideNavContent = $sideNavContent -replace 'color: var\(--text-with-main-color\);', 'color: #c8c8c8;'
 Set-Content $sideNavPath -Value $sideNavContent
 
-$sideNavMoreOptionsPath = ".\renderer\components\side-nav-more-options\side-nav-more-options.css"
+$sideNavMoreOptionsPath = ".\renderer\components\SideNavMoreOptions\SideNavMoreOptions.css"
 $sideNavMoreOptionsContent = Get-Content $sideNavMoreOptionsPath -Raw
 $sideNavMoreOptionsContent = $sideNavMoreOptionsContent -replace 'background-color: var\(--side-nav-color\);', 'background-color: var(--primary-color);'
 Set-Content $sideNavMoreOptionsPath -Value $sideNavMoreOptionsContent
