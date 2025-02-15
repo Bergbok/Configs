@@ -3195,6 +3195,11 @@ function Invoke-Setup {
             Set-ItemProperty "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Value 0
         }
 
+        function Disable-SuggestedNotifications {
+            Write-Host "Disabling suggested notifications..."
+            Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.Suggested" -Name "Enabled" -Value 0 -Type DWORD
+        }
+
         function Hide-DriveSpaceIndicators {
             Write-Host "Hiding drive space indicators..."
             reg import "$PSScriptRoot\Configs\Regedits\Drive-Space-Indicator-Bar\Remove-Drive-Space-Indicator-Bar.reg" 2>$null
@@ -3384,6 +3389,7 @@ function Invoke-Setup {
         Disable-LanguageSwitchHotkeys
         Disable-MicrosoftAccounts
         Disable-MouseAcceleration
+        Disable-SuggestedNotifications
         Hide-DriveSpaceIndicators
         Initialize-PackageManagers
         Invoke-Everything
