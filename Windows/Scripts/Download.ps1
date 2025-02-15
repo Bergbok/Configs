@@ -143,6 +143,19 @@ switch -regex ($url) {
         }
         break
     }
+    "https?:\/\/.*\.bandcamp\.com" {
+        $ytdlp = Get-ytdlp
+
+        if (-not $ytdlp) {
+            Write-Host "yt-dlp not found" -ForegroundColor Red
+            break
+        }
+
+        $params = "-x -P `"$outputDirectory\Audio\Bandcamp`" --audio-format mp3 --audio-quality 0 $url"
+
+        Start-Process $ytdlp -Args $params -NoNewWindow -Wait
+        break
+    }
     default {
         Write-Host "URL ($url) not supported" -ForegroundColor Red
     }
