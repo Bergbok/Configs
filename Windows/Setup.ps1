@@ -4218,7 +4218,7 @@ function Invoke-Setup {
                 }
             }
 
-            New-PsExe "$PSScriptRoot\Scripts\Download.ps1"
+            Invoke-ps2exe -inputFile "$PSScriptRoot\Scripts\Download.ps1" -outputFile "$env:USERPROFILE\Code\Scripts\ps2exe\Download.exe" -iconFile "$PSScriptRoot\Icons\PowerShell.ico"
             New-PsExe "$PSScriptRoot\Scripts\Dump-Event-Logs.ps1"
             New-PsExe "$PSScriptRoot\Scripts\Open-Volume-Mixer.ps1"
             New-PsExe "$PSScriptRoot\Scripts\ps2exe-exe2ps.ps1"
