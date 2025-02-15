@@ -624,7 +624,7 @@ $script:commands = @{
         "script:Log 'Firefox: Import DuckDuckGo settings.'"
         "script:Log 'Firefox: Run Checkmarks (Ctrl+H)'"
         "script:Log 'Firefox: Customize toolbar: Remove `"Account`", `"Save to Pocket`" & `"Import bookmarks`". Pin Simple Tab Groups & uBlock Origin.'"
-        "script:Log 'Firefox: Configure browser extensions: Augmented Steam, Bypass Paywalls Clean (Disable `"Enable new sites by default`"), Dark Reader, FFZ (manually enable 7TV, BTTV and Inline Tab-Completion add-ons), KeePassXC, LibRedirect, uBlock Origin, Violentmonkey.'"
+        "script:Log 'Firefox: Configure browser extensions: Augmented Steam, Bypass Paywalls Clean (Disable `"Enable new sites by default`"), Dark Reader, FFZ (manually enable 7TV, BTTV, Inline Tab-Completion & First Message Highlight add-ons), KeePassXC, LibRedirect, uBlock Origin, Violentmonkey.'"
     )
     "Flameshot" = @(
         "choco install flameshot -y"
