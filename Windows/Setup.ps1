@@ -763,7 +763,7 @@ $script:commands = @{
             }
         }"
         "if (Get-Command code -ErrorAction SilentlyContinue) {
-            git config --global core.editor code
+            git config --global core.editor 'code --wait'
         } else {
             script:Log 'git: Could not set core.editor to VSCode.' 
         }"
