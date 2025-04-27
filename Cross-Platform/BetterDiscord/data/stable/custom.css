@@ -18,12 +18,14 @@ div.flex_dc333f.horizontal_dc333f.justifyCenter_ec1a20.alignCenter_ec1a20.wrap_e
     box-shadow: none !important;
 }
 
-div[class*='friendsBadge'] {
-    background: none;
+div[class^='folder'],
+div[class^='friendsBadge'],
+span[class^='expandedFolderBackground'] {
+    background: none !important;
 }
 
 .bd-addon-error,
-[class*='outer'] {							/* Background of active users on friends tab */	
+[class*='outer'] {							/* Background of active users on friends tab */
     background-color: #191919 !important;
 }
 
@@ -49,7 +51,7 @@ div.reactionCount_ec6b19,
 /* ## Nitro Hiding */
 [class*='upsellContainer'],					/* Nitro ad that appears when scrolling down */
 [class*='nitroBottomDivider'],				/* Thin line between servers */
-[class*='emojiLockIconContainer'],			/* Lock icons on emojis & darkening overlay */ 
+[class*='emojiLockIconContainer'],			/* Lock icons on emojis & darkening overlay */
 [class*='nitroTopDividerContainer'],		/* Divider between "Frequently Used" and server emojis */
 [class*='categoryItemLockIconContainer'] {	/* Lock icons on server icons */
     display: none !important;
@@ -58,7 +60,7 @@ div.reactionCount_ec6b19,
     background-color: transparent !important;
 }
 /* ## Misc */
-.emoji.jumboable {							/* Enlarge native (real) emojis */		
+.emoji.jumboable {							/* Enlarge native (real) emojis */
     width:150px !important;
     height:150px !important;
 }
