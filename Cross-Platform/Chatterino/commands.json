@@ -1,11 +1,6 @@
 {
     "commands": [
         {
-            "name": "/j",
-            "func": "!join Barry63",
-            "showInMsgContextMenu": false
-        },
-        {
             "name": "/gongoverdose",
             "func": "Side effects of gongo may include but are not limited to: lowered awarness of the passage of time, chronic zzooTrip face, slurred or altered speech patterns (commonly known as emote brain), love for an otherworldy being known as Osmo, and hightened senses. If you are noticing any of these signs please contact your local gongo doctor immediately",
             "showInMsgContextMenu": false
@@ -18,11 +13,6 @@
         {
             "name": "/jermaPoint",
             "func": "jermaPoint {1+} jermaPoint2",
-            "showInMsgContextMenu": false
-        },
-        {
-            "name": "/fakeBlock",
-            "func": "You successfully blocked user {1}",
             "showInMsgContextMenu": false
         },
         {

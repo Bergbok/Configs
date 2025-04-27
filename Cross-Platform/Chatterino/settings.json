@@ -3,7 +3,8 @@
         "autorun": false,
         "pauseChatModifier": 67108864,
         "autocompletion": {
-            "userCompletionOnlyWithAt": true
+            "userCompletionOnlyWithAt": true,
+            "emoteCompletionWithColon": true
         },
         "showJoins": false,
         "showParts": false
@@ -29,6 +30,7 @@
             "new tab",
             "next message",
             "open debug popup",
+            "open overlay",
             "open quick switcher",
             "open settings",
             "popup accept",
@@ -73,6 +75,7 @@
             "show search",
             "toggle live tabs only",
             "toggle local r9k",
+            "toggle overlay click-through",
             "toggle tab visibility",
             "zoom in",
             "zoom out",
@@ -262,6 +265,12 @@
             "category": "split",
             "arguments": []
         },
+        "open overlay": {
+            "action": "popupOverlay",
+            "keySequence": "Ctrl+Alt+N",
+            "category": "split",
+            "arguments": []
+        },
         "reconnect": {
             "action": "reconnect",
             "keySequence": "Ctrl+F5",
@@ -313,6 +322,14 @@
             "keySequence": "Ctrl+F",
             "category": "split",
             "arguments": []
+        },
+        "toggle overlay click-through": {
+            "action": "toggleOverlayInertia",
+            "keySequence": "Ctrl+Shift+U",
+            "category": "split",
+            "arguments": [
+                "all"
+            ]
         },
         "emote picker": {
             "action": "openEmotesPopup",
@@ -518,14 +535,6 @@
                 "7"
             ]
         },
-        "toggle live tabs only": {
-            "action": "setTabVisibility",
-            "keySequence": "Ctrl+Shift+L",
-            "category": "window",
-            "arguments": [
-                "toggleLiveOnly"
-            ]
-        },
         "toggle local r9k": {
             "action": "toggleLocalR9K",
             "keySequence": "Ctrl+H",
@@ -566,7 +575,7 @@
         }
     },
     "misc": {
-        "currentVersion": "2.5.1",
+        "currentVersion": "2.5.2",
         "lockNotebookLayout": false,
         "attachExtensionToAnyProcess": false,
         "emotesTooltipPreview": 1,
@@ -634,7 +643,6 @@
         "enableToast": true,
         "twitch": [
             "Jerma985",
-            "supertf",
             "GreatSphynx"
         ],
         "enableFlashTaskbar": true,
@@ -646,98 +654,7 @@
     "ignore": {
         "phrases": [
             {
-                "pattern": "\\blil (bro|pup)\\b",
-                "regex": true,
-                "isBlock": false,
-                "replaceWith": "dude",
-                "caseSensitive": false
-            },
-            {
-                "pattern": "\\bpeak\\b",
-                "regex": true,
-                "isBlock": false,
-                "replaceWith": "good",
-                "caseSensitive": false
-            },
-            {
-                "pattern": "\\bmid\\b",
-                "regex": true,
-                "isBlock": false,
-                "replaceWith": "average",
-                "caseSensitive": false
-            },
-            {
-                "pattern": "\\bomE\\b",
-                "regex": true,
-                "isBlock": false,
-                "replaceWith": "OMEGALUL",
-                "caseSensitive": true
-            },
-            {
-                "pattern": "\\bhardstuck\\b",
-                "regex": true,
-                "isBlock": false,
-                "replaceWith": "hardstuck​",
-                "caseSensitive": true
-            },
-            {
-                "pattern": "\\bChatters\\b",
-                "regex": true,
-                "isBlock": false,
-                "replaceWith": "Chatters​",
-                "caseSensitive": true
-            },
-            {
-                "pattern": "\\bEarthquake\\b",
-                "regex": true,
-                "isBlock": false,
-                "replaceWith": "Earthquake​",
-                "caseSensitive": true
-            },
-            {
-                "pattern": "\\bLOOT\\b",
-                "regex": true,
-                "isBlock": false,
-                "replaceWith": "LOOT​",
-                "caseSensitive": true
-            },
-            {
-                "pattern": "\\bmods\\b",
-                "regex": true,
-                "isBlock": false,
-                "replaceWith": "mods​",
-                "caseSensitive": true
-            },
-            {
-                "pattern": "\\bpillow\\b",
-                "regex": true,
-                "isBlock": false,
-                "replaceWith": "pillow​",
-                "caseSensitive": true
-            },
-            {
-                "pattern": "CatTime[^\\s]*",
-                "regex": true,
-                "isBlock": false,
-                "replaceWith": "",
-                "caseSensitive": true
-            },
-            {
-                "pattern": "\\b(AnySubGiftersInChat|denise|DontLook|DrinkBlood|[Dd]vaAss|eulASS|glorplis|forsen(Buh|Cream|Puke)|HotFemboy|JermaGoingCrazy|JUMP|JustFriends|Kissaweeb|ModTeam|MorningRoutine|NewOutfit|OkayuFukireta|TakeIt|VeryElis)\\b",
-                "regex": true,
-                "isBlock": false,
-                "replaceWith": "",
-                "caseSensitive": true
-            },
-            {
-                "pattern": "\\b(?:angyfi|annytf|augy|axeum|baomote|beyumi|chibidoki|cir|dankju1|daphh|deme|elis|emukukis|enaroh|envy|filly|gothicbun|gura|hacker42|henya|hinano|hunney4|ilarj|illy|ironmouse|jnx|kanae|Kanna|kanna|karubis|kendo|kylekj|lac|lucypy|miku|miwo|miya|muni|nb3|Neco|neco|nephu|nesta|nimuvt|nya|pmel|renvye|renx|rootvt|sagiri|sayuwu|seastv|shxtou|shyy|Silver|sulkyc|sumsalt|swrd|tobs|tororox|vedal|vei|vulp|warpsa|woomy|yocci|zenyah)[^\\s]+\\b",
-                "regex": true,
-                "isBlock": false,
-                "replaceWith": "",
-                "caseSensitive": true
-            },
-            {
-                "pattern": "^(Link Your Account Here|keep updated with sleepy|Thank you for smashing it|Resub hype!|NEW YOUTUBE VIDEO pokeU|pokeING GO ON THE REDDIT|You can find Poke on|Amazon Prime members get a free Twitch sub|Follow me on Instagram|Join my Discord|If you're enjoying the stream, don't forget to|follow dizzy on social media|dizzy is not making a comeback on|Please ask for permission to post a link.)",
+                "pattern": "(Link Your Account Here|keep updated with sleepy|Thank you for smashing it|Resub hype!|NEW YOUTUBE VIDEO pokeU|pokeING GO ON THE REDDIT RIGHT NOW AND POST MEMES|You can find Poke on twitter|Amazon Prime members get a free Twitch subscription each month.|Follow me on Instagram|Join my Discord|If you're enjoying the stream, don't forget to follow|follow dizzy on social media|dizzy is not making a comeback on Apex|Please ask for permission to post a link.)",
                 "regex": true,
                 "isBlock": true,
                 "replaceWith": "",
@@ -808,6 +725,6 @@
         "allowCommandsAtEnd": false
     },
     "similarity": {
-        "hideSimilar": true
+        "hideSimilar": false
     }
 }
