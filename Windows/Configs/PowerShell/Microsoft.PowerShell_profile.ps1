@@ -1,4 +1,9 @@
 function cmder { cmd /k %CMDER_ROOT%\vendor\init.bat }
+function bd {
+    Set-Location -Path '~\Code\Scripts\Python\BetterDiscord-AutoInstaller'
+    & '.\venv\Scripts\Activate.ps1'
+    python main.py
+}
 function e { exit }
 function kys { shutdown /s /t 0 }
 function p { powershell-here -ExecutionPolicy Bypass -NoLogo }
