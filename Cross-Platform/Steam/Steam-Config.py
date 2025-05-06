@@ -41,7 +41,7 @@ def edit_install_config(install_config_path):
 def edit_local_config(localconfig_path):
     config_string = open(localconfig_path, encoding='utf-8').read()
     config = vdf.loads(config_string, mapper=vdf.VDFDict)
-    config_tweaks = { 
+    config_tweaks = {
         "UserLocalConfigStore": {
             "friends": {
                 "ChatFlashMode": "0",
@@ -56,8 +56,8 @@ def edit_local_config(localconfig_path):
                 "Sounds_PlayMessage": "1",
                 "Sounds_EventsAndAnnouncements": "0"
             },
-            "news": { 
-                "NotifyAvailableGames": "0" 
+            "news": {
+                "NotifyAvailableGames": "0"
             },
             "system": {
                 "displayratesasbits": "0",
@@ -65,7 +65,7 @@ def edit_local_config(localconfig_path):
                 "JumplistSettingsKnown": "262143",
                 "GameOverlayHomePage": "https://duckduckgo.com"
             }
-        } 
+        }
     }
     update_vdf_dict(config, config_tweaks)
     vdf.dump(config, open(localconfig_path, 'w', encoding='utf-8'), pretty=True)
@@ -88,7 +88,7 @@ def edit_shared_config(sharedconfig_path):
     update_vdf_dict(config, config_tweaks)
     vdf.dump(config, open(sharedconfig_path, 'w', encoding='utf-8'), pretty=True)
     # print_keys_recursively(config)
-    
+
 def main():
     parser = argparse.ArgumentParser(description='Edits Steam localconfig configuration file.')
     parser.add_argument('steampath', type=str, help='Path to folder containing Steam executable folder.')
@@ -96,12 +96,12 @@ def main():
     
     install_config_path = os.path.join(args.steampath, r"config\config.vdf")
     edit_install_config(install_config_path)
-    
+
     localconfig_paths = glob.glob(os.path.join(args.steampath, r"userdata\*\config\localconfig.vdf"))
 
     if not localconfig_paths:
         print("No localconfig.vdf found.")
-    
+
     for localconfig_path in localconfig_paths:
         edit_local_config(localconfig_path)
 
@@ -109,9 +109,10 @@ def main():
 
     if not sharedconfig_paths:
         print("No sharedconfig.vdf found.")
-    
+
     for sharedconfig_path in sharedconfig_paths:
         edit_shared_config(sharedconfig_path)
+
 
 if __name__ == "__main__":
     main()
