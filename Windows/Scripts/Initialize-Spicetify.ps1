@@ -135,7 +135,7 @@ function Initialize-CustomApps {
     if (Test-Path "$spicetifyConfigDir\CustomApps\marketplace") {
         Remove-Item "$spicetifyConfigDir\CustomApps\marketplace" -Recurse -Force
     }
-    Move-Item ".\marketplace" -Destination "$spicetifyConfigDir\CustomApps"
+    Move-Item ".\marketplace-dist" -Destination "$spicetifyConfigDir\CustomApps"
     spicetify config custom_apps marketplace
 
     spicetify config custom_apps lyrics-plus
