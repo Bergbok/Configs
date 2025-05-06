@@ -1,6 +1,6 @@
 $latestRelease = Invoke-RestMethod -Uri "https://api.github.com/repos/farag2/Sophia-Script-for-Windows/releases/latest"
 
-if ($PSVersionTable.PSVersion.Major -ge 7 -and $PSVersionTable.PSVersion.Minor -ge 3) { 
+if ($PSVersionTable.PSVersion.Major -ge 7 -and $PSVersionTable.PSVersion.Minor -ge 3) {
     $asset = $latestRelease.assets | Where-Object { $_.name -like "Sophia.Script.for.Windows.10.PowerShell.7*.zip" }
 } else {
     $asset = $latestRelease.assets | Where-Object { $_.name -like "Sophia.Script.for.Windows.10.v*.zip" }
@@ -22,7 +22,7 @@ Get-ChildItem ".\Sophia" -Filter "*.psm1" -Recurse | ForEach-Object {
     $module | Set-Content $_.FullName
 }
 
-if ($PSVersionTable.PSVersion.Major -ge 7 -and $PSVersionTable.PSVersion.Minor -ge 3) { 
+if ($PSVersionTable.PSVersion.Major -ge 7 -and $PSVersionTable.PSVersion.Minor -ge 3) {
     Move-Item ".\Sophia\Sophia_Script_for_Windows_10_PowerShell_7_v*\*" -Destination ".\Sophia"
     Remove-Item ".\Sophia\Sophia_Script_for_Windows_10_PowerShell_7_v*"
 } else {

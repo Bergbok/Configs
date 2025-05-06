@@ -12,7 +12,7 @@ function Initialize-Paths {
             return
         }
     }
-    
+
     $spotifyDirs = es -i -r "^(?!Minimize-).*\.exe$" "Spotify.exe"
     $roamingDir = $null
 
@@ -59,10 +59,10 @@ function Initialize-CustomApps {
             [string]$repo,
             [string]$pattern
         )
-    
+
         $releasesUrl = "https://api.github.com/repos/$repo/releases"
         $releases = Invoke-RestMethod -Uri $releasesUrl
-    
+
         foreach ($release in $releases) {
             foreach ($asset in $release.assets) {
                 if ($asset.name -match $pattern) {
@@ -72,10 +72,10 @@ function Initialize-CustomApps {
         }
         return $null
     }
-    
+
     $libraryUrl = Get-LatestReleaseAssetUrl -repo "harbassan/spicetify-apps" -pattern "spicetify-library\.release\.zip"
     $statsUrl = Get-LatestReleaseAssetUrl -repo "harbassan/spicetify-apps" -pattern "spicetify-stats\.release\.zip"
-    
+
     if ($libraryUrl) {
         Write-Host "Installing 'Library' custom app to $spicetifyConfigDir\CustomApps"
         Invoke-WebRequest $libraryUrl -OutFile ".\library.zip"
@@ -89,7 +89,7 @@ function Initialize-CustomApps {
     } else {
         Write-Warning "Couldn't download spicetify library custom app."
     }
-    
+
     if ($statsUrl) {
         Write-Host "Installing 'Stats' custom app to '$spicetifyConfigDir\CustomApps'"
         Invoke-WebRequest $statsUrl -OutFile ".\stats.zip"

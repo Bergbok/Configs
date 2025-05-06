@@ -1,5 +1,5 @@
 ﻿if (Get-NetFirewallRule | Where-Object DisplayName -EQ "Block-Steam") {
-    Get-NetFirewallRule | Where-Object DisplayName -eq "Block-Steam" | Remove-NetFirewallRule 
+    Get-NetFirewallRule | Where-Object DisplayName -eq "Block-Steam" | Remove-NetFirewallRule
 	Write-Output "Unblocked Steam"
 } else {
 	$steam = es -i -n 1 -r "\.exe$" "steam.exe"

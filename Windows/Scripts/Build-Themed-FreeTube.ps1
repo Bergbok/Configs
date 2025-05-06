@@ -91,8 +91,8 @@ Invoke-Expression $buildCommand
 
 Remove-Item ".\build\win-unpacked" -Recurse -Force
 
-$latestVersion = Get-ChildItem ".\build" -Filter "FreeTube Setup *.exe" | 
-    Sort-Object { [version]($_.Name -replace 'FreeTube Setup |\.exe', '') } -Descending | 
+$latestVersion = Get-ChildItem ".\build" -Filter "FreeTube Setup *.exe" |
+    Sort-Object { [version]($_.Name -replace 'FreeTube Setup |\.exe', '') } -Descending |
     Select-Object -First 1
 
 if ($latestVersion) {

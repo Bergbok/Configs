@@ -10,7 +10,7 @@ while (-not $url) {
 }
 
 function Get-ytdlp {
-    if (Get-Command yt-dlp -ErrorAction SilentlyContinue) { 
+    if (Get-Command yt-dlp -ErrorAction SilentlyContinue) {
         $ytdlp = "yt-dlp"
     } else {
         $ytdlp = es -i -n 1 -r "^(?!.*Python.*\\Scripts\\).*\.exe$" "yt-dlp.exe"
@@ -34,7 +34,7 @@ switch -regex ($url) {
         break
     }
     "https?:\/\/(on\.)?soundcloud\.com" {
-        if (Get-Command scdl -ErrorAction SilentlyContinue) { 
+        if (Get-Command scdl -ErrorAction SilentlyContinue) {
             $scdl = "scdl"
         } else {
             $scdl = "python $(es -i -n 1 -r "\.py$" "scdl.py")"
@@ -61,7 +61,7 @@ switch -regex ($url) {
         break
     }
     "https?:\/\/((www|m)\.)?twitch\.tv" {
-        if (Get-Command "twitchemotedownloader" -ErrorAction SilentlyContinue) { 
+        if (Get-Command "twitchemotedownloader" -ErrorAction SilentlyContinue) {
             $twitchemotedownloader = "twitchemotedownloader"
         } else {
             $twitchemotedownloader = es -i -n 1 -r "\.exe$" "EmoteDownloader.exe"
@@ -72,7 +72,7 @@ switch -regex ($url) {
             break
         }
 
-        if (Get-Command "webp2gif" -ErrorAction SilentlyContinue) { 
+        if (Get-Command "webp2gif" -ErrorAction SilentlyContinue) {
             $webp2gif = "webp2gif"
         } else {
             $webp2gif = es -i -n 1 -r "\.exe$" "webp2gif.exe"
@@ -91,7 +91,7 @@ switch -regex ($url) {
         }
 
         $platforms = @(
-            "Twitch", 
+            "Twitch",
             "BTTV",
             "FFZ",
             "7TV"
@@ -112,7 +112,7 @@ switch -regex ($url) {
             $params = "-p $platform --channel_names $channel --client_id $env:TWITCH_EMOTE_DL_CLIENT_ID --client_secret $env:TWITCH_EMOTE_DL_CLIENT_SECRET --output_dir `"$env:USERPROFILE\Pictures\Twitch Emotes`""
             Start-Process $twitchemotedownloader -Args $params -NoNewWindow -Wait
         }
-        
+
         $emotes = Get-ChildItem "$env:USERPROFILE\Pictures\Twitch Emotes\$channel" -Filter *.webp
         foreach ($emote in $emotes) {
             Start-Process $webp2gif -Args "-u `"$($emote.FullName)`"" -NoNewWindow -Wait

@@ -2705,10 +2705,7 @@ if (-not $script:keyString) {
 }
 
 # TLS 1.2
-[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-
-# TLS 1.3
-# [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 12288
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072 # 12288 for TLS 1.3
 #endregion
 
 #region Script Scope Functions
@@ -2718,7 +2715,7 @@ function script:Add-EnvPath {
         [Parameter(Mandatory, Position=0)]
         [string] $LiteralPath,
         [ValidateSet('User', 'CurrentUser', 'Machine', 'LocalMachine')]
-        [string] $Scope 
+        [string] $Scope
     )
 
     Set-StrictMode -Version 1;
@@ -2750,7 +2747,7 @@ function script:Expand-7zArchive {
     } else {
         $7z = es -i -n 1 -r "\.exe$" "7z.exe"
     }
-    
+
     $archiveName = [System.IO.Path]::GetFileNameWithoutExtension($archivePath)
     $destinationPath = Join-Path (Split-Path $archivePath) -ChildPath $archiveName
 
@@ -2814,7 +2811,7 @@ function script:Log {
         [string]$message,
         [switch]$Verbose
     )
-    
+
     $time = $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
     Add-Content $script:logFilePath -Value "$time $message"
     if ($Verbose) {
@@ -2839,7 +2836,7 @@ function script:New-Shortcut {
     begin {
         $shell = New-Object -ComObject WScript.Shell
     }
-    
+
     process {
         $link = $shell.CreateShortcut($LinkPath)
 
@@ -2886,12 +2883,12 @@ function script:Update-EnvPath {
 #region Argument Printing
 foreach ($arg in $MyInvocation.BoundParameters.keys) {
     switch -regex ($arg) {
-        "encryptString|keyString" { 
+        "encryptString|keyString" {
             $value = "[REDACTED]"
             break
         }
         default {
-            $value = (Get-Variable $arg).Value 
+            $value = (Get-Variable $arg).Value
         }
     }
     $arglist += "-$arg $value "
@@ -2951,21 +2948,21 @@ function Show-WinForm {
                 [array]$categoryEntries,
                 [int]$top
             )
-        
+
             $groupBox = New-Object System.Windows.Forms.GroupBox
             $groupBox.Text = $categoryName
             $groupBox.Size = New-Object System.Drawing.Size(360, 200)
             $groupBox.Location = New-Object System.Drawing.Point(10, $top)
             $groupBox.BackColor = [System.Drawing.ColorTranslator]::FromHtml("#212121")
             $groupBox.ForeColor = [System.Drawing.ColorTranslator]::FromHtml("#c8c8c8")
-        
+
             $checkedListBox = New-Object System.Windows.Forms.CheckedListBox
             $checkedListBox.Width = 340
             $checkedListBox.Location = New-Object System.Drawing.Point(10, 20)
             $checkedListBox.BackColor = [System.Drawing.ColorTranslator]::FromHtml("#191919")
             $checkedListBox.BorderStyle = [System.Windows.Forms.BorderStyle]::None
             $checkedListBox.ForeColor = [System.Drawing.ColorTranslator]::FromHtml("#c8c8c8")
-        
+
             foreach ($entry in $categoryEntries) {
                 $index = $checkedListBox.Items.Add($entry)
                 if ($script:required -contains $entry) {
@@ -2990,12 +2987,12 @@ function Show-WinForm {
 
             return $groupBox, $checkedListBox
         }
-    
+
         $panel = New-Object System.Windows.Forms.Panel
         $panel.AutoScroll = $true
         $panel.Dock = [System.Windows.Forms.DockStyle]::Fill
         $panel.BackColor = [System.Drawing.ColorTranslator]::FromHtml("#212121")
-    
+
         $top = 0
         $checkedListBoxes = @()
         foreach ($category in $script:selection.Keys | Sort-Object) {
@@ -3004,7 +3001,7 @@ function Show-WinForm {
             $panel.Controls.Add($groupBox)
             $top += $groupBox.Height + 10
         }
-    
+
         return $panel, $checkedListBoxes
     }
 
@@ -3012,11 +3009,11 @@ function Show-WinForm {
         param (
             [array]$checkedListBoxes
         )
-    
+
         $panel = New-Object System.Windows.Forms.Panel
         $panel.Dock = [System.Windows.Forms.DockStyle]::Fill
         $panel.Height = 0
-    
+
         $selectAllButton = New-Object System.Windows.Forms.Button
         $selectAllButton.Text = "Select All"
         $selectAllButton.Width = 170
@@ -3032,7 +3029,7 @@ function Show-WinForm {
         $deselectAllButton.FlatStyle = [System.Windows.Forms.FlatStyle]::Flat
         $deselectAllButton.BackColor = [System.Drawing.ColorTranslator]::FromHtml("#191919")
         $deselectAllButton.ForeColor = [System.Drawing.ColorTranslator]::FromHtml("#c8c8c8")
-    
+
         $selectAllButton.Add_Click({
             foreach ($checkedListBox in $checkedListBoxes) {
                 for ($i = 0; $i -lt $checkedListBox.Items.Count; $i++) {
@@ -3042,7 +3039,7 @@ function Show-WinForm {
                 }
             }
         })
-    
+
         $deselectAllButton.Add_Click({
             foreach ($checkedListBox in $checkedListBoxes) {
                 for ($i = 0; $i -lt $checkedListBox.Items.Count; $i++) {
@@ -3052,10 +3049,10 @@ function Show-WinForm {
                 }
             }
         })
-    
+
         $panel.Controls.Add($selectAllButton)
         $panel.Controls.Add($deselectAllButton)
-    
+
         return $panel
     }
 
@@ -3064,7 +3061,7 @@ function Show-WinForm {
             [System.Windows.Forms.Form]$form,
             [array]$checkedListBoxes
         )
-    
+
         $button = New-Object System.Windows.Forms.Button
         $button.Text = "Proceed"
         $button.Dock = [System.Windows.Forms.DockStyle]::Fill
@@ -3072,7 +3069,7 @@ function Show-WinForm {
         $button.FlatStyle = [System.Windows.Forms.FlatStyle]::Flat
         $button.BackColor = [System.Drawing.ColorTranslator]::FromHtml("#191919")
         $button.ForeColor = [System.Drawing.ColorTranslator]::FromHtml("#c8c8c8")
-    
+
         $button.Add_Click({
             $script:selected = @()
             foreach ($checkedListBox in $checkedListBoxes) {
@@ -3082,13 +3079,13 @@ function Show-WinForm {
             Invoke-Setup
             $form.Close()
         })
-    
+
         return $button
     }
 
     $form = New-Object System.Windows.Forms.Form
     $form.BackColor = [System.Drawing.ColorTranslator]::FromHtml("#212121")
-    $form.FormBorderStyle = [System.Windows.Forms.FormBorderStyle]::FixedDialog 
+    $form.FormBorderStyle = [System.Windows.Forms.FormBorderStyle]::FixedDialog
     $form.Icon = [System.Drawing.Icon]::ExtractAssociatedIcon("$PSScriptRoot\Icons\Transparent.ico")
     $form.MaximizeBox = $false
     $form.Size = New-Object System.Drawing.Size(420, 690)
@@ -3153,7 +3150,7 @@ function Invoke-Setup {
 
         function Edit-EntryOrder {
             $defaultOrderValue = 9001
-        
+
             $script:selected = $script:selected | Sort-Object {
                 $entry = $_
                 if ($script:ordering.ContainsKey($entry)) {
@@ -3342,7 +3339,7 @@ function Invoke-Setup {
             )
 
             Write-Host "Updating scroll line count..."
-            
+
             [SystemParametersInfo.WinAPICall]::SystemParametersInfo(0x0069, $lines, $null, $null)
         }
 
@@ -3374,7 +3371,7 @@ function Invoke-Setup {
             Write-Host "Showing hidden files and folders..."
             Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Hidden" -Value 1
         }
-        
+
         function Show-HiddenSystemFilesAndFolders {
             Write-Host "Showing hidden system files and folders..."
             Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowSuperHidden" -Value 1
@@ -3422,22 +3419,22 @@ function Invoke-Setup {
             param (
                 [string]$installCommand
             )
-        
+
             Write-Verbose "Checking winget package elevation requirement..."
 
             if ($installCommand -match '--id=([^\s]+)') {
                 $id = $matches[1]
             }
-        
+
             if ($installCommand -match "(?:-v|--version)\s+(?:[`"']?)([^`"']+)(?:[`"']?)") {
                 $version = $matches[1]
             }
-        
+
             $deconstructedID = $id.Split('.')
             $owner = $deconstructedID[0]
             $ownerInitial = $owner.Substring(0, 1).ToLower()
             $name = $deconstructedID[1]
-        
+
             if (-not $version) {
                 $apiUrl = "https://api.github.com/repos/microsoft/winget-pkgs/commits?path=manifests/$ownerInitial/$owner/$name"
                 $commits = @()
@@ -3465,13 +3462,13 @@ function Invoke-Setup {
                     $index++
                 }
             }
-        
+
             $manifestUrl = "https://raw.githubusercontent.com/microsoft/winget-pkgs/refs/heads/master/manifests/$ownerInitial/$owner/$name/$version/$owner.$name.installer.yaml"
             Write-Verbose "Checking manifest at $manifestUrl"
             $manifest = Invoke-RestMethod -Uri $manifestUrl
 
             Write-Verbose "Finished checking winget package elevation requirement..."
-        
+
             if ($manifest -match "ElevationRequirement:\s*elevationProhibited") {
                 return $true
             } else {
@@ -3487,7 +3484,7 @@ function Invoke-Setup {
 
             $commands = $script:commands[$entry]
             $executedPackageManager = $false
-    
+
             foreach ($pref in $preferences) {
                 foreach ($command in $commands) {
                     if ($command -match "^$pref") {
@@ -3509,8 +3506,8 @@ function Invoke-Setup {
                         break
                     }
                 }
-                if ($executedPackageManager) { 
-                    break 
+                if ($executedPackageManager) {
+                    break
                 }
             }
     
@@ -3540,8 +3537,8 @@ function Invoke-Setup {
         function Confirm-SysinternalsEula {
             if ($script:selected | Where-Object { $script:selection["Sysinternals"] -contains $_ }) {
                 Write-Host "Accepting Sysinternals EULA..."
-                if (-not (Test-Path "HKCU:\Software\Sysinternals")) { 
-                    New-Item "HKCU:\Software\Sysinternals" -Force | Out-Null 
+                if (-not (Test-Path "HKCU:\Software\Sysinternals")) {
+                    New-Item "HKCU:\Software\Sysinternals" -Force | Out-Null
                 }
                 Set-ItemProperty "HKCU:\Software\Sysinternals" -Name "EulaAccepted" -Value 1 -Force
             }
@@ -4000,7 +3997,7 @@ function Invoke-Setup {
                     "Microsoft-SnippingTool"
                     "Microsoft-RemoteDesktopConnection"
                 )
-                
+
                 foreach ($featureName in $optionalFeatureNames) {
                     Disable-WindowsOptionalFeature -Online -FeatureName $featureName -NoRestart -Remove
                 }
@@ -4039,7 +4036,7 @@ function Invoke-Setup {
                     "XboxNetApiSvc"                            # Xbox Live Networking Service
                     "ndu"                                      # Windows Network Data Usage Monitor
                 )
-    
+
                 foreach ($service in $services) {
                     Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled -ErrorAction SilentlyContinue
                 }
@@ -4088,7 +4085,7 @@ function Invoke-Setup {
             Optimize-ContextMenu
             Remove-ThisPCFolders
 
-            if (Test-Path "$env:SYSTEMDRIVE\Users\defaultuser0") { 
+            if (Test-Path "$env:SYSTEMDRIVE\Users\defaultuser0") {
                 Remove-Item "$env:SYSTEMDRIVE\Users\defaultuser0" -Recurse -Force
             }
 
@@ -4099,7 +4096,7 @@ function Invoke-Setup {
             foreach ($entry in $script:selected) {
                 switch ($entry) {
                     "Steam" {
-                        foreach ($steamappsFolder in (es -i /ad "steamapps")) { 
+                        foreach ($steamappsFolder in (es -i /ad "steamapps")) {
                             if ($steamappsFolder -match "SteamLibrary") {
                                 New-Item -ItemType SymbolicLink "$env:USERPROFILE\Games\Steam Libraries\$($steamappsFolder.Substring(0,1))" -Target "$steamappsFolder\common" -Force | Out-Null
                             }
@@ -4154,12 +4151,12 @@ function Invoke-Setup {
                             Start-Process $wallpaperengine -Args "-control mute"
                         } else {
                             Write-Host "Wallpaper Engine: Couldn't find Wallpaper Engine executable."
-                        }                        
+                        }
                     }
                 }
             }
         }
-        
+
         function New-PsExes {
             function New-PsExe {
                 param (
@@ -4240,7 +4237,7 @@ function Invoke-Setup {
                     [Microsoft.Management.Infrastructure.CimInstance]$settings = (New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable),
                     [string]$taskPath = "\Custom"
                 )
-            
+
                 if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
                     Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
                 }
@@ -4251,16 +4248,16 @@ function Invoke-Setup {
                 param (
                     [string]$query
                 )
-            
+
                 $CIMTriggerClass = Get-CimClass -ClassName "MSFT_TaskEventTrigger" -Namespace "root/Microsoft/Windows/TaskScheduler:MSFT_TaskEventTrigger"
-                
+
                 $trigger = New-CimInstance -CimClass $CIMTriggerClass -ClientOnly
                 $trigger.Subscription = $query
                 $trigger.Enabled = $True
-            
+
                 return $trigger
             }
-            
+
             Write-Host "Creating scheduled tasks..."
 
             foreach ($entry in $script:selected) {
@@ -4366,10 +4363,10 @@ function Invoke-Setup {
 
         function New-TaskbarEntries {
             Write-Host "Creating taskbar entries..."
-        
+
             $tempDir = Join-Path ([System.IO.Path]::GetTempPath()) -ChildPath "Taskbar Shortcuts"
             New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
-        
+
             foreach ($entry in $script:selected) {
                 switch ($entry) {
                     "Chatterino2" {
@@ -4449,7 +4446,7 @@ function Invoke-Setup {
                     }
                 }
             }
-        
+
             script:Log "Taskbar: Manually pin Explorer and set icon to '$env:USERPROFILE\Pictures\System\Grey-Explorer.ico'"
             script:Log "Taskbar: Open calculator and pin from taskbar instead of drag and drop."
             script:New-Shortcut -linkPath "$tempDir\Download.lnk" -targetPath "$env:USERPROFILE\Code\Scripts\ps2exe\Download.exe" -iconLocation "%SystemRoot%\System32\SHELL32.dll,178"
@@ -4461,10 +4458,10 @@ function Invoke-Setup {
             Write-Host "Removing desktop shortcuts..."
             $desktopShortcuts = @(Get-ChildItem "$env:USERPROFILE\Desktop" -Include "*.lnk", "*.url" -Recurse)
             $desktopShortcuts += Get-ChildItem "$env:PUBLIC\Desktop" -Include "*.lnk", "*.url" -Recurse
-            
+
             foreach ($shortcut in $desktopShortcuts) {
                 Remove-Item $shortcut.FullName
-            }            
+            }
         }
 
         function Set-PreferredAssociations {
@@ -4513,7 +4510,7 @@ function Invoke-Setup {
             cmd /c "assoc .ps1=Microsoft.PowerShellScript.1"
             cmd /c "ftype Microsoft.PowerShellScript.1=`"$env:WINDIR\System32\WindowsPowerShell\v1.0\powershell.exe`" -ExecutionPolicy Bypass -File `"%1`""
         }
-        
+
         Edit-Icons
         Add-QuickAccessPins
         Confirm-SysinternalsEula

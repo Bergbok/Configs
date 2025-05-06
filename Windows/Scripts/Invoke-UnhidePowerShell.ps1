@@ -32,5 +32,5 @@ function Invoke-UnhidePowerShell {
       }
     }
 }
- 
+
 Invoke-UnhidePowerShell

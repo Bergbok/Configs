@@ -16,7 +16,7 @@ if (Get-Command scoop -ErrorAction SilentlyContinue) {
         $destinations = Get-ChildItem "$env:USERPROFILE\scoop\apps\discord\*\app\app-*\resources" -ErrorAction SilentlyContinue
 
         if ($destinations) {
-            foreach ($destination in $destinations) {                
+            foreach ($destination in $destinations) {
                 Copy-Item ".\app.asar" -Destination "$($destination.FullName)\app.asar" -Force
                 Write-Host -ForegroundColor Green "Successfully installed OpenAsar to $($destination.FullName)"
             }

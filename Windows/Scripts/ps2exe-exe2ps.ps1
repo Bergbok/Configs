@@ -3,13 +3,13 @@ param (
 )
 
 if (-not $path) {
-    if ($MyInvocation.MyCommand.CommandType -eq "ExternalScript") { 
+    if ($MyInvocation.MyCommand.CommandType -eq "ExternalScript") {
         $path = Split-Path $MyInvocation.MyCommand.Definition
-    } else { 
+    } else {
         $path = Split-Path ([Environment]::GetCommandLineArgs()[0])
-        if (!$path) { 
-            $path = "." 
-        } 
+        if (!$path) {
+            $path = "."
+        }
     }
 }
 
