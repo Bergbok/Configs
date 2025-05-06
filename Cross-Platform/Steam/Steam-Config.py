@@ -93,11 +93,10 @@ def main():
     parser = argparse.ArgumentParser(description='Edits Steam localconfig configuration file.')
     parser.add_argument('steampath', type=str, help='Path to folder containing Steam executable folder.')
     args = parser.parse_args()
-    
-    install_config_path = os.path.join(args.steampath, r"config\config.vdf")
+    install_config_path = os.path.join(args.steampath, "config", "config.vdf")
     edit_install_config(install_config_path)
 
-    localconfig_paths = glob.glob(os.path.join(args.steampath, r"userdata\*\config\localconfig.vdf"))
+    localconfig_paths = glob.glob(os.path.join(args.steampath, "userdata", "*", "config", "localconfig.vdf"))
 
     if not localconfig_paths:
         print("No localconfig.vdf found.")
@@ -105,7 +104,7 @@ def main():
     for localconfig_path in localconfig_paths:
         edit_local_config(localconfig_path)
 
-    sharedconfig_paths = glob.glob(os.path.join(args.steampath, r"userdata\*\*\remote\sharedconfig.vdf"))
+    sharedconfig_paths = glob.glob(os.path.join(args.steampath, "userdata", "*", "*", "remote", "sharedconfig.vdf"))
 
     if not sharedconfig_paths:
         print("No sharedconfig.vdf found.")
