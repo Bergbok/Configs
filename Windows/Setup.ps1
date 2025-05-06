@@ -50,69 +50,11 @@ foreach ($key in $MyInvocation.BoundParameters.Keys) {
     Set-Variable -Scope Script -Name $key -Value $MyInvocation.BoundParameters[$key]
 }
 
-$script:commands = @{
+$script:packageManagerCommands = @{
     ".NET 8.0 Desktop Runtime" = @(
         "choco install dotnet-8.0-runtime -y"
         "scoop install extras/windowsdesktop-runtime"
         "winget install --id=Microsoft.DotNet.Runtime.8 --exact --accept-source-agreements --accept-package-agreements"
-    )
-    "After Dark CC Theme" = @(
-        "gdown `$script:afterDarkThemeGDriveID"
-        "script:Expand-7zArchive '.\After-Dark-CC-Theme.7z'"
-        "Remove-Item '.\After-Dark-CC-Theme.7z'"
-        # Copy-Item : The requested operation cannot be performed on a file with a user-mapped section open.
-        "Copy-Item '.\After-Dark-CC-Theme\Theme For Win10 22H2\Hide Commandbar\*' -Destination '$env:WINDIR\Resources\Themes' -Recurse -Force -ErrorAction SilentlyContinue"
-        "New-Item -ItemType Directory '$env:USERPROFILE\Themes\After-Dark-CC-Theme' -Force | Out-Null"
-        "Copy-Item '.\After-Dark-CC-Theme\*' -Destination '$env:USERPROFILE\Themes\After-Dark-CC-Theme' -Recurse -Force -ErrorAction SilentlyContinue"
-        "Remove-Item '.\After-Dark-CC-Theme' -Recurse -Force"
-        "Set-Location '$env:USERPROFILE\Themes\After-Dark-CC-Theme\OldNewExplorer'"
-        "Start-Process '.\OldNewExplorerCfg.exe'"
-        "Start-Process 'https://imgur.com/oldnewexplorer-config-C8BNIZL'"
-        "Set-Location '$PSScriptRoot'"
-        "`$secureuxthemePath = es -i -n 1 -r '\.exe$' 'ThemeTool.exe'"
-        "Start-Process `$secureuxthemePath"
-        "Start-Sleep -Seconds 0.69"
-        "`$themeToolProcess = Get-Process -Name 'ThemeTool' -ErrorAction SilentlyContinue"
-        "if (`$themeToolProcess) {
-            `$themeToolProcess.CloseMainWindow() | Out-Null
-        }"
-        "Start-Process '$env:USERPROFILE\Themes\After-Dark-CC-Theme\Icons\iPack Icon\Gray V4 iPack Icon\Gray V4 iPack Icon.exe'"
-        "Set-Clipboard 'HKEY_CLASSES_ROOT\CLSID\{679f85cb-0220-4080-b29b-5540cc05aab6}\DefaultIcon'"
-        "Start-Process '$env:USERPROFILE\Themes\After-Dark-CC-Theme\Icons\iPack Icon\Windows 10 - Change Quick Access Icon\RegOwnershipEx.exe'"
-        "Start-Sleep -Seconds 2"
-        "Set-Clipboard 'HKEY_LOCAL_MACHINE\Software\WOW6432Node\Classes\CLSID\{679f85cb-0220-4080-b29b-5540cc05aab6}\DefaultIcon'"
-        "Start-Process '$env:USERPROFILE\Themes\After-Dark-CC-Theme\Icons\iPack Icon\Windows 10 - Change Quick Access Icon\RegOwnershipEx.exe'"
-        "`$timeout = 120"
-        "Write-Host 'Press any key after taking ownership of keys with RegOwnershipEx' -ForegroundColor Green"
-        "`$stopwatch = [System.Diagnostics.Stopwatch]::StartNew()"
-        "`$keyPressed = `$false"
-        "while (`$stopwatch.Elapsed.TotalSeconds -lt `$timeout) {
-            `$remainingTime = [math]::Ceiling(`$timeout - `$stopwatch.Elapsed.TotalSeconds)
-            if (`$remainingTime -le 5) {
-                `$color = 'Red'
-            } else {
-                `$color = 'Yellow'
-            }
-            Write-Host -ForegroundColor `$color Skipping in `$remainingTime seconds...
-            if ([System.Console]::KeyAvailable) {
-                `$key = [System.Console]::ReadKey(`$true)
-                `$keyPressed = `$true
-                break
-            }
-            Start-Sleep -Seconds 1
-        }"
-        "`$stopwatch.Stop()"
-        "if (`$keyPressed) {
-            `$basePath = '$env:USERPROFILE'
-            `$fileName = 'Themes\After-Dark-CC-Theme\Icons\iPack Icon\Windows 10 - Change Quick Access Icon\custom.reg'
-            `$fullPath = Join-Path `$basePath -ChildPath `$fileName
-            
-            Write-Host 'Changing Quick Access icon...' -ForegroundColor Green
-            reg import `$fullPath 2>`$null
-            & '$PSScriptRoot\Scripts\Reload-Icon-Cache.ps1'
-        } else {
-            script:Log 'After-Dark-CC-Theme: Skipped Quick Access icon change registry import, you can do it manually with - reg import '$env:USERPROFILE\Icons\iPack Icon\Windows 10 - Change Quick Access Icon\custom.reg''
-        }"
     )
     "AltServer" = @(
         "choco install altserver -y"
@@ -135,15 +77,10 @@ $script:commands = @{
         "choco install autohotkey -y"
         "scoop install extras/autohotkey"
         "winget install --id=AutoHotkey.AutoHotkey --exact --accept-source-agreements --accept-package-agreements"
-        "Copy-Item '$PSScriptRoot\Configs\AutoHotkey' -Destination '$env:USERPROFILE\Code\Scripts' -Recurse -Force"
-        "foreach (`$script in (Get-ChildItem '$env:USERPROFILE\Code\Scripts\AutoHotkey\Startup\*')) { 
-            New-Item -ItemType SymbolicLink `"$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\`$(`$script.Name)`" -Target `$script.FullName -Force 
-        }"
     )
     "Autologon" = @(
         # "choco install autologon"
         "scoop install sysinternals/autologon"
-        "autologon"
     )
     "AutoRuns" = @(
         "choco install autoruns -y"
@@ -154,57 +91,6 @@ $script:commands = @{
         "choco install bulk-crap-uninstaller -y"
         "scoop install extras/bulk-crap-uninstaller"
         "winget install --id=Klocman.BulkCrapUninstaller --exact --accept-source-agreements --accept-package-agreements"
-    )
-    "BetterDiscord" = @(
-        "New-Item -ItemType Directory '$env:APPDATA\BetterDiscord' -Force | Out-Null"
-        "Copy-Item '$(Split-Path $PSScriptRoot)\Cross-Platform\BetterDiscord\*' -Destination '$env:APPDATA\BetterDiscord' -Recurse -Force"
-        "`$pluginDir = '$env:APPDATA\BetterDiscord\plugins'"
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Library/0BDFDB.plugin.js' -OutFile `"`$pluginDir\0BDFDB.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/zerebos/BDPluginLibrary/refs/heads/master/release/0PluginLibrary.plugin.js' -OutFile `"`$pluginDir\0PluginLibrary.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/Neodymium7/BetterDiscordStuff/refs/heads/main/ActivityIcons/ActivityIcons.plugin.js' -OutFile `"`$pluginDir\ActivityIcons.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/arg0NNY/DiscordPlugins/refs/heads/master/BetterAnimations/BetterAnimations.plugin.js' -OutFile `"`$pluginDir\BetterAnimations.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/jaspwr/BDPlugins/refs/heads/main/BetterAudioPlayer/BetterAudioPlayer.plugin.js' -OutFile `"`$pluginDir\BetterAudioPlayer.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/zerebos/BetterDiscordAddons/refs/heads/master/Plugins/BetterFormattingRedux/BetterFormattingRedux.plugin.js' -OutFile `"`$pluginDir\BetterFormattingRedux.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/arg0NNY/DiscordPlugins/refs/heads/master/BetterGuildTooltip/BetterGuildTooltip.plugin.js' -OutFile `"`$pluginDir\BetterGuildTooltip.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Plugins/BetterNsfwTag/BetterNsfwTag.plugin.js' -OutFile `"`$pluginDir\BetterNsfwTag.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/Zerthox/BetterDiscord-Plugins/refs/heads/master/dist/bd/BetterVolume.plugin.js' -OutFile `"`$pluginDir\BetterVolume.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/jaimeadf/BetterDiscordPlugins/refs/heads/build/BiggerStreamPreview/dist/BiggerStreamPreview.plugin.js' -OutFile `"`$pluginDir\BiggerStreamPreview.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/QWERTxD/BetterDiscordPlugins/refs/heads/master/CallTimeCounter/CallTimeCounter.plugin.js' -OutFile `"`$pluginDir\CallTimeCounter.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/EpicGazel/DiscordFreeEmojis/refs/heads/master/DiscordFreeEmojis.plugin.js' -OutFile `"`$pluginDir\DiscordFreeEmojis.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/zerebos/BetterDiscordAddons/refs/heads/master/Plugins/DoNotTrack/DoNotTrack.plugin.js' -OutFile `"`$pluginDir\DoNotTrack.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/Farcrada/DiscordPlugins/refs/heads/master/Double-click-to-edit/DoubleClickToEdit.plugin.js' -OutFile `"`$pluginDir\DoubleClickToEdit.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Plugins/EditUsers/EditUsers.plugin.js' -OutFile `"`$pluginDir\EditUsers.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Plugins/GameActivityToggle/GameActivityToggle.plugin.js' -OutFile `"`$pluginDir\GameActivityToggle.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Plugins/ImageUtilities/ImageUtilities.plugin.js' -OutFile `"`$pluginDir\ImageUtilities.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/Strencher/BetterDiscordStuff/refs/heads/master/InvisibleTyping/InvisibleTyping.plugin.js' -OutFile `"`$pluginDir\InvisibleTyping.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/bepvte/bd-addons/refs/heads/main/plugins/NoSpotifyPause.plugin.js' -OutFile `"`$pluginDir\NoSpotifyPause.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Plugins/PluginRepo/PluginRepo.plugin.js' -OutFile `"`$pluginDir\PluginRepo.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Plugins/ReadAllNotificationsButton/ReadAllNotificationsButton.plugin.js' -OutFile `"`$pluginDir\ReadAllNotificationsButton.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/jaimeadf/BetterDiscordPlugins/refs/heads/build/SecretRingTone/dist/SecretRingTone.plugin.js' -OutFile `"`$pluginDir\SecretRingTone.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Plugins/ShowConnections/ShowConnections.plugin.js' -OutFile `"`$pluginDir\ShowConnections.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Plugins/SplitLargeMessages/SplitLargeMessages.plugin.js' -OutFile `"`$pluginDir\SplitLargeMessages.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Plugins/ThemeRepo/ThemeRepo.plugin.js' -OutFile `"`$pluginDir\ThemeRepo.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/aarondoet/BetterDiscordStuff/refs/heads/master/Plugins/TypingIndicator/TypingIndicator.plugin.js' -OutFile `"`$pluginDir\TypingIndicator.plugin.js`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/QWERTxD/BetterDiscordPlugins/main/TypingUsersAvatars/TypingUsersAvatars.plugin.js' -OutFile `"`$pluginDir\TypingUsersAvatars.plugin.js`""
-        "`$themeDir = '$env:APPDATA\BetterDiscord\themes'"
-        "New-Item -ItemType Directory `$themeDir -Force | Out-Null"
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Themes/DiscordRecolor/DiscordRecolor.theme.css' -OutFile `"`$themeDir\DiscordRecolor.theme.css`""
-        "Invoke-WebRequest 'https://raw.githubusercontent.com/NYRI4/Discolored/refs/heads/master/support/discolored.theme.css' -OutFile `"`$themeDir\discolored.theme.css`""
-        "git clone 'https://github.com/Zwylair/BetterDiscordAutoInstaller'"
-        "New-Item -ItemType Directory '$env:USERPROFILE\Code\Scripts\Python\BetterDiscord-AutoInstaller' -Force | Out-Null"
-        "Copy-Item '.\BetterDiscordAutoInstaller\*' -Destination '$env:USERPROFILE\Code\Scripts\Python\BetterDiscord-AutoInstaller' -Recurse -Force"
-        "Remove-Item '.\BetterDiscordAutoInstaller' -Recurse -Force"
-        "Set-Location '$env:USERPROFILE\Code\Scripts\Python\BetterDiscord-AutoInstaller'"
-        "python -m venv venv"
-        ".\venv\Scripts\Activate.ps1"
-        "pip install -r requirements.txt"
-        "Remove-Item '.\settings.json' -Force -ErrorAction SilentlyContinue"
-        "python main.py"
-        "deactivate"
-        "Set-Location '$PSScriptRoot'"
-        "if (Get-Command syncthing -ErrorAction SilentlyContinue) {
-            syncthing cli config folders add --id '5rvta-4ecem' --label 'BetterDiscord' --path '$env:APPDATA\BetterDiscord'
-        }"
     )
     "BFG Repo-Cleaner" = @(
         "choco install bfg-repo-cleaner -y"
@@ -219,64 +105,16 @@ $script:commands = @{
         "choco install calibre -y"
         "scoop install extras/calibre"
         "winget install --id=calibre.calibre --exact --accept-source-agreements --accept-package-agreements"
-        "if (scoop list | Select-String -Pattern 'calibre' -SimpleMatch) {
-            `$destinationPath = '$env:USERPROFILE\scoop\persist\calibre\Calibre Settings'
-        } else {
-            `$destinationPath = '$env:APPDATA\calibre'
-        }"
-        "New-Item -ItemType Directory `$destinationPath -Force | Out-Null"
-        "Copy-Item '$(Split-Path $PSScriptRoot)\Cross-Platform\Calibre\icons-dark.rcc' -Destination `$destinationPath -Force"
     )
     "CEMU" = @(
         "choco install cemu -y"
         "scoop install games/cemu"
         "winget install --id=Cemu.Cemu --exact --accept-source-agreements --accept-package-agreements"
-        "gdown `$script:wiiUSavesGDriveID"
-        "script:Expand-7zArchive '.\Wii-U.7z'"
-        "Remove-Item '.\Wii-U.7z'"
-        "if (scoop list | Select-String -Pattern 'cemu' -SimpleMatch) {
-            New-Item -ItemType Directory '$env:USERPROFILE\scoop\persist\cemu\mlc01\usr\save' -Force | Out-Null
-            Copy-Item '.\Wii-U\*' -Destination '$env:USERPROFILE\scoop\persist\cemu\mlc01\usr\save' -Recurse -Force
-            if (Get-Command syncthing -ErrorAction SilentlyContinue) {
-                Set-Content '$env:USERPROFILE\scoop\persist\cemu\mlc01\.stignore' 'usr/title'
-                syncthing cli config folders add --id 'riwat-pjoqx' --label 'CEMU MLC' --path '$env:USERPROFILE\scoop\persist\cemu\mlc01'
-            }
-        } else {
-            `$cemu_path = es -i -n 1 -r '\.exe$' 'Cemu.exe'
-            `$savePath = `"`$(Split-Path `$cemu_path)\mlc01\usr\save`"
-            New-Item -ItemType Directory `$savePath -Force | Out-Null
-            Copy-Item '.\Wii-U\*' -Destination `"`$savePath`" -Force
-            if (Get-Command syncthing -ErrorAction SilentlyContinue) {
-                Set-Content `"`$(Split-Path `$cemu_path)\mlc01\.stignore`" 'usr/title'
-                syncthing cli config folders add --id 'riwat-pjoqx' --label 'CEMU MLC' --path `"`$(Split-Path `$cemu_path)\mlc01`"
-            }
-        }"
-        "Remove-Item '.\Wii-U' -Recurse -Force"
     )
     "Chatterino2" = @(
         "choco install chatterino -y"
         # "scoop install extras/chatterino" # taskbar entry
         "winget install --id=ChatterinoTeam.Chatterino --exact --accept-source-agreements --accept-package-agreements"
-        "New-Item -ItemType Directory '$env:USERPROFILE\Audio\SFX\Notifications' -Force | Out-Null"
-        "Copy-Item '$(Split-Path $PSScriptRoot)\Cross-Platform\Chatterino\default-notification.mp3' -Destination '$env:USERPROFILE\Audio\SFX\Notifications\Metroid-Data-Received.mp3' -Force"
-        "Copy-Item '$(Split-Path $PSScriptRoot)\Cross-Platform\Chatterino\jerma-notification.wav' -Destination '$env:USERPROFILE\Audio\SFX\Notifications\Jerma-UWU.wav' -Force"
-        "`$settings = Get-Content '$(Split-Path $PSScriptRoot)\Cross-Platform\Chatterino\settings.json'"
-        "`$settings = `$settings -replace 'jerma-notification-path-here', (`'$env:USERPROFILE\Audio\SFX\Notifications\Jerma-UWU.wav' -replace '\\', '\\')"
-        "`$settings = `$settings -replace 'default-notification-path-here', (`'$env:USERPROFILE\Audio\SFX\Notifications\Metroid-Data-Received.wav' -replace '\\', '\\')"
-        "`$settings = `$settings -replace 'imgur-client-id-here', `$script:imgurClientID"
-        "if (scoop list | Select-String -Pattern 'chatterino' -SimpleMatch) {
-            `$confPath = '$env:USERPROFILE\scoop\persist\chatterino\Settings'
-        } else {
-            `$confPath = '$env:APPDATA\Chatterino2\Settings'
-        }"
-        "New-Item -ItemType Directory `$confPath -Force | Out-Null"
-        "Copy-Item '$(Split-Path $PSScriptRoot)\Cross-Platform\Chatterino\*' -Exclude 'default-notification.mp3', 'jerma-notification.wav' -Destination `$confPath -Recurse -Force"
-        "Set-Content `"`$confPath\settings.json`" -Value `$settings -Force"
-        "if (Get-Command syncthing -ErrorAction SilentlyContinue) {
-            Set-Content `"`$confPath\.stignore`" '*.json.bkp-*`n*.json.??????'
-            syncthing cli config folders add --id 'axgjf-shqtw' --label 'Chatterino' --path `$confPath
-        }"
-        "script:Log 'Chatterino: If the log in button does nothing, manually log in with https://chatterino.com/client_login'"
     )
     "Cheat Engine" = @(
         "choco install cheatengine -y"
@@ -285,32 +123,6 @@ $script:commands = @{
     "Cmder" = @(
         "choco install cmder -y"
         "scoop install main/cmder"
-        "if (scoop list | Select-String -Pattern 'cmder' -SimpleMatch) {
-            `$destinationPath = '$env:USERPROFILE\scoop\persist\cmder'
-        } else {
-            `$destinationPath = (Split-Path (es -i -n 1 -r '\.exe$' 'Cmder.exe'))
-        }"
-        "New-Item -ItemType Directory `$destinationPath -Force | Out-Null"
-        "Copy-Item '$PSScriptRoot\Configs\Cmder\config' -Destination `$destinationPath -Recurse -Force"
-        "New-Item -ItemType Directory '$env:USERPROFILE\Themes\oh-my-posh' -Force | Out-Null"
-        "Copy-Item '$(Split-Path $PSScriptRoot)\Cross-Platform\oh-my-posh\*' -Destination '$env:USERPROFILE\Themes\oh-my-posh' -Force"
-        "`$cmder_root = (Split-Path (es -i -n 1 -r '\.exe$' 'Cmder.exe'))"
-        "`$ohmyposhlua = Get-Content `"`$cmder_root\config\oh-my-posh.lua`""
-        "`$ohmyposhlua = `$ohmyposhlua -replace 'theme-path-here', ('$env:USERPROFILE\Themes\oh-my-posh\current.omp.json' -replace '\\', '\\')"
-        "`$ohmyposhlua | Set-Content `"`$cmder_root\config\oh-my-posh.lua`" -Force"
-    )
-    "Command Prompt Aliases" = @(
-        "New-Item -ItemType Directory '$env:USERPROFILE\.config\cmd' -Force | Out-Null"
-        "`$aliases = Get-Content '$PSScriptRoot\Configs\Command-Prompt\aliases.doskey'"
-        "if (Get-Command pwsh -ErrorAction SilentlyContinue) {
-            `$aliases = `$aliases -replace 'powershell-path-here', ((Get-Command pwsh).Source)
-            `$aliases = `$aliases -replace '[A-Z]:\\Program Files', '%ProgramFiles%'
-        } else {
-            `$aliases = `$aliases -replace 'powershell-path-here', '%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe'
-        }"
-        "Set-Content '$env:USERPROFILE\.config\cmd\aliases.doskey' -Value `$aliases"
-        "New-Item 'HKCU:\Software\Microsoft\Command Processor' -Force | Out-Null"
-        "Set-ItemProperty 'HKCU:\Software\Microsoft\Command Processor' -Name 'AutoRun' -Type String -Value 'doskey /MACROFILE=`"%USERPROFILE%\.config\cmd\aliases.doskey`"' -Force"
     )
     "CreamInstaller" = @(
         "scoop install bergbok/creaminstaller"
@@ -325,27 +137,10 @@ $script:commands = @{
         "scoop install extras/cyberduck"
         "winget install --id=Iterate.Cyberduck --exact --accept-source-agreements --accept-package-agreements"
     )
-    "Cyberpunk Waifus Font" = @(
-        "Invoke-WebRequest 'https://dl.dafont.com/dl/?f=cyberpunkwaifus' -OutFile '.\CyberpunkWaifus-Font.zip'"
-        "Expand-Archive '.\CyberpunkWaifus-Font.zip' -DestinationPath '.' -Force"
-        "Remove-Item '.\CyberpunkWaifus-Font.zip'"
-        "script:Install-FontFile (Get-ChildItem '.\CyberpunkWaifus (1).ttf').FullName"
-        "Remove-Item '.\CyberpunkWaifus (1).ttf' -Force"
-    )
     "DS4Windows" = @(
         "choco install ds4windows -y"
         "scoop install bergbok/ds4windows"
         "winget install --id=Ryochan7.DS4Windows --exact --accept-source-agreements --accept-package-agreements"
-        "if (scoop list | Select-String -Pattern 'ds4windows' -SimpleMatch) {
-            `$destinationPath = '$env:USERPROFILE\scoop\persist\ds4windows'
-        } else {
-            `$destinationPath = '$env:APPDATA\DS4Windows'
-        }"
-        "New-Item -ItemType Directory `$destinationPath -Force | Out-Null"
-        "Copy-Item '$PSScriptRoot\Configs\DS4Windows\*' -Destination `$destinationPath -Recurse -Force"
-        "Start-Sleep -Seconds 1"
-        "`$ds4windows = es -i -n 1 -r '\.exe$' 'DS4Windows.exe'"
-        "Start-Process `$ds4windows"
     )
     "Deno" = @(
         "choco install deno -y"
@@ -356,30 +151,6 @@ $script:commands = @{
         # "choco list | Out-Null; choco install discord -y"
         # "scoop list | Out-Null; scoop install bergbok/discord" # taskbar entry
         "winget list | Out-Null; winget install --id=Discord.Discord --exact --accept-source-agreements --accept-package-agreements"
-	"script:Log 'Discord: Get mobile app QR code scanner ready.'"
-        "if (`$script:selected -contains 'BetterDiscord') {
-            Write-Host 'Please log into Discord, press enter to continue when done.'
-            Start-Sleep -Seconds 12
-            if (-not (Get-Process -Name 'discord' -ErrorAction SilentlyContinue)) {
-                `$discord = es -i -n 1 -r '\.exe$' 'Discord.exe'
-                Start-Process powershell -Args `"`$discord`" -WindowStyle Hidden
-            }
-            Read-Host
-        }"
-    )
-    "Discord OpenAsar" = @(
-        "& '$PSScriptRoot\Scripts\Install-Discord-OpenAsar.ps1'"
-    )
-    "DisplayFusion" = @(
-        "Start-Process steam://install/227260"
-        "Get-Content '$PSScriptRoot\Configs\DisplayFusion\Settings.reg'"
-        "`$settings = Get-Content '$PSScriptRoot\Configs\DisplayFusion\Settings.reg'"
-        "`$settings = `$settings -replace 'userprofile-here', ('$env:USERPROFILE' -replace '\\', '\\')"
-        "`$settings = `$settings -replace 'computer-name-here', '$env:COMPUTERNAME'"
-        "`$settings = `$settings -replace 'taskbarx-path-here', ((es -i -n 1 -r '\.exe$' 'TaskbarX.exe') -replace '\\', '\\')"
-        "`$settings | Out-File '.\temp-DisplayFusion-Settings.reg'"
-        "reg import '.\temp-DisplayFusion-Settings.reg' 2>`$null"
-        "Remove-Item '.\temp-DisplayFusion-Settings.reg' -Force"
     )
     "Docker CLI" = @(
         "choco install docker-cli -y"
@@ -409,48 +180,13 @@ $script:commands = @{
         "choco install dolphin -y"
         "scoop install games/dolphin"
         "winget install --id=DolphinEmulator.Dolphin --exact --accept-source-agreements --accept-package-agreements"
-        "Invoke-WebRequest 'https://gist.github.com/dantheman213/182e1ac17174681996221c31f59f1135/archive/538946df058e315f34fe926eb42f766689bb8ddb.zip' -OutFile 'Dolphin-Xbox-Controller-Profiles.zip'"
-        "Expand-Archive '.\Dolphin-Xbox-Controller-Profiles.zip'"
-        "Remove-Item '.\Dolphin-Xbox-Controller-Profiles.zip'"
-        "if (scoop list | Select-String -Pattern 'dolphin' -SimpleMatch) {
-            `$profilePath = '$env:USERPROFILE\scoop\persist\dolphin\User\Config\Profiles'
-        } else {
-            `$profilePath = '$env:USERPROFILE\Documents\Dolphin Emulator\Config\Profiles'
-        }"
-        "New-Item -ItemType Directory `"`$profilePath\GCPad`" -Force | Out-Null"
-        "Copy-Item '.\Dolphin-Xbox-Controller-Profiles\*\Xbox Controller (GCPad).ini' -Destination `"`$profilePath\GCPad`" -Force"
-        "New-Item -ItemType Directory `"`$profilePath\Wiimote`" -Force | Out-Null"
-        "Copy-Item '.\Dolphin-Xbox-Controller-Profiles\*\Xbox Controller (Nunchuk+Wiimote).ini' -Destination `"`$profilePath\Wiimote`" -Force"
-        "Remove-Item '.\Dolphin-Xbox-Controller-Profiles' -Recurse -Force"
     )
     "DuckStation" = @(
         # "scoop install games/duckstation; scoop install bergbok/ps2-bios" # https://github.com/Calinou/scoop-games/issues/1251
         "winget install --id=Stenzek.DuckStation --exact --accept-source-agreements --accept-package-agreements --ignore-security-hash; scoop install bergbok/ps2-bios"
-        "`$biosPath = '$env:USERPROFILE\scoop\apps\ps2-bios\current\BIOS'"
-        "if (scoop list | Select-String -Pattern 'duckstation' -SimpleMatch) {
-            Remove-Item '$env:USERPROFILE\scoop\apps\duckstation\current\bios'
-            New-Item -ItemType SymbolicLink '$env:USERPROFILE\scoop\persist\duckstation\current\bios' -Target `$biosPath -Force
-        } else {
-            New-Item -ItemType Directory '$env:USERPROFILE\Documents\DuckStation' -Force | Out-Null
-            New-Item -ItemType SymbolicLink '$env:USERPROFILE\Documents\DuckStation\bios' -Target `$biosPath -Force
-        }"
     )
     "Elden Ring Save Manager" = @(
         "scoop install bergbok/eldenring-save-manager"
-        "Copy-Item '$PSScriptRoot\Configs\Elden-Ring-Save-Manager\background.png' -Destination '$env:USERPROFILE\scoop\persist\eldenring-save-manager\data' -Force"
-        "Copy-Item '$PSScriptRoot\Configs\Elden-Ring-Save-Manager\config.json' -Destination '$env:USERPROFILE\scoop\persist\eldenring-save-manager\data' -Force"
-        "`$config = Get-Content '$env:USERPROFILE\scoop\persist\eldenring-save-manager\data\config.json'"
-        "`$config = `$config -replace 'gamedir-here', `"$env:USERPROFILE\AppData\Roaming\EldenRing\`$(`$script:steamID)`""
-        "`$config = `$config -replace 'steamID-here', `$script:steamID"
-        "`$config = `$config -replace '\\', '/'"
-        "`$config | Set-Content '$env:USERPROFILE\scoop\persist\eldenring-save-manager\data\config.json'"
-        # https://stackoverflow.com/a/44151771
-        "git clone 'https://github.com/Bergbok/Elden-Ring-Saves.git' --depth 1"
-        "Push-Location '.\Elden-Ring-Saves'"
-        "git fetch --unshallow"
-        "Copy-Item '.\save-files\*' -Destination '$env:USERPROFILE\scoop\persist\eldenring-save-manager\data\save-files' -Recurse -Force"
-        "Pop-Location"
-        "Remove-Item .\Elden-Ring-Saves -Recurse -Force"
     )
     "Epic Games Launcher" = @(
         "choco install epicgameslauncher -y"
@@ -461,35 +197,6 @@ $script:commands = @{
         # "choco install everything -y"
         # "scoop install extras/everything" # taskbar entry
         "winget install --id=voidtools.Everything --exact --accept-source-agreements --accept-package-agreements"
-        "if (-not (Get-Process -Name 'Everything' -ErrorAction SilentlyContinue)) {
-            everything
-        }"
-        "Stop-Process -Name 'everything' -Force -ErrorAction SilentlyContinue"
-        "if (scoop list | Select-String -Pattern 'Name=everything;' -SimpleMatch) {
-            Copy-Item '$PSScriptRoot\Configs\Everything\Everything.ini' -Destination '$env:USERPROFILE\scoop\persist\everything' -Force
-        } else {
-            New-Item -ItemType Directory '$env:APPDATA\Everything' -Force | Out-Null
-            Copy-Item '$PSScriptRoot\Configs\Everything\Everything.ini' -Destination '$env:APPDATA\Everything' -Force
-        }"
-        "if (Get-Command everything -ErrorAction SilentlyContinue) {
-            `$everything = 'everything'
-        } else {
-            `$driveRoots = Get-PSDrive -PSProvider FileSystem |  Select-Object -ExpandProperty Root | Where-Object { `$_ -notlike '*Temp*' }
-            foreach (`$driveRoot in `$driveRoots) {
-                `$everythingPath = `"`$(`$driveRoot)Program Files\Everything\Everything.exe`"
-                if (Test-Path `$everythingPath) {
-                    `$everything = `$everythingPath
-                    break
-                }
-            }
-        }"
-        "Start-Process `$everything -WindowStyle Minimized -Args '-install-service'"
-        "Start-Sleep -Seconds 1; Stop-Process -Name 'everything' -Force"
-        "Start-Process `$everything -WindowStyle Minimized -Args '-install-client-service'"
-        "Start-Sleep -Seconds 1; Stop-Process -Name 'everything' -Force"
-        "Start-Process `$everything -WindowStyle Minimized -Args '-install-run-on-system-startup'"
-        "Start-Sleep -Seconds 1; Stop-Process -Name 'everything' -Force -ErrorAction SilentlyContinue"
-        "Start-Process `$everything -WindowStyle Minimized"
     )
     "Everything CLI" = @(
         "choco install es -y"
@@ -503,22 +210,11 @@ $script:commands = @{
     )
     "ExplorerPatcher" = @(
         "scoop info | Out-Null"
-        "Add-MpPreference -ExclusionPath '$env:PROGRAMFILES\ExplorerPatcher'"
-        "Add-MpPreference -ExclusionPath '$env:APPDATA\ExplorerPatcher'"
-        "Add-MpPreference -ExclusionPath '$env:WINDIR\dxgi.dll'"
-        "Add-MpPreference -ExclusionPath '$env:WINDIR\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy'"
-        "Add-MpPreference -ExclusionPath '$env:WINDIR\SystemApps\ShellExperienceHost_cw5n1h2txyewy'"
-        "reg import '$PSScriptRoot\Configs\ExplorerPatcher\ExplorerPatcher.reg'"
-        "scoop install bergbok/explorer-patcher"
     )
     "f.lux" = @(
         "choco install f.lux.install -y"
         # "scoop install extras/f.lux" # autostart doesn't work
         "winget install --id=flux.flux --exact --accept-source-agreements --accept-package-agreements"
-        "Start-Sleep -Seconds 1"
-        "`$flux = es -i -n 1 -r '\.exe$' 'flux.exe'"
-        "Start-Process `$flux"
-        "script:Log `"f.lux: Click the limited color popup, but don't restart!`""
     )
     "Fan Control" = @(
         "scoop install extras/fancontrol"
@@ -541,122 +237,15 @@ $script:commands = @{
         "choco install firefox -y"
         # "scoop install extras/firefox" # taskbar entry
         "winget install --id=Mozilla.Firefox --exact --accept-source-agreements --accept-package-agreements"
-        "Start-Sleep -Seconds 1"
-        "if (Get-Command firefox -ErrorAction SilentlyContinue) {
-            `$firefox = 'firefox'
-        } else {
-            `$firefox = es -i -n 1 -r '\.exe$' 'firefox.exe'
-        }"
-        "Start-Process `$firefox -Args '-setDefaultBrowser'"
-        "Start-Sleep -Seconds 4.2"
-        "Write-Host 'Setting up Arkenfox...'"
-        "`$latestRelease = Invoke-RestMethod -Uri 'https://api.github.com/repos/arkenfox/user.js/releases/latest'"
-        "`$zipUrl = `$latestRelease.zipball_url"
-        "Invoke-WebRequest `$zipUrl -OutFile '.\Arkenfox.zip'"
-        "Expand-Archive '.\Arkenfox.zip' -DestinationPath '.\Arkenfox' -Force"
-        "Remove-Item '.\Arkenfox.zip' -Force"
-        "Move-Item '.\Arkenfox\arkenfox-user.js*\*' -Destination '.\Arkenfox' -ErrorAction SilentlyContinue"
-        "Remove-Item '.\Arkenfox\arkenfox-user.js*' -Recurse -Force"
-        "Remove-Item '.\Arkenfox\prefsCleaner.sh'"
-        "Remove-Item '.\Arkenfox\updater.sh'"
-        "Remove-Item '.\Arkenfox\LICENSE.txt'"
-        "Remove-Item '.\Arkenfox\README.md'"
-        "Stop-Process -Name 'firefox' -ErrorAction SilentlyContinue"
-        "`$profileDirs = @(Get-ChildItem `"$env:APPDATA\Mozilla\Firefox\Profiles`" -Directory)"
-        "`$profileFolder = `"$(Split-Path $PSScriptRoot)\Cross-Platform\Firefox`""
-        "`$userChrome = Get-Content `"`$profileFolder\chrome\userChrome.css`""
-        "`$userChrome = `$userChrome -replace 'phone-hostname-here', `$script:phoneHostname"
-        "`$userChrome = `$userChrome -replace 'pi-hostname-here', `$script:piHostname"
-        "foreach (`$dir in `$profileDirs) {
-            Copy-Item `"`$profileFolder\*`" -Destination `$dir.FullName -Recurse -Force            
-            Copy-Item '.\Arkenfox\*' -Destination `$dir.FullName -Recurse -Force
-            Set-Location `$dir.FullName
-            New-Item -ItemType File '.\chrome\userChrome.css' -ErrorAction SilentlyContinue
-            `$userChrome | Set-Content '.\chrome\userChrome.css'
-            if ((Test-Path '.\user.js') -and (Test-Path '.\prefs.js')) {
-                Start-Process '.\prefsCleaner.bat' -Args '-unattended' -Wait -NoNewWindow 
-                Start-Process '.\updater.bat' -Args '-unattended' -Wait -NoNewWindow
-            }
-            `$host.UI.RawUI.WindowTitle = 'Running setup'
-            Set-Location '$PSScriptRoot'
-        }"
-        "Remove-Item '.\Arkenfox' -Recurse -Force"
-        "try {
-            Write-Host 'Downloading Bypass Paywalls Clean...'
-            `$bypassPaywallsPath = [System.IO.Path]::GetTempPath() + 'Bypass-Paywalls-Clean-Latest.xpi'
-            Invoke-WebRequest 'https://gitflic.ru/project/magnolia1234/bpc_uploads/blob/raw?file=bypass_paywalls_clean-latest.xpi&inline=false' -OutFile `$bypassPaywallsPath
-        } catch {
-            script:Log 'Firefox: Failed to download Bypass Paywalls Clean'
-        }"
-        "foreach (`$file in (Get-ChildItem '$(Split-Path $PSScriptRoot)\Cross-Platform\Browser-Extensions' -Exclude 'FFZ.json' -Recurse -Attributes !Directory)) {
-            `$path = '`"' + 'file://' + `$file.FullName + '`"'
-            Write-Verbose `"Opening `$path with Firefox`"
-            Start-Process `$firefox -Args `"`-new-tab `$path`"
-            Start-Sleep -Seconds 1
-        }"
-        "Start-Process `$firefox -Args '-new-tab https://store.steampowered.com'"
-        "Start-Sleep -Seconds 1"
-        "Start-Process `$firefox -Args '-new-tab https://www.twitch.tv/greatsphynx'"
-        "Start-Sleep -Seconds 1"
-        "Start-Process `$firefox -Args '-new-tab https://adsbypasser.github.io/releases/adsbypasser.full.es7.user.js'"
-        "Start-Sleep -Seconds 1"
-        "Start-Process `$firefox -Args '-new-tab https://raw.githubusercontent.com/Nuklon/Steam-Economy-Enhancer/master/code.user.js'"
-        "Start-Sleep -Seconds 1"
-        "Start-Process `$firefox -Args '-new-tab https://github.com/pixeltris/TwitchAdSolutions/raw/refs/heads/master/video-swap-new/video-swap-new.user.js'"
-        "Start-Sleep -Seconds 1"
-        "Start-Process `$firefox -Args '-new-tab https://codeberg.org/Amm0ni4/bypass-all-shortlinks-debloated/raw/branch/main/Bypass_All_Shortlinks.user.js'"
-        "Start-Sleep -Seconds 1"
-        "Start-Process `$firefox -Args '-new-tab https://raw.githubusercontent.com/Bergbok/Configs/refs/heads/main/Cross-Platform/Browser-Extensions/FFZ.json'"
-        "Start-Sleep -Seconds 1"
-        "Start-Process `$firefox -Args '-new-tab https://duckduckgo.com/settings'"
-        "Start-Sleep -Seconds 1"
-        "Start-Process `$firefox -Args '-new-tab about:profiles'"
-        "Start-Sleep -Seconds 1"
-        "Start-Process `$firefox -Args '-new-tab about:preferences#search'"
-        "Start-Sleep -Seconds 4.2"
-        "Start-Process `$firefox -Args `"-new-tab `$bypassPaywallsPath`""
-        "if (Get-Command syncthing -ErrorAction SilentlyContinue) {
-            `$folderPath = `"`$((Get-ChildItem '$env:APPDATA\Mozilla\Firefox\Profiles' | Select-Object -First 1).FullName)\chrome`"
-            syncthing cli config folders add --id 'xhfsq-nqpty' --label 'Firefox CSS' --path `$folderPath --paused
-            script:Log 'Syncthing: Double check that the Firefox CSS folder is correct -> about:profiles'
-        }"
-        "script:Log 'Firefox: Change search engine from Google.'"
-        "script:Log 'Firefox: Import DuckDuckGo settings.'"
-        "script:Log 'Firefox: Run Checkmarks (Ctrl+H)'"
-        "script:Log 'Firefox: Customize toolbar: Remove `"Account`", `"Save to Pocket`" & `"Import bookmarks`". Pin Simple Tab Groups & uBlock Origin.'"
-        "script:Log 'Firefox: Configure browser extensions: Augmented Steam, Bypass Paywalls Clean (Disable `"Enable new sites by default`"), Dark Reader, FFZ (manually enable 7TV, BTTV, Inline Tab-Completion & First Message Highlight add-ons), KeePassXC, LibRedirect, uBlock Origin, Violentmonkey.'"
     )
     "Flameshot" = @(
         "choco install flameshot -y"
         "scoop install extras/flameshot"
         "winget install --id=Flameshot.Flameshot --exact --accept-source-agreements --accept-package-agreements"
-        "New-Item -ItemType Directory '$env:APPDATA\Flameshot' -Force | Out-Null"
-        "Copy-Item '$(Split-Path $PSScriptRoot)\Cross-Platform\Flameshot\Flameshot.ini' -Destination '$env:APPDATA\Flameshot' -Force"
-        "`$flameshotini = Get-Content '$env:APPDATA\Flameshot\Flameshot.ini' "
-        "`$flameshotini = `$flameshotini -replace 'screenshot-path-here', '$env:USERPROFILE\Pictures\Screenshots'"
-        "`$flameshotini = `$flameshotini -replace 'imgur-client-id-here', `$script:imgurClientID"
-        "`$flameshotini | Set-Content '$env:APPDATA\flameshot\Flameshot.ini' -Force"
     )
     "Flash-enabled Chromium" = @(
         "choco install ungoogled-chromium --version=87.0.4280.1411 -y"
         "winget install --id=eloston.ungoogled-chromium -v '87.0.4280.67' --exact --accept-source-agreements --accept-package-agreements"
-        "`$apiUrl = 'https://gitlab.com/api/v4/projects/cleanflash%2Finstaller/releases'"
-        "`$response = Invoke-RestMethod -Uri `$apiUrl"
-        "`$latestCleanFlashRelease = `$response | Select-Object -First 1"
-        "`$latestCleanFlashDownload = `$latestCleanFlashRelease.assets.links.direct_asset_url"
-        "try {
-            `$tempPath = [System.IO.Path]::GetTempPath() + 'CleanFlashInstaller.exe'
-            Invoke-WebRequest `$latestCleanFlashDownload -OutFile `$tempPath
-            Start-Process `$tempPath
-        } catch {
-            script:Log 'CleanFlash: Failed to download installer, opening download page in browser.'
-            `$firefox = es -i -n 1 -r '\.exe$' 'firefox.exe'
-            if (`$firefox) {
-                Start-Process `$firefox -Args `"-new-tab `$latestCleanFlashDownload`"
-            } else {
-                Start-Process `$latestCleanFlashDownload 
-            }
-        }"
     )
     "Flashpoint Infinity" = @(
         # "choco install flashpoint-infinity -y"
@@ -670,39 +259,9 @@ $script:commands = @{
         "choco install freetube --pre -y"
         # "scoop install extras/freetube" # taskbar entry
         "winget install --id=PrestonN.FreeTube --exact --accept-source-agreements --accept-package-agreements"
-        "New-Item -ItemType Directory '$env:APPDATA\FreeTube' -Force | Out-Null"
-        "Copy-Item '$(Split-Path $PSScriptRoot)\Cross-Platform\FreeTube\settings.db' -Destination '$env:APPDATA\FreeTube' -Force"
-        "gdown `$script:freetubeDataGDriveID"
-        "script:Expand-7zArchive '.\FreeTube.7z'"
-        "Remove-Item '.\FreeTube.7z'"
-        "Copy-Item '.\FreeTube\*' -Destination '$env:APPDATA\FreeTube' -Recurse -Force"
-        "Remove-Item '.\FreeTube' -Recurse -Force"
-        "if (Get-Command syncthing -ErrorAction SilentlyContinue) {
-            Set-Content '$env:APPDATA\FreeTube\.stignore' '!/history.db`n!/playlists.db`n!/profiles.db`n!/settings.db`n*'
-            syncthing cli config folders add --id 'kqgmu-jazfm' --label 'FreeTube' --path '$env:APPDATA\FreeTube'
-        }"
-    )
-    "FreeTube (Custom)" = @(
-        "& `"$PSScriptRoot\Scripts\Build-Themed-FreeTube.ps1`""
-        "Set-Location '$PSScriptRoot'"
-        "New-Item -ItemType Directory '$env:APPDATA\FreeTube' -Force | Out-Null"
-        "Copy-Item '$(Split-Path $PSScriptRoot)\Cross-Platform\FreeTube\settings.db' -Destination '$env:APPDATA\FreeTube' -Force"
-        "gdown `$script:freetubeDataGDriveID"
-        "script:Expand-7zArchive '.\FreeTube.7z'"
-        "Remove-Item '.\FreeTube.7z'"
-        "Copy-Item '.\FreeTube\*' -Destination '$env:APPDATA\FreeTube' -Recurse -Force"
-        "Remove-Item '.\FreeTube' -Recurse -Force"
-        "if (Get-Command syncthing -ErrorAction SilentlyContinue) {
-            Set-Content '$env:APPDATA\FreeTube\.stignore' '!/history.db`n!/playlists.db`n!/profiles.db`n!/settings.db`n*'
-            syncthing cli config folders add --id 'kqgmu-jazfm' --label 'FreeTube' --path '$env:APPDATA\FreeTube'
-        }"
     )
     "G.Skill Trident Z Lighting Control" = @(
         "scoop install bergbok/g.skill-trident-z-lighting-control"
-        "Start-Sleep -Seconds 5"
-        "Get-Process -Name 'G.SKILL Trident Z Lighting Control *.tmp' -ErrorAction SilentlyContinue | Stop-Process"
-        "New-Item -ItemType Directory '$env:USERPROFILE\AppData\Roaming\G.SKILL\Trident Z Lighting Control' -Force | Out-Null"
-        "Copy-Item '$PSScriptRoot\Configs\G.Skill-Trident-Z-Lighting-Control\config' -Destination '$env:USERPROFILE\AppData\Roaming\G.SKILL\Trident Z Lighting Control' -Force"
     )
     "gdown" = @(
         "pip install gdown"
@@ -724,49 +283,6 @@ $script:commands = @{
         # "choco install git -y"
         # "scoop install main/git"
         # "winget install --id=Git.Git --exact --accept-source-agreements --accept-package-agreements"
-        "git config --global user.email `$script:gitEmail"
-        "git config --global user.name `$script:gitName"
-        "if (-not (git config --global user.signingKey)) { 
-            `$gpg = (Get-Command gpg -ErrorAction SilentlyContinue).Source
-            if (-not `$gpg) { `$gpg = es -i -n 1 -r '\.exe$' 'gpg.exe' }
-            if (`$gpg) {
-                git config --global gpg.program `$gpg
-                git config --global commit.gpgSign true
-                git config --global tag.gpgSign true
-                `$content = `"%echo Generating GPG key...
-                    Key-Type: `$gpgKeyType
-                    Key-Length: `$gpgKeyLength
-                    Key-Curve: `$gpgKeyCurve
-                    Subkey-Type: `$gpgSubkeyType
-                    Subkey-Length: `$gpgSubkeyLength
-                    Subkey-Curve: `$gpgSubkeyCurve
-                    Passphrase: `$gpgPassphrase
-                    Name-Real: `$gpgNameReal
-                    Name-Email: `$gpgNameEmail
-                    Expire-Date: `$gpgExpireDate
-                    %commit
-                    %echo done`"
-                New-Item .\gpg.temp -ItemType File -Value `$content -Force | Out-Null
-                `$gpgOutput = & `$gpg --batch --generate-key .\gpg.temp 2>&1
-                `$gpgOutput = `$gpgOutput -join '`n'
-                if (`$gpgOutput -match '([A-Z0-9])+(?=\.rev)') {
-                    `$keyFingerprint = `$matches[0]
-                    git config --global user.signingkey `$keyFingerprint
-                    `$pubkey = & `$gpg --export --armor `$keyFingerprint
-                    script:Log `"GPG key:`n`$pubkey`"
-                    Set-Clipboard `$pubkey
-                    Start-Process 'https://github.com/settings/gpg/new'
-                }
-                Remove-Item .\gpg.temp -Force
-            } else {
-                Write-Warning `"gpg.exe not found, couldn't set up git gpg signing`"
-            }
-        }"
-        "if (Get-Command code -ErrorAction SilentlyContinue) {
-            git config --global core.editor 'code --wait'
-        } else {
-            script:Log 'git: Could not set core.editor to VSCode.' 
-        }"
     )
     "git filter-repo" = @(
         # "scoop install main/git-filter-repo"
@@ -801,12 +317,6 @@ $script:commands = @{
         "choco install gpg4win -y"
         "scoop install extras/gpg4win; Add-EnvPath '$env:USERPROFILE\scoop\apps\git\current\usr\bin'"
         "winget install --id=GnuPG.Gpg4win --exact --accept-source-agreements --accept-package-agreements"
-        "`$gpg = (Get-Command gpg -ErrorAction SilentlyContinue).Source"
-        "if (-not `$gpg) { `$gpg = es -i -n 1 -r '\.exe$' 'gpg.exe' }"
-        "Start-Process `$gpg -Args '--daemon' -WindowStyle Hidden"
-        "`$keyboxd = (Get-Command keyboxd -ErrorAction SilentlyContinue).Source"
-        "if (-not `$keyboxd) { `$keyboxd = es -i -n 1 -r '\.exe$' 'keyboxd.exe' }"
-        "Start-Process `$keyboxd -Args '--daemon' -WindowStyle Hidden"
     )
     "CPUID HWMonitor" = @(
         "choco install hwmonitor -y"
@@ -823,16 +333,6 @@ $script:commands = @{
         "scoop install extras/heidisql"
         "winget install --id=HeidiSQL.HeidiSQL --exact --accept-source-agreements --accept-package-agreements"
     )
-    "HypnOS Cursor" = @(
-        "gdown `$script:hypnosCursorGDriveID"
-        "script:Expand-7zArchive '.\HypnOS-Cursor.7z'"
-        "Remove-Item .\HypnOS-Cursor.7z"
-        "script:Install-Cursor (Get-ChildItem '.\HypnOS-Cursor\HypnOS-1x\install.inf').FullName"
-        "script:Install-Cursor (Get-ChildItem '.\HypnOS-Cursor\HypnOS-2x\install.inf').FullName"
-        "Start-Sleep -Seconds 1"
-        "Remove-Item .\HypnOS-Cursor -Recurse"
-        "Start-Process 'rundll32.exe' -Args 'shell32.dll,Control_RunDLL main.cpl,,1'"
-    )
     "IconsExtract" = @(
         "choco install iconsext -y"
         "scoop install nirsoft/iconsext"
@@ -840,29 +340,15 @@ $script:commands = @{
     "iCloud" = @(
         "choco install icloud -y"
         "winget install --id=Apple.iCloud --exact --accept-source-agreements --accept-package-agreements"
-        "`$shell = New-Object -ComObject Shell.Application"
-        "(`$shell.Namespace('shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}').Items() | Where-Object {`$_.Path -eq '$env:USERPROFILE\iCloudDrive'}).InvokeVerb('unpinfromhome')"
-        "(`$shell.Namespace('shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}').Items() | Where-Object {`$_.Name -eq 'iCloud Photos'}).InvokeVerb('unpinfromhome')"
-        "Remove-Item 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{F0D63F85-37EC-4097-B30D-61B4A8917118}' -Force"
-        "script:Log 'iCloud: If you get `"Your computer is missing Media features.`" even though it is installed you may need to use Orca to modify iCloud64.msi (remove the `"Installed OR MS_MEDIAFEATUREPACK_INSTALLED OR IGNORE_MEDIAFEATUREPACK`" condition from the LaunchCondition table). You can find iCloud64.msi in TEMP while the installer is running.'"
     )
     "iCUE" = @(
         "choco install icue -y"
         "winget install --id=Corsair.iCUE.5 --exact --accept-source-agreements --accept-package-agreements"
-        "`$tempPath = [System.IO.Path]::GetTempPath()"
-        "Copy-Item '$PSScriptRoot\Configs\iCUE\*' -Destination `$tempPath -Force"
-        "`$defaultProfile = Get-Content `"`$tempPath\Default.cueprofile`""
-        "`$defaultProfile = `$defaultProfile -replace 'userprofile-here', '$env:USERPROFILE'"
-        "`$defaultProfile = `$defaultProfile -replace 'windir-here', '$env:WINDIR'"
-        "`$defaultProfile | Set-Content `"`$tempPath\Default.cueprofile`""
-        "script:Log `"iCUE: Import profiles from `$tempPath`""
     )
     "ImageGlass" = @(
         # "choco install imageglass -y"
         # "scoop install extras/imageglass; script:Log `"ImageGlass: If this app doesn't work maybe you need to clean '$env:USERPROFILE\scoop\apps\imageglass\current\igconfig.json' and reinstall '$env:USERPROFILE\scoop\apps\imageglass\current\Themes'`"" # doesn't show an option in ms-settings:defaultapps
         "winget install --id=DuongDieuPhap.ImageGlass --exact --accept-source-agreements --accept-package-agreements"
-        "script:Log 'ImageGlass: Set as default photo viewer in settings -> ms-settings:defaultapps'"
-        "Start-Process ms-settings:defaultapps"
     )
     "itch" = @(
         "choco install itch -y"
@@ -890,20 +376,6 @@ $script:commands = @{
         "choco install keepassxc -y"
         # "scoop install extras/keepassxc" # taskbar entry
         "winget install --id=KeePassXCTeam.KeePassXC --exact --accept-source-agreements --accept-package-agreements"
-        "Start-Sleep -Seconds 1"
-        "`$keepassxc = es -i -n 1 -r '\.exe$' 'KeePassXC.exe'"
-        "Start-Process `$keepassxc"
-        "New-Item -ItemType Directory '$env:USERPROFILE\Documents\KeePass' -Force | Out-Null"
-        "if (Get-Command syncthing -ErrorAction SilentlyContinue) {
-            Set-Content '$env:USERPROFILE\Documents\KeePass\.stignore' 'desktop.ini'
-            syncthing cli config folders add --id 'fxxre-9vvua' --label 'KeePass' --path '$env:USERPROFILE\Documents\KeePass'
-        }"
-        "script:Log 'KeePassXC: Enable auto startup, browser integration, and pair with browser extension.'"
-    )
-    "khinsider.py" = @(
-        "git clone 'https://github.com/obskyr/khinsider.git' '$env:USERPROFILE\Code\Scripts\Python\khinsiderdl'"
-        "Remove-Item '$env:USERPROFILE\Code\Scripts\Python\khinsiderdl\.gitignore' -ErrorAction SilentlyContinue"
-        "Remove-Item '$env:USERPROFILE\Code\Scripts\Python\khinsiderdl\README.md' -ErrorAction SilentlyContinue"
     )
     "Legendary" = @(
         "choco install legendary -y"
@@ -934,34 +406,16 @@ $script:commands = @{
     )
     "Lumafly" = @(
         "scoop install bergbok/lumafly"
-        "Start-Process '$env:USERPROFILE\scoop\apps\lumafly\current\Lumafly.exe' -Args 'scarab://modpack/mPP6enEq'"
     )
     "Majora's Mask" = @(
         "scoop install bergbok/zelda64recompiled"
     )
-    "Media Feature Pack" = @(
-        "Add-WindowsCapability -Online -Name Media.MediaFeaturePack"
-    )
-    "melonDS" = @( 
+    "melonDS" = @(
         # "scoop install games/melonds"
         "winget install --id=melonDS.melonDS --exact --accept-source-agreements --accept-package-agreements"
     )
-    "Microsoft Activation Scripts" = @(
-        "Start-Process powershell -WindowStyle Hidden -Args `"Invoke-RestMethod 'https://get.activated.win' | Invoke-Expression`""
-        "script:Log 'MAS: Use option 1, keep window open if you selected Microsoft Office.'"
-    )
     "Microsoft Office" = @(
         # "scoop install nonportable/office-365-apps-minimal-np"
-        "Invoke-WebRequest 'https://officecdn.microsoft.com/pr/wsus/setup.exe' -OutFile '.\setup.exe'"
-        "Start-Process '.\setup.exe' -Args '/configure `"$PSScriptRoot\Configs\Microsoft-Office\Configuration.xml`"' -Wait"
-        "Remove-Item '.\setup.exe'"
-    )
-    "Minecraft Font" = @(
-        "Invoke-WebRequest 'https://dl.dafont.com/dl/?f=minecraft' -OutFile '.\Minecraft-Font.zip'"
-        "Expand-Archive '.\Minecraft-Font.zip' -DestinationPath '.' -Force"
-        "Remove-Item '.\Minecraft-Font.zip'"
-        "script:Install-FontFile (Get-ChildItem '.\Minecraft.ttf').FullName"
-        "Remove-Item '.\Minecraft.ttf' -Force"
     )
     "Minecraft Launcher" = @(
         "choco install minecraft-launcher -y"
@@ -978,19 +432,6 @@ $script:commands = @{
         "choco install mp3tag -y"
         # "scoop install extras/mp3tag; script:Log 'Mp3tag: Enable context menu with: start regsvr32 -Verb RunAs -Args @(`"$env:USERPROFILE\scoop\apps\mp3tag\current\Mp3tagShell.dll`" `"/s`")'; script:Log 'Mp3tag: Disable context menu with: start regsvr32 -Verb RunAs -Args @(`"/u`", `"$env:USERPROFILE\scoop\apps\mp3tag\current\Mp3tagShell.dll`", `"/s`")'" # taskbar entry
         "winget install --id=FlorianHeidenreich.Mp3tag --exact --accept-source-agreements --accept-package-agreements"
-        "gdown `$script:mp3tagConfigGDriveID"
-        "script:Expand-7zArchive '.\Mp3tag.7z'"
-        "Remove-Item '.\Mp3tag.7z'"
-        "if (scoop list | Select-String -Pattern 'mp3tag' -SimpleMatch) {
-            Copy-Item '.\Mp3tag\*' -Destination '$env:USERPROFILE\scoop\persist\mp3tag' -Recurse -Force
-            Remove-Item '$env:USERPROFILE\scoop\apps\mp3tag\current\data\actions\*'
-            Copy-Item '$PSScriptRoot\Configs\Mp3tag\*' -Destination '$env:USERPROFILE\scoop\apps\mp3tag\current' -Recurse -Force
-        } else {
-            New-Item -ItemType Directory '$env:APPDATA\Mp3tag' -Force | Out-Null
-            Copy-Item '.\Mp3tag\*' -Destination '$env:APPDATA\Mp3tag' -Recurse -Force
-            Copy-Item '$PSScriptRoot\Configs\Mp3tag\*' -Destination '$env:APPDATA\Mp3tag' -Recurse -Force
-        }"
-        "Remove-Item '.\Mp3tag' -Recurse -Force"
     )
     "mpv" = @(
         "choco install mpv -y"
@@ -1010,11 +451,6 @@ $script:commands = @{
         "scoop install main/neofetch"
         "winget install --id=nepnep.neofetch-win --exact --accept-source-agreements --accept-package-agreements"
     )
-    "Network Sharing" = @(
-        "Set-NetFirewallRule -DisplayGroup 'Network Discovery' -Enabled True"
-        "Set-NetFirewallRule -DisplayGroup 'File and Printer Sharing' -Enabled True"
-        "shrpubw"
-    )
     "Nicotine+" = @(
         "choco install nicotine-plus -y"
         # "scoop install extras/nicotine-plus" # taskbar entry
@@ -1032,19 +468,11 @@ $script:commands = @{
     )
     "NoPayStation" = @(
         "scoop install bergbok/nopaystation; scoop install bergbok/pkg2zip"
-        "Copy-Item '$PSScriptRoot\Configs\NoPayStation\npsSettings.dat' -Destination '$env:USERPROFILE\scoop\persist\nopaystation'"
-        "script:Log `"NoPayStation: You need to manually set download location and pkg2zip path to '`$(scoop prefix pkg2zip)\pkg2zip.exe' in settings.`""
     )
     "Notepad++" = @(
         "choco install notepadplusplus.install -y"
         # "scoop install extras/notepadplusplus" # taskbar entry
         "winget install --id=Notepad++.Notepad++ --exact --accept-source-agreements --accept-package-agreements"
-        "New-Item -ItemType Directory '$env:USERPROFILE\scoop\persist\notepadplusplus\cloud' -Force | Out-Null"
-        "Copy-Item '$PSScriptRoot\Configs\Notepad++\*' -Destination '$env:USERPROFILE\scoop\persist\notepadplusplus\cloud' -Force -Recurse"
-        "script:Log 'Notepad++: You need to manually import settings by going to Settings -> Preferences -> Cloud & Link and setting the path to: `"$env:USERPROFILE\scoop\persist\notepadplusplus\cloud`" and set up file associations (launch as admin).'"
-    )
-    "NVIDIA Drivers" = @(
-        "Start-Process 'https://www.nvidia.com/en-us/drivers'"
     )
     "NZXT CAM" = @(
         "choco install nzxt-cam -y"
@@ -1054,46 +482,16 @@ $script:commands = @{
         "choco install obs-studio.install -y"
         "scoop install extras/obs-studio; Start-Process '$env:USERPROFILE\scoop\apps\obs-studio\current\data\obs-plugins\win-dshow\virtualcam-install.bat'"
         "winget install --id=OBSProject.OBSStudio --exact --accept-source-agreements --accept-package-agreements"
-        "if (scoop list | Select-String -Pattern 'obs-studio') {
-            `$confPath = '$env:USERPROFILE\scoop\persist\obs-studio\config\obs-studio'
-        } else {
-            `$confPath = '$env:APPDATA\obs-studio'
-        }"
-        "New-Item -ItemType Directory -Path `$confPath -Force | Out-Null"
-        "New-Item -ItemType Directory -Path `"`$confPath\basic`" -Force | Out-Null"
-        "New-Item -ItemType Directory -Path `"`$confPath\scripts`" -Force | Out-Null"
-        "Invoke-Webrequest 'https://gitlab.com/albinou/obs-scripts/raw/master/datetime.lua' -OutFile `"`$confPath\scripts\datetime-digital-clock.lua`""
-        "Invoke-Webrequest 'https://github.com/cg2121/obs-advanced-timer/releases/latest/download/advanced-timer.lua' -OutFile `"`$confPath\scripts\advanced-timer.lua`""
-        "Invoke-Webrequest 'https://obsproject.com/forum/resources/obsplay-nvidia-shadowplay-alternative.1326/download' -OutFile `"`$confPath\scripts\OBSPlay.lua`""
-        "Invoke-Webrequest 'https://raw.githubusercontent.com/obsproject/obs-studio/refs/heads/master/UI/frontend-plugins/frontend-tools/data/scripts/instant-replay.lua' -OutFile `"`$confPath\scripts\instant-replay.lua`""
-        "Copy-Item '$(Split-Path $PSScriptRoot)\Cross-Platform\OBS-Studio\*' -Destination `"`$confPath\basic`" -Recurse -Force"
-        "`$scenes = Get-Content `"`$confPath\basic\scenes\Main.json`""
-        "`$scenes = `$scenes -replace 'advanced-timer-script-path-here', (`"`$confPath\scripts\advanced-timer.lua`" -replace '\\', '/')"
-        "`$scenes = `$scenes -replace 'datetime-script-path-here', (`"`$confPath\scripts\datetime-digital-clock.lua`" -replace '\\', '/')"
-        "`$scenes = `$scenes -replace 'obsplay-script-path-here', (`"`$confPath\scripts\OBSPlay.lua`" -replace '\\', '/')"
-        "`$scenes = `$scenes -replace 'instant-replay-script-path-here', (`"`$confPath\scripts\instant-replay.lua`" -replace '\\', '/')"
-        "`$scenes = `$scenes -replace 'save-path-here', '$("$env:USERPROFILE\Videos" -replace '\\', '/')'"
-        "`$scenes | Set-Content `"`$confPath\basic\scenes\Main.json`""
-        "`$basic = Get-Content `"`$confPath\basic\profiles\Main\basic.ini`""
-        "`$basic = `$basic -replace 'save-path-here', '$("$env:USERPROFILE\Videos" -replace '\\', '/')'"
-        "`$basic | Set-Content `"`$confPath\basic\profiles\Main\basic.ini`""
     )
     "Obsidian" = @(
         "choco install obsidian -y"
         # "scoop install extras/obsidian" # taskbar entry
         "winget install --id=Obsidian.Obsidian --exact --accept-source-agreements --accept-package-agreements"
-        "New-Item -ItemType Directory '$env:USERPROFILE\Documents\Obsidian' -Force | Out-Null"
-        "Start-Process 'https://github.com/Bergbok/Obsidian-Vault'"
-        "if (Get-Command syncthing -ErrorAction SilentlyContinue) {
-            syncthing cli config folders add --id 'd4xqu-hqmrt' --label 'Obsidian' --path '$env:USERPROFILE\Documents\Obsidian'
-        }"
     )
     "oh-my-posh" = @(
         "choco install oh-my-posh -y"
         "scoop install main/oh-my-posh"
         "winget install --id=JanDeDobbeleer.OhMyPosh --exact --accept-source-agreements --accept-package-agreements"
-        "New-Item -ItemType Directory '$env:USERPROFILE\Themes\oh-my-posh' -Force | Out-Null"
-        "Copy-Item '$(Split-Path $PSScriptRoot)\Cross-Platform\oh-my-posh\*' -Destination '$env:USERPROFILE\Themes\oh-my-posh' -Force"
     )
     "onefetch" = @(
         "choco install onefetch -y"
@@ -1104,43 +502,6 @@ $script:commands = @{
         "choco install open-shell -y"
         "scoop install nonportable/open-shell-np"
         "winget install --id=Open-Shell.Open-Shell-Menu --exact --accept-source-agreements --accept-package-agreements"
-        "New-Item -ItemType Directory '$env:APPDATA\OpenShell\Pinned' -Force | Out-Null"
-        "`$shortcuts = @{
-            'calibre.lnk' = @{ target = 'calibre.exe'; scoopName = 'calibre' }
-            'DS4Windows.lnk' = @{ target = 'DS4Windows.exe'; scoopName = 'ds4windows-maintained' }
-            'Emulators\ares.lnk' = @{ target = 'ares.exe'; scoopName = 'ares' }
-            'Emulators\CEMU.lnk' = @{ target = 'Cemu.exe'; scoopName = 'cemu' }
-            'Emulators\Dolphin.lnk' = @{ target = 'Dolphin.exe'; scoopName = 'dolphin' }
-            'Emulators\DuckStation.lnk' = @{ target = 'duckstation*.exe'; scoopName = 'duckstation' }
-            'Emulators\Lime3DS.lnk' = @{ target = 'lime3ds.exe'; scoopName = 'lime3ds' }
-            'Emulators\melonDS.lnk' = @{ target = 'melonDS.exe'; scoopName = 'melonds' }
-            'Emulators\PCSX2.lnk' = @{ target = 'pcsx2-qt.exe'; scoopName = 'pcsx2' }
-            'Emulators\PPSSPP.lnk' = @{ target = 'PPSSPPWindows64.exe'; scoopName = 'ppsspp' }
-            'Emulators\RPCS3.lnk' = @{ target = 'rpcs3.exe'; scoopName = 'rpcs3' }
-            'Emulators\Ruffle.lnk' = @{ target = 'ruffle.exe'; scoopName = 'ruffle' }
-            'Emulators\Ryujinx.lnk' = @{ target = 'Ryujinx.exe'; scoopName = 'ryujinx' }
-            'Emulators\SameBoy.lnk' = @{ target = 'sameboy.exe'; scoopName = 'sameboy' }
-            'Emulators\Vita3K.lnk' = @{ target = 'Vita3K.exe'; scoopName = 'vita3k' }
-            'ER Save Manager.lnk' = @{ target = 'SaveManager.exe'; scoopName = 'secureuxtheme' }
-            'f.lux.lnk' = @{ target = 'flux.exe'; scoopName = 'f.lux' }
-            'GIF Cam.lnk' = @{ target = 'GifCam.exe'; scoopName = 'gifcam' }
-            'HWMonitor.lnk' = @{ target = 'HWMonitor.exe'; scoopName = 'hwmonitor' }
-            'Libre HWMonitor.lnk' = @{ target = 'LibreHardwareMonitor.exe'; scoopName = 'librehardwaremonitor' }
-            'Open Shell\Classic Explorer Settings.lnk' = @{ target = 'ClassicExplorerSettings.exe' }
-            'Open Shell\Start Menu Settings.lnk' = @{ target = 'StartMenu.exe'; args = '-settings' }
-            'PowerToys.lnk' = @{ target = 'PowerToys.Settings.exe'; scoopName = 'powertoys' }
-            'SecureUxTheme.lnk' = @{ target = 'ThemeTool.exe'; scoopName = 'secureuxtheme' }
-            'Task Scheduler.lnk' = @{ target = '$env:WINDIR\system32\taskschd.msc'; args = '/s' }
-            'TaskbarX.lnk' = @{ target = 'TaskbarX.exe'; scoopName = 'taskbarx' }
-        }"
-        "foreach (`$entry in `$shortcuts.Keys) {
-            `$shortcut = `$shortcuts[`$entry]
-            `$targetPath = script:Get-ShortcutPath `$shortcut.target -scoopName `$shortcut.scoopName
-            script:New-Shortcut -linkPath `"$env:APPDATA\OpenShell\Pinned\`$entry`" -targetPath `$targetPath -arguments `$shortcut.args
-        }"
-        "Invoke-WebRequest 'https://i.imgur.com/Dc7ljTj.png' -OutFile '$env:USERPROFILE\Pictures\Transparent.png'"
-        "Start-Process (es -i -n 1 -r '\.exe$' 'ClassicExplorerSettings.exe') -Args '-xml `"$PSScriptRoot\Configs\Open-Shell\Explorer Settings.xml`"'"
-        "Start-Process (es -i -n 1 -r '\.exe$' 'StartMenu.exe') -Args '-xml `"$PSScriptRoot\Configs\Open-Shell\Menu Settings.xml`"'"
     )
     "OpenRGB" = @(
         "choco install openrgb -y"
@@ -1164,78 +525,25 @@ $script:commands = @{
         "choco install pcsx2 -y; scoop install bergbok/ps2-bios"
         "scoop install games/pcsx2; scoop install bergbok/ps2-bios"
         "winget install --id=PCSX2Team.PCSX2 --exact --accept-source-agreements --accept-package-agreements' scoop install bergbok/ps2-bios"
-        "if (scoop list | Select-String -Pattern 'pcsx2' -SimpleMatch) {
-            `$biosPath = '$env:USERPROFILE\scoop\apps\ps2-bios\current\BIOS'
-            `$destinationPath = '$env:USERPROFILE\scoop\persist\pcsx2\bios'
-            Remove-Item `$destinationPath -Recurse -Force
-            New-Item -ItemType SymbolicLink `$destinationPath -Target `$biosPath -Force
-        }"
     )
     "PeaZip" = @(
         "choco install peazip -y"
         "scoop install extras/peazip"
         "winget install --id=Giorgiotani.Peazip --exact --accept-source-agreements --accept-package-agreements"
-        "`$conf = '$(Split-Path $PSScriptRoot)\Cross-Platform\Configs\PeaZip\conf.txt'"
-        "if (scoop list | Select-String -Pattern 'peazip' -SimpleMatch) {
-            `$destinationPath = '$env:USERPROFILE\scoop\persist\peazip\res\conf' 
-        } else {
-            `$destinationPath = '$env:APPDATA\PeaZip'
-        }"
-        "New-Item -ItemType Directory `$destinationPath -Force | Out-Null"
-        "Copy-Item `$conf -Destination `$destinationPath -Recurse -Force"
-        "script:Log 'PeaZip: Set extended mode for `"Browse path with PeaZip`" with ShellMenuView.'"
-    )
-    "Photoshop" = @(
-        "Start-Process `$script:adobePhotoshopURL"
-        "script:Log 'Photoshop: Be sure to disable CCXProcess in Task Manager -> Startup.'"
-        "script:Log 'Photoshop: Alt+Shift+Ctrl+K -> File -> Quick Export as PNG'"
     )
     "PowerShell Update" = @(
         "winget install --id=Microsoft.PowerShell -e --accept-source-agreements --accept-package-agreements"
-        "Start-Process powershell -Args 'Update-Help'"
-    )
-    "PowerShell Profile" = @(
-        "if (!(Test-Path '$PROFILE')) {
-            New-Item -ItemType File '$PROFILE' -Force | Out-Null
-        }"
-        "Copy-Item '$PSScriptRoot\Configs\PowerShell\Microsoft.PowerShell_profile.ps1' -Destination '$PROFILE' -Force"
-        "New-Item -ItemType Directory '$env:USERPROFILE\Themes\oh-my-posh' -Force | Out-Null"
-        "Copy-Item '$(Split-Path $PSScriptRoot)\Cross-Platform\oh-my-posh\*' -Destination '$env:USERPROFILE\Themes\oh-my-posh' -Force"
-        "`$profileContent = Get-Content '$PROFILE'"
-        "`$modifiedContent = `$profileContent -replace 'theme-path-here', '$env:USERPROFILE\Themes\oh-my-posh\current.omp.json'"
-        "`$pwshVersion = Get-Command pwsh -ErrorAction SilentlyContinue | Select-Object -Property Version"
-        "if (`$pwshVersion.Version.Major -ge 7) {
-            if (!(Test-Path '$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1')) {
-                New-Item -ItemType File '$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1' -Force | Out-Null
-            }
-            `$modifiedContent = `$modifiedContent -replace 'powershell-here', 'pwsh.exe'
-            `$modifiedContent | Set-Content '$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1'
-            `$modifiedContent | Set-Content '$env:USERPROFILE\Documents\PowerShell\Microsoft.VSCode_profile.ps1'
-        } else {
-            `$modifiedContent = `$modifiedContent -replace 'powershell-here', 'powershell.exe'
-        }"
-        "`$modifiedContent | Set-Content '$PROFILE' -Force"
-        "`$modifiedContent | Set-Content '$(Split-Path $PROFILE)\Microsoft.VSCode_profile.ps1' -Force"
     )
     "PowerToys" = @(
         "choco install powertoys -y"
         # https://github.com/microsoft/PowerToys/issues/636
         "scoop install nonportable/powertoys-np"
         "winget install --id=Microsoft.PowerToys --exact --accept-source-agreements --accept-package-agreements"
-        "New-Item -ItemType Directory '$env:LOCALAPPDATA\Microsoft\PowerToys' -Force | Out-Null"
-        "Copy-Item '$PSScriptRoot\Configs\PowerToys\*' -Destination '$env:LOCALAPPDATA\Microsoft\PowerToys' -Recurse -Force"
-        "`$runsettings = Get-Content '$PSScriptRoot\Configs\PowerToys\PowerToys Run\settings.json'"
-        "`$runsettings = `$runsettings -replace 'runplugins-here', ((es -i -n 1 -r 'RunPlugins$' /ad 'PowerToys\RunPlugins') -replace '\\', '\\')"
-        "`$runsettings | Set-Content '$env:LOCALAPPDATA\Microsoft\PowerToys\PowerToys Run\settings.json'"
     )
     "PPSSPP" = @(
         "choco install ppsspp -y"
         "scoop install games/ppsspp"
         "winget install --id=PPSSPPTeam.PPSSPP --exact --accept-source-agreements --accept-package-agreements"
-    )
-    "Premiere Pro" = @(
-        "Start-Process `$script:adobePremiereProURL"
-        "script:Log 'Photoshop: Be sure to disable CCXProcess in Task Manager -> Startup.'"
     )
     "Process Explorer" = @(
         "choco install procexp -y"
@@ -1256,8 +564,6 @@ $script:commands = @{
         "scoop install bergbok/ps2exe"
         # "Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted -SourceLocation 'https://www.powershellgallery.com/api/v2'"
         # "Install-Module -Name ps2exe -AcceptLicense"
-        "New-Item -ItemType Directory '$env:USERPROFILE\Code\Scripts\ps2exe' -Force | Out-Null"
-        "Add-MpPreference -ExclusionPath '$env:USERPROFILE\Code\Scripts\ps2exe'"
     )
     "PsShutdown" = @(
         "choco install psshutdown -y"
@@ -1267,58 +573,20 @@ $script:commands = @{
         # "choco install python -y" # hangs at 'Restricting write permissions to Administrators...'
         # "scoop install main/python"//
         "winget install --id=Python.Python.3.13 --exact --accept-source-agreements --accept-package-agreements"
-	"script:Update-EnvPath"
-        "python -m ensurepip --upgrade"
-        "python -m pip install --upgrade pip"
     )
     "qBittorrent" = @(
         "choco install qbittorrent -y"
         # "scoop install extras/qbittorrent" # taskbar entry
         "winget install --id=qbittorrent.qBittorrent --exact --accept-source-agreements --accept-package-agreements"
-        "script:Log 'qBittorrent: Disable `"Check for program updates`" in settings.'"
     )
     "qBittorrent Enhanced" = @(
         "choco install qbittorrent-enhanced -y"
         # "scoop install extras/qbittorrent-enhanced" # taskbar entry
         "winget install --id=c0re100.qBittorrent-Enhanced-Edition --exact --accept-source-agreements --accept-package-agreements"
-        "script:Log 'qBittorrent: Disable `"Check for program updates`" in settings.'"
     )
     "QTTabBar" = @(
         # "scoop install nonportable/qttabbar-indiff-np" # restarts PC
         "winget install --id=indiff.QTTabBar --exact --accept-source-agreements --accept-package-agreements"
-        "Enable-WindowsOptionalFeature -Online -FeatureName 'NetFx3' -NoRestart"
-        "Copy-Item '$PSScriptRoot\Configs\QTTabBar\QTTabBarTab.png' '$env:USERPROFILE\Pictures\System' -Force"
-        "`$settings = Get-Content '$PSScriptRoot\Configs\QTTabBar\QTTabBarSettings.reg'"
-        "`$settings = `$settings -replace 'tab-image-here', ('$env:USERPROFILE\Pictures\System\QTTabBarTab.png' -replace '\\', '\\')"
-        "`$settings = `$settings -replace 'userprofile-here', ('$env:USERPROFILE' -replace '\\', '\\')"
-        "`$plugins = @(
-            'QTWindowManager',
-            'TurnOffRepeat',
-            'CreateNewItem',
-            'QTFileTools',
-            'QTQuick',
-            'Memo',
-            'QTClock',
-            'ShowStatusBar',
-            'QTViewModeButton',
-            'FolderTreeButton',
-            'MigemoLoader',
-            'ActivateByMouseHover'
-        )"
-        "`$foundPluginPaths = @()"
-        "foreach (`$plugin in `$plugins) {
-            `$pluginPath = es -i -n 1 -r '\.dll$' `"`$plugin.dll`"
-            if (`$pluginPath) {
-                `$foundPluginPaths += `$pluginPath
-            }
-        }"
-        "for (`$i = 0; `$i -lt `$foundPluginPaths.Count; `$i++) {
-            `$settings += '`"' + `"`$i`" + '`"=`"' + (`$foundPluginPaths[`$i] -replace '\\', '\\') + '`"'
-        }"
-        "`$settings | Out-File '.\temp-QTTabBar-Settings.reg'"
-        "reg import '.\temp-QTTabBar-Settings.reg' 2>`$null"
-        "Remove-Item '.\temp-QTTabBar-Settings.reg'"
-        "script:Log 'QTTabBar: If appearance is off, go to Options -> Appearance and set tab image to `"$env:USERPROFILE\Pictures\System\QTTabBarTab.png`", disable `"Solid color`" under Toolbar Background and change text color/font.'"
     )
     "r2modman" = @(
         "scoop install games/r2modman"
@@ -1328,71 +596,11 @@ $script:commands = @{
         "choco install rainmeter -y"
         "scoop install extras/rainmeter"
         "winget install --id=Rainmeter.Rainmeter --exact --accept-source-agreements --accept-package-agreements"
-        "git clone 'https://github.com/JoeSiu/RainmeterAutoLayout.git'"
-        "`$autolayoutVars = Get-Content .\RainmeterAutoLayout\AutoLayout\@Resources\Variables.inc"
-        "`$autolayoutVars = `$autolayoutVars -replace 'LayoutMap=`".*`"', 'LayoutMap=`"4695x3324=Custom|3840x2160=CustomTV|3840x3240=CustomTV|3840x1182=CustomCENTER_DELL+LEFT_SAMSUNG|3840x1245=CustomTV_DISABLED|`"'"
-        "`$autolayoutVars | Set-Content .\RainmeterAutoLayout\AutoLayout\@Resources\Variables.inc"
-        "New-Item -ItemType Directory '$env:USERPROFILE\Themes\Rainmeter' -Force | Out-Null"
-        "Copy-Item '.\RainmeterAutoLayout\AutoLayout' -Destination '$env:USERPROFILE\Themes\Rainmeter' -Recurse -Force"
-        "Remove-Item '.\RainmeterAutoLayout' -Recurse -Force"
-        "`$tempPath = [System.IO.Path]::GetTempPath() + 'Rainmeter'"
-        "Copy-Item '$PSScriptRoot\Configs\Rainmeter' -Destination (Split-Path `$tempPath) -Exclude 'README.md, Skins' -Recurse -Force"
-        "`$inis = Get-ChildItem `"`$tempPath`" -Name 'Rainmeter.ini' -Recurse"
-        "foreach (`$ini in `$inis) {
-            `$iniContent = Get-Content `"`$tempPath\`$ini`"
-            `$iniContent = `$iniContent -replace 'skin-path-here', '$env:USERPROFILE\Themes\Rainmeter'
-            `$iniContent = `$iniContent -replace 'skin-path-here', ((es -i -n 1 -r '\.exe$' 'Code.exe') -replace 'vscode\\[\d\.]+', 'vscode\current')
-            `$iniContent | Set-Content `"`$tempPath\`$ini`" -Force
-        }"
-        "Invoke-WebRequest 'https://github.com/keifufu/WebNowPlaying-Rainmeter/releases/latest/download/WebNowPlaying-x64.dll' -OutFile '.\WebNowPlaying.dll' "
-        "if (Test-Path '$env:APPDATA\Rainmeter') {
-            Copy-Item `"`$tempPath\Rainmeter.ini`" -Destination '$env:APPDATA\Rainmeter' -Force
-            New-Item -ItemType Directory '$env:APPDATA\Rainmeter\Plugins' -Force | Out-Null
-            Copy-Item '.\WebNowPlaying.dll' -Destination '$env:APPDATA\Rainmeter\Plugins' -Force
-            Copy-Item `"`$tempPath\Layouts`" -Destination '$env:APPDATA\Rainmeter' -Recurse -Force
-        }"
-        "if (scoop list | Select-String -Pattern 'rainmeter' -SimpleMatch) {
-            Copy-Item `"`$tempPath\Rainmeter.ini`" -Destination '$env:USERPROFILE\scoop\persist\rainmeter' -Force
-            Copy-Item '.\WebNowPlaying.dll' -Destination '$env:USERPROFILE\scoop\persist\rainmeter\Plugins' -Force
-            Copy-Item `"`$tempPath\Layouts`" -Destination '$env:USERPROFILE\scoop\persist\rainmeter' -Recurse -Force
-        }"
-        "Remove-Item '.\WebNowPlaying.dll'"
-        "Remove-Item `$tempPath -Recurse -Force"
-        "Copy-Item '$PSScriptRoot\Configs\Rainmeter\Skins\*' -Destination '$env:USERPROFILE\Themes\Rainmeter' -Recurse -Force"
-        "`$weatherConfPath = '$env:USERPROFILE\Themes\Rainmeter\ASTROWeather\@Resources\Variables.inc'"
-        "`$weathersettings = (Get-Content `$weatherConfPath) -replace 'api-key-here', `$script:rainmeterWeatherAPIKey"
-        "`$weathersettings | Set-Content `$weatherConfPath"
-        "script:Log `"Rainmeter: Set latitude and longitude in `$weatherConfPath using https://www.mapcoordinates.net`""
-        "Start-Process notepad `$weatherConfPath"
-        "Start-Process 'https://www.mapcoordinates.net'"
-        "Start-Process 'https://in-the-sky.org/data/planets.php'"
     )
     "RPCS3" = @(
         "choco install rpcs3 --pre -y; scoop install games/ps3-system-software"
         "scoop install games/rpcs3; scoop install games/ps3-system-software"
         "winget install --id=RPCS3.RPCS3 --exact --accept-source-agreements --accept-package-agreements; scoop install games/ps3-system-software"
-        "gdown `$script:ps3SavesGDriveID"
-        "script:Expand-7zArchive '.\PS3.7z'"
-        "Remove-Item '.\PS3.7z'"
-        "if (scoop list | Select-String -Pattern 'rpcs3' -SimpleMatch) {
-            `$savePath = '$env:USERPROFILE\scoop\persist\rpcs3\dev_hdd0\home\00000001\savedata'
-            New-Item -ItemType Directory `$savePath -Force | Out-Null
-            Copy-Item '.\PS3\*' -Destination `$savePath -Recurse -Force
-            if (Get-Command syncthing -ErrorAction SilentlyContinue) {
-                syncthing cli config folders add --id 'pacu9-xjxpf' --label 'RPSC3' --path `$savePath
-            }
-        } else {
-            `$rpcs3_path = es -i -n 1 -r '\.exe$' 'rpcs3.exe'
-            `$savePath = `"`$(Split-Path `$rpcs3_path)\dev_hdd0\home\00000001\savedata`"
-            New-Item -ItemType Directory `$savePath -Force | Out-Null
-            Copy-Item '.\PS3\*' -Destination `"`$savePath`" -Recurse -Force
-            if (Get-Command syncthing -ErrorAction SilentlyContinue) {
-                syncthing cli config folders add --id 'pacu9-xjxpf' --label 'RPSC3' --path `$savePath
-            }
-        }"
-        "Remove-Item '.\PS3' -Recurse -Force"
-        "script:Log 'RPCS3: File -> Install Firmware -> `"$env:USERPROFILE\scoop\apps\ps3-system-software\current\PS3UPDAT.PUP`"'"
-        "script:Log 'RPSC3: Disable shader compiling popups -> Config -> Emulator -> Show * compilation hint'"
     )
     "Ruby" = @(
         "choco install ruby -y"
@@ -1428,35 +636,6 @@ $script:commands = @{
         # "scoop install games/ryujinx"
         # "winget install --id=Ryujinx.Ryujinx --exact --accept-source-agreements --accept-package-agreements"
         "scoop install bergbok/ryujinx-mirror"
-        "gdown `$script:switchFilesGDriveID"
-        "script:Expand-7zArchive '.\Switch.7z'"
-        "Remove-Item '.\Switch.7z'"
-        "`$jsonFiles = Get-ChildItem -Path '.\Switch' -Filter '*.json' -Recurse"
-        "foreach (`$file in `$jsonFiles) {
-            `$fileContent = Get-Content `$file.FullName
-            `$fileContent = `$fileContent -replace 'roms-path-here', '$($env:USERPROFILE -replace '\\', '\\')\\Games\\ROMs\\Switch'
-            `$fileContent | Set-Content `$file.FullName
-        }"
-        "if (scoop list | Select-String -Pattern 'ryujinx' -SimpleMatch) {
-            `$confPath = '$env:USERPROFILE\scoop\persist\ryujinx\portable'
-            New-Item -ItemType Directory -Path '$env:USERPROFILE\scoop\persist\ryujinx-mirror' -Force | Out-Null
-            New-Item -ItemType Directory -Path '$env:USERPROFILE\scoop\persist\ryujinx-greemdev' -Force | Out-Null
-            New-Item -ItemType SymbolicLink '$env:USERPROFILE\scoop\persist\ryujinx-mirror\portable' -Target `$confPath -Force | Out-Null
-            New-Item -ItemType SymbolicLink '$env:USERPROFILE\scoop\persist\ryujinx-greemdev\portable' -Target `$confPath -Force | Out-Null
-        } else {
-            `$confPath = '$env:APPDATA\Ryujinx'
-        }"
-        "New-Item -ItemType Directory `$confPath -Force | Out-Null"
-        "Copy-Item '.\Switch\*' -Destination `$confPath -Recurse -Force"
-        "Remove-Item '.\Switch' -Recurse -Force"
-        "Copy-Item '$(Split-Path $PSScriptRoot)\Cross-Platform\Ryujinx\*' -Destination `$confPath -Force"
-        "`$config = Get-Content `"`$confPath\Config.json`""
-        "`$config = `$config -replace 'roms-path-here', '$($env:USERPROFILE -replace '\\', '\\')\\Games\\ROMs\\Switch'"
-        "`$config | Set-Content `"`$confPath\Config.json`""
-        "if (Get-Command syncthing -ErrorAction SilentlyContinue) {
-           Set-Content `"`$confPath\.stignore`" 'Config.json`ngames/*/cache'
-            syncthing cli config folders add --id 'z3qjr-yw9j5' --label 'Ryujinx' --path `$confPath
-        }"
     )
     "SameBoy" = @(
         "choco install sameboy -y"
@@ -1465,36 +644,17 @@ $script:commands = @{
     )
     "scdl" = @(
         "pip install scdl"
-        "New-Item -ItemType Directory '$env:USERPROFILE\Downloads\Audio\SoundCloud' -Force | Out-Null"
-        "New-Item -ItemType Directory '$env:USERPROFILE\.config\scdl' -Force | Out-Null"
-        "Copy-Item '$(Split-Path $PSScriptRoot)\Cross-Platform\scdl\scdl.cfg' -Destination '$env:USERPROFILE\.config\scdl' -Force"
-        "(Get-Content '$env:USERPROFILE\.config\scdl\scdl.cfg') -replace 'path-here', '$env:USERPROFILE\Downloads\Audio\Soundcloud' | Set-Content '$env:USERPROFILE\.config\scdl\scdl.cfg'"
     )
     "SecureUxTheme" = @(
         "scoop install extras/secureuxtheme"
         "winget install --id=namazso.SecureUXTheme --exact --accept-source-agreements --accept-package-agreements"
     )
-    "Sekiro" = @(
-        "Write-Host 'Downloading Sekiro...'"
-        "gdown `$script:sekiroGDriveID"
-        "script:Expand-7zArchive '.\Sekiro.7z'"
-        "Remove-Item '.\Sekiro.7z'"
-        "Copy-Item '.\Sekiro' -Destination '$env:USERPROFILE\Games\Sekiro Shadows Die Twice GOTY Edition' -Recurse -Force"
-        "Remove-Item '.\Sekiro' -Recurse -Force"
-        "script:Log 'Sekiro: For autostarting unlocker with game ensure `'Local Policies/Audit Policy/Audit process tracking`' is set to `'Success`''"
-    )
     "SGDBoop" = @(
         "scoop install bergbok/sgdboop"
-        "Start-Process '$env:USERPROFILE\scoop\apps\sgdboop\current\SGDBoop.exe'"
-        "Start-Sleep -Seconds 1"
-        "Stop-Process -Name SGDBoop"
-        
     )
     "ShellExView" = @(
         "choco install shexview.portable -y"
         "scoop install nirsoft/shexview"
-        "winget install --id=NirSoft.ShellExView --exact --accept-source-agreements --accept-package-agreements"
-        "script:Log 'ShellExView: Disable GpgEx shell extension.'"
     )
     "ShellMenuNew" = @(
         "choco install shellmenunew -y"
@@ -1503,212 +663,9 @@ $script:commands = @{
     "ShellMenuView" = @(
         "choco install shmnview -y"
         "scoop install nirsoft/shmnview"
-        "script:Log 'ShellMenuView: Set extended mode for: Take Ownership'"
     )
     "Ship of Harkinian" = @(
         "scoop install games/shipwright"
-        "gdown `$script:sohGDriveID"
-        "script:Expand-7zArchive '.\SoH.7z'"
-        "Remove-Item '.\SoH.7z'"
-        "Copy-Item '.\SoH\*' -Destination '$env:USERPROFILE\scoop\persist\shipwright' -Recurse -ErrorAction SilentlyContinue"
-        "Remove-Item '.\SoH' -Recurse -Force"
-    )
-    "Sophia Script" = @(
-        "Write-Host 'Running Sophia Script...'"
-	"`$preSophiaWindowTitle = `$host.UI.RawUI.WindowTitle"
-        "`$latestRelease = Invoke-RestMethod -Uri 'https://api.github.com/repos/farag2/Sophia-Script-for-Windows/releases/latest'"
-        "if (`$PSVersionTable.PSVersion.Major -ge 7 -and `$PSVersionTable.PSVersion.Minor -ge 3) { 
-            `$asset = `$latestRelease.assets | Where-Object { `$_.name -like 'Sophia.Script.for.Windows.10.PowerShell.7*.zip' }
-        } else {
-            `$asset = `$latestRelease.assets | Where-Object { `$_.name -like 'Sophia.Script.for.Windows.10.v*.zip' }
-        }"
-        "if (`$null -ne `$asset) {
-            Invoke-WebRequest `$asset.browser_download_url -OutFile '.\SophiaScript.zip'
-        } else {
-            Write-Warning 'Could not download Sophia Script.'
-            return
-        }"
-        "Expand-Archive '.\SophiaScript.zip' -DestinationPath '.\Sophia'"
-        "Remove-Item '.\SophiaScript.zip'"
-        "Get-ChildItem '.\Sophia' -Filter '*.psm1' -Recurse | ForEach-Object {
-            `$module = Get-Content `$_.FullName
-            `$module = `$module -replace '\[Windows\.UI\.Notifications\.ToastNotificationManager\]::CreateToastNotifier', '# [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier'
-            `$module | Set-Content `$_.FullName
-        }"
-        "if (`$PSVersionTable.PSVersion.Major -ge 7 -and `$PSVersionTable.PSVersion.Minor -ge 3) { 
-            Move-Item '.\Sophia\Sophia_Script_for_Windows_10_PowerShell_7_v*\*' -Destination '.\Sophia'
-            Remove-Item '.\Sophia\Sophia_Script_for_Windows_10_PowerShell_7_v*'
-        } else {
-            Move-Item '.\Sophia\Sophia_Script_for_Windows_10_v*\*' -Destination '.\Sophia'
-            Remove-Item '.\Sophia\Sophia_Script_for_Windows_10_v*'
-        }"
-        ". '.\Sophia\Functions.ps1'"
-        # Could probably be done faster by passing all functions at once, however I kinda like the brief respite while it runs.
-        "Sophia -Functions 'CreateRestorePoint'"
-        "Sophia -Functions 'ActiveHours -Manually'"
-        "Sophia -Functions 'AdminApprovalMode -Default'"  # UAC? off = -Never
-        "Sophia -Functions 'AdvertisingID -Disable'"
-        "Sophia -Functions 'AeroShaking -Disable'"
-        "Sophia -Functions 'AppsLanguageSwitch -Disable'"
-        "Sophia -Functions 'AppsSilentInstalling -Disable'"
-        "Sophia -Functions 'AppsSmartScreen -Disable'"
-        "Sophia -Functions 'AppSuggestions -Hide'"
-        "Sophia -Functions 'Autoplay -Disable'"
-        "Sophia -Functions 'BackgroundUWPApps -Disable'"  # Might mess with WSL
-        "Sophia -Functions 'BingSearch -Disable'"
-        "Sophia -Functions 'BitmapImageNewContext -Hide'"
-        "Sophia -Functions 'BSoDStopError -Enable'"
-        "Sophia -Functions 'CABInstallContext -Hide'"
-        "Sophia -Functions 'CastToDeviceContext -Hide'"
-        "Sophia -Functions 'CompressedFolderNewContext -Hide'"
-        "Sophia -Functions 'CopilotButton -Hide'"
-        "Sophia -Functions 'CortanaAutostart -Disable'"
-        "Sophia -Functions 'CortanaButton -Hide'"
-        "Sophia -Functions 'DefenderSandbox -Enable'"
-        "Sophia -Functions 'DeliveryOptimization -Disable'"
-        "Sophia -Functions 'DiagnosticDataLevel -Minimal'"
-        "Sophia -Functions 'DiagTrackService -Disable'"
-        "Sophia -Functions 'DismissMSAccount'"
-        "Sophia -Functions 'DismissSmartScreenFilter'"
-        "Sophia -Functions 'EditWithPaint3DContext -Hide'"
-        "Sophia -Functions 'ErrorReporting -Disable'"
-        "Sophia -Functions 'EventViewerCustomView -Enable'"
-        "Sophia -Functions 'F1HelpPage -Disable'"
-        "Sophia -Functions 'FeedbackFrequency -Never'"
-        "Sophia -Functions 'FileTransferDialog -Detailed'"
-        "Sophia -Functions 'FirstLogonAnimation -Disable'"
-        "Sophia -Functions 'FolderGroupBy -None'"
-        "Sophia -Functions 'GPUScheduling -Enable'"
-        "Sophia -Functions 'HEVC -Install'"
-        "Sophia -Functions 'HiddenItems -Enable'"
-        "Sophia -Functions 'IncludeInLibraryContext -Hide'"
-        "Sophia -Functions 'JPEGWallpapersQuality -Max'"
-        "Sophia -Functions 'LanguageListAccess -Disable'"
-        "Sophia -Functions 'MappedDrivesAppElevatedAccess -Enable'"
-        "Sophia -Functions 'MeetNow -Hide'"
-        "Sophia -Functions 'MergeConflicts -Show'"
-        "Sophia -Functions 'MSIExtractContext -Hide'"
-        "Sophia -Functions 'MultipleInvokeContext -Disable'"
-        "Sophia -Functions 'NetworkDiscovery -Enable'"
-        "Sophia -Functions 'NetworkProtection -Enable'"
-        "Sophia -Functions 'NewAppInstalledNotification -Hide'"
-        "Sophia -Functions 'NewsInterests -Disable'"
-        "Sophia -Functions 'OneDrive -Uninstall'"
-        "Sophia -Functions 'OneDriveFileExplorerAd -Hide'"
-        "Sophia -Functions 'OpenFileExplorerTo -ThisPC'"
-        "Sophia -Functions 'PeopleTaskbar -Hide'"
-        "Sophia -Functions 'PreventEdgeShortcutCreation -Channels Stable, Beta, Dev, Canary'"
-        "Sophia -Functions 'PrintCMDContext -Hide'"
-        "Sophia -Functions 'PrtScnSnippingTool -Disable'"
-        "Sophia -Functions 'PUAppsDetection -Enable'"
-        "Sophia -Functions 'QuickAccessFrequentFolders -Hide'"
-        "Sophia -Functions 'QuickAccessRecentFiles -Hide'"
-        "Sophia -Functions 'RecentlyAddedApps -Hide'"
-        "Sophia -Functions 'RecycleBinDeleteConfirmation -Enable'"
-        "Sophia -Functions 'ReservedStorage -Disable'"
-        "Sophia -Functions 'RestartNotification -Hide'"
-        "Sophia -Functions 'RichTextDocumentNewContext -Hide'"
-        "Sophia -Functions 'SATADrivesRemovableMedia -Disable'"
-        "Sophia -Functions 'SaveRestartableApps -Disable'"
-        "Sophia -Functions 'SaveZoneInformation -Disable'"
-        "Sophia -Functions 'ScheduledTasks -Disable'"
-        "Sophia -Functions 'SearchHighlights -Hide'"
-        "Sophia -Functions 'SecondsInSystemClock -Hide'"
-        "Sophia -Functions 'SettingsSuggestedContent -Hide'"
-        "Sophia -Functions 'ShareContext -Hide'"
-        "Sophia -Functions 'ShortcutsSuffix -Disable'"
-        "Sophia -Functions 'SigninInfo -Disable'"
-        "Sophia -Functions 'SnapAssist -Enable'"
-        "Sophia -Functions 'StartAccountNotifications -Hide'"
-        "Sophia -Functions 'StickyShift -Disable'"
-        "Sophia -Functions 'StorageSense -Enable'"
-        "Sophia -Functions 'StorageSenseTempFiles -Enable'"
-        "Sophia -Functions 'TailoredExperiences -Disable'"
-        "Sophia -Functions 'TaskbarSearch -Hide'"
-        "Sophia -Functions 'TaskManagerWindow -Expanded'"
-        "Sophia -Functions 'TaskViewButton -Hide'"
-        "Sophia -Functions 'ThisPC -Hide'"
-        "Sophia -Functions 'ThumbnailCacheRemoval -Disable'"
-        "Sophia -Functions 'UninstallPCHealthCheck'"
-        "Sophia -Functions 'UnpinTaskbarShortcuts -Shortcuts Edge, Store, Mail'"
-        "Sophia -Functions 'UpdateMicrosoftProducts -Disable'"
-        "Sophia -Functions 'UserFolders -ThreeDObjects Hide -Desktop Hide -Documents Hide -Downloads Hide -Music Hide -Pictures Hide -Videos Hide'"
-        "Sophia -Functions 'UseStoreOpenWith -Hide'"
-        "Sophia -Functions 'WhatsNewInWindows -Disable'"
-        "Sophia -Functions 'Win32LongPathLimit -Disable'"
-        "Sophia -Functions 'WindowsInkWorkspace -Hide'"
-        "Sophia -Functions 'WindowsLatestUpdate -Disable'"
-        "Sophia -Functions 'WindowsManageDefaultPrinter -Disable'"
-        "Sophia -Functions 'WindowsSandbox -Enable'"
-        "Sophia -Functions 'WindowsTips -Disable'"
-        "Sophia -Functions 'WindowsWelcomeExperience -Hide'"
-        "Sophia -Functions 'XboxGameBar -Disable'"
-        "Sophia -Functions 'XboxGameTips -Disable'"
-        "if (-not `$script:isLaptop) {
-            Sophia -Functions 'Hibernation -Disable'
-            Sophia -Functions 'PowerPlan -High'
-        }"
-        "Remove-Item '.\Sophia' -Recurse -Force"
-	"`$host.UI.RawUI.WindowTitle = `$preSophiaWindowTitle"
-    )
-    "SoS Optimize Harden Debloat" = @(
-        # I don't recommend running this on home PCs.
-        "Write-Host 'Running SoS Windows Optimize Harden Debloat...'"
-        "Set-Location '$PSScriptRoot'"
-        "git clone 'https://github.com/simeononsecurity/Windows-Optimize-Harden-Debloat.git'"
-        "`$parameters = @{
-            cleargpos = `$false
-            installupdates = `$false
-            adobe = `$false
-            firefox = `$false
-            chrome = `$false
-            IE11 = `$false
-            edge = `$false
-            dotnet = `$false
-            office = `$false
-            onedrive = `$false
-            java = `$false
-            windows = `$true                 # https://github.com/search?q=repo%3Asimeononsecurity%2FWindows-Optimize-Harden-Debloat+if+%28%24windows+-eq+%24true%29+%7B&type=code
-            defender = `$false
-            firewall = `$false
-            mitigations = `$false
-            defenderHardening = `$false
-            pshardening = `$false
-            sslhardening = `$false
-            smbhardening = `$true            # https://github.com/search?q=repo%3Asimeononsecurity%2FWindows-Optimize-Harden-Debloat+%24smbhardening&type=code
-            applockerhardening = `$false
-            bitlockerhardening = `$false
-            removebloatware = `$true         # https://github.com/search?q=repo%3Asimeononsecurity%2FWindows-Optimize-Harden-Debloat+%24removebloatware&type=code
-            disabletelemetry = `$true        # https://github.com/search?q=repo%3Asimeononsecurity%2FWindows-Optimize-Harden-Debloat+%24disabletelemetry&type=code
-            privacy = `$true                 # https://github.com/search?q=repo%3Asimeononsecurity%2FWindows-Optimize-Harden-Debloat+%24privacy&type=code
-            imagecleanup = `$true            # https://github.com/search?q=repo%3Asimeononsecurity%2FWindows-Optimize-Harden-Debloat+%24imagecleanup&type=code
-            nessusPID = `$false
-            sysmon = `$false
-            diskcompression = `$false
-            emet = `$false
-            updatemanagement = `$false
-            deviceguard = `$false
-            sosbrowsers = `$false
-        }"
-        "`$scriptContent = Get-Content .\Windows-Optimize-Harden-Debloat\sos-optimize-windows.ps1"
-        "`$scriptContent -replace 'Import-GPOs -gposdir `"\.\\Files\\GPOs\\DoD\\Windows`"', '# Import-GPOs -gposdir `".\Files\GPOs\DoD\Windows`"'"
-        "`$scriptContent | Set-Content .\Windows-Optimize-Harden-Debloat\sos-optimize-windows.ps1"
-        "& '.\Windows-Optimize-Harden-Debloat\sos-optimize-windows.ps1' `$parameters['cleargpos'] `$parameters['installupdates'] `$parameters['adobe'] `$parameters['firefox'] `$parameters['chrome'] `$parameters['IE11'] `$parameters['edge'] `$parameters['dotnet'] `$parameters['office'] `$parameters['onedrive'] `$parameters['java'] `$parameters['windows'] `$parameters['defender'] `$parameters['firewall'] `$parameters['mitigations'] `$parameters['defenderHardening'] `$parameters['pshardening'] `$parameters['sslhardening'] `$parameters['smbhardening'] `$parameters['applockerhardening'] `$parameters['bitlockerhardening'] `$parameters['removebloatware'] `$parameters['disabletelemetry'] `$parameters['privacy'] `$parameters['imagecleanup'] `$parameters['nessusPID'] `$parameters['sysmon'] `$parameters['diskcompression'] `$parameters['emet'] `$parameters['updatemanagement'] `$parameters['deviceguard'] `$parameters['sosbrowsers']"
-        "Set-Location '$PSScriptRoot'"
-        "Remove-Item '.\Windows-Optimize-Harden-Debloat' -Recurse -Force"
-        "Set-Location '$PSScriptRoot'"
-        # reenable Explorer preview pane
-        "Set-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer' -Name 'NoReadingPane' -Type 'DWORD' -Value 0 -Force"
-        "New-Item 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer' -Force | Out-Null"
-        "Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer' -Name 'NoReadingPane' -Type 'DWORD' -Value 0 -Force"
-        # reenable Clipboard history
-        "Set-ItemProperty 'HKCU:\Software\Microsoft\Clipboard' -Name 'EnableClipboardHistory' -Type 'DWORD' -Value 1 -Force"
-        # reenable Run history
-        "Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'Start_TrackProgs' -Type 'DWORD' -Value 1 -Force"
-        # disable lock screen requiring Ctrl+Alt+Del
-        "Set-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System' -Name 'DisableCAD' -Type 'DWORD' -Value 1 -Force"
-        # reenable lock screen username preview
-        "Set-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System' -Name 'DontDisplayLastUsername' -Type 'DWORD' -Value 0 -Force"
     )
     "SoulseekQt" = @(
         "scoop install extras/soulseekqt"
@@ -1723,11 +680,6 @@ $script:commands = @{
         "scoop install main/spicetify-cli"
         "winget install --id=Spicetify.Spicetify --exact --accept-source-agreements --accept-package-agreements"
         # Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/spicetify/cli/main/install.ps1 | Invoke-Expression
-        "& '$PSScriptRoot\Scripts\Initialize-Spicetify.ps1' -Full"
-        "Start-Process 'spotify:marketplace'"
-        "Start-Process 'https://raw.githubusercontent.com/Bergbok/Configs/refs/heads/main/Cross-Platform/Spicetify/marketplace.json'"
-        "Start-Process 'https://gist.githubusercontent.com/Bergbok/c7503bcb7ba2699ae10830b5aacbf333/raw/excluding-%255Bcontains-local-files%255D'"
-        "Start-Process 'https://gist.githubusercontent.com/Bergbok/c7503bcb7ba2699ae10830b5aacbf333/raw/including-%255Bcontains-local-files%255D'"
     )
     "Spotify" = @(
         # Latest:
@@ -1738,74 +690,15 @@ $script:commands = @{
         # "choco install spotify -y --version=1.2.45.454 --ignore-checksums; choco pin add -n=spotify"
         # # "scoop install bergbok/spotify; scoop hold spotify" # https://github.com/ScoopInstaller/Extras/issues/12429, also taskbar entry
         "winget install --id=Spotify.Spotify -v '1.2.45.454.gc16ec9f6' --exact --accept-source-agreements --accept-package-agreements; winget pin add --id=Spotify.Spotify"
-        "if (`$script:selected -contains 'Spicetify') {
-            Write-Host 'Please log into Spotify, press enter to continue when done.'
-            Start-Sleep -Seconds 2
-            `$spotify = es -r '\.exe$' 'Spotify.exe' | Where-Object { `$_ -notmatch 'Minimize-' } | Select-Object -First 1
-            Start-Process `$spotify
-            Read-Host
-        }"
-        "script:Log 'Spotify: Set local files location.'"
     )
     "ssh" = @(
         "choco install openssh -y"
         "scoop install main/openssh"
-        "if (scoop list | Select-String 'openssh' -SimpleMatch) {
-            & '$env:USERPROFILE\scoop\apps\openssh\current\install-sshd.ps1'
-        }"
-        "if (-not (scoop list | Select-String 'openssh' -SimpleMatch)  -and (-not (choco list openssh) -contains '0 packages installed.')) { 
-            Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
-            Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
-        }"
-        "Start-Service sshd"
-        "Set-Service -Name 'sshd' -StartupType 'Automatic'"
-        "Start-Service ssh-agent"
-        "Set-Service -Name 'ssh-agent' -StartupType 'Automatic'"
-        "if (Get-Command ssh-keygen -ErrorAction SilentlyContinue) {
-            Start-Process powershell -Args 'ssh-keygen'
-        } else {
-            script:Log 'ssh: Could not generate ssh key, ssh-keygen not found.' 
-        }"
-        "New-Item -Path '$env:USERPROFILE\.ssh' -ItemType Directory -Force | Out-Null"
-        "New-Item -Path '$env:SYSTEMDRIVE\ProgramData\ssh' -ItemType Directory -Force | Out-Null"
-        "Add-Content '$env:USERPROFILE\.ssh\authorized_keys', '$env:SYSTEMDRIVE\ProgramData\ssh\administrators_authorized_keys' -Value (`$script:authorizedSshPubkeys -split ',')"
     )
     "Steam" = @(
         "choco install steam -y"
         "scoop install bergbok/steam"
         "winget install --id=Valve.Steam --exact --accept-source-agreements --accept-package-agreements"
-        "script:Log 'Steam: Get mobile app QR code scanner ready.'"
-        "Start-Sleep -Seconds 1"
-        "`$steam = es -i -n 1 -r '\.exe$' 'steam.exe'"
-        "Start-Process `$steam"
-        "if (`$script:selected -contains 'DisplayFusion' -or `$script:selected -contains 'Wallpaper Engine') {
-            Write-Host 'Please log into Steam, press enter to continue when done.'
-            Read-Host
-        }"
-        "Stop-Process -Name 'steam' -ErrorAction SilentlyContinue"
-        "`$steamInstallDriveLetter = `$steam.Substring(0, 1)"
-        "`$newLibraryPath =  `"`$(`$steamInstallDriveLetter):\SteamLibrary\steamapps`""
-        "New-Item -ItemType Directory -Path `"`$newLibraryPath\common`" -Force | Out-Null"
-        "New-Item -ItemType SymbolicLink `"$env:USERPROFILE\Games\Steam Libraries\`$steamInstallDriveLetter`" -Target `"`$newLibraryPath\common`" -Force | Out-Null"
-        "if (scoop list | Select-String -Pattern 'steam' -SimpleMatch) {
-            Remove-Item '$env:USERPROFILE\scoop\persist\steam\steamapps' -Recurse -Force
-            New-Item -ItemType SymbolicLink '$env:USERPROFILE\scoop\persist\steam\steamapps' -Target `$newLibraryPath | Out-Null
-        } else {
-            Remove-Item '${env:ProgramFiles(x86)}\Steam\steamapps' -Recurse -Force
-            New-Item -ItemType SymbolicLink '${env:ProgramFiles(x86)}\Steam\steamapps' -Target `$newLibraryPath | Out-Null
-        }"
-        "Set-Location '$(Split-Path $PSScriptRoot)\Cross-Platform\Steam'"
-        "python -m venv venv"
-        ".\venv\Scripts\Activate.ps1"
-        "pip install -r requirements.txt"
-        "`$steampath = Split-Path `$steam"
-        "python Steam-Config.py `"`$steampath`""
-        "deactivate"
-        "Remove-Item '.\venv' -Recurse -Force"
-        "Set-Location '$PSScriptRoot'"
-        "Start-Sleep -Seconds 2"
-        "Start-Process `$steam"
-        "script:Log 'Steam: Add additional drives in settings -> Storage.'"
     )
     "Steam Achievement Manager" = @(
         # "choco install steamachievementmanager -y"
@@ -1816,67 +709,6 @@ $script:commands = @{
         "choco install steam-rom-manager -y"
         "scoop install games/steam-rom-manager"
         "winget install --id=SteamGridDB.RomManager --exact --accept-source-agreements --accept-package-agreements"
-        "if (scoop list | Select-String -Pattern 'steam-rom-manager') {
-            `$configPath = '$env:USERPROFILE\scoop\persist\steam-rom-manager\userData'
-        } else {
-            `$configPath = '$env:APPDATA\steam-rom-manager\userData'
-        }"
-        "Copy-Item '$(Split-Path $PSScriptRoot)\Cross-Platform\Steam-ROM-Manager\*' -Destination `$configPath -Recurse -Force"
-        "`$steam = es -i -n 1 -r '\.exe$' 'steam.exe'"
-        "`$steamPath = Split-Path `$steam"
-        "`$userConfigurations = Get-Content `"`$configPath\userConfigurations.json`""
-        "`$replacements = @{
-            'steam-account-name-here' = `$script:steamAccountName
-            'steam-path-here' = (`$steamPath -replace '\\', '\\')
-            'roms-path-here' = ('$env:USERPROFILE\Games\ROMs' -replace '\\', '\\')
-            'ares-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'ares.exe') -replace 'ares\\\d+', 'ares\current' -replace '\\', '\\')
-            'cemu-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'Cemu.exe') -replace 'cemu\\\d+', 'cemu\current' -replace '\\', '\\')
-            'cemu-path-here' = ((es -i -n 1 -r '\.exe$' 'Cemu.exe') -replace 'cemu\\\d+', 'cemu\current' -replace '\\\\Cemu\.exe', '' -replace '\\', '\\')
-            'dolphin-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'Dolphin.exe') -replace 'dolphin\\\d+', 'dolphin\current' -replace '\\', '\\')
-            'duckstation-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'duckstation*.exe') -replace 'duckstation\\[a-z\d-]+', 'duckstation\current' -replace '\\', '\\')
-            'lime3ds-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'lime3ds.exe') -replace 'lime3ds\\[\d\.]+', 'lime3ds\current' -replace '\\', '\\')
-            'melonds-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'melonDS.exe') -replace 'melonDS\\\d+', 'melonDS\current' -replace '\\', '\\')
-            'pcsx2-executable-path-here' = ((es -i -n 2 -r '\.exe$' 'pcsx2*.exe') -replace 'pcsx2\\[\d\.]+', 'pcsx2\current' -replace '\\', '\\')
-            'ppsspp-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'PPSSPPWindows64.exe') -replace 'ppsspp\\[\d\.]+', 'ppsspp\current' -replace '\\', '\\')
-            'rpcs3-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'rpcs3.exe') -replace 'rpcs3\\[\d\.-]+', 'rpcs3\current' -replace '\\', '\\')
-            'ryujinx-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'Ryujinx.exe') -replace '\\', '\\')
-            'sameboy-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'sameboy.exe') -replace 'sameboy\\[\d\.]+', 'sameboy\current' -replace '\\', '\\')
-            'windows-non-steam-games-path-here' = ('$env:USERPROFILE\Games\Windows' -replace '\\', '\\')
-        }"
-        "foreach (`$key in `$replacements.Keys) {
-            `$userConfigurations = `$userConfigurations -replace `$key, `$replacements[`$key]
-        }"
-        "`$userConfigurations | Set-Content `"`$configPath\userConfigurations.json`""
-        "`$userSettings = Get-Content `"`$configPath\userSettings.json`""
-        "`$userSettings = `$userSettings -replace 'steam-account-name-here', `$script:steamAccountName"
-        "`$userSettings = `$userSettings -replace 'steam-path-here', (`$steamPath -replace '\\', '\\')"
-        "`$userSettings | Set-Content `"`$configPath\userSettings.json`""
-        "Write-Host 'Downloading local Steam images...'"
-        "gdown `$script:steamGridImagesGDriveID"
-        "script:Expand-7zArchive '.\steam-grid-images.7z'"
-        "Remove-Item '.\steam-grid-images.7z'"
-        "`$steamGridImagesPath = `$steamPath + '\userdata\' + `$script:steamID3 + '\config\grid'"
-        "New-Item -ItemType Directory `$steamGridImagesPath -Force | Out-Null"
-        "Stop-Process -Name 'steam' -ErrorAction SilentlyContinue"
-        "Copy-Item '.\steam-grid-images\*' -Destination `$steamGridImagesPath -Force"
-        "Remove-Item '.\steam-grid-images' -Recurse -Force"
-        "Start-Process `$steam"
-        "Write-Host 'Downloading Steam ROM Manager (Steam parser) image choices...'"
-        "gdown `$script:steamParserSrmImagesGDriveID"
-        "script:Expand-7zArchive '.\steam-srm-image-choices.7z'"
-        "Remove-Item '.\steam-srm-image-choices.7z'"
-        "New-Item -ItemType Directory '$env:USERPROFILE\Pictures\Steam ROM Manager\Steam Parser Exports\$(Get-Date -Format "dd-MM-yyyy")' -Force | Out-Null"
-        "Copy-Item '.\steam-srm-image-choices\*' -Destination '$env:USERPROFILE\Pictures\Steam ROM Manager\Steam Parser Exports\$(Get-Date -Format "dd-MM-yyyy")' -Force"
-        "Remove-Item '.\steam-srm-image-choices' -Recurse -Force"
-        "Write-Host 'Downloading Steam ROM Manager (non-Steam parser) image choices...'"
-        "gdown `$script:nonSteamParserSrmImagesGDriveID"
-        "script:Expand-7zArchive '.\non-steam-srm-image-choices.7z'"
-        "Remove-Item '.\non-steam-srm-image-choices.7z'"
-        "New-Item -ItemType Directory '$env:USERPROFILE\Pictures\Steam ROM Manager\Non-Steam Parser Exports\$(Get-Date -Format "dd-MM-yyyy")' -Force | Out-Null"
-        "Copy-Item '.\non-steam-srm-image-choices\*' -Destination '$env:USERPROFILE\Pictures\Steam ROM Manager\Non-Steam Parser Exports\$(Get-Date -Format "dd-MM-yyyy")' -Force"
-        "Remove-Item '.\non-steam-srm-image-choices' -Recurse -Force"
-        "script:Log 'Steam ROM Manager: Double check parsers/exceptions before adding games.'"
-        "script:Log 'Steam ROM Manager: You might need to manually select artwork & set up exceptions for the Windows Non-Steam parser. Or just disable it.'"
     )
     "Streamlink Twitch GUI" = @(
         "choco install streamlink-twitch-gui -y"
@@ -1887,54 +719,30 @@ $script:commands = @{
         "choco install stremio -y"
         "scoop install extras/stremio; reg import '$env:USERPROFILE\scoop\apps\stremio\current\install-context.reg' 2>`$null"
         "winget install --id=Stremio.Stremio --exact --accept-source-agreements --accept-package-agreements"
-        "Start-Process 'https://stremio-addons.netlify.app'"
     )
     "gsudo" = @(
         "choco install gsudo -y"
         "scoop install main/gsudo"
         "winget install --id=gerardog.gsudo --exact --accept-source-agreements --accept-package-agreements"
-        "gsudo config CacheMode Auto"
     )
     "Syncthing" = @(
         "choco install syncthing -y"
         # "scoop install main/syncthing" # https://github.com/ScoopInstaller/Main/issues/5888
         "winget install --id=Syncthing.Syncthing --exact --accept-source-agreements --accept-package-agreements"
-        "syncthing generate --no-default-folder"
-        "Start-Process powershell -Args 'syncthing --no-browser --no-console'"
     )
     "Syncthing Tray" = @(
         "choco install syncthingtray -y"
         "scoop install extras/syncthingtray"
         "winget install --id=Martchus.syncthingtray --exact --accept-source-agreements --accept-package-agreements"
-        "Start-Sleep -Seconds 2"
-        "Stop-Process -Name 'syncthingtray*' -ErrorAction SilentlyContinue"
-        # won't work unless it's already been configured :/
-        "`$syncthingtrayiniPath = es -i -n 1 -r '\.ini$' 'syncthingtray.ini'"
-        "`$syncthingtrayini = Get-Content `$syncthingtrayiniPath"
-        "`$syncthingtrayini = `$syncthingtrayini -replace 'syncthingAutostart=true', 'syncthingAutostart=false'"
-        "`$syncthingtrayini = `$syncthingtrayini -replace 'notifyOnDisconnect=true', 'notifyOnDisconnect=false'"
-        "`$syncthingtrayini = `$syncthingtrayini -replace 'stopOnMetered=false', 'stopOnMetered=true'"
-        "`$syncthingtrayini | Set-Content `"`$syncthingtrayiniPath`""
-        "script:Log 'SyncthingTray: Set syncthingAutostart=false, notifyOnDisconnect=false, stopOnMetered=true.'"
     )
     "TaskbarX" = @(
         "choco install taskbarx -y"
         "scoop install extras/taskbarx"
-        "Start-Sleep -Seconds 2"
-        "`$taskbarxConfigurator = es -i -n 1 -r '\.exe$' 'TaskbarX Configurator.exe'"
-        "runas.exe /trustlevel:0x20000 `"powershell -Command Start-Process `$taskbarxConfigurator`""
     )
     "TeraCopy" = @(
         "choco install teracopy -y"
         "scoop install nonportable/teracopy-np"
         "winget install --id=CodeSector.TeraCopy --exact --accept-source-agreements --accept-package-agreements"
-    )
-    "Terraria Font" = @(
-        "Invoke-WebRequest 'https://www.ffonts.net/Andy-Bold.font.zip' -OutFile '.\Terraria-Font.zip'"
-        "Expand-Archive '.\Terraria-Font.zip' -DestinationPath '.\Terraria-Font' -Force"
-        "Remove-Item '.\Terraria-Font.zip'"
-        "script:Install-FontFile (Get-ChildItem '.\Terraria-Font\ANDYB.TTF').FullName"
-        "Remove-Item '.\Terraria-Font' -Recurse -Force"
     )
     "Twitch Downloader CLI" = @(
         "choco install twitchdownloader-cli -y"
@@ -1952,93 +760,6 @@ $script:commands = @{
         "scoop install extras/unigetui; scoop install main/scoop-search"
         "winget install --id MartiCliment.UniGetUI --exact --accept-source-agreements --accept-package-agreements; scoop install main/scoop-search"
     )
-    "Uninstall Edge" = @(
-        # https://github.com/ChrisTitusTech/winutil/issues/2672
-        # "Invoke-WebRequest 'https://raw.githubusercontent.com/ChrisTitusTech/winutil/refs/heads/main/functions/private/Uninstall-WinUtilEdgeBrowser.ps1' -OutFile '.\Uninstall-WinUtilEdgeBrowser.ps1'"
-        # ". '.\Uninstall-WinUtilEdgeBrowser.ps1'"
-        # "Uninstall-WinUtilEdgeBrowser uninstall"
-        # "Remove-Item '.\Uninstall-WinUtilEdgeBrowser.ps1'"
-        "Invoke-WebRequest 'https://gist.githubusercontent.com/ave9858/c3451d9f452389ac7607c99d45edecc6/raw/8575efeef94236dfb36e8fb37d83945d3b108f21/UninstallEdge.ps1' -OutFile '.\UninstallEdge.ps1'"
-        "`$script = Get-Content '.\UninstallEdge.ps1'"
-        "`$script = `$script -replace '\`$ErrorActionPreference = `"Stop`"', '`$ErrorActionPreference = `"SilentlyContinue`"'"
-        "`$script | Set-Content '.\UninstallEdge.ps1'"
-        ".\UninstallEdge.ps1"
-        "Remove-Item .\UninstallEdge.ps1"
-    )
-    "Uninstall OneDrive" = @(
-        # modified from: https://github.com/ChrisTitusTech/winutil/blob/main/docs/dev/tweaks/z--Advanced-Tweaks---CAUTION/RemoveOnedrive.md
-        # not currently using this, but keeping here in case Sophia's implementation fails
-        " Write-Host 'Uninstalling OneDrive...'
-        `$OneDrivePath = `$env:OneDrive
-        `$regPath = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe'
-        if (Test-Path `$regPath -ErrorAction SilentlyContinue) {
-            `$OneDriveUninstallString = Get-ItemPropertyValue `"`$regPath`" -Name 'UninstallString'
-            `$OneDriveExe, `$OneDriveArgs = `$OneDriveUninstallString.Split(' ')
-            Start-Process `$OneDriveExe -Args `"`$OneDriveArgs /silent`" -NoNewWindow -Wait
-        } else {
-            return
-        }
-        if (-not (Test-Path `$regPath -ErrorAction SilentlyContinue)) {
-            Remove-Item -Recurse -Force -ErrorAction SilentlyContinue `"$env:LOCALAPPDATA\Microsoft\OneDrive`"
-            Remove-Item -Recurse -Force -ErrorAction SilentlyContinue `"$env:LOCALAPPDATA\OneDrive`"
-            Remove-Item -Recurse -Force -ErrorAction SilentlyContinue `"$env:PROGRAMDATA\Microsoft OneDrive`"
-            Remove-Item -Recurse -Force -ErrorAction SilentlyContinue `"$env:SYSTEMDRIVE\OneDriveTemp`"
-            Remove-Item -Recurse -Force -ErrorAction SilentlyContinue `"`$OneDrivePath`"
-            reg delete 'HKEY_CURRENT_USER\Software\Microsoft\OneDrive' -f
-            if ((Get-ChildItem `"`$OneDrivePath`" -Recurse | Measure-Object).Count -eq 0) {
-                Remove-Item -Recurse -Force -ErrorAction SilentlyContinue `"`$OneDrivePath`"
-            }
-            Set-ItemProperty 'HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}' -Name 'System.IsPinnedToNameSpaceTree' -Value 0
-            Set-ItemProperty 'HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}' -Name 'System.IsPinnedToNameSpaceTree' -Value 0
-            reg load 'hku\Default' '$env:HOMEDRIVE\Users\Default\NTUSER.DAT'
-            reg delete 'HKEY_USERS\Default\Software\Microsoft\Windows\CurrentVersion\Run' /v 'OneDriveSetup' /f
-            reg unload 'hku\Default'
-            Remove-Item -Force -ErrorAction SilentlyContinue `"$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk`"
-            Get-ScheduledTask -TaskPath '\' -TaskName 'OneDrive*' -ea SilentlyContinue | Unregister-ScheduledTask -Confirm:$false
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'AppData' -Value `"$env:USERPROFILE\AppData\Roaming`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Cache' -Value `"$env:USERPROFILE\AppData\Local\Microsoft\Windows\INetCache`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Cookies' -Value `"$env:USERPROFILE\AppData\Local\Microsoft\Windows\INetCookies`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Favorites' -Value `"$env:USERPROFILE\Favorites`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'History' -Value `"$env:USERPROFILE\AppData\Local\Microsoft\Windows\History`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Local AppData' -Value `"$env:USERPROFILE\AppData\Local`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'My Music' -Value `"$env:USERPROFILE\Music`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'My Video' -Value `"$env:USERPROFILE\Videos`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'NetHood' -Value `"$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Network Shortcuts`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'PrintHood' -Value `"$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Printer Shortcuts`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Programs' -Value `"$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Recent' -Value `"$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Recent`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'SendTo' -Value `"$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\SendTo`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Start Menu' -Value `"$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Startup' -Value `"$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Templates' -Value `"$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Templates`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name '{374DE290-123F-4565-9164-39C4925E467B}' -Value `"$env:USERPROFILE\Downloads`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Desktop' -Value `"$env:USERPROFILE\Desktop`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'My Pictures' -Value `"$env:USERPROFILE\Pictures`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Personal' -Value `"$env:USERPROFILE\Documents`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name '{F42EE2D3-909F-4907-8871-4C22FC0BF756}' -Value `"$env:USERPROFILE\Documents`" -Type ExpandString
-            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name '{0DDD015D-B06C-45D5-8C4C-F59713854639}' -Value `"$env:USERPROFILE\Pictures`" -Type ExpandString
-            Stop-Process -Name 'explorer'
-            if (-not (Get-Process 'explorer' -ErrorAction SilentlyContinue)) {
-                Start-Process 'explorer'
-            }
-            Start-Process 'explorer.exe'
-            Start-Process 'explorer.exe'
-        } else {
-            Write-Host 'Something went wrong during the unistallation of OneDrive' -ForegroundColor Red
-        }"
-    )
-    "USBHelper" = @(
-        "`$tempPath = [System.IO.Path]::GetTempPath() + 'USBHelperInstaller.exe'"
-        "Invoke-WebRequest 'https://github.com/FailedShack/USBHelperInstaller/releases/latest/download/USBHelperInstaller.exe' -OutFile `$tempPath"
-        "Start-Process `$tempPath"
-        "Set-Clipboard 'titlekeys.ovh'"
-        "script:Log 'USBHelper: Set title key site to titlekeys.ovh'"
-    )
-    "veadotube mini" = @( 
-        "Start-Process 'https://olmewe.itch.io/veadotube-mini/purchase'"
-        "Copy-Item '$(Split-Path $PSScriptRoot)\Cross-Platform\veadotube-mini\*' -Destination '$env:USERPROFILE\Pictures\pngtubers' -Recurse -Force"
-        "script:Log 'veadotube mini: pngtubers have been copied to `"$env:USERPROFILE\Pictures\pngtubers`"'"
-    )
     "Ventoy" = @(
         "choco install ventoy -y"
         "scoop install extras/ventoy"
@@ -2048,7 +769,6 @@ $script:commands = @{
         # "choco install virtualbox -y" # floods terminal
         # "scoop install nonportable/virtualbox-np" # install script doesn't use erroraction silentlycontinue
         "winget install --id=Oracle.VirtualBox --exact --accept-source-agreements --accept-package-agreements"
-        "Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart"
     )
     "Visual C++ Redistributable" = @(
         # "choco install vcredist140"
@@ -2059,13 +779,6 @@ $script:commands = @{
         "choco install vscode -y"
         # "scoop install extras/vscode; script:Log 'VSCode: Optionally: reg import `"$env:USERPROFILE\scoop\apps\vscode\current\install-context.reg`"; reg import `"$env:USERPROFILE\scoop\apps\vscode\current\install-associations.reg`"'" # taskbar entry
         "winget install --id=Microsoft.VisualStudioCode --exact --accept-source-agreements --accept-package-agreements"
-        "if (Get-Command code -ErrorAction SilentlyContinue) {
-            gsudo --integrity Medium -- code
-        } else {
-            `$code = es -i -n 1 -r '\.exe$' 'Code.exe'
-            gsudo --integrity Medium -- Start-Process `$code 
-        }"
-        "script:Log 'VSCode: Change git.defaultCloneDirectory to $($env:USERPROFILE -replace '\\', '\\')\\Code'"
     )
     "Vita3K" = @(
         "scoop install games/vita3k --skip-hash-check" # https://github.com/Calinou/scoop-games/issues?q=vita3k%40
@@ -2079,21 +792,6 @@ $script:commands = @{
     "Voicemod" = @(
         # "choco install voicemod -y"
         "scoop install bergbok/voicemod"
-        "script:Log 'Voicemod: Disable auto startup in Task Manager'"
-    )
-    "Wallpaper" = @(
-        "Write-Host 'Setting wallpaper...'"
-        "Invoke-WebRequest `$script:wallpaperUrl -OutFile `"$env:USERPROFILE\Pictures\Wallpapers\`$script:wallpaperFilename`""
-        "New-Item -ItemType SymbolicLink '$env:USERPROFILE\Pictures\Wallpapers\Current' -Target `"$env:USERPROFILE\Pictures\Wallpapers\`$script:wallpaperFilename`" -Force"
-        "Set-ItemProperty 'HKCU:\Control Panel\Desktop' -Name 'WallpaperStyle' -Value 10 -Type String"
-        # from: https://gist.github.com/s7ephen/714023?permalink_comment_id=3611772#gistcomment-3611772
-        "Add-Type -TypeDefinition 'using System.Runtime.InteropServices; public class Wallpaper { public const int SetDesktopWallpaper = 20; public const int UpdateIniFile = 0x01; public const int SendWinIniChange = 0x02; [DllImport(`"user32.dll`", SetLastError = true, CharSet = CharSet.Auto)] private static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni); public static void SetWallpaper(string path) { SystemParametersInfo(SetDesktopWallpaper, 0, path, UpdateIniFile | SendWinIniChange); } }'"
-        "[Wallpaper]::SetWallpaper('$env:USERPROFILE\Pictures\Wallpapers\Current')"
-        # couldn't manage to change the lock screen programmatically, tried changing registry keys and even overwriting the files in $env:WINDIR\Web\Screen
-    )
-    "Wallpaper Engine" = @(
-        "Start-Process steam://install/431960"
-        "script:Log 'Wallpaper Engine: Open before script ends to set it up.'"
     )
     "webp2gif" = @(
         "scoop install bergbok/webp2gif"
@@ -2106,76 +804,16 @@ $script:commands = @{
         "choco install winaero-tweaker.portable -y"
         "scoop install extras/winaero-tweaker"
         "winget install --id=winaero.tweaker --exact --accept-source-agreements --accept-package-agreements"
-        "`$winaerotweaker = es -i -n 1 -r '\.exe$' 'WinaeroTweaker.exe'"
-        "`$winaerotweakerini = Get-Content '$PSScriptRoot\Configs\Winaero-Tweaker\Winaero Tweaker.ini'"
-        "`$winaerotweakerini = `$winaerotweakerini -replace 'lockscreenimage-here', '$env:USERPROFILE\Pictures\Wallpapers\Current'"
-        "`$winaerotweakerini | Set-Content `"`$(Split-Path `$winaerotweaker)\Winaero Tweaker.ini`" -Force"
-        "Invoke-WebRequest `$script:wallpaperUrl -OutFile `"$env:USERPROFILE\Pictures\Wallpapers\`$script:wallpaperFilename`""
-        "New-Item -ItemType SymbolicLink '$env:USERPROFILE\Pictures\Wallpapers\Current' -Target `"$env:USERPROFILE\Pictures\Wallpapers\`$script:wallpaperFilename`" -Force"
-        "script:Log `"Winaero Tweaker: You need to manually import tweaks from: '`$(Split-Path `$winaerotweaker)\Winaero Tweaker.ini'`""
-        "Set-Clipboard `"`$(Split-Path `$winaerotweaker)\Winaero Tweaker.ini`""
-        "Start-Process `$winaerotweaker"
     )
     "Windows Terminal" = @(
         "choco install microsoft-windows-terminal -y"
         # "scoop install extras/windows-terminal; script:Log 'Windows Terminal: Optionally run reg import $env:USERPROFILE\scoop\apps\windows-terminal\install-context.reg'" # taskbar entry
         "winget install --id=Microsoft.WindowsTerminal --exact --accept-source-agreements --accept-package-agreements"
-        "if (Get-Command wt -ErrorAction SilentlyContinue) {
-            wt
-        } else {
-            Start-Process (es -i -n 1 -r '\.exe$' 'wt.exe')
-        }"
-        "Start-Sleep -Seconds 0.25"
-        "Stop-Process -Name 'WindowsTerminal' -ErrorAction SilentlyContinue"
-        "`$config = Get-Content '$PSScriptRoot\Configs\Windows-Terminal\settings.json'"
-        "`$config = `$config -replace 'windir-here', ('$env:WINDIR' -replace '\\', '\\')"
-        "`$config = `$config -replace 'userprofile-here', ('$env:USERPROFILE' -replace '\\', '\\')"
-        "`$config = `$config -replace 'nerdfont-here', 'MesloLGM Nerd Font'"
-        "`$config = `$config -replace 'pi-hostname-here', `$script:piHostname"
-        "`$config = `$config -replace 'laptop-hostname-here', `$script:laptopHostname"
-        "`$pwshVersion = Get-Command pwsh -ErrorAction SilentlyContinue | Select-Object -Property Version"
-        "if (`$pwshVersion.Version.Major -ge 7) {
-            `$config = `$config -replace 'pwsh-path-here', (((Get-Command pwsh).Source) -replace '\\', '\\')
-            `$config = `$config -replace 'true, // unhide if pwsh7', 'false,'
-            `$config = `$config -replace 'false, // hide if pwsh7', 'true,' 
-        }"
-        "if (scoop list | Select-String -Pattern 'windows-terminal' -SimpleMatch) {
-            `$destinationPath = '$env:USERPROFILE\scoop\persist\windows-terminal\settings'
-        } else {
-            `$destinationPath = `"`$((Get-ChildItem '$env:LOCALAPPDATA\Packages' -Filter 'Microsoft.WindowsTerminal*').FullName)\LocalState`"
-        }"
-        "New-Item -ItemType Directory `$destinationPath -Force | Out-Null"
-        "Set-Content `"`$destinationPath\settings.json`" -Value `$config -Force | Out-Null"
     )
     "WinRAR" = @(
         "choco install winrar -y"
         "scoop install extras/winrar; script:Log 'WinRAR: Set up context menu within settings window'"
         "winget install --id=RARLab.WinRAR --exact --accept-source-agreements --accept-package-agreements"
-        "Invoke-WebRequest 'https://github.com/bitcookies/winrar-keygen/releases/latest/download/winrar-keygen-x64.exe' -OutFile '.\winrar-keygen.exe'"
-        ".\winrar-keygen.exe 'Bergbok' 'Anti-Nagware License' | Out-File -Encoding ascii rarreg.key"
-        "if (scoop list | Select-String -Pattern 'winrar' -SimpleMatch) {
-            Copy-Item '.\rarreg.key' -Destination '$env:USERPROFILE\scoop\persist\winrar' -Force
-        }
-        if (Test-Path '$env:APPDATA\WinRAR') {
-            Copy-Item '.\rarreg.key' -Destination '$env:APPDATA\WinRAR' -Force
-        }"
-        "Remove-Item '.\winrar-keygen.exe'"
-        "Remove-Item '.\rarreg.key'"
-        "Invoke-WebRequest 'https://www.rarlab.com/themes/Bitcrushed_24x24.theme.rar' -OutFile '.\Bitcrushed.theme.rar'"
-        "`$WinRAR = es -i -n 1 -r '\.exe$' 'WinRAR.exe'"
-        "New-Item -ItemType Directory '.\WinRAR-Bitcrushed' -Force | Out-Null"
-        "Start-Process `$WinRAR -Args 'x `".\Bitcrushed.theme.rar`" `".\WinRAR-Bitcrushed`"'"
-        "Start-Sleep -Seconds 1"
-        "Remove-Item .\Bitcrushed.theme.rar"
-        "Copy-Item '.\WinRAR-Bitcrushed' -Destination '$env:USERPROFILE\Themes\WinRAR' -Recurse -Force"
-        "Remove-Item '.\WinRAR-Bitcrushed' -Recurse -Force"
-        "`$settingsRegContent = Get-Content '$PSScriptRoot\Configs\WinRAR\Settings.reg'"  
-        "`$updatedSettingsRegContent = `$settingsRegContent -replace 'home-here', ('$env:USERPROFILE' -replace '\\', '\\')"
-        "`$updatedSettingsRegContent = `$updatedSettingsRegContent -replace 'theme-path-here', ('$env:USERPROFILE\Themes\WinRAR' -replace '\\', '\\')"
-        "`$updatedSettingsRegContent = `$updatedSettingsRegContent -replace 'winrar-path-here', ((es -i -n 1 -r '\.exe$' 'WinRAR.exe') -replace '\\', '\\')"
-        "`$updatedSettingsRegContent | Set-Content '.\temp-WinRAR-Settings.reg'"
-        "reg import '.\temp-WinRAR-Settings.reg' 2>`$null"
-        "Remove-Item '.\temp-WinRAR-Settings.reg'"
     )
     "WinSCP" = @(
         "choco install winscp -y"
@@ -2184,27 +822,15 @@ $script:commands = @{
     )
     "WinSetView" = @(
         "scoop install bergbok/winsetview"
-        "reg import '$PSScriptRoot\Configs\WinSetView\WinViewBak.reg' 2>`$null"
     )
     "WizTree" = @(
         "choco install wiztree -y"
         "scoop install extras/wiztree"
         "winget install --id=AntibodySoftware.WizTree --exact --accept-source-agreements --accept-package-agreements"
-        "if (scoop list | Select-String -Pattern 'wiztree' -SimpleMatch) {
-            `$destinationPath = '$env:USERPROFILE\scoop\persist\wiztree'
-        } else {
-            `$destinationPath = '$env:APPDATA\WizTree3'
-        }"
-        "New-Item -ItemType Directory `$destinationPath -Force | Out-Null"
-        "Copy-Item '$PSScriptRoot\Configs\WizTree\WizTree3.ini' -Destination `$destinationPath -Force"
-        "script:Log 'WizTree: Set context menu extended mode with ShellMenuView.'"
     )
     "WSL" = @(
         "choco install wsl2 -y"
         "winget install --id=Microsoft.WSL --exact --accept-source-agreements --accept-package-agreements"
-        "wsl --install --no-distribution --no-launch --web-download"
-        "wsl --update"
-        "wsl --unregister Ubuntu"
     )
     "WSL - Arch" = @(
         "choco install wsl-archlinux -y"
@@ -2212,7 +838,6 @@ $script:commands = @{
     )
     "WSL - Debian" = @(
         "wsl --install --no-launch --distribution Debian"
-        "script:Log 'Debian: You may need to run the following for internet connection: sudo setcap cap_net_raw+p /bin/ping^'"
     )
     "Yarn" = @(
         "choco install yarn -y"
@@ -3477,18 +2102,12 @@ function Invoke-Setup {
         }
 
         foreach ($entry in $script:selected) {
-            if (-not $script:commands.ContainsKey($entry) -and ($entry -ne "7z")) {
-                script:Log "No setup commands found for '$entry'."
-                continue
-            }
-
-            $commands = $script:commands[$entry]
+            $packageManagerCommands = $script:packageManagerCommands[$entry]
             $executedPackageManager = $false
 
             foreach ($pref in $preferences) {
-                foreach ($command in $commands) {
+                foreach ($command in $packageManagerCommands) {
                     if ($command -match "^$pref") {
-                        # Read-Host
                         Write-Verbose "`nSetting up $entry with $pref`n"
                         if ($command -match "^choco|^winget") {
                             if ($command -match "^winget" -and ($command -match "--ignore-security-hash" -or (Get-WingetElevationRequirement $command))) {
@@ -3510,12 +2129,1513 @@ function Invoke-Setup {
                     break
                 }
             }
-    
+
             foreach ($command in $commands) {
                 if ($command -notmatch "^(choco|scoop|winget)") {
                     Write-Verbose "Executing command: $command`n"
-                    # Read-Host
                     Invoke-Expression $command
+                }
+            }
+
+            switch ($entry) {
+                "After Dark CC Theme" {
+                    gdown $script:afterDarkThemeGDriveID
+                    script:Expand-7zArchive '.\After-Dark-CC-Theme.7z'
+                    Remove-Item '.\After-Dark-CC-Theme.7z'
+                    # Copy-Item : The requested operation cannot be performed on a file with a user-mapped section open.
+                    Copy-Item '.\After-Dark-CC-Theme\Theme For Win10 22H2\Hide Commandbar\*' -Destination "$env:WINDIR\Resources\Themes" -Recurse -Force -ErrorAction SilentlyContinue
+                    New-Item -ItemType Directory "$env:USERPROFILE\Themes\After-Dark-CC-Theme" -Force | Out-Null
+                    Copy-Item '.\After-Dark-CC-Theme\*' -Destination "$env:USERPROFILE\Themes\After-Dark-CC-Theme" -Recurse -Force -ErrorAction SilentlyContinue
+                    Remove-Item '.\After-Dark-CC-Theme' -Recurse -Force
+                    Set-Location "$env:USERPROFILE\Themes\After-Dark-CC-Theme\OldNewExplorer"
+                    Start-Process '.\OldNewExplorerCfg.exe'
+                    Start-Process 'https://imgur.com/oldnewexplorer-config-C8BNIZL'
+                    Set-Location $PSScriptRoot
+                    $secureuxthemePath = es -i -n 1 -r '\.exe$' 'ThemeTool.exe'
+                    Start-Process $secureuxthemePath
+                    Start-Sleep -Seconds 0.69
+                    $themeToolProcess = Get-Process -Name 'ThemeTool' -ErrorAction SilentlyContinue
+                    if ($themeToolProcess) {
+                        $themeToolProcess.CloseMainWindow() | Out-Null
+                    }
+                    Start-Process "$env:USERPROFILE\Themes\After-Dark-CC-Theme\Icons\iPack Icon\Gray V4 iPack Icon\Gray V4 iPack Icon.exe"
+                    Set-Clipboard 'HKEY_CLASSES_ROOT\CLSID\{679f85cb-0220-4080-b29b-5540cc05aab6}\DefaultIcon'
+                    Start-Process "$env:USERPROFILE\Themes\After-Dark-CC-Theme\Icons\iPack Icon\Windows 10 - Change Quick Access Icon\RegOwnershipEx.exe"
+                    Start-Sleep -Seconds 2
+                    Set-Clipboard 'HKEY_LOCAL_MACHINE\Software\WOW6432Node\Classes\CLSID\{679f85cb-0220-4080-b29b-5540cc05aab6}\DefaultIcon'
+                    Start-Process "$env:USERPROFILE\Themes\After-Dark-CC-Theme\Icons\iPack Icon\Windows 10 - Change Quick Access Icon\RegOwnershipEx.exe"
+                    $timeout = 120
+                    Write-Host 'Press any key after taking ownership of keys with RegOwnershipEx' -ForegroundColor Green
+                    $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+                    $keyPressed = $false
+                    while ($stopwatch.Elapsed.TotalSeconds -lt $timeout) {
+                        $remainingTime = [math]::Ceiling($timeout - $stopwatch.Elapsed.TotalSeconds)
+                        if ($remainingTime -le 5) {
+                            $color = 'Red'
+                        } else {
+                            $color = 'Yellow'
+                        }
+                        Write-Host -ForegroundColor $color Skipping in $remainingTime seconds...
+                        if ([System.Console]::KeyAvailable) {
+                            $key = [System.Console]::ReadKey($true)
+                            $keyPressed = $true
+                            break
+                        }
+                        Start-Sleep -Seconds 1
+                    }
+                    $stopwatch.Stop()
+                    if ($keyPressed) {
+                        $basePath = $env:USERPROFILE
+                        $fileName = 'Themes\After-Dark-CC-Theme\Icons\iPack Icon\Windows 10 - Change Quick Access Icon\custom.reg'
+                        $fullPath = Join-Path $basePath -ChildPath $fileName
+
+                        Write-Host 'Changing Quick Access icon...' -ForegroundColor Green
+                        reg import $fullPath 2>$null
+                        & "$PSScriptRoot\Scripts\Reload-Icon-Cache.ps1"
+                    } else {
+                        script:Log "After-Dark-CC-Theme: Skipped Quick Access icon change registry import, you can do it manually with - reg import '$env:USERPROFILE\Icons\iPack Icon\Windows 10 - Change Quick Access Icon\custom.reg'"
+                    }
+                }
+                "AutoHotkey" {
+                    Copy-Item "$PSScriptRoot\Configs\AutoHotkey" -Destination "$env:USERPROFILE\Code\Scripts" -Recurse -Force
+                    foreach ($script in (Get-ChildItem "$env:USERPROFILE\Code\Scripts\AutoHotkey\Startup\*")) {
+                        New-Item -ItemType SymbolicLink "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\$($script.Name)" -Target $script.FullName -Force
+                    }
+                }
+                "Autologon" {
+                    autologon
+                }
+                "BetterDiscord" {
+                    New-Item -ItemType Directory "$env:APPDATA\BetterDiscord" -Force | Out-Null
+                    Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\BetterDiscord\*" -Destination "$env:APPDATA\BetterDiscord" -Recurse -Force
+                    $pluginDir = "$env:APPDATA\BetterDiscord\plugins"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Library/0BDFDB.plugin.js' -OutFile "$pluginDir\0BDFDB.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/zerebos/BDPluginLibrary/refs/heads/master/release/0PluginLibrary.plugin.js' -OutFile "$pluginDir\0PluginLibrary.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/Neodymium7/BetterDiscordStuff/refs/heads/main/ActivityIcons/ActivityIcons.plugin.js' -OutFile "$pluginDir\ActivityIcons.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/arg0NNY/DiscordPlugins/refs/heads/master/BetterAnimations/BetterAnimations.plugin.js' -OutFile "$pluginDir\BetterAnimations.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/jaspwr/BDPlugins/refs/heads/main/BetterAudioPlayer/BetterAudioPlayer.plugin.js' -OutFile "$pluginDir\BetterAudioPlayer.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/zerebos/BetterDiscordAddons/refs/heads/master/Plugins/BetterFormattingRedux/BetterFormattingRedux.plugin.js' -OutFile "$pluginDir\BetterFormattingRedux.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/arg0NNY/DiscordPlugins/refs/heads/master/BetterGuildTooltip/BetterGuildTooltip.plugin.js' -OutFile "$pluginDir\BetterGuildTooltip.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Plugins/BetterNsfwTag/BetterNsfwTag.plugin.js' -OutFile "$pluginDir\BetterNsfwTag.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/Zerthox/BetterDiscord-Plugins/refs/heads/master/dist/bd/BetterVolume.plugin.js' -OutFile "$pluginDir\BetterVolume.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/nicola02nb/BetterDiscord-Stuff/refs/heads/main/Plugins/BiggerStreamPreview/BiggerStreamPreview.plugin.js' -OutFile "$pluginDir\BiggerStreamPreview.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/QWERTxD/BetterDiscordPlugins/refs/heads/main/CallTimeCounter/CallTimeCounter.plugin.js' -OutFile "$pluginDir\CallTimeCounter.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/EpicGazel/DiscordFreeEmojis/refs/heads/master/DiscordFreeEmojis.plugin.js' -OutFile "$pluginDir\DiscordFreeEmojis.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/zerebos/BetterDiscordAddons/refs/heads/master/Plugins/DoNotTrack/DoNotTrack.plugin.js' -OutFile "$pluginDir\DoNotTrack.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/Farcrada/DiscordPlugins/refs/heads/master/Double-click-to-edit/DoubleClickToEdit.plugin.js' -OutFile "$pluginDir\DoubleClickToEdit.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Plugins/EditUsers/EditUsers.plugin.js' -OutFile "$pluginDir\EditUsers.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Plugins/GameActivityToggle/GameActivityToggle.plugin.js' -OutFile "$pluginDir\GameActivityToggle.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Plugins/ImageUtilities/ImageUtilities.plugin.js' -OutFile "$pluginDir\ImageUtilities.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/Strencher/BetterDiscordStuff/refs/heads/master/InvisibleTyping/InvisibleTyping.plugin.js' -OutFile "$pluginDir\InvisibleTyping.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/bepvte/bd-addons/refs/heads/main/plugins/NoSpotifyPause.plugin.js' -OutFile "$pluginDir\NoSpotifyPause.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Plugins/ReadAllNotificationsButton/ReadAllNotificationsButton.plugin.js' -OutFile "$pluginDir\ReadAllNotificationsButton.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/jaimeadf/BetterDiscordPlugins/refs/heads/build/SecretRingTone/dist/SecretRingTone.plugin.js' -OutFile "$pluginDir\SecretRingTone.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Plugins/ShowConnections/ShowConnections.plugin.js' -OutFile "$pluginDir\ShowConnections.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Plugins/SplitLargeMessages/SplitLargeMessages.plugin.js' -OutFile "$pluginDir\SplitLargeMessages.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/aarondoet/BetterDiscordStuff/refs/heads/master/Plugins/TypingIndicator/TypingIndicator.plugin.js' -OutFile "$pluginDir\TypingIndicator.plugin.js"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/QWERTxD/BetterDiscordPlugins/main/TypingUsersAvatars/TypingUsersAvatars.plugin.js' -OutFile "$pluginDir\TypingUsersAvatars.plugin.js"
+                    $themeDir = "$env:APPDATA\BetterDiscord\themes"
+                    New-Item -ItemType Directory $themeDir -Force | Out-Null
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Themes/DiscordRecolor/DiscordRecolor.theme.css' -OutFile "$themeDir\DiscordRecolor.theme.css"
+                    Invoke-WebRequest 'https://raw.githubusercontent.com/NYRI4/Discolored/refs/heads/master/support/discolored.theme.css' -OutFile "$themeDir\discolored.theme.css"
+                    git clone 'https://github.com/Zwylair/BetterDiscordAutoInstaller'
+                    New-Item -ItemType Directory "$env:USERPROFILE\Code\Scripts\Python\BetterDiscord-AutoInstaller" -Force | Out-Null
+                    Copy-Item '.\BetterDiscordAutoInstaller\*' -Destination "$env:USERPROFILE\Code\Scripts\Python\BetterDiscord-AutoInstaller" -Recurse -Force
+                    Remove-Item '.\BetterDiscordAutoInstaller' -Recurse -Force
+                    Set-Location "$env:USERPROFILE\Code\Scripts\Python\BetterDiscord-AutoInstaller"
+                    python -m venv venv
+                    .\venv\Scripts\Activate.ps1
+                    pip install -r requirements.txt
+                    Remove-Item '.\settings.json' -Force -ErrorAction SilentlyContinue
+                    python main.py
+                    deactivate
+                    Set-Location $PSScriptRoot
+                    if (Get-Command syncthing -ErrorAction SilentlyContinue) {
+                        syncthing cli config folders add --id '5rvta-4ecem' --label 'BetterDiscord' --path "$env:APPDATA\BetterDiscord"
+                    }
+                }
+                "Calibre" {
+                    if (scoop list | Select-String -Pattern 'calibre' -SimpleMatch) {
+                        $destinationPath = "$env:USERPROFILE\scoop\persist\calibre\Calibre Settings"
+                    } else {
+                        $destinationPath = "$env:APPDATA\calibre"
+                    }
+                    New-Item -ItemType Directory $destinationPath -Force | Out-Null
+                    Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\Calibre\icons-dark.rcc" -Destination $destinationPath -Force
+                }
+                "CEMU" {
+                    gdown $script:wiiUSavesGDriveID
+                    script:Expand-7zArchive '.\Wii-U.7z'
+                    Remove-Item '.\Wii-U.7z'
+                    if (scoop list | Select-String -Pattern 'cemu' -SimpleMatch) {
+                        New-Item -ItemType Directory "$env:USERPROFILE\scoop\persist\cemu\mlc01\usr\save" -Force | Out-Null
+                        Copy-Item '.\Wii-U\*' -Destination "$env:USERPROFILE\scoop\persist\cemu\mlc01\usr\save" -Recurse -Force
+                        if (Get-Command syncthing -ErrorAction SilentlyContinue) {
+                            Set-Content "$env:USERPROFILE\scoop\persist\cemu\mlc01\.stignore" 'usr/title'
+                            syncthing cli config folders add --id 'riwat-pjoqx' --label 'CEMU MLC' --path "$env:USERPROFILE\scoop\persist\cemu\mlc01"
+                        }
+                    } else {
+                        $cemu_path = es -i -n 1 -r '\.exe$' 'Cemu.exe'
+                        $savePath = "$(Split-Path $cemu_path)\mlc01\usr\save"
+                        New-Item -ItemType Directory $savePath -Force | Out-Null
+                        Copy-Item '.\Wii-U\*' -Destination "$savePath" -Force
+                        if (Get-Command syncthing -ErrorAction SilentlyContinue) {
+                            Set-Content "$(Split-Path $cemu_path)\mlc01\.stignore" 'usr/title'
+                            syncthing cli config folders add --id 'riwat-pjoqx' --label 'CEMU MLC' --path "$(Split-Path $cemu_path)\mlc01"
+                        }
+                    }
+                    Remove-Item '.\Wii-U' -Recurse -Force
+                }
+                "Chatterino2" {
+                    New-Item -ItemType Directory "$env:USERPROFILE\Audio\SFX\Notifications" -Force | Out-Null
+                    Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\Chatterino\default-notification.mp3" -Destination "$env:USERPROFILE\Audio\SFX\Notifications\Metroid-Data-Received.mp3" -Force
+                    Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\Chatterino\jerma-notification.wav" -Destination "$env:USERPROFILE\Audio\SFX\Notifications\Jerma-UWU.wav" -Force
+                    $settings = Get-Content "$(Split-Path $PSScriptRoot)\Cross-Platform\Chatterino\settings.json"
+                    $settings = $settings -replace 'jerma-notification-path-here', ("$env:USERPROFILE\Audio\SFX\Notifications\Jerma-UWU.wav" -replace '\\', '\\')
+                    $settings = $settings -replace 'default-notification-path-here', ("$env:USERPROFILE\Audio\SFX\Notifications\Metroid-Data-Received.wav" -replace '\\', '\\')
+                    $settings = $settings -replace 'imgur-client-id-here', $script:imgurClientID
+                    if (scoop list | Select-String -Pattern 'chatterino' -SimpleMatch) {
+                        $confPath = "$env:USERPROFILE\scoop\persist\chatterino\Settings"
+                    } else {
+                        $confPath = "$env:APPDATA\Chatterino2\Settings"
+                    }
+                    New-Item -ItemType Directory $confPath -Force | Out-Null
+                    Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\Chatterino\*" -Exclude 'default-notification.mp3', 'jerma-notification.wav' -Destination $confPath -Recurse -Force
+                    Set-Content "$confPath\settings.json" -Value $settings -Force
+                    if (Get-Command syncthing -ErrorAction SilentlyContinue) {
+                        Set-Content "$confPath\.stignore" '*.json.bkp-*`n*.json.??????'
+                        syncthing cli config folders add --id 'axgjf-shqtw' --label 'Chatterino' --path $confPath
+                    }
+                    script:Log 'Chatterino: If the log in button does nothing, manually log in with https://chatterino.com/client_login'
+                }
+                "Command Prompt Aliases" {
+                    New-Item -ItemType Directory "$env:USERPROFILE\.config\cmd" -Force | Out-Null
+                    $aliases = Get-Content "$PSScriptRoot\Configs\Command-Prompt\aliases.doskey"
+                    if (Get-Command pwsh -ErrorAction SilentlyContinue) {
+                        $aliases = $aliases -replace 'powershell-path-here', ((Get-Command pwsh).Source)
+                        $aliases = $aliases -replace '[A-Z]:\\Program Files', '%ProgramFiles%'
+                    } else {
+                        $aliases = $aliases -replace 'powershell-path-here', '%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe'
+                    }
+                    Set-Content "$env:USERPROFILE\.config\cmd\aliases.doskey" -Value $aliases
+                    New-Item 'HKCU:\Software\Microsoft\Command Processor' -Force | Out-Null
+                    Set-ItemProperty 'HKCU:\Software\Microsoft\Command Processor' -Name 'AutoRun' -Type String -Value 'doskey /MACROFILE="%USERPROFILE%\.config\cmd\aliases.doskey"' -Force
+                }
+                "Cyberpunk Waifus Font" {
+                    Invoke-WebRequest 'https://dl.dafont.com/dl/?f=cyberpunkwaifus' -OutFile '.\CyberpunkWaifus-Font.zip'
+                    Expand-Archive '.\CyberpunkWaifus-Font.zip' -DestinationPath '.' -Force
+                    Remove-Item '.\CyberpunkWaifus-Font.zip'
+                    script:Install-FontFile (Get-ChildItem '.\CyberpunkWaifus (1).ttf').FullName
+                    Remove-Item '.\CyberpunkWaifus (1).ttf' -Force
+                }
+                "DS4Windows" {
+                    if (scoop list | Select-String -Pattern 'ds4windows' -SimpleMatch) {
+                        $destinationPath = "$env:USERPROFILE\scoop\persist\ds4windows"
+                    } else {
+                        $destinationPath = "$env:APPDATA\DS4Windows"
+                    }
+                    New-Item -ItemType Directory $destinationPath -Force | Out-Null
+                    Copy-Item "$PSScriptRoot\Configs\DS4Windows\*" -Destination $destinationPath -Recurse -Force
+                    Start-Sleep -Seconds 1
+                    $ds4windows = es -i -n 1 -r '\.exe$' 'DS4Windows.exe'
+                    Start-Process $ds4windows
+                }
+                "Discord" {
+                    script:Log 'Discord: Get mobile app QR code scanner ready.'
+                    if ($script:selected -contains 'BetterDiscord') {
+                        Write-Host 'Please log into Discord, press enter to continue when done.'
+                        Start-Sleep -Seconds 12
+                        if (-not (Get-Process -Name 'discord' -ErrorAction SilentlyContinue)) {
+                            $discord = es -i -n 1 -r '\.exe$' 'Discord.exe'
+                            Start-Process powershell -Args $discord -WindowStyle Hidden
+                        }
+                        Read-Host
+                    }
+                }
+                "Discord OpenAsar" {
+                    & "$PSScriptRoot\Scripts\Install-Discord-OpenAsar.ps1"
+                }
+                "DisplayFusion" {
+                    Start-Process steam://install/227260
+                    Get-Content "$PSScriptRoot\Configs\DisplayFusion\Settings.reg"
+                    $settings = Get-Content "$PSScriptRoot\Configs\DisplayFusion\Settings.reg"
+                    $settings = $settings -replace 'userprofile-here', ($env:USERPROFILE -replace '\\', '\\')
+                    $settings = $settings -replace 'computer-name-here', $env:COMPUTERNAME
+                    $settings = $settings -replace 'taskbarx-path-here', ((es -i -n 1 -r '\.exe$' 'TaskbarX.exe') -replace '\\', '\\')
+                    $settings | Out-File '.\temp-DisplayFusion-Settings.reg'
+                    reg import '.\temp-DisplayFusion-Settings.reg' 2>$null
+                    Remove-Item '.\temp-DisplayFusion-Settings.reg' -Force
+                }
+                "Dolphin" {
+                    Invoke-WebRequest 'https://gist.github.com/dantheman213/182e1ac17174681996221c31f59f1135/archive/538946df058e315f34fe926eb42f766689bb8ddb.zip' -OutFile 'Dolphin-Xbox-Controller-Profiles.zip'
+                    Expand-Archive '.\Dolphin-Xbox-Controller-Profiles.zip'
+                    Remove-Item '.\Dolphin-Xbox-Controller-Profiles.zip'
+                    if (scoop list | Select-String -Pattern 'dolphin' -SimpleMatch) {
+                        $profilePath = "$env:USERPROFILE\scoop\persist\dolphin\User\Config\Profiles"
+                    } else {
+                        $profilePath = "$env:USERPROFILE\Documents\Dolphin Emulator\Config\Profiles"
+                    }
+                    New-Item -ItemType Directory "$profilePath\GCPad" -Force | Out-Null
+                    Copy-Item '.\Dolphin-Xbox-Controller-Profiles\*\Xbox Controller (GCPad).ini' -Destination "$profilePath\GCPad" -Force
+                    New-Item -ItemType Directory "$profilePath\Wiimote" -Force | Out-Null
+                    Copy-Item '.\Dolphin-Xbox-Controller-Profiles\*\Xbox Controller (Nunchuk+Wiimote).ini' -Destination "$profilePath\Wiimote" -Force
+                    Remove-Item '.\Dolphin-Xbox-Controller-Profiles' -Recurse -Force
+                }
+                "Duckstation" {
+                    $biosPath = "$env:USERPROFILE\scoop\apps\ps2-bios\current\BIOS"
+                    if (scoop list | Select-String -Pattern 'duckstation' -SimpleMatch) {
+                        Remove-Item "$env:USERPROFILE\scoop\apps\duckstation\current\bios"
+                        New-Item -ItemType SymbolicLink "$env:USERPROFILE\scoop\persist\duckstation\current\bios" -Target $biosPath -Force
+                    } else {
+                        New-Item -ItemType Directory "$env:USERPROFILE\Documents\DuckStation" -Force | Out-Null
+                        New-Item -ItemType SymbolicLink "$env:USERPROFILE\Documents\DuckStation\bios" -Target $biosPath -Force
+                    }
+                }
+                "Elden Ring Save Manager" {
+                    Copy-Item "$PSScriptRoot\Configs\Elden-Ring-Save-Manager\background.png" -Destination "$env:USERPROFILE\scoop\persist\eldenring-save-manager\data" -Force
+                    Copy-Item "$PSScriptRoot\Configs\Elden-Ring-Save-Manager\config.json" -Destination "$env:USERPROFILE\scoop\persist\eldenring-save-manager\data" -Force
+                    $config = Get-Content "$env:USERPROFILE\scoop\persist\eldenring-save-manager\data\config.json"
+                    $config = $config -replace 'gamedir-here', "$env:USERPROFILE\AppData\Roaming\EldenRing\$($script:steamID)"
+                    $config = $config -replace 'steamID-here', $script:steamID
+                    $config = $config -replace '\\', '/'
+                    $config | Set-Content "$env:USERPROFILE\scoop\persist\eldenring-save-manager\data\config.json"
+                    # https://stackoverflow.com/a/44151771
+                    git clone 'https://github.com/Bergbok/Elden-Ring-Saves.git' --depth 1
+                    Push-Location '.\Elden-Ring-Saves'
+                    git fetch --unshallow
+                    Copy-Item '.\save-files\*' -Destination "$env:USERPROFILE\scoop\persist\eldenring-save-manager\data\save-files" -Recurse -Force
+                    Pop-Location
+                    Remove-Item .\Elden-Ring-Saves -Recurse -Force
+                }
+                "Everything" {
+                    if (-not (Get-Process -Name 'Everything' -ErrorAction SilentlyContinue)) {
+                        everything
+                    }
+                    Stop-Process -Name 'everything' -Force -ErrorAction SilentlyContinue
+                    if (scoop list | Select-String -Pattern 'Name=everything;' -SimpleMatch) {
+                        Copy-Item "$PSScriptRoot\Configs\Everything\Everything.ini" -Destination "$env:USERPROFILE\scoop\persist\everything" -Force
+                    } else {
+                        New-Item -ItemType Directory "$env:APPDATA\Everything" -Force | Out-Null
+                        Copy-Item "$PSScriptRoot\Configs\Everything\Everything.ini" -Destination "$env:APPDATA\Everything" -Force
+                    }
+                    if (Get-Command everything -ErrorAction SilentlyContinue) {
+                        $everything = 'everything'
+                    } else {
+                        $driveRoots = Get-PSDrive -PSProvider FileSystem |  Select-Object -ExpandProperty Root | Where-Object { $_ -notlike '*Temp*' }
+                        foreach ($driveRoot in $driveRoots) {
+                            $everythingPath = "$($driveRoot)Program Files\Everything\Everything.exe"
+                            if (Test-Path $everythingPath) {
+                                $everything = $everythingPath
+                                break
+                            }
+                        }
+                    }
+                    Start-Process $everything -WindowStyle Minimized -Args '-install-service'
+                    Start-Sleep -Seconds 1; Stop-Process -Name 'everything' -Force
+                    Start-Process $everything -WindowStyle Minimized -Args '-install-client-service'
+                    Start-Sleep -Seconds 1; Stop-Process -Name 'everything' -Force
+                    Start-Process $everything -WindowStyle Minimized -Args '-install-run-on-system-startup'
+                    Start-Sleep -Seconds 1; Stop-Process -Name 'everything' -Force -ErrorAction SilentlyContinue
+                    Start-Process $everything -WindowStyle Minimized
+                }
+                "ExplorerPatcher" {
+                    Add-MpPreference -ExclusionPath "$env:PROGRAMFILES\ExplorerPatcher"
+                    Add-MpPreference -ExclusionPath "$env:APPDATA\ExplorerPatcher"
+                    Add-MpPreference -ExclusionPath "$env:WINDIR\dxgi.dll"
+                    Add-MpPreference -ExclusionPath "$env:WINDIR\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy"
+                    Add-MpPreference -ExclusionPath "$env:WINDIR\SystemApps\ShellExperienceHost_cw5n1h2txyewy"
+                    reg import "$PSScriptRoot\Configs\ExplorerPatcher\ExplorerPatcher.reg"
+                    scoop install bergbok/explorer-patcher
+                }
+                "f.lux" {
+                    Start-Sleep -Seconds 1
+                    $flux = es -i -n 1 -r '\.exe$' 'flux.exe'
+                    Start-Process $flux
+                    script:Log "f.lux: Click the limited color popup, but don't restart!"
+                }
+                "Firefox" {
+                    Start-Sleep -Seconds 1
+                    if (Get-Command firefox -ErrorAction SilentlyContinue) {
+                        $firefox = 'firefox'
+                    } else {
+                        $firefox = es -i -n 1 -r '\.exe$' 'firefox.exe'
+                    }
+                    Start-Process $firefox -Args '-setDefaultBrowser'
+                    Start-Sleep -Seconds 4.2
+                    Write-Host 'Setting up Arkenfox...'
+                    $latestRelease = Invoke-RestMethod -Uri 'https://api.github.com/repos/arkenfox/user.js/releases/latest'
+                    $zipUrl = $latestRelease.zipball_url
+                    Invoke-WebRequest $zipUrl -OutFile '.\Arkenfox.zip'
+                    Expand-Archive '.\Arkenfox.zip' -DestinationPath '.\Arkenfox' -Force
+                    Remove-Item '.\Arkenfox.zip' -Force
+                    Move-Item '.\Arkenfox\arkenfox-user.js*\*' -Destination '.\Arkenfox' -ErrorAction SilentlyContinue
+                    Remove-Item '.\Arkenfox\arkenfox-user.js*' -Recurse -Force
+                    Remove-Item '.\Arkenfox\prefsCleaner.sh'
+                    Remove-Item '.\Arkenfox\updater.sh'
+                    Remove-Item '.\Arkenfox\LICENSE.txt'
+                    Remove-Item '.\Arkenfox\README.md'
+                    Stop-Process -Name 'firefox' -ErrorAction SilentlyContinue
+                    $profileDirs = Get-ChildItem "$env:APPDATA\Mozilla\Firefox\Profiles" -Directory
+                    $profileFolder = "$(Split-Path $PSScriptRoot)\Cross-Platform\Firefox"
+                    $userChrome = Get-Content "$profileFolder\chrome\userChrome.css"
+                    $userChrome = $userChrome -replace 'phone-hostname-here', $script:phoneHostname
+                    $userChrome = $userChrome -replace 'pi-hostname-here', $script:piHostname
+                    foreach ($dir in $profileDirs) {
+                        Copy-Item "$profileFolder\*" -Destination $dir.FullName -Recurse -Force
+                        Copy-Item '.\Arkenfox\*' -Destination $dir.FullName -Recurse -Force
+                        Set-Location $dir.FullName
+                        New-Item -ItemType File '.\chrome\userChrome.css' -ErrorAction SilentlyContinue
+                        $userChrome | Set-Content '.\chrome\userChrome.css'
+                        if ((Test-Path '.\user.js') -and (Test-Path '.\prefs.js')) {
+                            Start-Process '.\prefsCleaner.bat' -Args '-unattended' -Wait -NoNewWindow
+                            Start-Process '.\updater.bat' -Args '-unattended' -Wait -NoNewWindow
+                        }
+                        $host.UI.RawUI.WindowTitle = 'Running setup'
+                        Set-Location $PSScriptRoot
+                    }
+                    Remove-Item '.\Arkenfox' -Recurse -Force
+                    try {
+                        Write-Host 'Downloading Bypass Paywalls Clean...'
+                        $bypassPaywallsPath = [System.IO.Path]::GetTempPath() + 'Bypass-Paywalls-Clean-Latest.xpi'
+                        Invoke-WebRequest 'https://gitflic.ru/project/magnolia1234/bpc_uploads/blob/raw?file=bypass_paywalls_clean-latest.xpi&inline=false' -OutFile $bypassPaywallsPath
+                    } catch {
+                        script:Log 'Firefox: Failed to download Bypass Paywalls Clean'
+                    }
+                    foreach ($file in (Get-ChildItem "$(Split-Path $PSScriptRoot)\Cross-Platform\Browser-Extensions" -Exclude 'FFZ.json' -Recurse -Attributes !Directory)) {
+                        $path = '"' + 'file://' + $file.FullName + '"'
+                        Write-Verbose "Opening $path with Firefox"
+                        Start-Process $firefox -Args "`-new-tab $path"
+                        Start-Sleep -Seconds 1
+                    }
+                    Start-Process $firefox -Args '-new-tab https://store.steampowered.com'
+                    Start-Sleep -Seconds 1
+                    Start-Process $firefox -Args '-new-tab https://www.twitch.tv/greatsphynx'
+                    Start-Sleep -Seconds 1
+                    Start-Process $firefox -Args '-new-tab https://adsbypasser.github.io/releases/adsbypasser.full.es7.user.js'
+                    Start-Sleep -Seconds 1
+                    Start-Process $firefox -Args '-new-tab https://raw.githubusercontent.com/Nuklon/Steam-Economy-Enhancer/master/code.user.js'
+                    Start-Sleep -Seconds 1
+                    Start-Process $firefox -Args '-new-tab https://github.com/pixeltris/TwitchAdSolutions/raw/refs/heads/master/video-swap-new/video-swap-new.user.js'
+                    Start-Sleep -Seconds 1
+                    Start-Process $firefox -Args '-new-tab https://codeberg.org/Amm0ni4/bypass-all-shortlinks-debloated/raw/branch/main/Bypass_All_Shortlinks.user.js'
+                    Start-Sleep -Seconds 1
+                    Start-Process $firefox -Args '-new-tab https://raw.githubusercontent.com/Bergbok/Configs/refs/heads/main/Cross-Platform/Browser-Extensions/FFZ.json'
+                    Start-Sleep -Seconds 1
+                    Start-Process $firefox -Args '-new-tab https://duckduckgo.com/settings'
+                    Start-Sleep -Seconds 1
+                    Start-Process $firefox -Args '-new-tab about:profiles'
+                    Start-Sleep -Seconds 1
+                    Start-Process $firefox -Args '-new-tab about:preferences#search'
+                    Start-Sleep -Seconds 4.2
+                    Start-Process $firefox -Args "-new-tab $bypassPaywallsPath"
+                    if (Get-Command syncthing -ErrorAction SilentlyContinue) {
+                        $folderPath = "$((Get-ChildItem "$env:APPDATA\Mozilla\Firefox\Profiles" | Select-Object -First 1).FullName)\chrome"
+                        syncthing cli config folders add --id 'xhfsq-nqpty' --label 'Firefox CSS' --path $folderPath --paused
+                        script:Log 'Syncthing: Double check that the Firefox CSS folder is correct -> about:profiles'
+                    }
+                    script:Log 'Firefox: Change search engine from Google.'
+                    script:Log 'Firefox: Import DuckDuckGo settings.'
+                    script:Log 'Firefox: Run Checkmarks (Ctrl+H)'
+                    script:Log 'Firefox: Customize toolbar: Remove "Account", "Save to Pocket" & "Import bookmarks". Pin Simple Tab Groups & uBlock Origin.'
+                    script:Log 'Firefox: Configure browser extensions: Augmented Steam, Bypass Paywalls Clean (Disable "Enable new sites by default"), Dark Reader, FFZ (manually enable 7TV, BTTV, Inline Tab-Completion & First Message Highlight add-ons), KeePassXC, LibRedirect, uBlock Origin, Violentmonkey.'
+                }
+                "Flameshot" {
+                    New-Item -ItemType Directory "$env:APPDATA\Flameshot" -Force | Out-Null
+                    Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\Flameshot\Flameshot.ini" -Destination "$env:APPDATA\Flameshot" -Force
+                    $flameshotini = Get-Content "$env:APPDATA\Flameshot\Flameshot.ini"
+                    $flameshotini = $flameshotini -replace 'screenshot-path-here', "$env:USERPROFILE\Pictures\Screenshots"
+                    $flameshotini = $flameshotini -replace 'imgur-client-id-here', $script:imgurClientID
+                    $flameshotini | Set-Content "$env:APPDATA\flameshot\Flameshot.ini" -Force
+                }
+                "Flash-enabled Chromium" {
+                    $apiUrl = 'https://gitlab.com/api/v4/projects/cleanflash%2Finstaller/releases'
+                    $response = Invoke-RestMethod -Uri $apiUrl
+                    $latestCleanFlashRelease = $response | Select-Object -First 1
+                    $latestCleanFlashDownload = $latestCleanFlashRelease.assets.links.direct_asset_url
+                    try {
+                        $tempPath = [System.IO.Path]::GetTempPath() + 'CleanFlashInstaller.exe'
+                        Invoke-WebRequest $latestCleanFlashDownload -OutFile $tempPath
+                        Start-Process $tempPath
+                    } catch {
+                        script:Log 'CleanFlash: Failed to download installer, opening download page in browser.'
+                        $firefox = es -i -n 1 -r '\.exe$' 'firefox.exe'
+                        if ($firefox) {
+                            Start-Process $firefox -Args "-new-tab $latestCleanFlashDownload"
+                        } else {
+                            Start-Process $latestCleanFlashDownload
+                        }
+                    }
+                }
+                "FreeTube" {
+                    New-Item -ItemType Directory "$env:APPDATA\FreeTube" -Force | Out-Null
+                    Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\FreeTube\settings.db" -Destination "$env:APPDATA\FreeTube" -Force
+                    gdown $script:freetubeDataGDriveID
+                    script:Expand-7zArchive '.\FreeTube.7z'
+                    Remove-Item '.\FreeTube.7z'
+                    Copy-Item '.\FreeTube\*' -Destination "$env:APPDATA\FreeTube" -Recurse -Force
+                    Remove-Item '.\FreeTube' -Recurse -Force
+                    if (Get-Command syncthing -ErrorAction SilentlyContinue) {
+                        Set-Content "$env:APPDATA\FreeTube\.stignore" '!/history.db`n!/playlists.db`n!/profiles.db`n!/settings.db`n*'
+                        syncthing cli config folders add --id 'kqgmu-jazfm' --label 'FreeTube' --path "$env:APPDATA\FreeTube"
+                    }
+                }
+                "FreeTube (Custom)" {
+                    & "$PSScriptRoot\Scripts\Build-Themed-FreeTube.ps1"
+                    Set-Location "$PSScriptRoot"
+                    New-Item -ItemType Directory "$env:APPDATA\FreeTube" -Force | Out-Null
+                    Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\FreeTube\settings.db" -Destination "$env:APPDATA\FreeTube" -Force
+                    gdown $script:freetubeDataGDriveID
+                    script:Expand-7zArchive '.\FreeTube.7z'
+                    Remove-Item '.\FreeTube.7z'
+                    Copy-Item '.\FreeTube\*' -Destination "$env:APPDATA\FreeTube" -Recurse -Force
+                    Remove-Item '.\FreeTube' -Recurse -Force
+                    if (Get-Command syncthing -ErrorAction SilentlyContinue) {
+                        Set-Content "$env:APPDATA\FreeTube\.stignore" '!/history.db`n!/playlists.db`n!/profiles.db`n!/settings.db`n*'
+                        syncthing cli config folders add --id 'kqgmu-jazfm' --label 'FreeTube' --path "$env:APPDATA\FreeTube"
+                    }
+                }
+                "G.Skill Trident Z Lighting Control" {
+                    Start-Sleep -Seconds 5
+                    Get-Process -Name 'G.SKILL Trident Z Lighting Control *.tmp' -ErrorAction SilentlyContinue | Stop-Process
+                    New-Item -ItemType Directory "$env:USERPROFILE\AppData\Roaming\G.SKILL\Trident Z Lighting Control" -Force | Out-Null
+                    Copy-Item "$PSScriptRoot\Configs\G.Skill-Trident-Z-Lighting-Control\config" -Destination "$env:USERPROFILE\AppData\Roaming\G.SKILL\Trident Z Lighting Control" -Force
+                }
+                "git" {
+                    git config --global user.email $script:gitEmail
+                    git config --global user.name $script:gitName
+                    if (-not (git config --global user.signingKey)) {
+                        $gpg = (Get-Command gpg -ErrorAction SilentlyContinue).Source
+                        if (-not $gpg) { $gpg = es -i -n 1 -r '\.exe$' 'gpg.exe' }
+                        if ($gpg) {
+                            git config --global gpg.program $gpg
+                            git config --global commit.gpgSign true
+                            git config --global tag.gpgSign true
+                            $content = "%echo Generating GPG key...
+                                Key-Type: $gpgKeyType
+                                Key-Length: $gpgKeyLength
+                                Key-Curve: $gpgKeyCurve
+                                Subkey-Type: $gpgSubkeyType
+                                Subkey-Length: $gpgSubkeyLength
+                                Subkey-Curve: $gpgSubkeyCurve
+                                Passphrase: $gpgPassphrase
+                                Name-Real: $gpgNameReal
+                                Name-Email: $gpgNameEmail
+                                Expire-Date: $gpgExpireDate
+                                %commit
+                                %echo done"
+                            New-Item .\gpg.temp -ItemType File -Value $content -Force | Out-Null
+                            $gpgOutput = & $gpg --batch --generate-key .\gpg.temp 2>&1
+                            $gpgOutput = $gpgOutput -join '`n'
+                            if ($gpgOutput -match '([A-Z0-9])+(?=\.rev)') {
+                                $keyFingerprint = $matches[0]
+                                git config --global user.signingkey $keyFingerprint
+                                $pubkey = & $gpg --export --armor $keyFingerprint
+                                script:Log "GPG key:`n$pubkey"
+                                Set-Clipboard $pubkey
+                                Start-Process 'https://github.com/settings/gpg/new'
+                            }
+                            Remove-Item .\gpg.temp -Force
+                        } else {
+                            Write-Warning "gpg.exe not found, couldn't set up git gpg signing"
+                        }
+                    }
+                    if (Get-Command code -ErrorAction SilentlyContinue) {
+                        git config --global core.editor 'code --wait'
+                    } else {
+                        script:Log 'git: Could not set core.editor to VSCode.'
+                    }
+                }
+                "Gpg4win" {
+                    $gpg = (Get-Command gpg -ErrorAction SilentlyContinue).Source
+                    if (-not $gpg) { $gpg = es -i -n 1 -r '\.exe$' 'gpg.exe' }
+                    Start-Process $gpg -Args '--daemon' -WindowStyle Hidden
+                    $keyboxd = (Get-Command keyboxd -ErrorAction SilentlyContinue).Source
+                    if (-not $keyboxd) { $keyboxd = es -i -n 1 -r '\.exe$' 'keyboxd.exe' }
+                    Start-Process $keyboxd -Args '--daemon' -WindowStyle Hidden
+                }
+                "HypnOS Cursor" {
+                    gdown $script:hypnosCursorGDriveID
+                    script:Expand-7zArchive '.\HypnOS-Cursor.7z'
+                    Remove-Item .\HypnOS-Cursor.7z
+                    script:Install-Cursor (Get-ChildItem '.\HypnOS-Cursor\HypnOS-1x\install.inf').FullName
+                    script:Install-Cursor (Get-ChildItem '.\HypnOS-Cursor\HypnOS-2x\install.inf').FullName
+                    Start-Sleep -Seconds 1
+                    Remove-Item .\HypnOS-Cursor -Recurse
+                    Start-Process 'rundll32.exe' -Args 'shell32.dll,Control_RunDLL main.cpl,,1'
+                }
+                "iCloud" {
+                    $shell = New-Object -ComObject Shell.Application
+                    ($shell.Namespace('shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}').Items() | Where-Object {$_.Path -eq "$env:USERPROFILE\iCloudDrive"}).InvokeVerb('unpinfromhome')
+                    ($shell.Namespace('shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}').Items() | Where-Object {$_.Name -eq 'iCloud Photos'}).InvokeVerb('unpinfromhome')
+                    Remove-Item 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{F0D63F85-37EC-4097-B30D-61B4A8917118}' -Force
+                    script:Log 'iCloud: If you get "Your computer is missing Media features." even though it is installed you may need to use Orca to modify iCloud64.msi (remove the "Installed OR MS_MEDIAFEATUREPACK_INSTALLED OR IGNORE_MEDIAFEATUREPACK" condition from the LaunchCondition table). You can find iCloud64.msi in TEMP while the installer is running.'
+                }
+                "iCue" {
+                    $tempPath = [System.IO.Path]::GetTempPath()
+                    Copy-Item "$PSScriptRoot\Configs\iCUE\*" -Destination $tempPath -Force
+                    $defaultProfile = Get-Content "$tempPath\Default.cueprofile"
+                    $defaultProfile = $defaultProfile -replace 'userprofile-here', $env:USERPROFILE
+                    $defaultProfile = $defaultProfile -replace 'windir-here', $env:WINDIR
+                    $defaultProfile | Set-Content "$tempPath\Default.cueprofile"
+                    script:Log "iCUE: Import profiles from $tempPath"
+                }
+                "ImageGlass" {
+                    script:Log 'ImageGlass: Set as default photo viewer in settings -> ms-settings:defaultapps'
+                    Start-Process ms-settings:defaultapps
+                }
+                "KeePassXC" {
+                    Start-Sleep -Seconds 1
+                    $keepassxc = es -i -n 1 -r '\.exe$' 'KeePassXC.exe'
+                    Start-Process $keepassxc
+                    New-Item -ItemType Directory "$env:USERPROFILE\Documents\KeePass" -Force | Out-Null
+                    if (Get-Command syncthing -ErrorAction SilentlyContinue) {
+                        Set-Content "$env:USERPROFILE\Documents\KeePass\.stignore" 'desktop.ini'
+                        syncthing cli config folders add --id 'fxxre-9vvua' --label 'KeePass' --path "$env:USERPROFILE\Documents\KeePass"
+                    }
+                    script:Log 'KeePassXC: Enable auto startup, browser integration, and pair with browser extension.'
+                }
+                "khinsider.py" {
+                    git clone 'https://github.com/obskyr/khinsider.git' "$env:USERPROFILE\Code\Scripts\Python\khinsiderdl"
+                    Remove-Item "$env:USERPROFILE\Code\Scripts\Python\khinsiderdl\.gitignore" -ErrorAction SilentlyContinue
+                    Remove-Item "$env:USERPROFILE\Code\Scripts\Python\khinsiderdl\README.md" -ErrorAction SilentlyContinue
+                }
+                "Lumafly" {
+                    Start-Process "$env:USERPROFILE\scoop\apps\lumafly\current\Lumafly.exe" -Args 'scarab://modpack/mPP6enEq'
+                }
+                "Media Feature Pack" {
+                    Add-WindowsCapability -Online -Name Media.MediaFeaturePack
+                }
+                "Microsoft Activation Scripts" {
+                    Start-Process powershell -WindowStyle Hidden -Args "Invoke-RestMethod 'https://get.activated.win' | Invoke-Expression"
+                    script:Log 'MAS: Use option 1, keep window open if you selected Microsoft Office.'
+                }
+                "Microsoft Office" {
+                    Invoke-WebRequest 'https://officecdn.microsoft.com/pr/wsus/setup.exe' -OutFile '.\setup.exe'
+                    Start-Process '.\setup.exe' -Args "/configure '$PSScriptRoot\Configs\Microsoft-Office\Configuration.xml'" -Wait
+                    Remove-Item '.\setup.exe'
+                }
+                "Minecraft Font" {
+                    Invoke-WebRequest 'https://dl.dafont.com/dl/?f=minecraft' -OutFile '.\Minecraft-Font.zip'
+                    Expand-Archive '.\Minecraft-Font.zip' -DestinationPath '.' -Force
+                    Remove-Item '.\Minecraft-Font.zip'
+                    script:Install-FontFile (Get-ChildItem '.\Minecraft.ttf').FullName
+                    Remove-Item '.\Minecraft.ttf' -Force
+                }
+                "Mp3tag" {
+                    gdown $script:mp3tagConfigGDriveID
+                    script:Expand-7zArchive '.\Mp3tag.7z'
+                    Remove-Item '.\Mp3tag.7z'
+                    if (scoop list | Select-String -Pattern 'mp3tag' -SimpleMatch) {
+                        Copy-Item '.\Mp3tag\*' -Destination "$env:USERPROFILE\scoop\persist\mp3tag" -Recurse -Force
+                        Remove-Item "$env:USERPROFILE\scoop\apps\mp3tag\current\data\actions\*"
+                        Copy-Item "$PSScriptRoot\Configs\Mp3tag\*" -Destination "$env:USERPROFILE\scoop\apps\mp3tag\current" -Recurse -Force
+                    } else {
+                        New-Item -ItemType Directory "$env:APPDATA\Mp3tag" -Force | Out-Null
+                        Copy-Item '.\Mp3tag\*' -Destination "$env:APPDATA\Mp3tag" -Recurse -Force
+                        Copy-Item "$PSScriptRoot\Configs\Mp3tag\*" -Destination "$env:APPDATA\Mp3tag" -Recurse -Force
+                    }
+                    Remove-Item '.\Mp3tag' -Recurse -Force
+                }
+                "Network Sharing" {
+                    Set-NetFirewallRule -DisplayGroup 'Network Discovery' -Enabled True
+                    Set-NetFirewallRule -DisplayGroup 'File and Printer Sharing' -Enabled True
+                    shrpubw
+                }
+                "NoPayStation" {
+                    Copy-Item "$PSScriptRoot\Configs\NoPayStation\npsSettings.dat" -Destination "$env:USERPROFILE\scoop\persist\nopaystation"
+                    script:Log "NoPayStation: You need to manually set download location and pkg2zip path to '$(scoop prefix pkg2zip)\pkg2zip.exe' in settings."
+                }
+                "Notepad++" {
+                    New-Item -ItemType Directory "$env:USERPROFILE\scoop\persist\notepadplusplus\cloud" -Force | Out-Null
+                    Copy-Item "$PSScriptRoot\Configs\Notepad++\*" -Destination "$env:USERPROFILE\scoop\persist\notepadplusplus\cloud" -Force -Recurse
+                    script:Log 'Notepad++: You need to manually import settings by going to Settings -> Preferences -> Cloud & Link and setting the path to: "$env:USERPROFILE\scoop\persist\notepadplusplus\cloud" and set up file associations (launch as admin).'
+                }
+                "NVIDIA Drivers" {
+                    Start-Process 'https://www.nvidia.com/en-us/drivers'
+                }
+                "OBS Studio" {
+                    if (scoop list | Select-String -Pattern 'obs-studio') {
+                        $confPath = "$env:USERPROFILE\scoop\persist\obs-studio\config\obs-studio"
+                    } else {
+                        $confPath = "$env:APPDATA\obs-studio"
+                    }
+                    New-Item -ItemType Directory -Path $confPath -Force | Out-Null
+                    New-Item -ItemType Directory -Path "$confPath\basic" -Force | Out-Null
+                    New-Item -ItemType Directory -Path "$confPath\scripts" -Force | Out-Null
+                    Invoke-Webrequest 'https://gitlab.com/albinou/obs-scripts/raw/master/datetime.lua' -OutFile "$confPath\scripts\datetime-digital-clock.lua"
+                    Invoke-Webrequest 'https://github.com/cg2121/obs-advanced-timer/releases/latest/download/advanced-timer.lua' -OutFile "$confPath\scripts\advanced-timer.lua"
+                    Invoke-Webrequest 'https://obsproject.com/forum/resources/obsplay-nvidia-shadowplay-alternative.1326/download' -OutFile "$confPath\scripts\OBSPlay.lua"
+                    Invoke-Webrequest 'https://raw.githubusercontent.com/obsproject/obs-studio/refs/heads/master/UI/frontend-plugins/frontend-tools/data/scripts/instant-replay.lua' -OutFile "$confPath\scripts\instant-replay.lua"
+                    Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\OBS-Studio\*" -Destination "$confPath\basic" -Recurse -Force
+                    $scenes = Get-Content "$confPath\basic\scenes\Main.json"
+                    $scenes = $scenes -replace 'advanced-timer-script-path-here', ("$confPath\scripts\advanced-timer.lua" -replace '\\', '/')
+                    $scenes = $scenes -replace 'datetime-script-path-here', ("$confPath\scripts\datetime-digital-clock.lua" -replace '\\', '/')
+                    $scenes = $scenes -replace 'obsplay-script-path-here', ("$confPath\scripts\OBSPlay.lua" -replace '\\', '/')
+                    $scenes = $scenes -replace 'instant-replay-script-path-here', ("$confPath\scripts\instant-replay.lua" -replace '\\', '/')
+                    $scenes = $scenes -replace 'save-path-here', ("$env:USERPROFILE\Videos" -replace '\\', '/')
+                    $scenes | Set-Content "$confPath\basic\scenes\Main.json"
+                    $basic = Get-Content "$confPath\basic\profiles\Main\basic.ini"
+                    $basic = $basic -replace 'save-path-here', ("$env:USERPROFILE\Videos" -replace '\\', '/')
+                    $basic | Set-Content "$confPath\basic\profiles\Main\basic.ini"
+                }
+                "Obsidian" {
+                    New-Item -ItemType Directory "$env:USERPROFILE\Documents\Obsidian" -Force | Out-Null
+                    Start-Process 'https://github.com/Bergbok/Obsidian-Vault'
+                    if (Get-Command syncthing -ErrorAction SilentlyContinue) {
+                        syncthing cli config folders add --id 'd4xqu-hqmrt' --label 'Obsidian' --path "$env:USERPROFILE\Documents\Obsidian"
+                    }
+                }
+                "oh-my-posh" {
+                    New-Item -ItemType Directory "$env:USERPROFILE\Themes\oh-my-posh" -Force | Out-Null
+                    Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\oh-my-posh\*" -Destination "$env:USERPROFILE\Themes\oh-my-posh" -Force
+                }
+                "Open-Shell" {
+                    New-Item -ItemType Directory "$env:APPDATA\OpenShell\Pinned" -Force | Out-Null
+                    $shortcuts = @{
+                        'calibre.lnk' = @{ target = 'calibre.exe'; scoopName = 'calibre' }
+                        'DS4Windows.lnk' = @{ target = 'DS4Windows.exe'; scoopName = 'ds4windows-maintained' }
+                        'Emulators\ares.lnk' = @{ target = 'ares.exe'; scoopName = 'ares' }
+                        'Emulators\CEMU.lnk' = @{ target = 'Cemu.exe'; scoopName = 'cemu' }
+                        'Emulators\Dolphin.lnk' = @{ target = 'Dolphin.exe'; scoopName = 'dolphin' }
+                        'Emulators\DuckStation.lnk' = @{ target = 'duckstation*.exe'; scoopName = 'duckstation' }
+                        'Emulators\Lime3DS.lnk' = @{ target = 'lime3ds.exe'; scoopName = 'lime3ds' }
+                        'Emulators\melonDS.lnk' = @{ target = 'melonDS.exe'; scoopName = 'melonds' }
+                        'Emulators\PCSX2.lnk' = @{ target = 'pcsx2-qt.exe'; scoopName = 'pcsx2' }
+                        'Emulators\PPSSPP.lnk' = @{ target = 'PPSSPPWindows64.exe'; scoopName = 'ppsspp' }
+                        'Emulators\RPCS3.lnk' = @{ target = 'rpcs3.exe'; scoopName = 'rpcs3' }
+                        'Emulators\Ruffle.lnk' = @{ target = 'ruffle.exe'; scoopName = 'ruffle' }
+                        'Emulators\Ryujinx.lnk' = @{ target = 'Ryujinx.exe'; scoopName = 'ryujinx' }
+                        'Emulators\SameBoy.lnk' = @{ target = 'sameboy.exe'; scoopName = 'sameboy' }
+                        'Emulators\Vita3K.lnk' = @{ target = 'Vita3K.exe'; scoopName = 'vita3k' }
+                        'ER Save Manager.lnk' = @{ target = 'SaveManager.exe'; scoopName = 'secureuxtheme' }
+                        'f.lux.lnk' = @{ target = 'flux.exe'; scoopName = 'f.lux' }
+                        'GIF Cam.lnk' = @{ target = 'GifCam.exe'; scoopName = 'gifcam' }
+                        'HWMonitor.lnk' = @{ target = 'HWMonitor.exe'; scoopName = 'hwmonitor' }
+                        'Libre HWMonitor.lnk' = @{ target = 'LibreHardwareMonitor.exe'; scoopName = 'librehardwaremonitor' }
+                        'Open Shell\Classic Explorer Settings.lnk' = @{ target = 'ClassicExplorerSettings.exe' }
+                        'Open Shell\Start Menu Settings.lnk' = @{ target = 'StartMenu.exe'; args = '-settings' }
+                        'PowerToys.lnk' = @{ target = 'PowerToys.Settings.exe'; scoopName = 'powertoys' }
+                        'SecureUxTheme.lnk' = @{ target = 'ThemeTool.exe'; scoopName = 'secureuxtheme' }
+                        'Task Scheduler.lnk' = @{ target = "$env:WINDIR\system32\taskschd.msc"; args = '/s' }
+                        'TaskbarX.lnk' = @{ target = 'TaskbarX.exe'; scoopName = 'taskbarx' }
+                    }
+                    foreach ($entry in $shortcuts.Keys) {
+                        $shortcut = $shortcuts[$entry]
+                        $targetPath = script:Get-ShortcutPath $shortcut.target -scoopName $shortcut.scoopName
+                        script:New-Shortcut -linkPath "$env:APPDATA\OpenShell\Pinned\$entry" -targetPath $targetPath -arguments $shortcut.args
+                    }
+                    Invoke-WebRequest 'https://i.imgur.com/Dc7ljTj.png' -OutFile "$env:USERPROFILE\Pictures\Transparent.png"
+                    Start-Process (es -i -n 1 -r '\.exe$' 'ClassicExplorerSettings.exe') -Args "-xml '$PSScriptRoot\Configs\Open-Shell\Explorer Settings.xml'"
+                    Start-Process (es -i -n 1 -r '\.exe$' 'StartMenu.exe') -Args "-xml '$PSScriptRoot\Configs\Open-Shell\Menu Settings.xml'"
+                }
+                "PCSX2" {
+                    if (scoop list | Select-String -Pattern 'pcsx2' -SimpleMatch) {
+                        $biosPath = "$env:USERPROFILE\scoop\apps\ps2-bios\current\BIOS"
+                        $destinationPath = "$env:USERPROFILE\scoop\persist\pcsx2\bios"
+                        Remove-Item $destinationPath -Recurse -Force
+                        New-Item -ItemType SymbolicLink $destinationPath -Target $biosPath -Force
+                    }
+                }
+                "PeaZip" {
+                    $conf = "$(Split-Path $PSScriptRoot)\Cross-Platform\Configs\PeaZip\conf.txt"
+                    if (scoop list | Select-String -Pattern 'peazip' -SimpleMatch) {
+                        $destinationPath = "$env:USERPROFILE\scoop\persist\peazip\res\conf"
+                    } else {
+                        $destinationPath = "$env:APPDATA\PeaZip"
+                    }
+                    New-Item -ItemType Directory $destinationPath -Force | Out-Null
+                    Copy-Item $conf -Destination $destinationPath -Recurse -Force
+                    script:Log 'PeaZip: Set extended mode for "Browse path with PeaZip" with ShellMenuView.'
+                }
+                "Photoshop" {
+                    Start-Process $script:adobePhotoshopURL
+                    script:Log 'Photoshop: Be sure to disable CCXProcess in Task Manager -> Startup.'
+                    script:Log 'Photoshop: Alt+Shift+Ctrl+K -> File -> Quick Export as PNG'
+                }
+                "PowerShell Update" {
+                    Start-Process powershell -Args 'Update-Help'
+                }
+                "PowerShell Profile" {
+                    if (!(Test-Path $PROFILE)) {
+                        New-Item -ItemType File $PROFILE -Force | Out-Null
+                    }
+                    Copy-Item "$PSScriptRoot\Configs\PowerShell\Microsoft.PowerShell_profile.ps1" -Destination $PROFILE -Force
+                    New-Item -ItemType Directory "$env:USERPROFILE\Themes\oh-my-posh" -Force | Out-Null
+                    Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\oh-my-posh\*" -Destination "$env:USERPROFILE\Themes\oh-my-posh" -Force
+                    $profileContent = Get-Content $PROFILE
+                    $modifiedContent = $profileContent -replace 'theme-path-here', "$env:USERPROFILE\Themes\oh-my-posh\current.omp.json"
+                    $pwshVersion = Get-Command pwsh -ErrorAction SilentlyContinue | Select-Object -Property Version
+                    if ($pwshVersion.Version.Major -ge 7) {
+                        if (!(Test-Path "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1")) {
+                            New-Item -ItemType File "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Force | Out-Null
+                        }
+                        $modifiedContent = $modifiedContent -replace 'powershell-here', 'pwsh.exe'
+                        $modifiedContent | Set-Content "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+                        $modifiedContent | Set-Content "$env:USERPROFILE\Documents\PowerShell\Microsoft.VSCode_profile.ps1"
+                    } else {
+                        $modifiedContent = $modifiedContent -replace 'powershell-here', 'powershell.exe'
+                    }
+                    $modifiedContent | Set-Content $PROFILE -Force
+                    $modifiedContent | Set-Content "$(Split-Path $PROFILE)\Microsoft.VSCode_profile.ps1" -Force
+                }
+                "PowerToys" {
+                    New-Item -ItemType Directory "$env:LOCALAPPDATA\Microsoft\PowerToys" -Force | Out-Null
+                    Copy-Item "$PSScriptRoot\Configs\PowerToys\*" -Destination "$env:LOCALAPPDATA\Microsoft\PowerToys" -Recurse -Force
+                    $runsettings = Get-Content "$PSScriptRoot\Configs\PowerToys\PowerToys Run\settings.json"
+                    $runsettings = $runsettings -replace 'runplugins-here', ((es -i -n 1 -r 'RunPlugins$' /ad 'PowerToys\RunPlugins') -replace '\\', '\\')
+                    $runsettings | Set-Content "$env:LOCALAPPDATA\Microsoft\PowerToys\PowerToys Run\settings.json"
+                }
+                "Premiere Pro" {
+                    Start-Process $script:adobePremiereProURL
+                    script:Log 'Photoshop: Be sure to disable CCXProcess in Task Manager -> Startup.'
+                }
+                "ps2exe" {
+                    New-Item -ItemType Directory "$env:USERPROFILE\Code\Scripts\ps2exe" -Force | Out-Null
+                    Add-MpPreference -ExclusionPath "$env:USERPROFILE\Code\Scripts\ps2exe"
+                }
+                "Python" {
+                    script:Update-EnvPath
+                    python -m ensurepip --upgrade
+                    python -m pip install --upgrade pip
+                }
+                "qBittorrent" {
+                    script:Log 'qBittorrent: Disable "Check for program updates" in settings.'
+                }
+                "qBittorrent Enhanced" {
+                    script:Log 'qBittorrent: Disable "Check for program updates" in settings.'
+                }
+                "QTTabBar" {
+                    Enable-WindowsOptionalFeature -Online -FeatureName 'NetFx3' -NoRestart
+                    Copy-Item "$PSScriptRoot\Configs\QTTabBar\QTTabBarTab.png" "$env:USERPROFILE\Pictures\System" -Force
+                    $settings = Get-Content "$PSScriptRoot\Configs\QTTabBar\QTTabBarSettings.reg"
+                    $settings = $settings -replace 'tab-image-here', ("$env:USERPROFILE\Pictures\System\QTTabBarTab.png" -replace '\\', '\\')
+                    $settings = $settings -replace 'userprofile-here', ("$env:USERPROFILE" -replace '\\', '\\')
+                    $plugins = @(
+                        'QTWindowManager',
+                        'TurnOffRepeat',
+                        'CreateNewItem',
+                        'QTFileTools',
+                        'QTQuick',
+                        'Memo',
+                        'QTClock',
+                        'ShowStatusBar',
+                        'QTViewModeButton',
+                        'FolderTreeButton',
+                        'MigemoLoader',
+                        'ActivateByMouseHover'
+                    )
+                    $foundPluginPaths = @()
+                    foreach ($plugin in $plugins) {
+                        $pluginPath = es -i -n 1 -r '\.dll$' "$plugin.dll"
+                        if ($pluginPath) {
+                            $foundPluginPaths += $pluginPath
+                        }
+                    }
+                    for ($i = 0; $i -lt $foundPluginPaths.Count; $i++) {
+                        $settings += '"' + "$i" + '"="' + ($foundPluginPaths[$i] -replace '\\', '\\') + '"'
+                    }
+                    $settings | Out-File '.\temp-QTTabBar-Settings.reg'
+                    reg import '.\temp-QTTabBar-Settings.reg' 2>$null
+                    Remove-Item '.\temp-QTTabBar-Settings.reg'
+                    script:Log 'QTTabBar: If appearance is off, go to Options -> Appearance and set tab image to "$env:USERPROFILE\Pictures\System\QTTabBarTab.png", disable "Solid color" under Toolbar Background and change text color/font.'
+                }
+                "Rainmeter" {
+                    git clone 'https://github.com/JoeSiu/RainmeterAutoLayout.git'
+                    $autolayoutVars = Get-Content .\RainmeterAutoLayout\AutoLayout\@Resources\Variables.inc
+                    $autolayoutVars = $autolayoutVars -replace 'LayoutMap=".*"', 'LayoutMap="4695x3324=Custom|3840x2160=CustomTV|3840x3240=CustomTV|3840x1182=CustomCENTER_DELL+LEFT_SAMSUNG|3840x1245=CustomTV_DISABLED|"'
+                    $autolayoutVars | Set-Content .\RainmeterAutoLayout\AutoLayout\@Resources\Variables.inc
+                    New-Item -ItemType Directory "$env:USERPROFILE\Themes\Rainmeter" -Force | Out-Null
+                    Copy-Item '.\RainmeterAutoLayout\AutoLayout' -Destination "$env:USERPROFILE\Themes\Rainmeter" -Recurse -Force
+                    Remove-Item '.\RainmeterAutoLayout' -Recurse -Force
+                    $tempPath = [System.IO.Path]::GetTempPath() + 'Rainmeter'
+                    Copy-Item "$PSScriptRoot\Configs\Rainmeter" -Destination (Split-Path $tempPath) -Exclude 'README.md, Skins' -Recurse -Force
+                    $inis = Get-ChildItem "$tempPath" -Name 'Rainmeter.ini' -Recurse
+                    foreach ($ini in $inis) {
+                        $iniContent = Get-Content "$tempPath\$ini"
+                        $iniContent = $iniContent -replace 'skin-path-here', "$env:USERPROFILE\Themes\Rainmeter"
+                        $iniContent = $iniContent -replace 'skin-path-here', ((es -i -n 1 -r '\.exe$' 'Code.exe') -replace 'vscode\\[\d\.]+', 'vscode\current')
+                        $iniContent | Set-Content "$tempPath\$ini" -Force
+                    }
+                    Invoke-WebRequest 'https://github.com/keifufu/WebNowPlaying-Rainmeter/releases/latest/download/WebNowPlaying-x64.dll' -OutFile '.\WebNowPlaying.dll'
+                    if (Test-Path "$env:APPDATA\Rainmeter") {
+                        Copy-Item "$tempPath\Rainmeter.ini" -Destination "$env:APPDATA\Rainmeter" -Force
+                        New-Item -ItemType Directory "$env:APPDATA\Rainmeter\Plugins" -Force | Out-Null
+                        Copy-Item '.\WebNowPlaying.dll' -Destination "$env:APPDATA\Rainmeter\Plugins" -Force
+                        Copy-Item "$tempPath\Layouts" -Destination "$env:APPDATA\Rainmeter" -Recurse -Force
+                    }
+                    if (scoop list | Select-String -Pattern 'rainmeter' -SimpleMatch) {
+                        Copy-Item "$tempPath\Rainmeter.ini" -Destination "$env:USERPROFILE\scoop\persist\rainmeter" -Force
+                        Copy-Item '.\WebNowPlaying.dll' -Destination "$env:USERPROFILE\scoop\persist\rainmeter\Plugins" -Force
+                        Copy-Item "$tempPath\Layouts" -Destination "$env:USERPROFILE\scoop\persist\rainmeter" -Recurse -Force
+                    }
+                    Remove-Item '.\WebNowPlaying.dll'
+                    Remove-Item $tempPath -Recurse -Force
+                    Copy-Item "$PSScriptRoot\Configs\Rainmeter\Skins\*" -Destination "$env:USERPROFILE\Themes\Rainmeter" -Recurse -Force
+                    $weatherConfPath = "$env:USERPROFILE\Themes\Rainmeter\ASTROWeather\@Resources\Variables.inc"
+                    $weathersettings = (Get-Content $weatherConfPath) -replace 'api-key-here', $script:rainmeterWeatherAPIKey
+                    $weathersettings | Set-Content $weatherConfPath
+                    script:Log "Rainmeter: Set latitude and longitude in $weatherConfPath using https://www.mapcoordinates.net"
+                    Start-Process notepad $weatherConfPath
+                    Start-Process 'https://www.mapcoordinates.net'
+                    Start-Process 'https://in-the-sky.org/data/planets.php'
+                }
+                "RPCS3" {
+                    gdown $script:ps3SavesGDriveID
+                    script:Expand-7zArchive '.\PS3.7z'
+                    Remove-Item '.\PS3.7z'
+                    if (scoop list | Select-String -Pattern 'rpcs3' -SimpleMatch) {
+                        $savePath = "$env:USERPROFILE\scoop\persist\rpcs3\dev_hdd0\home\00000001\savedata"
+                        New-Item -ItemType Directory $savePath -Force | Out-Null
+                        Copy-Item '.\PS3\*' -Destination $savePath -Recurse -Force
+                        if (Get-Command syncthing -ErrorAction SilentlyContinue) {
+                            syncthing cli config folders add --id 'pacu9-xjxpf' --label 'RPSC3' --path $savePath
+                        }
+                    } else {
+                        $rpcs3_path = es -i -n 1 -r '\.exe$' 'rpcs3.exe'
+                        $savePath = "$(Split-Path $rpcs3_path)\dev_hdd0\home\00000001\savedata"
+                        New-Item -ItemType Directory $savePath -Force | Out-Null
+                        Copy-Item '.\PS3\*' -Destination "$savePath" -Recurse -Force
+                        if (Get-Command syncthing -ErrorAction SilentlyContinue) {
+                            syncthing cli config folders add --id 'pacu9-xjxpf' --label 'RPSC3' --path $savePath
+                        }
+                    }
+                    Remove-Item '.\PS3' -Recurse -Force
+                    script:Log 'RPCS3: File -> Install Firmware -> "$env:USERPROFILE\scoop\apps\ps3-system-software\current\PS3UPDAT.PUP"'
+                    script:Log 'RPSC3: Disable shader compiling popups -> Config -> Emulator -> Show * compilation hint'
+                }
+                "Ryujinx" {
+                    gdown $script:switchFilesGDriveID
+                    script:Expand-7zArchive '.\Switch.7z'
+                    Remove-Item '.\Switch.7z'
+                    $jsonFiles = Get-ChildItem -Path '.\Switch' -Filter '*.json' -Recurse
+                    foreach ($file in $jsonFiles) {
+                        $fileContent = Get-Content $file.FullName
+                        $fileContent = $fileContent -replace 'roms-path-here', "$($env:USERPROFILE -replace '\\', '\\')\\Games\\ROMs\\Switch"
+                        $fileContent | Set-Content $file.FullName
+                    }
+                    if (scoop list | Select-String -Pattern 'ryujinx' -SimpleMatch) {
+                        $confPath = "$env:USERPROFILE\scoop\persist\ryujinx\portable"
+                        New-Item -ItemType Directory -Path "$env:USERPROFILE\scoop\persist\ryujinx-mirror" -Force | Out-Null
+                        New-Item -ItemType Directory -Path "$env:USERPROFILE\scoop\persist\ryujinx-greemdev" -Force | Out-Null
+                        New-Item -ItemType SymbolicLink "$env:USERPROFILE\scoop\persist\ryujinx-mirror\portable" -Target $confPath -Force | Out-Null
+                        New-Item -ItemType SymbolicLink "$env:USERPROFILE\scoop\persist\ryujinx-greemdev\portable" -Target $confPath -Force | Out-Null
+                    } else {
+                        $confPath = "$env:APPDATA\Ryujinx"
+                    }
+                    New-Item -ItemType Directory $confPath -Force | Out-Null
+                    Copy-Item '.\Switch\*' -Destination $confPath -Recurse -Force
+                    Remove-Item '.\Switch' -Recurse -Force
+                    Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\Ryujinx\*" -Destination $confPath -Force
+                    $config = Get-Content "$confPath\Config.json"
+                    $config = $config -replace 'roms-path-here', "$($env:USERPROFILE -replace '\\', '\\')\\Games\\ROMs\\Switch"
+                    $config | Set-Content "$confPath\Config.json"
+                    if (Get-Command syncthing -ErrorAction SilentlyContinue) {
+                        Set-Content "$confPath\.stignore" 'Config.json`ngames/*/cache'
+                         syncthing cli config folders add --id 'z3qjr-yw9j5' --label 'Ryujinx' --path $confPath
+                    }
+                }
+                "scdl" {
+                    New-Item -ItemType Directory "$env:USERPROFILE\Downloads\Audio\SoundCloud" -Force | Out-Null
+                    New-Item -ItemType Directory "$env:USERPROFILE\.config\scdl" -Force | Out-Null
+                    Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\scdl\scdl.cfg" -Destination "$env:USERPROFILE\.config\scdl" -Force
+                    (Get-Content "$env:USERPROFILE\.config\scdl\scdl.cfg") -replace 'path-here', "$env:USERPROFILE\Downloads\Audio\Soundcloud" | Set-Content "$env:USERPROFILE\.config\scdl\scdl.cfg"
+                }
+                "Sekiro" {
+                    Write-Host 'Downloading Sekiro...'
+                    gdown $script:sekiroGDriveID
+                    script:Expand-7zArchive '.\Sekiro.7z'
+                    Remove-Item '.\Sekiro.7z'
+                    Copy-Item '.\Sekiro' -Destination "$env:USERPROFILE\Games\Sekiro Shadows Die Twice GOTY Edition" -Recurse -Force
+                    Remove-Item '.\Sekiro' -Recurse -Force
+                    script:Log "Sekiro: For autostarting unlocker with game ensure 'Local Policies/Audit Policy/Audit process tracking' is set to 'Success'"
+                }
+                "SGDBoop" {
+                    Start-Process "$env:USERPROFILE\scoop\apps\sgdboop\current\SGDBoop.exe"
+                    Start-Sleep -Seconds 1
+                    Stop-Process -Name SGDBoop
+                }
+                "ShellExView" {
+                    winget install --id=NirSoft.ShellExView --exact --accept-source-agreements --accept-package-agreements
+                    script:Log 'ShellExView: Disable GpgEx shell extension.'
+                }
+                "ShellMenuView" {
+                    script:Log 'ShellMenuView: Set extended mode for: Take Ownership'
+                }
+                "Ship of Harkinian" {
+                    gdown $script:sohGDriveID
+                    script:Expand-7zArchive '.\SoH.7z'
+                    Remove-Item '.\SoH.7z'
+                    Copy-Item '.\SoH\*' -Destination "$env:USERPROFILE\scoop\persist\shipwright" -Recurse -ErrorAction SilentlyContinue
+                    Remove-Item '.\SoH' -Recurse -Force
+                }
+                "Sophia Script" {
+                    Write-Host 'Running Sophia Script...'
+                    $preSophiaWindowTitle = $host.UI.RawUI.WindowTitle
+                    $latestRelease = Invoke-RestMethod -Uri 'https://api.github.com/repos/farag2/Sophia-Script-for-Windows/releases/latest'
+                    if ($PSVersionTable.PSVersion.Major -ge 7 -and $PSVersionTable.PSVersion.Minor -ge 3) {
+                        $asset = $latestRelease.assets | Where-Object { $_.name -like 'Sophia.Script.for.Windows.10.PowerShell.7*.zip' }
+                    } else {
+                        $asset = $latestRelease.assets | Where-Object { $_.name -like 'Sophia.Script.for.Windows.10.v*.zip' }
+                    }
+                    if ($null -ne $asset) {
+                        Invoke-WebRequest $asset.browser_download_url -OutFile '.\SophiaScript.zip'
+                    } else {
+                        Write-Warning 'Could not download Sophia Script.'
+                        return
+                    }
+                    Expand-Archive '.\SophiaScript.zip' -DestinationPath '.\Sophia'
+                    Remove-Item '.\SophiaScript.zip'
+                    Get-ChildItem '.\Sophia' -Filter '*.psm1' -Recurse | ForEach-Object {
+                        $module = Get-Content $_.FullName
+                        $module = $module -replace '\[Windows\.UI\.Notifications\.ToastNotificationManager\]::CreateToastNotifier', '# [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier'
+                        $module | Set-Content $_.FullName
+                    }
+                    if ($PSVersionTable.PSVersion.Major -ge 7 -and $PSVersionTable.PSVersion.Minor -ge 3) {
+                        Move-Item '.\Sophia\Sophia_Script_for_Windows_10_PowerShell_7_v*\*' -Destination '.\Sophia'
+                        Remove-Item '.\Sophia\Sophia_Script_for_Windows_10_PowerShell_7_v*'
+                    } else {
+                        Move-Item '.\Sophia\Sophia_Script_for_Windows_10_v*\*' -Destination '.\Sophia'
+                        Remove-Item '.\Sophia\Sophia_Script_for_Windows_10_v*'
+                    }
+                    . '.\Sophia\Functions.ps1'
+                    # Could probably be done faster by passing all functions at once, however I kinda like the brief respite while it runs.
+                    Sophia -Functions 'CreateRestorePoint'
+                    Sophia -Functions 'ActiveHours -Manually'
+                    Sophia -Functions 'AdminApprovalMode -Default'
+                    Sophia -Functions 'AdvertisingID -Disable'
+                    Sophia -Functions 'AeroShaking -Disable'
+                    Sophia -Functions 'AppsLanguageSwitch -Disable'
+                    Sophia -Functions 'AppsSilentInstalling -Disable'
+                    Sophia -Functions 'AppsSmartScreen -Disable'
+                    Sophia -Functions 'AppSuggestions -Hide'
+                    Sophia -Functions 'Autoplay -Disable'
+                    Sophia -Functions 'BackgroundUWPApps -Disable'
+                    Sophia -Functions 'BingSearch -Disable'
+                    Sophia -Functions 'BitmapImageNewContext -Hide'
+                    Sophia -Functions 'BSoDStopError -Enable'
+                    Sophia -Functions 'CABInstallContext -Hide'
+                    Sophia -Functions 'CastToDeviceContext -Hide'
+                    Sophia -Functions 'CompressedFolderNewContext -Hide'
+                    Sophia -Functions 'CopilotButton -Hide'
+                    Sophia -Functions 'CortanaAutostart -Disable'
+                    Sophia -Functions 'CortanaButton -Hide'
+                    Sophia -Functions 'DefenderSandbox -Enable'
+                    Sophia -Functions 'DeliveryOptimization -Disable'
+                    Sophia -Functions 'DiagnosticDataLevel -Minimal'
+                    Sophia -Functions 'DiagTrackService -Disable'
+                    Sophia -Functions 'DismissMSAccount'
+                    Sophia -Functions 'DismissSmartScreenFilter'
+                    Sophia -Functions 'EditWithPaint3DContext -Hide'
+                    Sophia -Functions 'ErrorReporting -Disable'
+                    Sophia -Functions 'EventViewerCustomView -Enable'
+                    Sophia -Functions 'F1HelpPage -Disable'
+                    Sophia -Functions 'FeedbackFrequency -Never'
+                    Sophia -Functions 'FileTransferDialog -Detailed'
+                    Sophia -Functions 'FirstLogonAnimation -Disable'
+                    Sophia -Functions 'FolderGroupBy -None'
+                    Sophia -Functions 'GPUScheduling -Enable'
+                    Sophia -Functions 'HEVC -Install'
+                    Sophia -Functions 'HiddenItems -Enable'
+                    Sophia -Functions 'IncludeInLibraryContext -Hide'
+                    Sophia -Functions 'JPEGWallpapersQuality -Max'
+                    Sophia -Functions 'LanguageListAccess -Disable'
+                    Sophia -Functions 'MappedDrivesAppElevatedAccess -Enable'
+                    Sophia -Functions 'MeetNow -Hide'
+                    Sophia -Functions 'MergeConflicts -Show'
+                    Sophia -Functions 'MSIExtractContext -Hide'
+                    Sophia -Functions 'MultipleInvokeContext -Disable'
+                    Sophia -Functions 'NetworkDiscovery -Enable'
+                    Sophia -Functions 'NetworkProtection -Enable'
+                    Sophia -Functions 'NewAppInstalledNotification -Hide'
+                    Sophia -Functions 'NewsInterests -Disable'
+                    Sophia -Functions 'OneDrive -Uninstall'
+                    Sophia -Functions 'OneDriveFileExplorerAd -Hide'
+                    Sophia -Functions 'OpenFileExplorerTo -ThisPC'
+                    Sophia -Functions 'PeopleTaskbar -Hide'
+                    Sophia -Functions 'PreventEdgeShortcutCreation -Channels Stable, Beta, Dev, Canary'
+                    Sophia -Functions 'PrintCMDContext -Hide'
+                    Sophia -Functions 'PrtScnSnippingTool -Disable'
+                    Sophia -Functions 'PUAppsDetection -Enable'
+                    Sophia -Functions 'QuickAccessFrequentFolders -Hide'
+                    Sophia -Functions 'QuickAccessRecentFiles -Hide'
+                    Sophia -Functions 'RecentlyAddedApps -Hide'
+                    Sophia -Functions 'RecycleBinDeleteConfirmation -Enable'
+                    Sophia -Functions 'ReservedStorage -Disable'
+                    Sophia -Functions 'RestartNotification -Hide'
+                    Sophia -Functions 'RichTextDocumentNewContext -Hide'
+                    Sophia -Functions 'SATADrivesRemovableMedia -Disable'
+                    Sophia -Functions 'SaveRestartableApps -Disable'
+                    Sophia -Functions 'SaveZoneInformation -Disable'
+                    Sophia -Functions 'ScheduledTasks -Disable'
+                    Sophia -Functions 'SearchHighlights -Hide'
+                    Sophia -Functions 'SecondsInSystemClock -Hide'
+                    Sophia -Functions 'SettingsSuggestedContent -Hide'
+                    Sophia -Functions 'ShareContext -Hide'
+                    Sophia -Functions 'ShortcutsSuffix -Disable'
+                    Sophia -Functions 'SigninInfo -Disable'
+                    Sophia -Functions 'SnapAssist -Enable'
+                    Sophia -Functions 'StartAccountNotifications -Hide'
+                    Sophia -Functions 'StickyShift -Disable'
+                    Sophia -Functions 'StorageSense -Enable'
+                    Sophia -Functions 'StorageSenseTempFiles -Enable'
+                    Sophia -Functions 'TailoredExperiences -Disable'
+                    Sophia -Functions 'TaskbarSearch -Hide'
+                    Sophia -Functions 'TaskManagerWindow -Expanded'
+                    Sophia -Functions 'TaskViewButton -Hide'
+                    Sophia -Functions 'ThisPC -Hide'
+                    Sophia -Functions 'ThumbnailCacheRemoval -Disable'
+                    Sophia -Functions 'UninstallPCHealthCheck'
+                    Sophia -Functions 'UnpinTaskbarShortcuts -Shortcuts Edge, Store, Mail'
+                    Sophia -Functions 'UpdateMicrosoftProducts -Disable'
+                    Sophia -Functions 'UserFolders -ThreeDObjects Hide -Desktop Hide -Documents Hide -Downloads Hide -Music Hide -Pictures Hide -Videos Hide'
+                    Sophia -Functions 'UseStoreOpenWith -Hide'
+                    Sophia -Functions 'WhatsNewInWindows -Disable'
+                    Sophia -Functions 'Win32LongPathLimit -Disable'
+                    Sophia -Functions 'WindowsInkWorkspace -Hide'
+                    Sophia -Functions 'WindowsLatestUpdate -Disable'
+                    Sophia -Functions 'WindowsManageDefaultPrinter -Disable'
+                    Sophia -Functions 'WindowsSandbox -Enable'
+                    Sophia -Functions 'WindowsTips -Disable'
+                    Sophia -Functions 'WindowsWelcomeExperience -Hide'
+                    Sophia -Functions 'XboxGameBar -Disable'
+                    Sophia -Functions 'XboxGameTips -Disable'
+                    if (-not $script:isLaptop) {
+                        Sophia -Functions 'Hibernation -Disable'
+                        Sophia -Functions 'PowerPlan -High'
+                    }
+                    Remove-Item '.\Sophia' -Recurse -Force
+                    $host.UI.RawUI.WindowTitle = $preSophiaWindowTitle
+                }
+                "SoS Optimize Harden Debloat" {
+                    # I don't recommend running this on home PCs.
+                    Write-Host 'Running SoS Windows Optimize Harden Debloat...'
+                    Set-Location $PSScriptRoot
+                    git clone 'https://github.com/simeononsecurity/Windows-Optimize-Harden-Debloat.git'
+                    $parameters = @{
+                        cleargpos = $false
+                        installupdates = $false
+                        adobe = $false
+                        firefox = $false
+                        chrome = $false
+                        IE11 = $false
+                        edge = $false
+                        dotnet = $false
+                        office = $false
+                        onedrive = $false
+                        java = $false
+                        windows = $true                 # https://github.com/search?q=repo%3Asimeononsecurity%2FWindows-Optimize-Harden-Debloat+if+%28%24windows+-eq+%24true%29+%7B&type=code
+                        defender = $false
+                        firewall = $false
+                        mitigations = $false
+                        defenderHardening = $false
+                        pshardening = $false
+                        sslhardening = $false
+                        smbhardening = $true            # https://github.com/search?q=repo%3Asimeononsecurity%2FWindows-Optimize-Harden-Debloat+%24smbhardening&type=code
+                        applockerhardening = $false
+                        bitlockerhardening = $false
+                        removebloatware = $true         # https://github.com/search?q=repo%3Asimeononsecurity%2FWindows-Optimize-Harden-Debloat+%24removebloatware&type=code
+                        disabletelemetry = $true        # https://github.com/search?q=repo%3Asimeononsecurity%2FWindows-Optimize-Harden-Debloat+%24disabletelemetry&type=code
+                        privacy = $true                 # https://github.com/search?q=repo%3Asimeononsecurity%2FWindows-Optimize-Harden-Debloat+%24privacy&type=code
+                        imagecleanup = $true            # https://github.com/search?q=repo%3Asimeononsecurity%2FWindows-Optimize-Harden-Debloat+%24imagecleanup&type=code
+                        nessusPID = $false
+                        sysmon = $false
+                        diskcompression = $false
+                        emet = $false
+                        updatemanagement = $false
+                        deviceguard = $false
+                        sosbrowsers = $false
+                    }
+                    $scriptContent = Get-Content .\Windows-Optimize-Harden-Debloat\sos-optimize-windows.ps1
+                    $scriptContent -replace 'Import-GPOs -gposdir "\.\\Files\\GPOs\\DoD\\Windows"', '# Import-GPOs -gposdir ".\Files\GPOs\DoD\Windows"'
+                    $scriptContent | Set-Content .\Windows-Optimize-Harden-Debloat\sos-optimize-windows.ps1
+                    & '.\Windows-Optimize-Harden-Debloat\sos-optimize-windows.ps1' $parameters['cleargpos'] $parameters['installupdates'] $parameters['adobe'] $parameters['firefox'] $parameters['chrome'] $parameters['IE11'] $parameters['edge'] $parameters['dotnet'] $parameters['office'] $parameters['onedrive'] $parameters['java'] $parameters['windows'] $parameters['defender'] $parameters['firewall'] $parameters['mitigations'] $parameters['defenderHardening'] $parameters['pshardening'] $parameters['sslhardening'] $parameters['smbhardening'] $parameters['applockerhardening'] $parameters['bitlockerhardening'] $parameters['removebloatware'] $parameters['disabletelemetry'] $parameters['privacy'] $parameters['imagecleanup'] $parameters['nessusPID'] $parameters['sysmon'] $parameters['diskcompression'] $parameters['emet'] $parameters['updatemanagement'] $parameters['deviceguard'] $parameters['sosbrowsers']
+                    Set-Location $PSScriptRoot
+                    Remove-Item '.\Windows-Optimize-Harden-Debloat' -Recurse -Force
+                    Set-Location $PSScriptRoot
+                    # reenable Explorer preview pane
+                    Set-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer' -Name 'NoReadingPane' -Type 'DWORD' -Value 0 -Force
+                    New-Item 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer' -Force | Out-Null
+                    Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer' -Name 'NoReadingPane' -Type 'DWORD' -Value 0 -Force
+                    # reenable Clipboard history
+                    Set-ItemProperty 'HKCU:\Software\Microsoft\Clipboard' -Name 'EnableClipboardHistory' -Type 'DWORD' -Value 1 -Force
+                    # reenable Run history
+                    Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'Start_TrackProgs' -Type 'DWORD' -Value 1 -Force
+                    # disable lock screen requiring Ctrl+Alt+Del
+                    Set-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System' -Name 'DisableCAD' -Type 'DWORD' -Value 1 -Force
+                    # reenable lock screen username preview
+                    Set-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System' -Name 'DontDisplayLastUsername' -Type 'DWORD' -Value 0 -Force
+                }
+                "Spicetify" {
+                    & "$PSScriptRoot\Scripts\Initialize-Spicetify.ps1" -Full
+                    Start-Process 'spotify:marketplace'
+                    Start-Process 'https://raw.githubusercontent.com/Bergbok/Configs/refs/heads/main/Cross-Platform/Spicetify/marketplace.json'
+                    Start-Process 'https://gist.githubusercontent.com/Bergbok/c7503bcb7ba2699ae10830b5aacbf333/raw/excluding-%255Bcontains-local-files%255D'
+                    Start-Process 'https://gist.githubusercontent.com/Bergbok/c7503bcb7ba2699ae10830b5aacbf333/raw/including-%255Bcontains-local-files%255D'
+                }
+                "Spotify" {
+                    if ($script:selected -contains 'Spicetify') {
+                        Write-Host 'Please log into Spotify, press enter to continue when done.'
+                        Start-Sleep -Seconds 2
+                        $spotify = es -r '\.exe$' 'Spotify.exe' | Where-Object { $_ -notmatch 'Minimize-' } | Select-Object -First 1
+                        Start-Process $spotify
+                        Read-Host
+                    }
+                    script:Log 'Spotify: Set local files location.'
+                }
+                "ssh" {
+                    if (scoop list | Select-String 'openssh' -SimpleMatch) {
+                        & "$env:USERPROFILE\scoop\apps\openssh\current\install-sshd.ps1"
+                    }
+                    if (-not (scoop list | Select-String 'openssh' -SimpleMatch)  -and (-not (choco list openssh) -contains '0 packages installed.')) {
+                        Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
+                        Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+                    }
+                    Start-Service sshd
+                    Set-Service -Name 'sshd' -StartupType 'Automatic'
+                    Start-Service ssh-agent
+                    Set-Service -Name 'ssh-agent' -StartupType 'Automatic'
+                    if (Get-Command ssh-keygen -ErrorAction SilentlyContinue) {
+                        Start-Process powershell -Args 'ssh-keygen'
+                    } else {
+                        script:Log 'ssh: Could not generate ssh key, ssh-keygen not found.'
+                    }
+                    New-Item -Path "$env:USERPROFILE\.ssh" -ItemType Directory -Force | Out-Null
+                    New-Item -Path "$env:SYSTEMDRIVE\ProgramData\ssh" -ItemType Directory -Force | Out-Null
+                    Add-Content "$env:USERPROFILE\.ssh\authorized_keys", "$env:SYSTEMDRIVE\ProgramData\ssh\administrators_authorized_keys" -Value ($script:authorizedSshPubkeys -split ',')
+                }
+                "Steam" {
+                    script:Log 'Steam: Get mobile app QR code scanner ready.'
+                    Start-Sleep -Seconds 1
+                    $steam = es -i -n 1 -r '\.exe$' 'steam.exe'
+                    Start-Process $steam
+                    if ($script:selected -contains 'DisplayFusion' -or $script:selected -contains 'Wallpaper Engine') {
+                        Write-Host 'Please log into Steam, press enter to continue when done.'
+                        Read-Host
+                    }
+                    Stop-Process -Name 'steam' -ErrorAction SilentlyContinue
+                    $steamInstallDriveLetter = $steam.Substring(0, 1)
+                    $newLibraryPath =  "$($steamInstallDriveLetter):\SteamLibrary\steamapps"
+                    New-Item -ItemType Directory -Path "$newLibraryPath\common" -Force | Out-Null
+                    New-Item -ItemType SymbolicLink "$env:USERPROFILE\Games\Steam Libraries\$steamInstallDriveLetter" -Target "$newLibraryPath\common" -Force | Out-Null
+                    if (scoop list | Select-String -Pattern 'steam' -SimpleMatch) {
+                        Remove-Item "$env:USERPROFILE\scoop\persist\steam\steamapps" -Recurse -Force
+                        New-Item -ItemType SymbolicLink "$env:USERPROFILE\scoop\persist\steam\steamapps" -Target $newLibraryPath | Out-Null
+                    } else {
+                        Remove-Item "${env:ProgramFiles(x86)}\Steam\steamapps" -Recurse -Force
+                        New-Item -ItemType SymbolicLink "${env:ProgramFiles(x86)}\Steam\steamapps" -Target $newLibraryPath | Out-Null
+                    }
+                    Set-Location "$(Split-Path $PSScriptRoot)\Cross-Platform\Steam"
+                    python -m venv venv
+                    .\venv\Scripts\Activate.ps1
+                    pip install -r requirements.txt
+                    $steampath = Split-Path $steam
+                    python Steam-Config.py "$steampath"
+                    deactivate
+                    Remove-Item '.\venv' -Recurse -Force
+                    Set-Location $PSScriptRoot
+                    Start-Sleep -Seconds 2
+                    Start-Process $steam
+                    script:Log 'Steam: Add additional drives in settings -> Storage.'
+                }
+                "Steam ROM Manager" {
+                    if (scoop list | Select-String -Pattern 'steam-rom-manager') {
+                        $configPath = "$env:USERPROFILE\scoop\persist\steam-rom-manager\userData"
+                    } else {
+                        $configPath = "$env:APPDATA\steam-rom-manager\userData"
+                    }
+                    Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\Steam-ROM-Manager\*" -Destination $configPath -Recurse -Force
+                    $steam = es -i -n 1 -r '\.exe$' 'steam.exe'
+                    $steamPath = Split-Path $steam
+                    $userConfigurations = Get-Content "$configPath\userConfigurations.json"
+                    $replacements = @{
+                        'steam-account-name-here' = $script:steamAccountName
+                        'steam-path-here' = ($steamPath -replace '\\', '\\')
+                        'roms-path-here' = ("$env:USERPROFILE\Games\ROMs" -replace '\\', '\\')
+                        'ares-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'ares.exe') -replace 'ares\\\d+', 'ares\current' -replace '\\', '\\')
+                        'cemu-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'Cemu.exe') -replace 'cemu\\\d+', 'cemu\current' -replace '\\', '\\')
+                        'cemu-path-here' = ((es -i -n 1 -r '\.exe$' 'Cemu.exe') -replace 'cemu\\\d+', 'cemu\current' -replace '\\\\Cemu\.exe', '' -replace '\\', '\\')
+                        'dolphin-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'Dolphin.exe') -replace 'dolphin\\\d+', 'dolphin\current' -replace '\\', '\\')
+                        'duckstation-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'duckstation*.exe') -replace 'duckstation\\[a-z\d-]+', 'duckstation\current' -replace '\\', '\\')
+                        'lime3ds-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'lime3ds.exe') -replace 'lime3ds\\[\d\.]+', 'lime3ds\current' -replace '\\', '\\')
+                        'melonds-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'melonDS.exe') -replace 'melonDS\\\d+', 'melonDS\current' -replace '\\', '\\')
+                        'pcsx2-executable-path-here' = ((es -i -n 2 -r '\.exe$' 'pcsx2*.exe') -replace 'pcsx2\\[\d\.]+', 'pcsx2\current' -replace '\\', '\\')
+                        'ppsspp-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'PPSSPPWindows64.exe') -replace 'ppsspp\\[\d\.]+', 'ppsspp\current' -replace '\\', '\\')
+                        'rpcs3-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'rpcs3.exe') -replace 'rpcs3\\[\d\.-]+', 'rpcs3\current' -replace '\\', '\\')
+                        'ryujinx-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'Ryujinx.exe') -replace '\\', '\\')
+                        'sameboy-executable-path-here' = ((es -i -n 1 -r '\.exe$' 'sameboy.exe') -replace 'sameboy\\[\d\.]+', 'sameboy\current' -replace '\\', '\\')
+                        'windows-non-steam-games-path-here' = ("$env:USERPROFILE\Games\Windows" -replace '\\', '\\')
+                    }
+                    foreach ($key in $replacements.Keys) {
+                        $userConfigurations = $userConfigurations -replace $key, $replacements[$key]
+                    }
+                    $userConfigurations | Set-Content "$configPath\userConfigurations.json"
+                    $userSettings = Get-Content "$configPath\userSettings.json"
+                    $userSettings = $userSettings -replace 'steam-account-name-here', $script:steamAccountName
+                    $userSettings = $userSettings -replace 'steam-path-here', ($steamPath -replace '\\', '\\')
+                    $userSettings | Set-Content "$configPath\userSettings.json"
+                    Write-Host 'Downloading local Steam images...'
+                    gdown $script:steamGridImagesGDriveID
+                    script:Expand-7zArchive '.\steam-grid-images.7z'
+                    Remove-Item '.\steam-grid-images.7z'
+                    $steamGridImagesPath = $steamPath + '\userdata\' + $script:steamID3 + '\config\grid'
+                    New-Item -ItemType Directory $steamGridImagesPath -Force | Out-Null
+                    Stop-Process -Name 'steam' -ErrorAction SilentlyContinue
+                    Copy-Item '.\steam-grid-images\*' -Destination $steamGridImagesPath -Force
+                    Remove-Item '.\steam-grid-images' -Recurse -Force
+                    Start-Process $steam
+                    Write-Host 'Downloading Steam ROM Manager (Steam parser) image choices...'
+                    gdown $script:steamParserSrmImagesGDriveID
+                    script:Expand-7zArchive '.\steam-srm-image-choices.7z'
+                    Remove-Item '.\steam-srm-image-choices.7z'
+                    New-Item -ItemType Directory "$env:USERPROFILE\Pictures\Steam ROM Manager\Steam Parser Exports\$(Get-Date -Format "dd-MM-yyyy")" -Force | Out-Null
+                    Copy-Item '.\steam-srm-image-choices\*' -Destination "$env:USERPROFILE\Pictures\Steam ROM Manager\Steam Parser Exports\$(Get-Date -Format "dd-MM-yyyy")" -Force
+                    Remove-Item '.\steam-srm-image-choices' -Recurse -Force
+                    Write-Host 'Downloading Steam ROM Manager (non-Steam parser) image choices...'
+                    gdown $script:nonSteamParserSrmImagesGDriveID
+                    script:Expand-7zArchive '.\non-steam-srm-image-choices.7z'
+                    Remove-Item '.\non-steam-srm-image-choices.7z'
+                    New-Item -ItemType Directory "$env:USERPROFILE\Pictures\Steam ROM Manager\Non-Steam Parser Exports\$(Get-Date -Format "dd-MM-yyyy")" -Force | Out-Null
+                    Copy-Item '.\non-steam-srm-image-choices\*' -Destination "$env:USERPROFILE\Pictures\Steam ROM Manager\Non-Steam Parser Exports\$(Get-Date -Format "dd-MM-yyyy")" -Force
+                    Remove-Item '.\non-steam-srm-image-choices' -Recurse -Force
+                    script:Log 'Steam ROM Manager: Double check parsers/exceptions before adding games.'
+                    script:Log 'Steam ROM Manager: You might need to manually select artwork & set up exceptions for the Windows Non-Steam parser. Or just disable it.'
+                }
+                "Stremio" {
+                    Start-Process 'https://stremio-addons.netlify.app'
+                }
+                "gsudo" {
+                    gsudo config CacheMode Auto
+                }
+                "Syncthing" {
+                    syncthing generate --no-default-folder
+                    Start-Process powershell -Args 'syncthing --no-browser --no-console'
+                }
+                "Syncthing Tray" {
+                    Start-Sleep -Seconds 2
+                    Stop-Process -Name 'syncthingtray*' -ErrorAction SilentlyContinue
+                    # won't work unless it's already been configured :/
+                    $syncthingtrayiniPath = es -i -n 1 -r '\.ini$' 'syncthingtray.ini'
+                    $syncthingtrayini = Get-Content $syncthingtrayiniPath
+                    $syncthingtrayini = $syncthingtrayini -replace 'syncthingAutostart=true', 'syncthingAutostart=false'
+                    $syncthingtrayini = $syncthingtrayini -replace 'notifyOnDisconnect=true', 'notifyOnDisconnect=false'
+                    $syncthingtrayini = $syncthingtrayini -replace 'stopOnMetered=false', 'stopOnMetered=true'
+                    $syncthingtrayini | Set-Content "$syncthingtrayiniPath"
+                    script:Log 'SyncthingTray: Set syncthingAutostart=false, notifyOnDisconnect=false, stopOnMetered=true.'
+                }
+                "TaskbarX" {
+                    Start-Sleep -Seconds 2
+                    $taskbarxConfigurator = es -i -n 1 -r '\.exe$' 'TaskbarX Configurator.exe'
+                    runas.exe /trustlevel:0x20000 "powershell -Command Start-Process $taskbarxConfigurator"
+                }
+                "Terraria Font" {
+                    Invoke-WebRequest 'https://www.ffonts.net/Andy-Bold.font.zip' -OutFile '.\Terraria-Font.zip'
+                    Expand-Archive '.\Terraria-Font.zip' -DestinationPath '.\Terraria-Font' -Force
+                    Remove-Item '.\Terraria-Font.zip'
+                    script:Install-FontFile (Get-ChildItem '.\Terraria-Font\ANDYB.TTF').FullName
+                    Remove-Item '.\Terraria-Font' -Recurse -Force
+                }
+                "Uninstall Edge" {
+                    # https://github.com/ChrisTitusTech/winutil/issues/2672
+                    # "Invoke-WebRequest 'https://raw.githubusercontent.com/ChrisTitusTech/winutil/refs/heads/main/functions/private/Uninstall-WinUtilEdgeBrowser.ps1' -OutFile '.\Uninstall-WinUtilEdgeBrowser.ps1'"
+                    # ". '.\Uninstall-WinUtilEdgeBrowser.ps1'"
+                    # "Uninstall-WinUtilEdgeBrowser uninstall"
+                    # "Remove-Item '.\Uninstall-WinUtilEdgeBrowser.ps1'"
+                    Invoke-WebRequest 'https://gist.githubusercontent.com/ave9858/c3451d9f452389ac7607c99d45edecc6/raw/8575efeef94236dfb36e8fb37d83945d3b108f21/UninstallEdge.ps1' -OutFile '.\UninstallEdge.ps1'
+                    $script = Get-Content '.\UninstallEdge.ps1'
+                    $script = $script -replace '\$ErrorActionPreference = "Stop"', "$ErrorActionPreference = 'SilentlyContinue'"
+                    $script | Set-Content '.\UninstallEdge.ps1'
+                    .\UninstallEdge.ps1
+                    Remove-Item .\UninstallEdge.ps1
+                }
+                "Uninstall OneDrive" {
+                    # modified from: https://github.com/ChrisTitusTech/winutil/blob/main/docs/dev/tweaks/z--Advanced-Tweaks---CAUTION/RemoveOnedrive.md
+                    # not currently using this, but keeping here in case Sophia's implementation fails
+                    Write-Host 'Uninstalling OneDrive...'
+                    $OneDrivePath = $env:OneDrive
+                    $regPath = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe'
+                    if (Test-Path $regPath -ErrorAction SilentlyContinue) {
+                        $OneDriveUninstallString = Get-ItemPropertyValue "$regPath" -Name 'UninstallString'
+                        $OneDriveExe, $OneDriveArgs = $OneDriveUninstallString.Split(' ')
+                        Start-Process $OneDriveExe -Args "$OneDriveArgs /silent" -NoNewWindow -Wait
+                    } else {
+                        return
+                    }
+                    if (-not (Test-Path $regPath -ErrorAction SilentlyContinue)) {
+                        Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$env:LOCALAPPDATA\Microsoft\OneDrive"
+                        Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$env:LOCALAPPDATA\OneDrive"
+                        Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$env:PROGRAMDATA\Microsoft OneDrive"
+                        Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$env:SYSTEMDRIVE\OneDriveTemp"
+                        Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$OneDrivePath"
+                        reg delete 'HKEY_CURRENT_USER\Software\Microsoft\OneDrive' -f
+                        if ((Get-ChildItem "$OneDrivePath" -Recurse | Measure-Object).Count -eq 0) {
+                            Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$OneDrivePath"
+                        }
+                        Set-ItemProperty 'HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}' -Name 'System.IsPinnedToNameSpaceTree' -Value 0
+                        Set-ItemProperty 'HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}' -Name 'System.IsPinnedToNameSpaceTree' -Value 0
+                        reg load 'hku\Default' "$env:HOMEDRIVE\Users\Default\NTUSER.DAT"
+                        reg delete 'HKEY_USERS\Default\Software\Microsoft\Windows\CurrentVersion\Run' /v 'OneDriveSetup' /f
+                        reg unload 'hku\Default'
+                        Remove-Item -Force -ErrorAction SilentlyContinue "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"
+                        Get-ScheduledTask -TaskPath '\' -TaskName 'OneDrive*' -ea SilentlyContinue | Unregister-ScheduledTask -Confirm:$false
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'AppData' -Value "$env:USERPROFILE\AppData\Roaming" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Cache' -Value "$env:USERPROFILE\AppData\Local\Microsoft\Windows\INetCache" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Cookies' -Value "$env:USERPROFILE\AppData\Local\Microsoft\Windows\INetCookies" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Favorites' -Value "$env:USERPROFILE\Favorites" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'History' -Value "$env:USERPROFILE\AppData\Local\Microsoft\Windows\History" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Local AppData' -Value "$env:USERPROFILE\AppData\Local" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'My Music' -Value "$env:USERPROFILE\Music" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'My Video' -Value "$env:USERPROFILE\Videos" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'NetHood' -Value "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Network Shortcuts" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'PrintHood' -Value "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Printer Shortcuts" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Programs' -Value "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Recent' -Value "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Recent" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'SendTo' -Value "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\SendTo" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Start Menu' -Value "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Startup' -Value "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Templates' -Value "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Templates" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name '{374DE290-123F-4565-9164-39C4925E467B}' -Value "$env:USERPROFILE\Downloads" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Desktop' -Value "$env:USERPROFILE\Desktop" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'My Pictures' -Value "$env:USERPROFILE\Pictures" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name 'Personal' -Value "$env:USERPROFILE\Documents" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name '{F42EE2D3-909F-4907-8871-4C22FC0BF756}' -Value "$env:USERPROFILE\Documents" -Type ExpandString
+                        Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' -Name '{0DDD015D-B06C-45D5-8C4C-F59713854639}' -Value "$env:USERPROFILE\Pictures" -Type ExpandString
+                        Stop-Process -Name 'explorer'
+                        if (-not (Get-Process 'explorer' -ErrorAction SilentlyContinue)) {
+                            Start-Process 'explorer'
+                        }
+                        Start-Process 'explorer.exe'
+                        Start-Process 'explorer.exe'
+                    } else {
+                        Write-Host 'Something went wrong during the unistallation of OneDrive' -ForegroundColor Red
+                    }
+                }
+                "USBHelper" {
+                    $tempPath = [System.IO.Path]::GetTempPath() + 'USBHelperInstaller.exe'
+                    Invoke-WebRequest 'https://github.com/FailedShack/USBHelperInstaller/releases/latest/download/USBHelperInstaller.exe' -OutFile $tempPath
+                    Start-Process $tempPath
+                    Set-Clipboard 'titlekeys.ovh'
+                    script:Log 'USBHelper: Set title key site to titlekeys.ovh'
+                }
+                "veadotube mini" {
+                    Start-Process 'https://olmewe.itch.io/veadotube-mini/purchase'
+                    Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\veadotube-mini\*" -Destination "$env:USERPROFILE\Pictures\pngtubers" -Recurse -Force
+                    script:Log "veadotube mini: pngtubers have been copied to '$env:USERPROFILE\Pictures\pngtubers'"
+                }
+                "VirtualBox" {
+                    Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart
+                }
+                "Visual Studio Code" {
+                    if (Get-Command code -ErrorAction SilentlyContinue) {
+                        gsudo --integrity Medium -- code
+                    } else {
+                        $code = es -i -n 1 -r '\.exe$' 'Code.exe'
+                        gsudo --integrity Medium -- Start-Process $code
+                    }
+                    script:Log 'VSCode: Change git.defaultCloneDirectory to $($env:USERPROFILE -replace '\\', '\\')\\Code'
+                }
+                "Voicemod" {
+                    script:Log 'Voicemod: Disable auto startup in Task Manager'
+                }
+                "Wallpaper" {
+                    Write-Host 'Setting wallpaper...'
+                    Invoke-WebRequest $script:wallpaperUrl -OutFile "$env:USERPROFILE\Pictures\Wallpapers\$script:wallpaperFilename"
+                    New-Item -ItemType SymbolicLink "$env:USERPROFILE\Pictures\Wallpapers\Current" -Target "$env:USERPROFILE\Pictures\Wallpapers\$script:wallpaperFilename" -Force
+                    Set-ItemProperty 'HKCU:\Control Panel\Desktop' -Name 'WallpaperStyle' -Value 10 -Type String
+                    # from: https://gist.github.com/s7ephen/714023?permalink_comment_id=3611772#gistcomment-3611772
+                    Add-Type -TypeDefinition 'using System.Runtime.InteropServices; public class Wallpaper { public const int SetDesktopWallpaper = 20; public const int UpdateIniFile = 0x01; public const int SendWinIniChange = 0x02; [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)] private static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni); public static void SetWallpaper(string path) { SystemParametersInfo(SetDesktopWallpaper, 0, path, UpdateIniFile | SendWinIniChange); } }'
+                    [Wallpaper]::SetWallpaper("$env:USERPROFILE\Pictures\Wallpapers\Current")
+                    # couldn't manage to change the lock screen programmatically, tried changing registry keys and overwriting the files in $env:WINDIR\Web\Screen
+                }
+                "Wallpaper Engine" {
+                    Start-Process steam://install/431960
+                    script:Log 'Wallpaper Engine: Open before script ends to set it up.'
+                }
+                "WinAero Tweaker" {
+                    $winaerotweaker = es -i -n 1 -r '\.exe$' 'WinaeroTweaker.exe'
+                    $winaerotweakerini = Get-Content "$PSScriptRoot\Configs\Winaero-Tweaker\Winaero Tweaker.ini"
+                    $winaerotweakerini = $winaerotweakerini -replace 'lockscreenimage-here', "$env:USERPROFILE\Pictures\Wallpapers\Current"
+                    $winaerotweakerini | Set-Content "$(Split-Path $winaerotweaker)\Winaero Tweaker.ini" -Force
+                    Invoke-WebRequest $script:wallpaperUrl -OutFile "$env:USERPROFILE\Pictures\Wallpapers\$script:wallpaperFilename"
+                    New-Item -ItemType SymbolicLink "$env:USERPROFILE\Pictures\Wallpapers\Current" -Target "$env:USERPROFILE\Pictures\Wallpapers\$script:wallpaperFilename" -Force
+                    script:Log "Winaero Tweaker: You need to manually import tweaks from: '$(Split-Path $winaerotweaker)\Winaero Tweaker.ini'"
+                    Set-Clipboard "$(Split-Path $winaerotweaker)\Winaero Tweaker.ini"
+                    Start-Process $winaerotweaker
+                }
+                "Windows Terminal" {
+                    if (Get-Command wt -ErrorAction SilentlyContinue) {
+                        wt
+                    } else {
+                        Start-Process (es -i -n 1 -r '\.exe$' 'wt.exe')
+                    }
+                    Start-Sleep -Seconds 0.25
+                    Stop-Process -Name 'WindowsTerminal' -ErrorAction SilentlyContinue
+                    $config = Get-Content "$PSScriptRoot\Configs\Windows-Terminal\settings.json"
+                    $config = $config -replace 'windir-here', ($env:WINDIR -replace '\\', '\\')
+                    $config = $config -replace 'userprofile-here', ($env:USERPROFILE -replace '\\', '\\')
+                    $config = $config -replace 'nerdfont-here', 'MesloLGM Nerd Font'
+                    $config = $config -replace 'pi-hostname-here', $script:piHostname
+                    $config = $config -replace 'laptop-hostname-here', $script:laptopHostname
+                    $pwshVersion = Get-Command pwsh -ErrorAction SilentlyContinue | Select-Object -Property Version
+                    if ($pwshVersion.Version.Major -ge 7) {
+                        $config = $config -replace 'pwsh-path-here', (((Get-Command pwsh).Source) -replace '\\', '\\')
+                        $config = $config -replace 'true, // unhide if pwsh7', 'false,'
+                        $config = $config -replace 'false, // hide if pwsh7', 'true,'
+                    }
+                    if (scoop list | Select-String -Pattern 'windows-terminal' -SimpleMatch) {
+                        $destinationPath = "$env:USERPROFILE\scoop\persist\windows-terminal\settings"
+                    } else {
+                        $destinationPath = "$((Get-ChildItem "$env:LOCALAPPDATA\Packages" -Filter 'Microsoft.WindowsTerminal*').FullName)\LocalState"
+                    }
+                    New-Item -ItemType Directory $destinationPath -Force | Out-Null
+                    Set-Content "$destinationPath\settings.json" -Value $config -Force | Out-Null
+                }
+                "WinRAR" {
+                    Invoke-WebRequest 'https://github.com/bitcookies/winrar-keygen/releases/latest/download/winrar-keygen-x64.exe' -OutFile '.\winrar-keygen.exe'
+                    .\winrar-keygen.exe 'Bergbok' 'Anti-Nagware License' | Out-File -Encoding ascii rarreg.key
+                    if (scoop list | Select-String -Pattern 'winrar' -SimpleMatch) {
+                        Copy-Item '.\rarreg.key' -Destination "$env:USERPROFILE\scoop\persist\winrar" -Force
+                    }
+                    if (Test-Path "$env:APPDATA\WinRAR") {
+                        Copy-Item '.\rarreg.key' -Destination "$env:APPDATA\WinRAR" -Force
+                    }
+                    Remove-Item '.\winrar-keygen.exe'
+                    Remove-Item '.\rarreg.key'
+                    Invoke-WebRequest 'https://www.rarlab.com/themes/Bitcrushed_24x24.theme.rar' -OutFile '.\Bitcrushed.theme.rar'
+                    $WinRAR = es -i -n 1 -r '\.exe$' 'WinRAR.exe'
+                    New-Item -ItemType Directory '.\WinRAR-Bitcrushed' -Force | Out-Null
+                    Start-Process $WinRAR -Args 'x ".\Bitcrushed.theme.rar" ".\WinRAR-Bitcrushed"'
+                    Start-Sleep -Seconds 1
+                    Remove-Item .\Bitcrushed.theme.rar
+                    Copy-Item '.\WinRAR-Bitcrushed' -Destination "$env:USERPROFILE\Themes\WinRAR" -Recurse -Force
+                    Remove-Item '.\WinRAR-Bitcrushed' -Recurse -Force
+                    $settingsRegContent = Get-Content "$PSScriptRoot\Configs\WinRAR\Settings.reg"
+                    $updatedSettingsRegContent = $settingsRegContent -replace 'home-here', ("$env:USERPROFILE" -replace '\\', '\\')
+                    $updatedSettingsRegContent = $updatedSettingsRegContent -replace 'theme-path-here', ("$env:USERPROFILE\Themes\WinRAR" -replace '\\', '\\')
+                    $updatedSettingsRegContent = $updatedSettingsRegContent -replace 'winrar-path-here', ((es -i -n 1 -r '\.exe$' 'WinRAR.exe') -replace '\\', '\\')
+                    $updatedSettingsRegContent | Set-Content '.\temp-WinRAR-Settings.reg'
+                    reg import '.\temp-WinRAR-Settings.reg' 2>$null
+                    Remove-Item '.\temp-WinRAR-Settings.reg'
+                }
+                "WinSetView" {
+                    reg import "$PSScriptRoot\Configs\WinSetView\WinViewBak.reg" 2>$null
+                }
+                "WizTree" {
+                    if (scoop list | Select-String -Pattern 'wiztree' -SimpleMatch) {
+                        $destinationPath = "$env:USERPROFILE\scoop\persist\wiztree"
+                    } else {
+                        $destinationPath = "$env:APPDATA\WizTree3"
+                    }
+                    New-Item -ItemType Directory $destinationPath -Force | Out-Null
+                    Copy-Item "$PSScriptRoot\Configs\WizTree\WizTree3.ini" -Destination $destinationPath -Force
+                    script:Log 'WizTree: Set context menu extended mode with ShellMenuView.'
+                }
+                "WSL" {
+                    wsl --install --no-distribution --no-launch --web-download
+                    wsl --update
+                    wsl --unregister Ubuntu
+                }
+                "WSL - Debian" {
+                    script:Log 'Debian: You may need to run the following for internet connection: sudo setcap cap_net_raw+p /bin/ping^'
                 }
             }
         }
