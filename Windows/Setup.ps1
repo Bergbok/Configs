@@ -2366,7 +2366,7 @@ function Invoke-Setup {
                     Remove-Item '.\temp-DisplayFusion-Settings.reg' -Force
                 }
                 "Dolphin" {
-                    Invoke-WebRequest 'https://gist.github.com/dantheman213/182e1ac17174681996221c31f59f1135/archive/538946df058e315f34fe926eb42f766689bb8ddb.zip' -OutFile 'Dolphin-Xbox-Controller-Profiles.zip'
+                    Invoke-WebRequest 'https://gist.github.com/Bergbok/7db0ab7cdeb96bebb9144c7a96a4c211/archive/2e21ed4a370688d1a65b0ec25483fc7be7ce2b7a.zip' -OutFile 'Dolphin-Xbox-Controller-Profiles.zip'
                     Expand-Archive '.\Dolphin-Xbox-Controller-Profiles.zip'
                     Remove-Item '.\Dolphin-Xbox-Controller-Profiles.zip'
                     if (scoop list | Select-String -Pattern 'dolphin' -SimpleMatch) {
