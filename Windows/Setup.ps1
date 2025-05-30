@@ -182,7 +182,7 @@ $script:packageManagerCommands = @{
         "winget install --id=DolphinEmulator.Dolphin --exact --accept-source-agreements --accept-package-agreements"
     )
     "DuckStation" = @(
-        # "scoop install games/duckstation; scoop install bergbok/ps2-bios" # https://github.com/Calinou/scoop-games/issues/1251
+        "scoop install games/duckstation; scoop install bergbok/ps2-bios"
         "winget install --id=Stenzek.DuckStation --exact --accept-source-agreements --accept-package-agreements --ignore-security-hash; scoop install bergbok/ps2-bios"
     )
     "Elden Ring Save Manager" = @(
