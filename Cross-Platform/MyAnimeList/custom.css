@@ -1,0 +1,99 @@
+/*
+.status-buttons = All Anime, Currently Watching, Completed, On Hold, Dropped & Planned to Watch
+.icon-menu = left buttons
+.list-status-title = Current page, eg. "PLAN TO WATCH"
+*/
+
+:root {
+    --link-color: #ffffff;
+    --link-hover-color: #604ca7;
+    --page-text-underline-color: #ffffff;
+    --current-page-header-background-color: #ffffff;
+}
+
+body {
+    background-color: #000000 !important;
+}
+
+.list-stats,
+#status-menu,
+#list-container,
+.list-status-title,
+.list-table-header .header-title {
+    background-color: #212121 !important;
+}
+
+.list-status-title .stats {
+    left: 50% !important;
+    right: unset !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+.list-stats,
+.list-status-title {
+    border-bottom: #444 1px solid !important;
+}
+
+.list-item {
+    border-right: #444 1px solid;
+}
+
+.list-stats,
+.list-table-header {
+    border-left: #444 1px solid !important;
+    border-right: #444 1px solid !important;
+}
+
+.list-stats {
+    color: #ffffff !important;
+    width: unset !important;
+}
+
+footer,
+.header,
+.malicon-streaming,
+.list-status-title .text {
+    display: none !important;
+}
+
+.list-container {
+    margin-top: 21px !important;
+}
+
+.status-button::after {
+    background-color: var(--page-text-underline-color) !important;
+}
+
+.link,
+#search-button,
+.status-button,
+.list-table .list-table-data .data a {
+    color: var(--link-color) !important;
+}
+
+.list-status-title .stats a {
+    color: var(--link-color) !important;
+}
+
+.icon-menu svg {
+    fill: var(--link-color) !important;
+}
+
+.icon-menu:hover svg {
+    fill: var(--link-hover-color) !important;
+}
+
+.link:hover,
+.status-button:hover,
+#search-button:hover {
+    color: var(--link-hover-color) !important;
+}
+
+.list-status-title .stats a:hover {
+    color: var(--link-hover-color) !important;
+}
+
+.status-button.on {
+    color: var(--current-page-header-background-color) !important;
+}
