@@ -11,6 +11,8 @@ user_pref("devtools.theme", "dark");
 user_pref("devtools.toolbox.host", "right");
 user_pref("svg.context-properties.content.enabled", true);
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
+user_pref("ui.caretBlinkTime", 0);
+user_pref("middlemouse.paste", false);
 
 user_pref("browser.startup.page", 3);                                           // 0102
 user_pref("browser.sessionstore.privacy_level", 0);                             // 0103
