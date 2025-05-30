@@ -2303,7 +2303,7 @@ function Invoke-Setup {
                     Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\Chatterino\*" -Exclude 'default-notification.mp3', 'jerma-notification.wav' -Destination $confPath -Recurse -Force
                     Set-Content "$confPath\settings.json" -Value $settings -Force
                     if (Get-Command syncthing -ErrorAction SilentlyContinue) {
-                        Set-Content "$confPath\.stignore" '*.json.bkp-*`n*.json.??????'
+                        Set-Content "$confPath\.stignore" "*.json.bkp-*`n*.json.??????"
                         syncthing cli config folders add --id 'axgjf-shqtw' --label 'Chatterino' --path $confPath
                     }
                     script:Log 'Chatterino: If the log in button does nothing, manually log in with https://chatterino.com/client_login'
@@ -2574,7 +2574,7 @@ function Invoke-Setup {
                     Copy-Item '.\FreeTube\*' -Destination "$env:APPDATA\FreeTube" -Recurse -Force
                     Remove-Item '.\FreeTube' -Recurse -Force
                     if (Get-Command syncthing -ErrorAction SilentlyContinue) {
-                        Set-Content "$env:APPDATA\FreeTube\.stignore" '!/history.db`n!/playlists.db`n!/profiles.db`n!/settings.db`n*'
+                        Set-Content "$env:APPDATA\FreeTube\.stignore" "!/history.db`n!/playlists.db`n!/profiles.db`n!/settings.db`n*"
                         syncthing cli config folders add --id 'kqgmu-jazfm' --label 'FreeTube' --path "$env:APPDATA\FreeTube"
                     }
                 }
@@ -2589,7 +2589,7 @@ function Invoke-Setup {
                     Copy-Item '.\FreeTube\*' -Destination "$env:APPDATA\FreeTube" -Recurse -Force
                     Remove-Item '.\FreeTube' -Recurse -Force
                     if (Get-Command syncthing -ErrorAction SilentlyContinue) {
-                        Set-Content "$env:APPDATA\FreeTube\.stignore" '!/history.db`n!/playlists.db`n!/profiles.db`n!/settings.db`n*'
+                        Set-Content "$env:APPDATA\FreeTube\.stignore" "!/history.db`n!/playlists.db`n!/profiles.db`n!/settings.db`n*"
                         syncthing cli config folders add --id 'kqgmu-jazfm' --label 'FreeTube' --path "$env:APPDATA\FreeTube"
                     }
                 }
@@ -2624,7 +2624,7 @@ function Invoke-Setup {
                                 %echo done"
                             New-Item .\gpg.temp -ItemType File -Value $content -Force | Out-Null
                             $gpgOutput = & $gpg --batch --generate-key .\gpg.temp 2>&1
-                            $gpgOutput = $gpgOutput -join '`n'
+                            $gpgOutput = $gpgOutput -join "`n"
                             if ($gpgOutput -match '([A-Z0-9])+(?=\.rev)') {
                                 $keyFingerprint = $matches[0]
                                 git config --global user.signingkey $keyFingerprint
@@ -3029,8 +3029,8 @@ function Invoke-Setup {
                     $config = $config -replace 'roms-path-here', "$($env:USERPROFILE -replace '\\', '\\')\\Games\\ROMs\\Switch"
                     $config | Set-Content "$confPath\Config.json"
                     if (Get-Command syncthing -ErrorAction SilentlyContinue) {
-                        Set-Content "$confPath\.stignore" 'Config.json`ngames/*/cache'
-                         syncthing cli config folders add --id 'z3qjr-yw9j5' --label 'Ryujinx' --path $confPath
+                        Set-Content "$confPath\.stignore" "Config.json`ngames/*/cache"
+                        syncthing cli config folders add --id 'z3qjr-yw9j5' --label 'Ryujinx' --path $confPath
                     }
                 }
                 "scdl" {
@@ -3530,7 +3530,7 @@ function Invoke-Setup {
                         $code = es -i -n 1 -r '\.exe$' 'Code.exe'
                         gsudo --integrity Medium -- Start-Process $code
                     }
-                    script:Log 'VSCode: Change git.defaultCloneDirectory to $($env:USERPROFILE -replace '\\', '\\')\\Code'
+                    script:Log "VSCode: Change git.defaultCloneDirectory to $($env:USERPROFILE -replace '\\', '\\')\\Code"
                 }
                 "Voicemod" {
                     script:Log 'Voicemod: Disable auto startup in Task Manager'
