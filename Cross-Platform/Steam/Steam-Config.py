@@ -90,8 +90,8 @@ def edit_shared_config(sharedconfig_path):
     # print_keys_recursively(config)
 
 def main():
-    parser = argparse.ArgumentParser(description='Edits Steam localconfig configuration file.')
-    parser.add_argument('steampath', type=str, help='Path to folder containing Steam executable folder.')
+    parser = argparse.ArgumentParser(description='Edits Steam configuration files.')
+    parser.add_argument('steampath', type=str, help='Path to Steam folder containing config & userdata folders.')
     args = parser.parse_args()
 
     print(f"Editing Steam config files in {args.steampath}")
