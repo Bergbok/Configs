@@ -2,15 +2,16 @@
     "windows": [
         {
             "emotePopup": {
-                "x": 831,
-                "y": 257
+                "height": 490,
+                "width": 973,
+                "x": 1920,
+                "y": 0
             },
-            "height": 888,
+            "height": 1008,
             "state": "maximized",
             "tabs": [
                 {
                     "highlightsEnabled": false,
-                    "selected": true,
                     "splits2": {
                         "data": {
                             "name": "greatsphynx",
@@ -24,6 +25,54 @@
                         "type": "split"
                     },
                     "title": "gongo"
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "name": "big_noli",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    }
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "name": "thezomo",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "zomo"
+                },
+                {
+                    "highlightsEnabled": false,
+                    "selected": true,
+                    "splits2": {
+                        "data": {
+                            "name": "dunkstream",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "dunkey"
                 },
                 {
                     "highlightsEnabled": false,
@@ -45,7 +94,7 @@
                     "highlightsEnabled": false,
                     "splits2": {
                         "data": {
-                            "name": "vargskelethor",
+                            "name": "jerma985",
                             "type": "twitch"
                         },
                         "filters": [
@@ -55,7 +104,7 @@
                         "moderationMode": false,
                         "type": "split"
                     },
-                    "title": "joel"
+                    "title": "jerma"
                 },
                 {
                     "highlightsEnabled": false,
@@ -77,7 +126,7 @@
                     "highlightsEnabled": false,
                     "splits2": {
                         "data": {
-                            "name": "jerma985",
+                            "name": "vargskelethor",
                             "type": "twitch"
                         },
                         "filters": [
@@ -87,38 +136,7 @@
                         "moderationMode": false,
                         "type": "split"
                     },
-                    "title": "jerma"
-                },
-                {
-                    "highlightsEnabled": false,
-                    "splits2": {
-                        "data": {
-                            "name": "ster",
-                            "type": "twitch"
-                        },
-                        "filters": [
-                        ],
-                        "flexh": 1,
-                        "flexv": 1,
-                        "moderationMode": false,
-                        "type": "split"
-                    }
-                },
-                {
-                    "highlightsEnabled": false,
-                    "splits2": {
-                        "data": {
-                            "name": "supertf",
-                            "type": "twitch"
-                        },
-                        "filters": [
-                        ],
-                        "flexh": 1,
-                        "flexv": 1,
-                        "moderationMode": false,
-                        "type": "split"
-                    },
-                    "title": "super"
+                    "title": "joel"
                 },
                 {
                     "highlightsEnabled": false,
@@ -151,6 +169,37 @@
                         "type": "split"
                     },
                     "title": "shrimps"
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "name": "ster",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    }
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "name": "supertf",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "super"
                 },
                 {
                     "highlightsEnabled": false,
@@ -198,9 +247,9 @@
                 }
             ],
             "type": "main",
-            "width": 1536,
-            "x": 463,
-            "y": -8
+            "width": 1920,
+            "x": 1920,
+            "y": 0
         }
     ]
 }

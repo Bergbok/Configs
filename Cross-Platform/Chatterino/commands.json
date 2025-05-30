@@ -26,7 +26,7 @@
             "showInMsgContextMenu": false
         },
         {
-            "name": "/fakeBanned",
+            "name": "/fakePerma",
             "func": "/me has been permanently banned.",
             "showInMsgContextMenu": false
         }
