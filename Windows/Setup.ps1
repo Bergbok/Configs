@@ -2357,7 +2357,6 @@ function Invoke-Setup {
                 }
                 "DisplayFusion" {
                     Start-Process steam://install/227260
-                    Get-Content "$PSScriptRoot\Configs\DisplayFusion\Settings.reg"
                     $settings = Get-Content "$PSScriptRoot\Configs\DisplayFusion\Settings.reg"
                     $settings = $settings -replace 'userprofile-here', ($env:USERPROFILE -replace '\\', '\\')
                     $settings = $settings -replace 'computer-name-here', $env:COMPUTERNAME
