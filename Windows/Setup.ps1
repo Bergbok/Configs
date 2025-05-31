@@ -1,9 +1,9 @@
 #Requires -RunAsAdministrator
 
-[CmdletBinding(HelpUri="https://github.com/Bergbok/Configs/blob/main/Windows/README.md#Setup.ps1")]
+[CmdletBinding(HelpUri='https://github.com/Bergbok/Configs/blob/main/Windows/README.md#Setup.ps1')]
 param ()
 
-$ErrorActionPreference = "Continue"
+$ErrorActionPreference = 'Continue'
 
 #region Duration Tracker
 $script:startTime = Get-Date
@@ -24,7 +24,7 @@ Register-EngineEvent -SourceIdentifier PowerShell.Exiting -Action { Invoke-Exiti
 #region Script Scope Variables
 $envEntries = (Get-Content "$PSScriptRoot\.env") -split "`n"
 foreach ($entry in $envEntries) {
-    if ($entry -match "^(.*?)=(.*)$") {
+    if ($entry -match '^(.*?)=(.*)$') {
         $key = $matches[1]
         $value = $matches[2]
     }
@@ -33,12 +33,12 @@ foreach ($entry in $envEntries) {
         continue
     }
 
-    $key = $key.ToLower() -replace "_", ""
+    $key = $key.ToLower() -replace '_', ''
     $value = $value -replace '\$PSScriptRoot', "$PSScriptRoot"
 
-    if ($value -eq "True" -or $value -eq "1") {
+    if ($value -eq 'True' -or $value -eq '1') {
         $value = $true
-    } elseif ($value -eq "False" -or $value -eq "0") {
+    } elseif ($value -eq 'False' -or $value -eq '0') {
         $value = $false
     }
 
@@ -51,1281 +51,1278 @@ foreach ($key in $MyInvocation.BoundParameters.Keys) {
 }
 
 $script:packageManagerCommands = @{
-    ".NET 8.0 Desktop Runtime" = @(
-        "choco install dotnet-8.0-runtime -y"
-        "scoop install extras/windowsdesktop-runtime"
-        "winget install --id=Microsoft.DotNet.Runtime.8 --exact --accept-source-agreements --accept-package-agreements"
+    '.NET 8.0 Desktop Runtime' = @(
+        'choco install dotnet-8.0-runtime -y'
+        'scoop install extras/windowsdesktop-runtime'
+        'winget install --id=Microsoft.DotNet.Runtime.8 --exact --accept-source-agreements --accept-package-agreements'
     )
-    "AltServer" = @(
-        "choco install altserver -y"
-        "scoop install bergbok/altserver"
-        "winget install --id=RileyTestut.AltServer --exact --accept-source-agreements --accept-package-agreements"
+    'AltServer' = @(
+        'choco install altserver -y'
+        'scoop install bergbok/altserver'
+        'winget install --id=RileyTestut.AltServer --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Ares" = @(
-        "scoop install games/ares"
+    'Ares' = @(
+        'scoop install games/ares'
     )
-    "Audacity" = @(
-        "choco install audacity -y"
-        "scoop install extras/audacity"
-        "winget install --id=Audacity.Audacity --exact --accept-source-agreements --accept-package-agreements"
+    'Audacity' = @(
+        'choco install audacity -y'
+        'scoop install extras/audacity'
+        'winget install --id=Audacity.Audacity --exact --accept-source-agreements --accept-package-agreements'
     )
-    "AudioDeviceCmdlets" = @(
-        "scoop install bergbok/audiodevicecmdlets"
-        # "Install-Module -Name AudioDeviceCmdlets -AcceptLicense"
+    'AudioDeviceCmdlets' = @(
+        'scoop install bergbok/audiodevicecmdlets'
+        # 'Install-Module -Name AudioDeviceCmdlets -AcceptLicense'
     )
-    "AutoHotkey" = @(
-        "choco install autohotkey -y"
-        "scoop install extras/autohotkey"
-        "winget install --id=AutoHotkey.AutoHotkey --exact --accept-source-agreements --accept-package-agreements"
+    'AutoHotkey' = @(
+        'choco install autohotkey -y'
+        'scoop install extras/autohotkey'
+        'winget install --id=AutoHotkey.AutoHotkey --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Autologon" = @(
-        # "choco install autologon"
-        "scoop install sysinternals/autologon"
+    'Autologon' = @(
+        # 'choco install autologon'
+        'scoop install sysinternals/autologon'
     )
-    "AutoRuns" = @(
-        "choco install autoruns -y"
-        "scoop install sysinternals/autoruns"
-        "winget install --id=Microsoft.Sysinternals.Autoruns --exact --accept-source-agreements --accept-package-agreements"
+    'AutoRuns' = @(
+        'choco install autoruns -y'
+        'scoop install sysinternals/autoruns'
+        'winget install --id=Microsoft.Sysinternals.Autoruns --exact --accept-source-agreements --accept-package-agreements'
     )
-    "BCUninstaller" = @(
-        "choco install bulk-crap-uninstaller -y"
-        "scoop install extras/bulk-crap-uninstaller"
-        "winget install --id=Klocman.BulkCrapUninstaller --exact --accept-source-agreements --accept-package-agreements"
+    'BCUninstaller' = @(
+        'choco install bulk-crap-uninstaller -y'
+        'scoop install extras/bulk-crap-uninstaller'
+        'winget install --id=Klocman.BulkCrapUninstaller --exact --accept-source-agreements --accept-package-agreements'
     )
-    "BFG Repo-Cleaner" = @(
-        "choco install bfg-repo-cleaner -y"
-        "scoop install main/bfg"
+    'BFG Repo-Cleaner' = @(
+        'choco install bfg-repo-cleaner -y'
+        'scoop install main/bfg'
     )
-    "Bun" = @(
-        "choco install bun -y"
-        "scoop install main/bun"
-        "winget install --id=Oven-sh.Bun --exact --accept-source-agreements --accept-package-agreements"
+    'Bun' = @(
+        'choco install bun -y'
+        'scoop install main/bun'
+        'winget install --id=Oven-sh.Bun --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Calibre" = @(
-        "choco install calibre -y"
-        "scoop install extras/calibre"
-        "winget install --id=calibre.calibre --exact --accept-source-agreements --accept-package-agreements"
+    'Calibre' = @(
+        'choco install calibre -y'
+        'scoop install extras/calibre'
+        'winget install --id=calibre.calibre --exact --accept-source-agreements --accept-package-agreements'
     )
-    "CEMU" = @(
-        "choco install cemu -y"
-        "scoop install games/cemu"
-        "winget install --id=Cemu.Cemu --exact --accept-source-agreements --accept-package-agreements"
+    'CEMU' = @(
+        'choco install cemu -y'
+        'scoop install games/cemu'
+        'winget install --id=Cemu.Cemu --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Chatterino2" = @(
-        "choco install chatterino -y"
-        # "scoop install extras/chatterino" # taskbar entry
-        "winget install --id=ChatterinoTeam.Chatterino --exact --accept-source-agreements --accept-package-agreements"
+    'Chatterino2' = @(
+        'choco install chatterino -y'
+        # 'scoop install extras/chatterino' # taskbar entry
+        'winget install --id=ChatterinoTeam.Chatterino --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Cheat Engine" = @(
-        "choco install cheatengine -y"
-        # "scoop install extras/cheat-engine" # taskbar entry
+    'Cheat Engine' = @(
+        'choco install cheatengine -y'
+        # 'scoop install extras/cheat-engine' # taskbar entry
     )
-    "Cmder" = @(
-        "choco install cmder -y"
-        "scoop install main/cmder"
+    'Cmder' = @(
+        'choco install cmder -y'
+        'scoop install main/cmder'
     )
-    "CreamInstaller" = @(
-        "scoop install bergbok/creaminstaller"
+    'CreamInstaller' = @(
+        'scoop install bergbok/creaminstaller'
     )
-    "CUDA" = @(
-        "choco install cuda -y"
-        "scoop install main/cuda"
-        "winget install --id=Nvidia.CUDA --exact --accept-source-agreements --accept-package-agreements"
+    'CUDA' = @(
+        'choco install cuda -y'
+        'scoop install main/cuda'
+        'winget install --id=Nvidia.CUDA --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Cyberduck" = @(
-        "choco install cyberduck -y"
-        "scoop install extras/cyberduck"
-        "winget install --id=Iterate.Cyberduck --exact --accept-source-agreements --accept-package-agreements"
+    'Cyberduck' = @(
+        'choco install cyberduck -y'
+        'scoop install extras/cyberduck'
+        'winget install --id=Iterate.Cyberduck --exact --accept-source-agreements --accept-package-agreements'
     )
-    "DS4Windows" = @(
-        "choco install ds4windows -y"
-        "scoop install bergbok/ds4windows"
-        "winget install --id=Ryochan7.DS4Windows --exact --accept-source-agreements --accept-package-agreements"
+    'DS4Windows' = @(
+        'choco install ds4windows -y'
+        'scoop install bergbok/ds4windows'
+        'winget install --id=Ryochan7.DS4Windows --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Deno" = @(
-        "choco install deno -y"
-        "scoop install main/deno"
-        "winget install --id=DenoLand.Deno --exact --accept-source-agreements --accept-package-agreements"
+    'Deno' = @(
+        'choco install deno -y'
+        'scoop install main/deno'
+        'winget install --id=DenoLand.Deno --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Discord" = @(
-        # "choco list | Out-Null; choco install discord -y"
-        # "scoop list | Out-Null; scoop install bergbok/discord" # taskbar entry
-        "winget list | Out-Null; winget install --id=Discord.Discord --exact --accept-source-agreements --accept-package-agreements"
+    'Discord' = @(
+        # 'choco list | Out-Null; choco install discord -y'
+        # 'scoop list | Out-Null; scoop install bergbok/discord' # taskbar entry
+        'winget list | Out-Null; winget install --id=Discord.Discord --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Docker CLI" = @(
-        "choco install docker-cli -y"
-        "scoop install main/docker"
-        "winget install --id=Docker.DockerCli --exact --accept-source-agreements --accept-package-agreements"
+    'Docker CLI' = @(
+        'choco install docker-cli -y'
+        'scoop install main/docker'
+        'winget install --id=Docker.DockerCli --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Docker Completion" = @(
-        "scoop install extras/dockercompletion"
-        # "Install-Module -Name DockerCompletion -AcceptLicense"
+    'Docker Completion' = @(
+        'scoop install extras/dockercompletion'
+        # 'Install-Module -Name DockerCompletion -AcceptLicense'
     )
-    "Docker Compose" = @(
-        "choco install docker-compose -y"
-        "scoop install main/docker-compose"
-        "winget install --id=Docker.DockerCompose --exact --accept-source-agreements --accept-package-agreements"
+    'Docker Compose' = @(
+        'choco install docker-compose -y'
+        'scoop install main/docker-compose'
+        'winget install --id=Docker.DockerCompose --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Docker Engine" = @(
-        "choco install docker-engine -y"
-        "scoop install main/docker"
-        "winget install --id=Docker.DockerCli --exact --accept-source-agreements --accept-package-agreements"
+    'Docker Engine' = @(
+        'choco install docker-engine -y'
+        'scoop install main/docker'
+        'winget install --id=Docker.DockerCli --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Docker Desktop" = @(
-        "choco install docker-desktop -y"
-        "scoop install main/docker-desktop"
-        "winget install --id=Docker.DockerDesktop --exact --accept-source-agreements --accept-package-agreements"
+    'Docker Desktop' = @(
+        'choco install docker-desktop -y'
+        'scoop install main/docker-desktop'
+        'winget install --id=Docker.DockerDesktop --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Dolphin" = @(
-        "choco install dolphin -y"
-        "scoop install games/dolphin"
-        "winget install --id=DolphinEmulator.Dolphin --exact --accept-source-agreements --accept-package-agreements"
+    'Dolphin' = @(
+        'choco install dolphin -y'
+        'scoop install games/dolphin'
+        'winget install --id=DolphinEmulator.Dolphin --exact --accept-source-agreements --accept-package-agreements'
     )
-    "DuckStation" = @(
-        "scoop install games/duckstation; scoop install bergbok/ps2-bios"
-        "winget install --id=Stenzek.DuckStation --exact --accept-source-agreements --accept-package-agreements --ignore-security-hash; scoop install bergbok/ps2-bios"
+    'DuckStation' = @(
+        'scoop install games/duckstation; scoop install bergbok/ps2-bios'
+        'winget install --id=Stenzek.DuckStation --exact --accept-source-agreements --accept-package-agreements --ignore-security-hash; scoop install bergbok/ps2-bios'
     )
-    "Elden Ring Save Manager" = @(
-        "scoop install bergbok/eldenring-save-manager"
+    'Elden Ring Save Manager' = @(
+        'scoop install bergbok/eldenring-save-manager'
     )
-    "Epic Games Launcher" = @(
-        "choco install epicgameslauncher -y"
-        "scoop install games/epic-games-launcher"
-        "winget install --id=EpicGames.EpicGamesLauncher --exact --accept-source-agreements --accept-package-agreements"
+    'Epic Games Launcher' = @(
+        'choco install epicgameslauncher -y'
+        'scoop install games/epic-games-launcher'
+        'winget install --id=EpicGames.EpicGamesLauncher --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Everything" = @(
-        # "choco install everything -y"
-        # "scoop install extras/everything" # taskbar entry
-        "winget install --id=voidtools.Everything --exact --accept-source-agreements --accept-package-agreements"
+    'Everything' = @(
+        # 'choco install everything -y'
+        # 'scoop install extras/everything' # taskbar entry
+        'winget install --id=voidtools.Everything --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Everything CLI" = @(
-        "choco install es -y"
-        "scoop install main/everything-cli"
-        "winget install --id=voidtools.Everything.Cli --exact --accept-source-agreements --accept-package-agreements"
+    'Everything CLI' = @(
+        'choco install es -y'
+        'scoop install main/everything-cli'
+        'winget install --id=voidtools.Everything.Cli --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Everything PowerToys" = @(
-        "choco install everythingpowertoys -y"
-        "scoop install extras/everything-powertoys"
-        "winget install --id=lin-ycv.EverythingPowerToys --exact --accept-source-agreements --accept-package-agreements"
+    'Everything PowerToys' = @(
+        'choco install everythingpowertoys -y'
+        'scoop install extras/everything-powertoys'
+        'winget install --id=lin-ycv.EverythingPowerToys --exact --accept-source-agreements --accept-package-agreements'
     )
-    "ExplorerPatcher" = @(
-        "scoop info | Out-Null"
+    'f.lux' = @(
+        'choco install f.lux.install -y'
+        # 'scoop install extras/f.lux' # autostart doesn't work
+        'winget install --id=flux.flux --exact --accept-source-agreements --accept-package-agreements'
     )
-    "f.lux" = @(
-        "choco install f.lux.install -y"
-        # "scoop install extras/f.lux" # autostart doesn't work
-        "winget install --id=flux.flux --exact --accept-source-agreements --accept-package-agreements"
+    'Fan Control' = @(
+        'scoop install extras/fancontrol'
+        'winget install --id=Rem0o.FanControl --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Fan Control" = @(
-        "scoop install extras/fancontrol"
-        "winget install --id=Rem0o.FanControl --exact --accept-source-agreements --accept-package-agreements"
+    'FFDec' = @(
+        'scoop install extras/ffdec'
+        'winget install --id=JPEXS.FFDec -e --accept-source-agreements --accept-package-agreements'
     )
-    "FFDec" = @(
-        "scoop install extras/ffdec"
-        "winget install --id=JPEXS.FFDec -e --accept-source-agreements --accept-package-agreements"
-    )
-    "ffmpeg" = @(
-        "choco install ffmpeg -y"
+    'ffmpeg' = @(
+        'choco install ffmpeg -y'
         "scoop info | Out-Null; if (`$script:selected -contains 'yt-dlp' -or (Get-Command yt-dlp)) { scoop install versions/ffmpeg-yt-dlp } else { scoop install main/ffmpeg }"
-        "winget install --id=Gyan.FFmpeg --exact --accept-source-agreements --accept-package-agreements"
+        'winget install --id=Gyan.FFmpeg --exact --accept-source-agreements --accept-package-agreements'
     )
-    "FileTypesMan" = @(
-        "choco install filetypesman -y"
-        "scoop install nirsoft/filetypesman"
+    'FileTypesMan' = @(
+        'choco install filetypesman -y'
+        'scoop install nirsoft/filetypesman'
     )
-    "Firefox" = @(
-        "choco install firefox -y"
-        # "scoop install extras/firefox" # taskbar entry
-        "winget install --id=Mozilla.Firefox --exact --accept-source-agreements --accept-package-agreements"
+    'Firefox' = @(
+        'choco install firefox -y'
+        # 'scoop install extras/firefox' # taskbar entry
+        'winget install --id=Mozilla.Firefox --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Flameshot" = @(
-        "choco install flameshot -y"
-        "scoop install extras/flameshot"
-        "winget install --id=Flameshot.Flameshot --exact --accept-source-agreements --accept-package-agreements"
+    'Flameshot' = @(
+        'choco install flameshot -y'
+        'scoop install extras/flameshot'
+        'winget install --id=Flameshot.Flameshot --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Flash-enabled Chromium" = @(
-        "choco install ungoogled-chromium --version=87.0.4280.1411 -y"
+    'Flash-enabled Chromium' = @(
+        'choco install ungoogled-chromium --version=87.0.4280.1411 -y'
         "winget install --id=eloston.ungoogled-chromium -v '87.0.4280.67' --exact --accept-source-agreements --accept-package-agreements"
     )
-    "Flashpoint Infinity" = @(
-        # "choco install flashpoint-infinity -y"
-        "scoop install games/flashpoint"
+    'Flashpoint Infinity' = @(
+        # 'choco install flashpoint-infinity -y'
+        'scoop install games/flashpoint'
     )
-    "FlicFlac" = @(
-        "choco install flicflac -y"
-        "scoop install bergbok/flicflac"
+    'FlicFlac' = @(
+        'choco install flicflac -y'
+        'scoop install bergbok/flicflac'
     )
-    "FreeTube" = @(
-        "choco install freetube --pre -y"
-        # "scoop install extras/freetube" # taskbar entry
-        "winget install --id=PrestonN.FreeTube --exact --accept-source-agreements --accept-package-agreements"
+    'FreeTube' = @(
+        'choco install freetube --pre -y'
+        # 'scoop install extras/freetube' # taskbar entry
+        'winget install --id=PrestonN.FreeTube --exact --accept-source-agreements --accept-package-agreements'
     )
-    "G.Skill Trident Z Lighting Control" = @(
-        "scoop install bergbok/g.skill-trident-z-lighting-control"
+    'G.Skill Trident Z Lighting Control' = @(
+        'scoop install bergbok/g.skill-trident-z-lighting-control'
     )
-    "gdown" = @(
-        "pip install gdown"
+    'gdown' = @(
+        'pip install gdown'
     )
-    "GifCam" = @(
-        "choco install gifcam -y"
-        "scoop install extras/gifcam"
+    'GifCam' = @(
+        'choco install gifcam -y'
+        'scoop install extras/gifcam'
     )
-    "Gifsicle" = @(
-        "choco install gifsicle -y"
-        "scoop install main/gifsicle"
+    'Gifsicle' = @(
+        'choco install gifsicle -y'
+        'scoop install main/gifsicle'
     )
-    "GIMP" = @(
-        "choco install gimp -y"
-        "scoop install extras/gimp"
-        "winget install --id=GIMP.GIMP --exact --accept-source-agreements --accept-package-agreements"
+    'GIMP' = @(
+        'choco install gimp -y'
+        'scoop install extras/gimp'
+        'winget install --id=GIMP.GIMP --exact --accept-source-agreements --accept-package-agreements'
     )
-    "git" = @(
-        # "choco install git -y"
-        # "scoop install main/git"
-        # "winget install --id=Git.Git --exact --accept-source-agreements --accept-package-agreements"
+    'git' = @(
+        # 'choco install git -y'
+        # 'scoop install main/git'
+        # 'winget install --id=Git.Git --exact --accept-source-agreements --accept-package-agreements'
     )
-    "git filter-repo" = @(
-        # "scoop install main/git-filter-repo"
-        "pip install git-filter-repo"
+    'git filter-repo' = @(
+        # 'scoop install main/git-filter-repo'
+        'pip install git-filter-repo'
     )
-    "GitHub CLI" = @(
-        "choco install gh -y"
-        "scoop install main/gh"
-        "winget install --id=GitHub.cli --exact --accept-source-agreements --accept-package-agreements"
+    'GitHub CLI' = @(
+        'choco install gh -y'
+        'scoop install main/gh'
+        'winget install --id=GitHub.cli --exact --accept-source-agreements --accept-package-agreements'
     )
-    "GitHub Desktop" = @(
-        "choco install github-desktop -y"
-        "scoop install extras/github"
-        "winget install --id=GitHub.GitHubDesktop --exact --accept-source-agreements --accept-package-agreements"
+    'GitHub Desktop' = @(
+        'choco install github-desktop -y'
+        'scoop install extras/github'
+        'winget install --id=GitHub.GitHubDesktop --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Go" = @(
-        "choco install go -y"
-        "scoop install main/go"
-        "winget install --id=GoLang.Go --exact --accept-source-agreements --accept-package-agreements"
+    'Go' = @(
+        'choco install go -y'
+        'scoop install main/go'
+        'winget install --id=GoLang.Go --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Godot" = @(
-        "choco install godot -y"
-        # "scoop install extras/godot" # taskbar entry
-        "winget install --id=GodotEngine.GodotEngine --exact --accept-source-agreements --accept-package-agreements"
+    'Godot' = @(
+        'choco install godot -y'
+        # 'scoop install extras/godot' # taskbar entry
+        'winget install --id=GodotEngine.GodotEngine --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Godot (Mono)" = @(
-        "choco install godot-mono -y"
-        # "scoop install extras/godot-mono" # taskbar entry
-        "winget install --id=GodotEngine.GodotEngine.Mono --exact --accept-source-agreements --accept-package-agreements"
+    'Godot (Mono)' = @(
+        'choco install godot-mono -y'
+        # 'scoop install extras/godot-mono' # taskbar entry
+        'winget install --id=GodotEngine.GodotEngine.Mono --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Gpg4win" = @(
-        "choco install gpg4win -y"
+    'Gpg4win' = @(
+        'choco install gpg4win -y'
         "scoop install extras/gpg4win; Add-EnvPath '$env:USERPROFILE\scoop\apps\git\current\usr\bin'"
-        "winget install --id=GnuPG.Gpg4win --exact --accept-source-agreements --accept-package-agreements"
+        'winget install --id=GnuPG.Gpg4win --exact --accept-source-agreements --accept-package-agreements'
     )
-    "CPUID HWMonitor" = @(
-        "choco install hwmonitor -y"
-        "scoop install extras/hwmonitor"
-        "winget install --id=CPUID.CPUID HWMonitor --exact --accept-source-agreements --accept-package-agreements"
+    'CPUID HWMonitor' = @(
+        'choco install hwmonitor -y'
+        'scoop install extras/hwmonitor'
+        'winget install --id=CPUID.CPUID HWMonitor --exact --accept-source-agreements --accept-package-agreements'
     )
-    "HandBrake" = @(
-        "choco install handbrake -y"
-        "scoop install extras/handbrake"
-        "winget install --id=HandBrake.HandBrake --exact --accept-source-agreements --accept-package-agreements"
+    'HandBrake' = @(
+        'choco install handbrake -y'
+        'scoop install extras/handbrake'
+        'winget install --id=HandBrake.HandBrake --exact --accept-source-agreements --accept-package-agreements'
     )
-    "HeidiSQL" = @(
-        "choco install heidisql -y"
-        "scoop install extras/heidisql"
-        "winget install --id=HeidiSQL.HeidiSQL --exact --accept-source-agreements --accept-package-agreements"
+    'HeidiSQL' = @(
+        'choco install heidisql -y'
+        'scoop install extras/heidisql'
+        'winget install --id=HeidiSQL.HeidiSQL --exact --accept-source-agreements --accept-package-agreements'
     )
-    "IconsExtract" = @(
-        "choco install iconsext -y"
-        "scoop install nirsoft/iconsext"
+    'IconsExtract' = @(
+        'choco install iconsext -y'
+        'scoop install nirsoft/iconsext'
     )
-    "iCloud" = @(
-        "choco install icloud -y"
-        "winget install --id=Apple.iCloud --exact --accept-source-agreements --accept-package-agreements"
+    'iCloud' = @(
+        'choco install icloud -y'
+        'winget install --id=Apple.iCloud --exact --accept-source-agreements --accept-package-agreements'
     )
-    "iCUE" = @(
-        "choco install icue -y"
-        "winget install --id=Corsair.iCUE.5 --exact --accept-source-agreements --accept-package-agreements"
+    'iCUE' = @(
+        'choco install icue -y'
+        'winget install --id=Corsair.iCUE.5 --exact --accept-source-agreements --accept-package-agreements'
     )
-    "ImageGlass" = @(
-        # "choco install imageglass -y"
+    'ImageGlass' = @(
+        # 'choco install imageglass -y'
         # "scoop install extras/imageglass; script:Log `"ImageGlass: If this app doesn't work maybe you need to clean '$env:USERPROFILE\scoop\apps\imageglass\current\igconfig.json' and reinstall '$env:USERPROFILE\scoop\apps\imageglass\current\Themes'`"" # doesn't show an option in ms-settings:defaultapps
-        "winget install --id=DuongDieuPhap.ImageGlass --exact --accept-source-agreements --accept-package-agreements"
+        'winget install --id=DuongDieuPhap.ImageGlass --exact --accept-source-agreements --accept-package-agreements'
     )
-    "itch" = @(
-        "choco install itch -y"
-        "scoop install games/itch"
-        "winget install --id=ItchIo.Itch --exact --accept-source-agreements --accept-package-agreements"
+    'itch' = @(
+        'choco install itch -y'
+        'scoop install games/itch'
+        'winget install --id=ItchIo.Itch --exact --accept-source-agreements --accept-package-agreements'
     )
-    "iTunes" = @(
-        "choco install itunes -y"
-        "winget install --id=Apple.iTunes --exact --accept-source-agreements --accept-package-agreements"
+    'iTunes' = @(
+        'choco install itunes -y'
+        'winget install --id=Apple.iTunes --exact --accept-source-agreements --accept-package-agreements'
     )
-    "JDownloader" = @(
-        "choco install jdownloader -y"
-        "scoop install versions/jdownloader"
-        "winget install --id=AppWork.JDownloader --exact --accept-source-agreements --accept-package-agreements"
+    'JDownloader' = @(
+        'choco install jdownloader -y'
+        'scoop install versions/jdownloader'
+        'winget install --id=AppWork.JDownloader --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Jitterbugpair" = @(
-        "scoop install bergbok/jitterbugpair"
+    'Jitterbugpair' = @(
+        'scoop install bergbok/jitterbugpair'
     )
-    "KDE Connect" = @(
-        "choco install kdeconnect-kde -y"
-        "scoop install extras/kdeconnect"
-        "winget install --id=KDE.KDEConnect --exact --accept-source-agreements --accept-package-agreements"
+    'KDE Connect' = @(
+        'choco install kdeconnect-kde -y'
+        'scoop install extras/kdeconnect'
+        'winget install --id=KDE.KDEConnect --exact --accept-source-agreements --accept-package-agreements'
     )
-    "KeePassXC" = @(
-        "choco install keepassxc -y"
-        # "scoop install extras/keepassxc" # taskbar entry
-        "winget install --id=KeePassXCTeam.KeePassXC --exact --accept-source-agreements --accept-package-agreements"
+    'KeePassXC' = @(
+        'choco install keepassxc -y'
+        # 'scoop install extras/keepassxc' # taskbar entry
+        'winget install --id=KeePassXCTeam.KeePassXC --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Legendary" = @(
-        "choco install legendary -y"
-        "scoop install games/legendary"
-        "winget install --id=derrod.legendary --exact --accept-source-agreements --accept-package-agreements"
+    'Legendary' = @(
+        'choco install legendary -y'
+        'scoop install games/legendary'
+        'winget install --id=derrod.legendary --exact --accept-source-agreements --accept-package-agreements'
     )
-    "LibreHardwareMonitor" = @(
-        "choco install librehardwaremonitor -y"
-        "scoop install extras/librehardwaremonitor"
-        "winget install --id=LibreHardwareMonitor.LibreHardwareMonitor --exact --accept-source-agreements --accept-package-agreements"
+    'LibreHardwareMonitor' = @(
+        'choco install librehardwaremonitor -y'
+        'scoop install extras/librehardwaremonitor'
+        'winget install --id=LibreHardwareMonitor.LibreHardwareMonitor --exact --accept-source-agreements --accept-package-agreements'
     )
-    "LibreOffice" = @(
-        "choco install libreoffice-fresh -y"
-        "scoop install extras/libreoffice"
-        "winget install --id=TheDocumentFoundation.LibreOffice --exact --accept-source-agreements --accept-package-agreements"
+    'LibreOffice' = @(
+        'choco install libreoffice-fresh -y'
+        'scoop install extras/libreoffice'
+        'winget install --id=TheDocumentFoundation.LibreOffice --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Lightshot" = @(
-        "choco install lightshot.install -y"
-        "scoop install versions/lightshot"
-        "winget install --id=Skillbrains.Lightshot --exact --accept-source-agreements --accept-package-agreements"
+    'Lightshot' = @(
+        'choco install lightshot.install -y'
+        'scoop install versions/lightshot'
+        'winget install --id=Skillbrains.Lightshot --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Lime3DS" = @(
-        "scoop install games/lime3ds"
+    'Lime3DS' = @(
+        'scoop install games/lime3ds'
     )
-    "Logitech G HUB" = @(
-        # "choco install lghub -y" # floods terminal with output until the installer finishes
-        "winget install --id=Logitech.GHUB --exact --accept-source-agreements --accept-package-agreements"
+    'Logitech G HUB' = @(
+        # 'choco install lghub -y' # floods terminal with output until the installer finishes
+        'winget install --id=Logitech.GHUB --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Lumafly" = @(
-        "scoop install bergbok/lumafly"
+    'Lumafly' = @(
+        'scoop install bergbok/lumafly'
     )
     "Majora's Mask" = @(
-        "scoop install bergbok/zelda64recompiled"
+        'scoop install bergbok/zelda64recompiled'
     )
-    "melonDS" = @(
-        # "scoop install games/melonds"
-        "winget install --id=melonDS.melonDS --exact --accept-source-agreements --accept-package-agreements"
+    'melonDS' = @(
+        # 'scoop install games/melonds'
+        'winget install --id=melonDS.melonDS --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Microsoft Office" = @(
-        # "scoop install nonportable/office-365-apps-minimal-np"
+    'Microsoft Office' = @(
+        # 'scoop install nonportable/office-365-apps-minimal-np'
     )
-    "Minecraft Launcher" = @(
-        "choco install minecraft-launcher -y"
-        "scoop install games/minecraft"
-        "winget install --id=Mojang.MinecraftLauncher --exact --accept-source-agreements --accept-package-agreements"
+    'Minecraft Launcher' = @(
+        'choco install minecraft-launcher -y'
+        'scoop install games/minecraft'
+        'winget install --id=Mojang.MinecraftLauncher --exact --accept-source-agreements --accept-package-agreements'
     )
-    "MegaBasterd" = @(
-        "scoop install extras/megabasterd; scoop install java/openjdk"
+    'MegaBasterd' = @(
+        'scoop install extras/megabasterd; scoop install java/openjdk'
     )
-    "Meslo Nerd Font" = @(
-        "scoop install nerd-fonts/Meslo-NF"
+    'Meslo Nerd Font' = @(
+        'scoop install nerd-fonts/Meslo-NF'
     )
-    "Mp3tag" = @(
-        "choco install mp3tag -y"
+    'Mp3tag' = @(
+        'choco install mp3tag -y'
         # "scoop install extras/mp3tag; script:Log 'Mp3tag: Enable context menu with: start regsvr32 -Verb RunAs -Args @(`"$env:USERPROFILE\scoop\apps\mp3tag\current\Mp3tagShell.dll`" `"/s`")'; script:Log 'Mp3tag: Disable context menu with: start regsvr32 -Verb RunAs -Args @(`"/u`", `"$env:USERPROFILE\scoop\apps\mp3tag\current\Mp3tagShell.dll`", `"/s`")'" # taskbar entry
-        "winget install --id=FlorianHeidenreich.Mp3tag --exact --accept-source-agreements --accept-package-agreements"
+        'winget install --id=FlorianHeidenreich.Mp3tag --exact --accept-source-agreements --accept-package-agreements'
     )
-    "mpv" = @(
-        "choco install mpv -y"
+    'mpv' = @(
+        'choco install mpv -y'
         "scoop install extras/mpv; script:Log 'mpv: You can use Icaros (nonportable/icaros-np) to enable thumbnails for all media types.'"
-        "winget install --id=mpv.net --exact --accept-source-agreements --accept-package-agreements"
+        'winget install --id=mpv.net --exact --accept-source-agreements --accept-package-agreements'
     )
-    "MultiMonitorTool" = @(
-        "choco install multimonitortool -y"
-        "scoop install nirsoft/multimonitortool"
+    'MultiMonitorTool' = @(
+        'choco install multimonitortool -y'
+        'scoop install nirsoft/multimonitortool'
     )
-    "NAPS2" = @(
-        "choco install naps2 -y"
-        "scoop install extras/naps2"
-        "winget install --id=Cyanfish.NAPS2 --exact --accept-source-agreements --accept-package-agreements"
+    'NAPS2' = @(
+        'choco install naps2 -y'
+        'scoop install extras/naps2'
+        'winget install --id=Cyanfish.NAPS2 --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Neofetch" = @(
-        "scoop install main/neofetch"
-        "winget install --id=nepnep.neofetch-win --exact --accept-source-agreements --accept-package-agreements"
+    'Neofetch' = @(
+        'scoop install main/neofetch'
+        'winget install --id=nepnep.neofetch-win --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Nicotine+" = @(
-        "choco install nicotine-plus -y"
-        # "scoop install extras/nicotine-plus" # taskbar entry
-        "winget install --id=Nicotine+.Nicotine+ --exact --accept-source-agreements --accept-package-agreements"
+    'Nicotine+' = @(
+        'choco install nicotine-plus -y'
+        # 'scoop install extras/nicotine-plus' # taskbar entry
+        'winget install --id=Nicotine+.Nicotine+ --exact --accept-source-agreements --accept-package-agreements'
     )
-    "NirCmd" = @(
-        "choco install nircmd -y"
-        "scoop install main/nircmd"
-        "winget install --id=NirSoft.NirCmd --exact --accept-source-agreements --accept-package-agreements"
+    'NirCmd' = @(
+        'choco install nircmd -y'
+        'scoop install main/nircmd'
+        'winget install --id=NirSoft.NirCmd --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Node.js" = @(
-        "choco install nodejs -y"
-        "scoop install main/nodejs"
-        "winget install --id=OpenJS.NodeJS --exact --accept-source-agreements --accept-package-agreements"
+    'Node.js' = @(
+        'choco install nodejs -y'
+        'scoop install main/nodejs'
+        'winget install --id=OpenJS.NodeJS --exact --accept-source-agreements --accept-package-agreements'
     )
-    "NoPayStation" = @(
-        "scoop install bergbok/nopaystation; scoop install bergbok/pkg2zip"
+    'NoPayStation' = @(
+        'scoop install bergbok/nopaystation; scoop install bergbok/pkg2zip'
     )
-    "Notepad++" = @(
-        "choco install notepadplusplus.install -y"
-        # "scoop install extras/notepadplusplus" # taskbar entry
-        "winget install --id=Notepad++.Notepad++ --exact --accept-source-agreements --accept-package-agreements"
+    'Notepad++' = @(
+        'choco install notepadplusplus.install -y'
+        # 'scoop install extras/notepadplusplus' # taskbar entry
+        'winget install --id=Notepad++.Notepad++ --exact --accept-source-agreements --accept-package-agreements'
     )
-    "NZXT CAM" = @(
-        "choco install nzxt-cam -y"
-        "winget install --id=NZXT.CAM --exact --accept-source-agreements --accept-package-agreements"
+    'NZXT CAM' = @(
+        'choco install nzxt-cam -y'
+        'winget install --id=NZXT.CAM --exact --accept-source-agreements --accept-package-agreements'
     )
-    "OBS Studio" = @(
-        "choco install obs-studio.install -y"
+    'OBS Studio' = @(
+        'choco install obs-studio.install -y'
         "scoop install extras/obs-studio; Start-Process '$env:USERPROFILE\scoop\apps\obs-studio\current\data\obs-plugins\win-dshow\virtualcam-install.bat'"
-        "winget install --id=OBSProject.OBSStudio --exact --accept-source-agreements --accept-package-agreements"
+        'winget install --id=OBSProject.OBSStudio --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Obsidian" = @(
-        "choco install obsidian -y"
-        # "scoop install extras/obsidian" # taskbar entry
-        "winget install --id=Obsidian.Obsidian --exact --accept-source-agreements --accept-package-agreements"
+    'Obsidian' = @(
+        'choco install obsidian -y'
+        # 'scoop install extras/obsidian' # taskbar entry
+        'winget install --id=Obsidian.Obsidian --exact --accept-source-agreements --accept-package-agreements'
     )
-    "oh-my-posh" = @(
-        "choco install oh-my-posh -y"
-        "scoop install main/oh-my-posh"
-        "winget install --id=JanDeDobbeleer.OhMyPosh --exact --accept-source-agreements --accept-package-agreements"
+    'oh-my-posh' = @(
+        'choco install oh-my-posh -y'
+        'scoop install main/oh-my-posh'
+        'winget install --id=JanDeDobbeleer.OhMyPosh --exact --accept-source-agreements --accept-package-agreements'
     )
-    "onefetch" = @(
-        "choco install onefetch -y"
-        "scoop install extras/onefetch"
-        "winget install --id=o2sh.onefetch --exact --accept-source-agreements --accept-package-agreements"
+    'onefetch' = @(
+        'choco install onefetch -y'
+        'scoop install extras/onefetch'
+        'winget install --id=o2sh.onefetch --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Open-Shell" = @(
-        "choco install open-shell -y"
-        "scoop install nonportable/open-shell-np"
-        "winget install --id=Open-Shell.Open-Shell-Menu --exact --accept-source-agreements --accept-package-agreements"
+    'Open-Shell' = @(
+        'choco install open-shell -y'
+        'scoop install nonportable/open-shell-np'
+        'winget install --id=Open-Shell.Open-Shell-Menu --exact --accept-source-agreements --accept-package-agreements'
     )
-    "OpenRGB" = @(
-        "choco install openrgb -y"
-        "scoop install extras/openrgb"
-        "winget install --id=CalcProgrammer1.OpenRGB --exact --accept-source-agreements --accept-package-agreements"
+    'OpenRGB' = @(
+        'choco install openrgb -y'
+        'scoop install extras/openrgb'
+        'winget install --id=CalcProgrammer1.OpenRGB --exact --accept-source-agreements --accept-package-agreements'
     )
-    "OpenWithView" = @(
-        "choco install openwithview -y"
-        "scoop install nirsoft/openwithview"
+    'OpenWithView' = @(
+        'choco install openwithview -y'
+        'scoop install nirsoft/openwithview'
     )
-    "Orca" = @(
-        "choco install orca -y"
-        "scoop install extras/orca"
+    'Orca' = @(
+        'choco install orca -y'
+        'scoop install extras/orca'
     )
-    "osu!" = @(
-        "choco install osu -y"
-        "scoop install games/osulazer"
-        "winget install --id=ppy.osu --exact --accept-source-agreements --accept-package-agreements"
+    'osu!' = @(
+        'choco install osu -y'
+        'scoop install games/osulazer'
+        'winget install --id=ppy.osu --exact --accept-source-agreements --accept-package-agreements'
     )
-    "PCSX2" = @(
-        "choco install pcsx2 -y; scoop install bergbok/ps2-bios"
-        "scoop install games/pcsx2; scoop install bergbok/ps2-bios"
-        "winget install --id=PCSX2Team.PCSX2 --exact --accept-source-agreements --accept-package-agreements' scoop install bergbok/ps2-bios"
+    'PCSX2' = @(
+        'choco install pcsx2 -y; scoop install bergbok/ps2-bios'
+        'scoop install games/pcsx2; scoop install bergbok/ps2-bios'
+        'winget install --id=PCSX2Team.PCSX2 --exact --accept-source-agreements --accept-package-agreements; scoop install bergbok/ps2-bios'
     )
-    "PeaZip" = @(
-        "choco install peazip -y"
-        "scoop install extras/peazip"
-        "winget install --id=Giorgiotani.Peazip --exact --accept-source-agreements --accept-package-agreements"
+    'PeaZip' = @(
+        'choco install peazip -y'
+        'scoop install extras/peazip'
+        'winget install --id=Giorgiotani.Peazip --exact --accept-source-agreements --accept-package-agreements'
     )
-    "PowerShell Update" = @(
-        "winget install --id=Microsoft.PowerShell -e --accept-source-agreements --accept-package-agreements"
+    'PowerShell Update' = @(
+        'winget install --id=Microsoft.PowerShell -e --accept-source-agreements --accept-package-agreements'
     )
-    "PowerToys" = @(
-        "choco install powertoys -y"
+    'PowerToys' = @(
+        'choco install powertoys -y'
         # https://github.com/microsoft/PowerToys/issues/636
-        "scoop install nonportable/powertoys-np"
-        "winget install --id=Microsoft.PowerToys --exact --accept-source-agreements --accept-package-agreements"
+        'scoop install nonportable/powertoys-np'
+        'winget install --id=Microsoft.PowerToys --exact --accept-source-agreements --accept-package-agreements'
     )
-    "PPSSPP" = @(
-        "choco install ppsspp -y"
-        "scoop install games/ppsspp"
-        "winget install --id=PPSSPPTeam.PPSSPP --exact --accept-source-agreements --accept-package-agreements"
+    'PPSSPP' = @(
+        'choco install ppsspp -y'
+        'scoop install games/ppsspp'
+        'winget install --id=PPSSPPTeam.PPSSPP --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Process Explorer" = @(
-        "choco install procexp -y"
-        "scoop install sysinternals/process-explorer"
-        "winget install --id=Microsoft.Sysinternals.ProcessExplorer --exact --accept-source-agreements --accept-package-agreements"
+    'Process Explorer' = @(
+        'choco install procexp -y'
+        'scoop install sysinternals/process-explorer'
+        'winget install --id=Microsoft.Sysinternals.ProcessExplorer --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Process Monitor" = @(
-        "choco install procmon -y"
-        "scoop install sysinternals/procmon"
-        "winget install --id=Microsoft.Sysinternals.ProcessMonitor --exact --accept-source-agreements --accept-package-agreements"
+    'Process Monitor' = @(
+        'choco install procmon -y'
+        'scoop install sysinternals/procmon'
+        'winget install --id=Microsoft.Sysinternals.ProcessMonitor --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Project 64" = @(
-        "choco install project64 -y"
-        "scoop install games/project64"
-        "winget install --id=Project64.Project64 --exact --accept-source-agreements --accept-package-agreements"
+    'Project 64' = @(
+        'choco install project64 -y'
+        'scoop install games/project64'
+        'winget install --id=Project64.Project64 --exact --accept-source-agreements --accept-package-agreements'
     )
-    "ps2exe" = @(
-        "scoop install bergbok/ps2exe"
+    'ps2exe' = @(
+        'scoop install bergbok/ps2exe'
         # "Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted -SourceLocation 'https://www.powershellgallery.com/api/v2'"
-        # "Install-Module -Name ps2exe -AcceptLicense"
+        # 'Install-Module -Name ps2exe -AcceptLicense'
     )
-    "PsShutdown" = @(
-        "choco install psshutdown -y"
-        "scoop install sysinternals/psshutdown"
+    'PsShutdown' = @(
+        'choco install psshutdown -y'
+        'scoop install sysinternals/psshutdown'
     )
-    "Python" = @(
-        # "choco install python -y" # hangs at 'Restricting write permissions to Administrators...'
-        # "scoop install main/python"//
-        "winget install --id=Python.Python.3.13 --exact --accept-source-agreements --accept-package-agreements"
+    'Python' = @(
+        # 'choco install python -y' # hangs at 'Restricting write permissions to Administrators...'
+        # 'scoop install main/python'
+        'winget install --id=Python.Python.3.13 --exact --accept-source-agreements --accept-package-agreements'
     )
-    "qBittorrent" = @(
-        "choco install qbittorrent -y"
-        # "scoop install extras/qbittorrent" # taskbar entry
-        "winget install --id=qbittorrent.qBittorrent --exact --accept-source-agreements --accept-package-agreements"
+    'qBittorrent' = @(
+        'choco install qbittorrent -y'
+        # 'scoop install extras/qbittorrent' # taskbar entry
+        'winget install --id=qbittorrent.qBittorrent --exact --accept-source-agreements --accept-package-agreements'
     )
-    "qBittorrent Enhanced" = @(
-        "choco install qbittorrent-enhanced -y"
-        # "scoop install extras/qbittorrent-enhanced" # taskbar entry
-        "winget install --id=c0re100.qBittorrent-Enhanced-Edition --exact --accept-source-agreements --accept-package-agreements"
+    'qBittorrent Enhanced' = @(
+        'choco install qbittorrent-enhanced -y'
+        # 'scoop install extras/qbittorrent-enhanced' # taskbar entry
+        'winget install --id=c0re100.qBittorrent-Enhanced-Edition --exact --accept-source-agreements --accept-package-agreements'
     )
-    "QTTabBar" = @(
-        # "scoop install nonportable/qttabbar-indiff-np" # restarts PC
-        "winget install --id=indiff.QTTabBar --exact --accept-source-agreements --accept-package-agreements"
+    'QTTabBar' = @(
+        # 'scoop install nonportable/qttabbar-indiff-np' # restarts PC
+        'winget install --id=indiff.QTTabBar --exact --accept-source-agreements --accept-package-agreements'
     )
-    "r2modman" = @(
-        "scoop install games/r2modman"
-        "winget install --id=ebkr.r2modman --exact --accept-source-agreements --accept-package-agreements"
+    'r2modman' = @(
+        'scoop install games/r2modman'
+        'winget install --id=ebkr.r2modman --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Rainmeter" = @(
-        "choco install rainmeter -y"
-        "scoop install extras/rainmeter"
-        "winget install --id=Rainmeter.Rainmeter --exact --accept-source-agreements --accept-package-agreements"
+    'Rainmeter' = @(
+        'choco install rainmeter -y'
+        'scoop install extras/rainmeter'
+        'winget install --id=Rainmeter.Rainmeter --exact --accept-source-agreements --accept-package-agreements'
     )
-    "RPCS3" = @(
-        "choco install rpcs3 --pre -y; scoop install games/ps3-system-software"
-        "scoop install games/rpcs3; scoop install games/ps3-system-software"
-        "winget install --id=RPCS3.RPCS3 --exact --accept-source-agreements --accept-package-agreements; scoop install games/ps3-system-software"
+    'RPCS3' = @(
+        'choco install rpcs3 --pre -y; scoop install games/ps3-system-software'
+        'scoop install games/rpcs3; scoop install games/ps3-system-software'
+        'winget install --id=RPCS3.RPCS3 --exact --accept-source-agreements --accept-package-agreements; scoop install games/ps3-system-software'
     )
-    "Ruby" = @(
-        "choco install ruby -y"
+    'Ruby' = @(
+        'choco install ruby -y'
         "scoop install main/ruby; scoop install msys2; Start-Process powershell -Args `"msys2 -c 'exit'`" -Wait; ridk install 3"
-        "winget install --id=RubyInstallerTeam.RubyWithDevKit.3.1 --exact --accept-source-agreements --accept-package-agreements"
+        'winget install --id=RubyInstallerTeam.RubyWithDevKit.3.1 --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Ruffle" = @(
-        "scoop install versions/ruffle-nightly"
+    'Ruffle' = @(
+        'scoop install versions/ruffle-nightly'
     )
-    "Rufus" = @(
-        "choco install rufus -y"
-        "scoop install extras/rufus"
-        "winget install --id=Rufus.Rufus --exact --accept-source-agreements --accept-package-agreements"
+    'Rufus' = @(
+        'choco install rufus -y'
+        'scoop install extras/rufus'
+        'winget install --id=Rufus.Rufus --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Rust" = @(
-        "choco install rust -y"
-        "scoop install main/rust"
-        "winget install --id=Rustlang.Rust.GNU --exact --accept-source-agreements --accept-package-agreements"
+    'Rust' = @(
+        'choco install rust -y'
+        'scoop install main/rust'
+        'winget install --id=Rustlang.Rust.GNU --exact --accept-source-agreements --accept-package-agreements'
     )
-    "RustDesk" = @(
-        "choco install rustdesk -y"
-        "scoop install extras/rustdesk"
-        "winget install --id=RustDesk.RustDesk --exact --accept-source-agreements --accept-package-agreements"
+    'RustDesk' = @(
+        'choco install rustdesk -y'
+        'scoop install extras/rustdesk'
+        'winget install --id=RustDesk.RustDesk --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Rusty PSN CLI" = @(
-        "scoop install bergbok/rusty-psn-cli"
+    'Rusty PSN CLI' = @(
+        'scoop install bergbok/rusty-psn-cli'
     )
-    "Rusty PSN GUI" = @(
-        "scoop install bergbok/rusty-psn"
+    'Rusty PSN GUI' = @(
+        'scoop install bergbok/rusty-psn'
     )
-    "Ryujinx" = @(
-        # "choco install ryujinx -y"
-        # "scoop install games/ryujinx"
-        # "winget install --id=Ryujinx.Ryujinx --exact --accept-source-agreements --accept-package-agreements"
-        "scoop install bergbok/ryujinx-mirror"
+    'Ryujinx' = @(
+        # 'choco install ryujinx -y'
+        # 'scoop install games/ryujinx'
+        # 'winget install --id=Ryujinx.Ryujinx --exact --accept-source-agreements --accept-package-agreements'
+        'scoop install bergbok/ryujinx-mirror'
     )
-    "SameBoy" = @(
-        "choco install sameboy -y"
-        "scoop install games/sameboy"
-        "winget install --id=LIJI32.SameBoy --exact --accept-source-agreements --accept-package-agreements"
+    'SameBoy' = @(
+        'choco install sameboy -y'
+        'scoop install games/sameboy'
+        'winget install --id=LIJI32.SameBoy --exact --accept-source-agreements --accept-package-agreements'
     )
-    "scdl" = @(
-        "pip install scdl"
+    'scdl' = @(
+        'pip install scdl'
     )
-    "SecureUxTheme" = @(
-        "scoop install extras/secureuxtheme"
-        "winget install --id=namazso.SecureUXTheme --exact --accept-source-agreements --accept-package-agreements"
+    'SecureUxTheme' = @(
+        'scoop install extras/secureuxtheme'
+        'winget install --id=namazso.SecureUXTheme --exact --accept-source-agreements --accept-package-agreements'
     )
-    "SGDBoop" = @(
-        "scoop install bergbok/sgdboop"
+    'SGDBoop' = @(
+        'scoop install bergbok/sgdboop'
     )
-    "ShellExView" = @(
-        "choco install shexview.portable -y"
-        "scoop install nirsoft/shexview"
+    'ShellExView' = @(
+        'choco install shexview.portable -y'
+        'scoop install nirsoft/shexview'
     )
-    "ShellMenuNew" = @(
-        "choco install shellmenunew -y"
-        "scoop install nirsoft/shellmenunew"
+    'ShellMenuNew' = @(
+        'choco install shellmenunew -y'
+        'scoop install nirsoft/shellmenunew'
     )
-    "ShellMenuView" = @(
-        "choco install shmnview -y"
-        "scoop install nirsoft/shmnview"
+    'ShellMenuView' = @(
+        'choco install shmnview -y'
+        'scoop install nirsoft/shmnview'
     )
-    "Ship of Harkinian" = @(
-        "scoop install games/shipwright"
+    'Ship of Harkinian' = @(
+        'scoop install games/shipwright'
     )
-    "SoulseekQt" = @(
-        "scoop install extras/soulseekqt"
+    'SoulseekQt' = @(
+        'scoop install extras/soulseekqt'
     )
-    "SoundVolumeView" = @(
-        "choco install soundvolumeview -y"
-        "scoop install nirsoft/soundvolumeview"
-        "winget install --id=NirSoft.SoundVolumeView --exact --accept-source-agreements --accept-package-agreements"
+    'SoundVolumeView' = @(
+        'choco install soundvolumeview -y'
+        'scoop install nirsoft/soundvolumeview'
+        'winget install --id=NirSoft.SoundVolumeView --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Spicetify" = @(
-        "choco install spicetify-cli -y"
-        "scoop install main/spicetify-cli"
-        "winget install --id=Spicetify.Spicetify --exact --accept-source-agreements --accept-package-agreements"
+    'Spicetify' = @(
+        'choco install spicetify-cli -y'
+        'scoop install main/spicetify-cli'
+        'winget install --id=Spicetify.Spicetify --exact --accept-source-agreements --accept-package-agreements'
         # Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/spicetify/cli/main/install.ps1 | Invoke-Expression
     )
-    "Spotify" = @(
+    'Spotify' = @(
         # Latest:
-        # "choco install spotify -y; choco pin add -n=spotify"
-        # # "scoop install extras/spotify; scoop hold spotify" # https://github.com/ScoopInstaller/Extras/issues/12429, also taskbar entry
-        # "winget install --id=Spotify.Spotify --exact --accept-source-agreements --accept-package-agreements; winget pin add --id=Spotify.Spotify"
+        # 'choco install spotify -y; choco pin add -n=spotify'
+        # # 'scoop install extras/spotify; scoop hold spotify' # https://github.com/ScoopInstaller/Extras/issues/12429, also taskbar entry
+        # 'winget install --id=Spotify.Spotify --exact --accept-source-agreements --accept-package-agreements; winget pin add --id=Spotify.Spotify'
         # v1.2.45.454:
-        # "choco install spotify -y --version=1.2.45.454 --ignore-checksums; choco pin add -n=spotify"
-        # # "scoop install bergbok/spotify; scoop hold spotify" # https://github.com/ScoopInstaller/Extras/issues/12429, also taskbar entry
+        # 'choco install spotify -y --version=1.2.45.454 --ignore-checksums; choco pin add -n=spotify'
+        # # 'scoop install bergbok/spotify; scoop hold spotify' # https://github.com/ScoopInstaller/Extras/issues/12429, also taskbar entry
         "winget install --id=Spotify.Spotify -v '1.2.45.454.gc16ec9f6' --exact --accept-source-agreements --accept-package-agreements; winget pin add --id=Spotify.Spotify"
     )
-    "ssh" = @(
-        "choco install openssh -y"
-        "scoop install main/openssh"
+    'ssh' = @(
+        'choco install openssh -y'
+        'scoop install main/openssh'
     )
-    "Steam" = @(
-        "choco install steam -y"
-        "scoop install bergbok/steam"
-        "winget install --id=Valve.Steam --exact --accept-source-agreements --accept-package-agreements"
+    'Steam' = @(
+        'choco install steam -y'
+        'scoop install bergbok/steam'
+        'winget install --id=Valve.Steam --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Steam Achievement Manager" = @(
-        # "choco install steamachievementmanager -y"
-        # "scoop install games/steam-achievement-manager"
-        "scoop install games/steam-achievement-manager-syntaxtm"
+    'Steam Achievement Manager' = @(
+        # 'choco install steamachievementmanager -y'
+        # 'scoop install games/steam-achievement-manager'
+        'scoop install games/steam-achievement-manager-syntaxtm'
     )
-    "Steam ROM Manager" = @(
-        "choco install steam-rom-manager -y"
-        "scoop install games/steam-rom-manager"
-        "winget install --id=SteamGridDB.RomManager --exact --accept-source-agreements --accept-package-agreements"
+    'Steam ROM Manager' = @(
+        'choco install steam-rom-manager -y'
+        'scoop install games/steam-rom-manager'
+        'winget install --id=SteamGridDB.RomManager --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Streamlink Twitch GUI" = @(
-        "choco install streamlink-twitch-gui -y"
-        "scoop install extras/streamlink-twitch-gui"
-        "winget install --id=Streamlink.Streamlink.TwitchGui --exact --accept-source-agreements --accept-package-agreements"
+    'Streamlink Twitch GUI' = @(
+        'choco install streamlink-twitch-gui -y'
+        'scoop install extras/streamlink-twitch-gui'
+        'winget install --id=Streamlink.Streamlink.TwitchGui --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Stremio" = @(
-        "choco install stremio -y"
+    'Stremio' = @(
+        'choco install stremio -y'
         "scoop install extras/stremio; reg import '$env:USERPROFILE\scoop\apps\stremio\current\install-context.reg' 2>`$null"
-        "winget install --id=Stremio.Stremio --exact --accept-source-agreements --accept-package-agreements"
+        'winget install --id=Stremio.Stremio --exact --accept-source-agreements --accept-package-agreements'
     )
-    "gsudo" = @(
-        "choco install gsudo -y"
-        "scoop install main/gsudo"
-        "winget install --id=gerardog.gsudo --exact --accept-source-agreements --accept-package-agreements"
+    'gsudo' = @(
+        'choco install gsudo -y'
+        'scoop install main/gsudo'
+        'winget install --id=gerardog.gsudo --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Syncthing" = @(
-        "choco install syncthing -y"
-        # "scoop install main/syncthing" # https://github.com/ScoopInstaller/Main/issues/5888
-        "winget install --id=Syncthing.Syncthing --exact --accept-source-agreements --accept-package-agreements"
+    'Syncthing' = @(
+        'choco install syncthing -y'
+        # 'scoop install main/syncthing' # https://github.com/ScoopInstaller/Main/issues/5888
+        'winget install --id=Syncthing.Syncthing --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Syncthing Tray" = @(
-        "choco install syncthingtray -y"
-        "scoop install extras/syncthingtray"
-        "winget install --id=Martchus.syncthingtray --exact --accept-source-agreements --accept-package-agreements"
+    'Syncthing Tray' = @(
+        'choco install syncthingtray -y'
+        'scoop install extras/syncthingtray'
+        'winget install --id=Martchus.syncthingtray --exact --accept-source-agreements --accept-package-agreements'
     )
-    "TaskbarX" = @(
-        "choco install taskbarx -y"
-        "scoop install extras/taskbarx"
+    'TaskbarX' = @(
+        'choco install taskbarx -y'
+        'scoop install extras/taskbarx'
     )
-    "TeraCopy" = @(
-        "choco install teracopy -y"
-        "scoop install nonportable/teracopy-np"
-        "winget install --id=CodeSector.TeraCopy --exact --accept-source-agreements --accept-package-agreements"
+    'TeraCopy' = @(
+        'choco install teracopy -y'
+        'scoop install nonportable/teracopy-np'
+        'winget install --id=CodeSector.TeraCopy --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Twitch Downloader CLI" = @(
-        "choco install twitchdownloader-cli -y"
-        "scoop install main/twitchdownloader-cli"
+    'Twitch Downloader CLI' = @(
+        'choco install twitchdownloader-cli -y'
+        'scoop install main/twitchdownloader-cli'
     )
-    "Twitch Downloader" = @(
-        "choco install twitchdownloader-gui -y"
-        "scoop install extras/twitchdownloader"
+    'Twitch Downloader' = @(
+        'choco install twitchdownloader-gui -y'
+        'scoop install extras/twitchdownloader'
     )
-    "Twitch Emote Downloader" = @(
-        "scoop install bergbok/twitch-emote-downloader"
+    'Twitch Emote Downloader' = @(
+        'scoop install bergbok/twitch-emote-downloader'
     )
-    "UniGetUI" = @(
-        "choco install wingetui; scoop install main/scoop-search"
-        "scoop install extras/unigetui; scoop install main/scoop-search"
-        "winget install --id MartiCliment.UniGetUI --exact --accept-source-agreements --accept-package-agreements; scoop install main/scoop-search"
+    'UniGetUI' = @(
+        'choco install wingetui; scoop install main/scoop-search'
+        'scoop install extras/unigetui; scoop install main/scoop-search'
+        'winget install --id MartiCliment.UniGetUI --exact --accept-source-agreements --accept-package-agreements; scoop install main/scoop-search'
     )
-    "Ventoy" = @(
-        "choco install ventoy -y"
-        "scoop install extras/ventoy"
-        "winget install --id=Ventoy.Ventoy --exact --accept-source-agreements --accept-package-agreements"
+    'Ventoy' = @(
+        'choco install ventoy -y'
+        'scoop install extras/ventoy'
+        'winget install --id=Ventoy.Ventoy --exact --accept-source-agreements --accept-package-agreements'
     )
-    "VirtualBox" = @(
-        # "choco install virtualbox -y" # floods terminal
-        # "scoop install nonportable/virtualbox-np" # install script doesn't use erroraction silentlycontinue
-        "winget install --id=Oracle.VirtualBox --exact --accept-source-agreements --accept-package-agreements"
+    'VirtualBox' = @(
+        # 'choco install virtualbox -y' # floods terminal
+        # 'scoop install nonportable/virtualbox-np' # install script doesn't use erroraction silentlycontinue
+        'winget install --id=Oracle.VirtualBox --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Visual C++ Redistributable" = @(
-        # "choco install vcredist140"
-        "scoop install extras/vcredist"
-        # "winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements --accept-package-agreements"
+    'Visual C++ Redistributable' = @(
+        # 'choco install vcredist140'
+        'scoop install extras/vcredist'
+        # 'winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Visual Studio Code" = @(
-        "choco install vscode -y"
+    'Visual Studio Code' = @(
+        'choco install vscode -y'
         # "scoop install extras/vscode; script:Log 'VSCode: Optionally: reg import `"$env:USERPROFILE\scoop\apps\vscode\current\install-context.reg`"; reg import `"$env:USERPROFILE\scoop\apps\vscode\current\install-associations.reg`"'" # taskbar entry
-        "winget install --id=Microsoft.VisualStudioCode --exact --accept-source-agreements --accept-package-agreements"
+        'winget install --id=Microsoft.VisualStudioCode --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Vita3K" = @(
-        "scoop install games/vita3k --skip-hash-check" # https://github.com/Calinou/scoop-games/issues?q=vita3k%40
-        "winget install --id=Vita3K.Vita3K --exact --accept-source-agreements --accept-package-agreements"
+    'Vita3K' = @(
+        'scoop install games/vita3k --skip-hash-check' # https://github.com/Calinou/scoop-games/issues?q=vita3k%40
+        'winget install --id=Vita3K.Vita3K --exact --accept-source-agreements --accept-package-agreements'
     )
-    "VLC" = @(
-        "choco install vlc -y"
-        # "scoop install extras/vlc" # doesn't show an option in ms-settings:defaultapps
-        "winget install --id=VideoLAN.VLC --exact --accept-source-agreements --accept-package-agreements"
+    'VLC' = @(
+        'choco install vlc -y'
+        # 'scoop install extras/vlc' # doesn't show an option in ms-settings:defaultapps
+        'winget install --id=VideoLAN.VLC --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Voicemod" = @(
-        # "choco install voicemod -y"
-        "scoop install bergbok/voicemod"
+    'Voicemod' = @(
+        # 'choco install voicemod -y'
+        'scoop install bergbok/voicemod'
     )
-    "webp2gif" = @(
-        "scoop install bergbok/webp2gif"
+    'webp2gif' = @(
+        'scoop install bergbok/webp2gif'
     )
-    "whois" = @(
-        "choco install whois -y"
-        "scoop install sysinternals/whois"
+    'whois' = @(
+        'choco install whois -y'
+        'scoop install sysinternals/whois'
     )
-    "WinAero Tweaker" = @(
-        "choco install winaero-tweaker.portable -y"
-        "scoop install extras/winaero-tweaker"
-        "winget install --id=winaero.tweaker --exact --accept-source-agreements --accept-package-agreements"
+    'WinAero Tweaker' = @(
+        'choco install winaero-tweaker.portable -y'
+        'scoop install extras/winaero-tweaker'
+        'winget install --id=winaero.tweaker --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Windows Terminal" = @(
-        "choco install microsoft-windows-terminal -y"
-        # "scoop install extras/windows-terminal; script:Log 'Windows Terminal: Optionally run reg import $env:USERPROFILE\scoop\apps\windows-terminal\install-context.reg'" # taskbar entry
-        "winget install --id=Microsoft.WindowsTerminal --exact --accept-source-agreements --accept-package-agreements"
+    'Windows Terminal' = @(
+        'choco install microsoft-windows-terminal -y'
+        # 'scoop install extras/windows-terminal; script:Log 'Windows Terminal: Optionally run reg import $env:USERPROFILE\scoop\apps\windows-terminal\install-context.reg'' # taskbar entry
+        'winget install --id=Microsoft.WindowsTerminal --exact --accept-source-agreements --accept-package-agreements'
     )
-    "WinRAR" = @(
-        "choco install winrar -y"
+    'WinRAR' = @(
+        'choco install winrar -y'
         "scoop install extras/winrar; script:Log 'WinRAR: Set up context menu within settings window'"
-        "winget install --id=RARLab.WinRAR --exact --accept-source-agreements --accept-package-agreements"
+        'winget install --id=RARLab.WinRAR --exact --accept-source-agreements --accept-package-agreements'
     )
-    "WinSCP" = @(
-        "choco install winscp -y"
-        "scoop install extras/winscp"
-        "winget install --id=WinSCP.WinSCP --exact --accept-source-agreements --accept-package-agreements"
+    'WinSCP' = @(
+        'choco install winscp -y'
+        'scoop install extras/winscp'
+        'winget install --id=WinSCP.WinSCP --exact --accept-source-agreements --accept-package-agreements'
     )
-    "WinSetView" = @(
-        "scoop install bergbok/winsetview"
+    'WinSetView' = @(
+        'scoop install bergbok/winsetview'
     )
-    "WizTree" = @(
-        "choco install wiztree -y"
-        "scoop install extras/wiztree"
-        "winget install --id=AntibodySoftware.WizTree --exact --accept-source-agreements --accept-package-agreements"
+    'WizTree' = @(
+        'choco install wiztree -y'
+        'scoop install extras/wiztree'
+        'winget install --id=AntibodySoftware.WizTree --exact --accept-source-agreements --accept-package-agreements'
     )
-    "WSL" = @(
-        "choco install wsl2 -y"
-        "winget install --id=Microsoft.WSL --exact --accept-source-agreements --accept-package-agreements"
+    'WSL' = @(
+        'choco install wsl2 -y'
+        'winget install --id=Microsoft.WSL --exact --accept-source-agreements --accept-package-agreements'
     )
-    "WSL - Arch" = @(
-        "choco install wsl-archlinux -y"
-        # "scoop install extras/archwsl"
+    'WSL - Arch' = @(
+        'choco install wsl-archlinux -y'
+        # 'scoop install extras/archwsl'
     )
-    "WSL - Debian" = @(
-        "wsl --install --no-launch --distribution Debian"
+    'WSL - Debian' = @(
+        'wsl --install --no-launch --distribution Debian'
     )
-    "Yarn" = @(
-        "choco install yarn -y"
-        "scoop install main/yarn"
-        "winget install --id=Yarn.Yarn --exact --accept-source-agreements --accept-package-agreements"
+    'Yarn' = @(
+        'choco install yarn -y'
+        'scoop install main/yarn'
+        'winget install --id=Yarn.Yarn --exact --accept-source-agreements --accept-package-agreements'
     )
-    "yt-dlp" = @(
-        "choco install yt-dlp -y"
-        "scoop install versions/yt-dlp-master"
-        "winget install --id=yt-dlp.yt-dlp --exact --accept-source-agreements --accept-package-agreements"
+    'yt-dlp' = @(
+        'choco install yt-dlp -y'
+        'scoop install versions/yt-dlp-master'
+        'winget install --id=yt-dlp.yt-dlp --exact --accept-source-agreements --accept-package-agreements'
     )
-    "Xtreme Download Manager" = @(
-        "choco install xdm -y"
-        "scoop install extras/xdman"
-        "winget install --id=subhra74.XtremeDownloadManager --exact --accept-source-agreements --accept-package-agreements"
+    'Xtreme Download Manager' = @(
+        'choco install xdm -y'
+        'scoop install extras/xdman'
+        'winget install --id=subhra74.XtremeDownloadManager --exact --accept-source-agreements --accept-package-agreements'
     )
 }
 
 $script:ordering = @{
-    "Microsoft Activation Scripts" = 1
-    "Uninstall Edge" = 2
-    "Everything" = 3
-    "Everything CLI" = 4
-    "Wallpaper" = 5
-    "Visual C++ Redistributable" = 6
-    "Syncthing" = 6
-    "KeePassXC" = 8
-    "Firefox" = 9
-    "f.lux" = 10
-    "Python" = 11
-    "Steam" = 12
-    "Sophia Script" = 13
-    "SoS Optimize Harden Debloat" = 14
-    "gsudo" = 15
-    "Spotify" = 101
-    "Discord" = 102
-    "Visual Studio Code" = 103
-    "Gpg4win" = 104
-    "git" = 105
-    "gdown" = 106
-    "SecureUxTheme" = 107
-    "ps2exe" = 108
-    "WSL" = 109
-    "LibreOffice" = 110
-    "Microsoft Office" = 111
-    ".NET 8.0 Desktop Runtime" = 112
-    "VLC" = 113
-    "PowerShell Update" = 114
-    "oh-my-posh" = 115
-    "Node.js" = 116
-    "yarn" = 117
-    "bun" = 118
-    "Ares" = 201
-    "CEMU" = 202
-    "Dolhpin" = 203
-    "Duckstation" = 204
-    "Lime3DS" = 205
-    "melonDS" = 206
-    "PCSX2" = 207
-    "PPSSPP" = 208
-    "RPCS3" = 209
-    "Ruffle" = 210
-    "Ryujinx" = 211
-    "SameBoy" = 212
-    "Vita3K" = 213
-    "calibre" = 301
-    "DS4Windows" = 302
-    "Flashpoint Infinity" = 303
-    "Elden Ring Save Manager" = 304
-    "GifCam" = 305
-    "CPUID HWMonitor" = 306
-    "LibreHardwareMonitor" = 307
-    "PowerToys" = 308
-    "TaskbarX" = 309
-    "qBitTorrent" = 310
-    "qBitTorrent Enhanced" = 311
+    'Microsoft Activation Scripts' = 1
+    'Uninstall Edge' = 2
+    'Everything' = 3
+    'Everything CLI' = 4
+    'Wallpaper' = 5
+    'Visual C++ Redistributable' = 6
+    'Syncthing' = 6
+    'KeePassXC' = 8
+    'Firefox' = 9
+    'f.lux' = 10
+    'Python' = 11
+    'Steam' = 12
+    'Sophia Script' = 13
+    'SoS Optimize Harden Debloat' = 14
+    'gsudo' = 15
+    'Spotify' = 101
+    'Discord' = 102
+    'Visual Studio Code' = 103
+    'Gpg4win' = 104
+    'git' = 105
+    'gdown' = 106
+    'SecureUxTheme' = 107
+    'ps2exe' = 108
+    'WSL' = 109
+    'LibreOffice' = 110
+    'Microsoft Office' = 111
+    '.NET 8.0 Desktop Runtime' = 112
+    'VLC' = 113
+    'PowerShell Update' = 114
+    'oh-my-posh' = 115
+    'Node.js' = 116
+    'yarn' = 117
+    'bun' = 118
+    'Ares' = 201
+    'CEMU' = 202
+    'Dolhpin' = 203
+    'Duckstation' = 204
+    'Lime3DS' = 205
+    'melonDS' = 206
+    'PCSX2' = 207
+    'PPSSPP' = 208
+    'RPCS3' = 209
+    'Ruffle' = 210
+    'Ryujinx' = 211
+    'SameBoy' = 212
+    'Vita3K' = 213
+    'calibre' = 301
+    'DS4Windows' = 302
+    'Flashpoint Infinity' = 303
+    'Elden Ring Save Manager' = 304
+    'GifCam' = 305
+    'CPUID HWMonitor' = 306
+    'LibreHardwareMonitor' = 307
+    'PowerToys' = 308
+    'TaskbarX' = 309
+    'qBitTorrent' = 310
+    'qBitTorrent Enhanced' = 311
 }
 
 $script:preselected = @(
-    ".NET 8.0 Desktop Runtime"
-    "After Dark CC Theme"
-    "Ares"
-    "Audacity"
-    "AudioDeviceCmdlets"
-    "AutoHotkey"
-    "Autologon"
-    "AutoRuns"
-    "BCUninstaller"
-    "BetterDiscord"
-    "BFG Repo-Cleaner"
-    "Bun"
-    "Calibre"
-    "CEMU"
-    "Chatterino2"
-    "Cheat Engine"
-    "Cmder"
-    "Command Prompt Aliases"
-    "CreamInstaller"
-    "Cyberpunk Waifus Font"
-    "Deno"
-    "Discord"
-    "Discord OpenAsar"
-    "DisplayFusion"
-    "Docker CLI"
-    "Docker Completion"
-    "Docker Compose"
-    "Docker Engine"
-    "Dolphin"
-    "DS4Windows"
-    "DuckStation"
-    "Elden Ring Save Manager"
-    "Everything PowerToys"
-    "ExplorerPatcher"
-    "f.lux"
-    "ffmpeg"
-    "FileTypesMan"
-    "Firefox"
-    "Flameshot"
-    "Flash-enabled Chromium"
-    "FlicFlac"
-    "FreeTube"
-    "GifCam"
-    "Gifsicle"
-    "GitHub CLI"
-    "GitHub Desktop"
-    "Godot (Mono)"
-    "Gpg4win"
-    "gsudo"
-    "HandBrake"
-    "HeidiSQL"
-    "HypnOS Cursor"
-    "IconsExtract"
-    "ImageGlass"
-    "KeePassXC"
-    "KDE Connect"
-    "khinsider.py"
-    "Legendary"
-    "LibreHardwareMonitor"
-    "LibreOffice"
-    "Lime3DS"
-    "Lumafly"
+    '.NET 8.0 Desktop Runtime'
+    'After Dark CC Theme'
+    'Ares'
+    'Audacity'
+    'AudioDeviceCmdlets'
+    'AutoHotkey'
+    'Autologon'
+    'AutoRuns'
+    'BCUninstaller'
+    'BetterDiscord'
+    'BFG Repo-Cleaner'
+    'Bun'
+    'Calibre'
+    'CEMU'
+    'Chatterino2'
+    'Cheat Engine'
+    'Cmder'
+    'Command Prompt Aliases'
+    'CreamInstaller'
+    'Cyberpunk Waifus Font'
+    'Deno'
+    'Discord'
+    'Discord OpenAsar'
+    'DisplayFusion'
+    'Docker CLI'
+    'Docker Completion'
+    'Docker Compose'
+    'Docker Engine'
+    'Dolphin'
+    'DS4Windows'
+    'DuckStation'
+    'Elden Ring Save Manager'
+    'Everything PowerToys'
+    'ExplorerPatcher'
+    'f.lux'
+    'ffmpeg'
+    'FileTypesMan'
+    'Firefox'
+    'Flameshot'
+    'Flash-enabled Chromium'
+    'FlicFlac'
+    'FreeTube'
+    'GifCam'
+    'Gifsicle'
+    'GitHub CLI'
+    'GitHub Desktop'
+    'Godot (Mono)'
+    'Gpg4win'
+    'gsudo'
+    'HandBrake'
+    'HeidiSQL'
+    'HypnOS Cursor'
+    'IconsExtract'
+    'ImageGlass'
+    'KeePassXC'
+    'KDE Connect'
+    'khinsider.py'
+    'Legendary'
+    'LibreHardwareMonitor'
+    'LibreOffice'
+    'Lime3DS'
+    'Lumafly'
     "Majora's Mask"
-    "melonDS"
-    "MegaBasterd"
-    "Meslo Nerd Font"
-    "Microsoft Activation Scripts"
-    "Minecraft Font"
-    "Minecraft Launcher"
-    "Mp3tag"
-    "MultiMonitorTool"
-    "NAPS2"
-    "Neofetch"
-    "Network Sharing"
-    "Nicotine+"
-    "Node.js"
-    "NoPayStation"
-    "Notepad++"
-    "NVIDIA Drivers"
-    "OBS Studio"
-    "Obsidian"
-    "oh-my-posh"
-    "OpenRGB"
-    "Open-Shell"
-    "OpenWithView"
-    "PCSX2"
-    "PeaZip"
-    "Photoshop"
-    "PowerShell Update"
-    "PowerShell Profile"
-    "PowerToys"
-    "PPSSPP"
-    "Premiere Pro"
-    "Process Explorer"
-    "Process Monitor"
-    "PsShutdown"
-    "qBittorrent Enhanced"
-    "QTTabBar"
-    "r2modman"
-    "RPCS3"
-    "Ruffle"
-    "Rufus"
-    "RustDesk"
-    "Rusty PSN GUI"
-    "Ryujinx"
-    "SameBoy"
-    "scdl"
-    "SecureUxTheme"
-    "SGDBoop"
-    "ShellExView"
-    "ShellMenuNew"
-    "ShellMenuView"
-    "Ship of Harkinian"
-    "Sophia Script"
-    "SoundVolumeView"
-    "Spicetify"
-    "Spotify"
-    "ssh"
-    "Steam"
-    "Steam Achievement Manager"
-    "Steam ROM Manager"
-    "Streamlink Twitch GUI"
-    "Syncthing Tray"
-    "Syncthing"
-    "TaskbarX"
-    "Terraria Font"
-    "Twitch Downloader CLI"
-    "Twitch Downloader"
-    "Twitch Emote Downloader"
-    "UniGetUI"
-    "Uninstall Edge"
-    "USBHelper"
-    "veadotube mini"
-    "Ventoy"
-    "VirtualBox"
-    "Visual C++ Redistributable"
-    "Visual Studio Code"
-    "VLC"
-    "Voicemod"
-    "Wallpaper"
-    "Wallpaper Engine"
-    "webp2gif"
-    "whois"
-    "WinAero Tweaker"
-    "Windows Terminal"
-    "WinSetView"
-    "WizTree"
-    "WSL"
-    "WSL - Arch"
-    "WSL - Debian"
-    "Xtreme Download Manager"
-    "yarn"
-    "yt-dlp"
+    'melonDS'
+    'MegaBasterd'
+    'Meslo Nerd Font'
+    'Microsoft Activation Scripts'
+    'Minecraft Font'
+    'Minecraft Launcher'
+    'Mp3tag'
+    'MultiMonitorTool'
+    'NAPS2'
+    'Neofetch'
+    'Network Sharing'
+    'Nicotine+'
+    'Node.js'
+    'NoPayStation'
+    'Notepad++'
+    'NVIDIA Drivers'
+    'OBS Studio'
+    'Obsidian'
+    'oh-my-posh'
+    'OpenRGB'
+    'Open-Shell'
+    'OpenWithView'
+    'PCSX2'
+    'PeaZip'
+    'Photoshop'
+    'PowerShell Update'
+    'PowerShell Profile'
+    'PowerToys'
+    'PPSSPP'
+    'Premiere Pro'
+    'Process Explorer'
+    'Process Monitor'
+    'PsShutdown'
+    'qBittorrent Enhanced'
+    'QTTabBar'
+    'r2modman'
+    'RPCS3'
+    'Ruffle'
+    'Rufus'
+    'RustDesk'
+    'Rusty PSN GUI'
+    'Ryujinx'
+    'SameBoy'
+    'scdl'
+    'SecureUxTheme'
+    'SGDBoop'
+    'ShellExView'
+    'ShellMenuNew'
+    'ShellMenuView'
+    'Ship of Harkinian'
+    'Sophia Script'
+    'SoundVolumeView'
+    'Spicetify'
+    'Spotify'
+    'ssh'
+    'Steam'
+    'Steam Achievement Manager'
+    'Steam ROM Manager'
+    'Streamlink Twitch GUI'
+    'Syncthing Tray'
+    'Syncthing'
+    'TaskbarX'
+    'Terraria Font'
+    'Twitch Downloader CLI'
+    'Twitch Downloader'
+    'Twitch Emote Downloader'
+    'UniGetUI'
+    'Uninstall Edge'
+    'USBHelper'
+    'veadotube mini'
+    'Ventoy'
+    'VirtualBox'
+    'Visual C++ Redistributable'
+    'Visual Studio Code'
+    'VLC'
+    'Voicemod'
+    'Wallpaper'
+    'Wallpaper Engine'
+    'webp2gif'
+    'whois'
+    'WinAero Tweaker'
+    'Windows Terminal'
+    'WinSetView'
+    'WizTree'
+    'WSL'
+    'WSL - Arch'
+    'WSL - Debian'
+    'Xtreme Download Manager'
+    'yarn'
+    'yt-dlp'
 )
 
 $script:required = @(
-    "7z"
-    "Everything"
-    "Everything CLI"
-    "gdown"
-    "Python"
-    "git"
-    "NirCmd"
-    "ps2exe"
+    '7z'
+    'Everything'
+    'Everything CLI'
+    'gdown'
+    'Python'
+    'git'
+    'NirCmd'
+    'ps2exe'
 )
 
 $script:selection = @{
     # The categorization could use some work but doesn't really matter.
-    "Misc." = @(
-        ".NET 8.0 Desktop Runtime"
-        "Audacity"
-        "AutoHotkey"
-        "BCUninstaller"
-        "Everything"
-        "Everything PowerToys"
-        "f.lux"
-        "Firefox"
-        "Flameshot"
-        "GIMP"
-        "Jitterbugpair"
-        "KeePassXC"
-        "KDE Connect"
-        "LibreOffice"
-        "Media Feature Pack"
-        "Mp3tag"
-        "NAPS2"
-        "Network Sharing"
-        "Notepad++"
-        "NVIDIA Drivers"
-        "Obsidian"
-        "Photoshop"
-        "PowerToys"
-        "Premiere Pro"
-        "RustDesk"
-        "Spotify"
-        "Syncthing"
-        "TeraCopy"
-        "UniGetUI"
-        "WizTree"
+    'Misc.' = @(
+        '.NET 8.0 Desktop Runtime'
+        'Audacity'
+        'AutoHotkey'
+        'BCUninstaller'
+        'Everything'
+        'Everything PowerToys'
+        'f.lux'
+        'Firefox'
+        'Flameshot'
+        'GIMP'
+        'Jitterbugpair'
+        'KeePassXC'
+        'KDE Connect'
+        'LibreOffice'
+        'Media Feature Pack'
+        'Mp3tag'
+        'NAPS2'
+        'Network Sharing'
+        'Notepad++'
+        'NVIDIA Drivers'
+        'Obsidian'
+        'Photoshop'
+        'PowerToys'
+        'Premiere Pro'
+        'RustDesk'
+        'Spotify'
+        'Syncthing'
+        'TeraCopy'
+        'UniGetUI'
+        'WizTree'
     )
-    "Compression" = @(
-        "7z"
-        "PeaZip"
-        "WinRAR"
+    'Compression' = @(
+        '7z'
+        'PeaZip'
+        'WinRAR'
     )
-    "Convertors | Decompilers" = @(
-        "FFDec"
-        "ffmpeg"
-        "FlicFlac"
-        "Gifsicle"
-        "HandBrake"
-        "webp2gif"
+    'Convertors | Decompilers' = @(
+        'FFDec'
+        'ffmpeg'
+        'FlicFlac'
+        'Gifsicle'
+        'HandBrake'
+        'webp2gif'
     )
-    "Dev" = @(
-        "AudioDeviceCmdlets"
-        "BFG Repo-Cleaner"
-        "Bun"
-        "Cmder"
-        "Command Prompt Aliases"
-        "CUDA"
-        "Deno"
-        "Docker CLI"
-        "Docker Completion"
-        "Docker Compose"
-        "Docker Desktop"
-        "Docker Engine"
-        "Everything CLI"
-        "git"
-        "git filter-repo"
-        "GitHub CLI"
-        "GitHub Desktop"
-        "Go"
-        "Godot"
-        "Godot (Mono)"
-        "Gpg4win"
-        "gsudo"
-        "HeidiSQL"
-        "Neofetch"
-        "Node.js"
-        "Orca"
-        "oh-my-posh"
-        "onefetch"
-        "PowerShell Update"
-        "PowerShell Profile"
-        "ps2exe"
-        "Python"
-        "Ruby"
-        "Rufus"
-        "Rust"
-        "ssh"
-        "Ventoy"
-        "VirtualBox"
-        "Visual C++ Redistributable"
-        "Visual Studio Code"
-        "Windows Terminal"
-        "WSL"
-        "WSL - Arch"
-        "WSL - Debian"
-        "Yarn"
+    'Dev' = @(
+        'AudioDeviceCmdlets'
+        'BFG Repo-Cleaner'
+        'Bun'
+        'Cmder'
+        'Command Prompt Aliases'
+        'CUDA'
+        'Deno'
+        'Docker CLI'
+        'Docker Completion'
+        'Docker Compose'
+        'Docker Desktop'
+        'Docker Engine'
+        'Everything CLI'
+        'git'
+        'git filter-repo'
+        'GitHub CLI'
+        'GitHub Desktop'
+        'Go'
+        'Godot'
+        'Godot (Mono)'
+        'Gpg4win'
+        'gsudo'
+        'HeidiSQL'
+        'Neofetch'
+        'Node.js'
+        'Orca'
+        'oh-my-posh'
+        'onefetch'
+        'PowerShell Update'
+        'PowerShell Profile'
+        'ps2exe'
+        'Python'
+        'Ruby'
+        'Rufus'
+        'Rust'
+        'ssh'
+        'Ventoy'
+        'VirtualBox'
+        'Visual C++ Redistributable'
+        'Visual Studio Code'
+        'Windows Terminal'
+        'WSL'
+        'WSL - Arch'
+        'WSL - Debian'
+        'Yarn'
     )
-    "Downloaders" = @(
-        "Cyberduck"
-        "gdown"
-        "JDownloader"
-        "khinsider.py"
-        "MegaBasterd"
-        "Nicotine+"
-        "NoPayStation"
-        "qBittorrent"
-        "qBittorrent Enhanced"
-        "Rusty PSN CLI"
-        "Rusty PSN GUI"
-        "scdl"
-        "Twitch Downloader CLI"
-        "Twitch Downloader"
-        "Twitch Emote Downloader"
-        "USBHelper"
-        "WinSCP"
-        "Xtreme Download Manager"
-        "yt-dlp"
+    'Downloaders' = @(
+        'Cyberduck'
+        'gdown'
+        'JDownloader'
+        'khinsider.py'
+        'MegaBasterd'
+        'Nicotine+'
+        'NoPayStation'
+        'qBittorrent'
+        'qBittorrent Enhanced'
+        'Rusty PSN CLI'
+        'Rusty PSN GUI'
+        'scdl'
+        'Twitch Downloader CLI'
+        'Twitch Downloader'
+        'Twitch Emote Downloader'
+        'USBHelper'
+        'WinSCP'
+        'Xtreme Download Manager'
+        'yt-dlp'
     )
-    "Fonts" = @(
-        "Cyberpunk Waifus Font"
-        "Meslo Nerd Font"
-        "Minecraft Font"
-        "Terraria Font"
+    'Fonts' = @(
+        'Cyberpunk Waifus Font'
+        'Meslo Nerd Font'
+        'Minecraft Font'
+        'Terraria Font'
     )
-    "Game" = @(
-        "Epic Games Launcher"
-        "Flash-enabled Chromium"
-        "Flashpoint Infinity"
-        "itch"
-        "Legendary"
-        "Minecraft Launcher"
-        "osu!"
-        "Sekiro"
-        "Steam"
+    'Game' = @(
+        'Epic Games Launcher'
+        'Flash-enabled Chromium'
+        'Flashpoint Infinity'
+        'itch'
+        'Legendary'
+        'Minecraft Launcher'
+        'osu!'
+        'Sekiro'
+        'Steam'
     )
-    "Game Emulators" = @(
-        "Ares"
-        "CEMU"
-        "Dolphin"
-        "DuckStation"
-        "Lime3DS"
-        "melonDS"
-        "PCSX2"
-        "PPSSPP"
-        "RPCS3"
-        "Ruffle"
-        "Ryujinx"
-        "SameBoy"
-        "Vita3K"
+    'Game Emulators' = @(
+        'Ares'
+        'CEMU'
+        'Dolphin'
+        'DuckStation'
+        'Lime3DS'
+        'melonDS'
+        'PCSX2'
+        'PPSSPP'
+        'RPCS3'
+        'Ruffle'
+        'Ryujinx'
+        'SameBoy'
+        'Vita3K'
     )
-    "Game Recompilations" = @(
-        "Ship of Harkinian"
+    'Game Recompilations' = @(
+        'Ship of Harkinian'
         "Majora's Mask"
     )
-    "Game Tools" = @(
-        "Cheat Engine"
-        "CreamInstaller"
-        "Elden Ring Save Manager"
-        "Lumafly"
-        "r2modman"
-        "Steam Achievement Manager"
-        "Steam ROM Manager"
+    'Game Tools' = @(
+        'Cheat Engine'
+        'CreamInstaller'
+        'Elden Ring Save Manager'
+        'Lumafly'
+        'r2modman'
+        'Steam Achievement Manager'
+        'Steam ROM Manager'
     )
-    "Hardware" = @(
-        "AltServer"
-        "CPUID HWMonitor"
-        "DS4Windows"
-        "DisplayFusion"
-        "Fan Control"
-        "G.Skill Trident Z Lighting Control"
-        "iCloud"
-        "iCUE"
-        "iTunes"
-        "Logitech G HUB"
-        "LibreHardwareMonitor"
-        "NZXT CAM"
-        "OpenRGB"
+    'Hardware' = @(
+        'AltServer'
+        'CPUID HWMonitor'
+        'DS4Windows'
+        'DisplayFusion'
+        'Fan Control'
+        'G.Skill Trident Z Lighting Control'
+        'iCloud'
+        'iCUE'
+        'iTunes'
+        'Logitech G HUB'
+        'LibreHardwareMonitor'
+        'NZXT CAM'
+        'OpenRGB'
     )
-    "NirSoft" = @(
-        "FileTypesMan"
-        "IconsExtract"
-        "MultiMonitorTool"
-        "NirCmd"
-        "ShellMenuView"
-        "ShellExView"
-        "ShellMenuNew"
-        "OpenWithView"
-        "SoundVolumeView"
+    'NirSoft' = @(
+        'FileTypesMan'
+        'IconsExtract'
+        'MultiMonitorTool'
+        'NirCmd'
+        'ShellMenuView'
+        'ShellExView'
+        'ShellMenuNew'
+        'OpenWithView'
+        'SoundVolumeView'
     )
-    "Rice" = @(
-        "After Dark CC Theme"
-        "BetterDiscord"
-        "ExplorerPatcher"
-        "Discord OpenAsar"
-        "HypnOS Cursor"
-        "Open-Shell"
-        "QTTabBar"
-        "Rainmeter"
-        "SecureUxTheme"
-        "SGDBoop"
-        "Spicetify"
-        "Syncthing Tray"
-        "TaskbarX"
-        "Wallpaper"
-        "Wallpaper Engine"
-        "WinAero Tweaker"
-        "WinSetView"
+    'Rice' = @(
+        'After Dark CC Theme'
+        'BetterDiscord'
+        'ExplorerPatcher'
+        'Discord OpenAsar'
+        'HypnOS Cursor'
+        'Open-Shell'
+        'QTTabBar'
+        'Rainmeter'
+        'SecureUxTheme'
+        'SGDBoop'
+        'Spicetify'
+        'Syncthing Tray'
+        'TaskbarX'
+        'Wallpaper'
+        'Wallpaper Engine'
+        'WinAero Tweaker'
+        'WinSetView'
     )
-    "Social" = @(
-        "Chatterino2"
-        "Discord"
+    'Social' = @(
+        'Chatterino2'
+        'Discord'
     )
-    "Sysinternals" = @(
-        "Autologon"
-        "AutoRuns"
-        "PsShutdown"
-        "Process Explorer"
-        "Process Monitor"
-        "whois"
+    'Sysinternals' = @(
+        'Autologon'
+        'AutoRuns'
+        'PsShutdown'
+        'Process Explorer'
+        'Process Monitor'
+        'whois'
     )
-    "Tweaks" = @(
-        "Microsoft Activation Scripts"
-        "Sophia Script"
-        "SoS Optimize Harden Debloat"
-        "Uninstall Edge"
+    'Tweaks' = @(
+        'Microsoft Activation Scripts'
+        'Sophia Script'
+        'SoS Optimize Harden Debloat'
+        'Uninstall Edge'
     )
-    "Viewers" = @(
-        "Calibre"
-        "FreeTube"
-        "FreeTube (Custom)"
-        "ImageGlass"
-        "mpv"
-        "Streamlink Twitch GUI"
-        "Stremio"
-        "VLC"
+    'Viewers' = @(
+        'Calibre'
+        'FreeTube'
+        'FreeTube (Custom)'
+        'ImageGlass'
+        'mpv'
+        'Streamlink Twitch GUI'
+        'Stremio'
+        'VLC'
     )
-    "Recording" = @(
-        "GifCam"
-        "OBS Studio"
-        "veadotube mini"
-        "Voicemod"
+    'Recording' = @(
+        'GifCam'
+        'OBS Studio'
+        'veadotube mini'
+        'Voicemod'
     )
 }
 
 if (-not $script:keyString) {
-    Write-Host "No key provided, some commands might fail." -ForegroundColor Red
+    Write-Host 'No key provided, some commands might fail.' -ForegroundColor Red
     Start-Sleep -Seconds 5
 }
 
@@ -1368,9 +1365,9 @@ function script:Expand-7zArchive {
     )
 
     if (Get-Command 7z -ErrorAction SilentlyContinue) {
-        $7z = "7z"
+        $7z = '7z'
     } else {
-        $7z = es -i -n 1 -r "\.exe$" "7z.exe"
+        $7z = es -i -n 1 -r '\.exe$' '7z.exe'
     }
 
     $archiveName = [System.IO.Path]::GetFileNameWithoutExtension($archivePath)
@@ -1404,23 +1401,23 @@ function script:Install-FontFile {
 function script:Get-ShortcutPath {
     param(
         [string]$targetExe,
-        [string]$scoopName = ""
+        [string]$scoopName = ''
     )
 
-    if ((Get-Command $targetExe -ErrorAction SilentlyContinue) -and ((Get-Command $targetExe).Source -notmatch "\\shims\\")) {
+    if ((Get-Command $targetExe -ErrorAction SilentlyContinue) -and ((Get-Command $targetExe).Source -notmatch '\\shims\\')) {
         $exePath = (Get-Command $targetExe).Source | Select-Object -First 1
     } else {
-        $exePaths = es -r "\.exe$" $targetExe | Where-Object { $_ -notmatch "Recycle\.Bin" -and $_ -notmatch "ps2exe" }
+        $exePaths = es -r '\.exe$' $targetExe | Where-Object { $_ -notmatch 'Recycle\.Bin' -and $_ -notmatch 'ps2exe' }
         #region Overrides
-        if ($targetExe -eq "FreeTube.exe") {
-            $exePaths = $exePaths | Where-Object { $_ -notmatch "win-unpacked" -and $_ -notmatch "Uninstall FreeTube.exe" -and $_ -notmatch "\\old-install\\" -and $_ -notmatch "\\7z-out\\" }
+        if ($targetExe -eq 'FreeTube.exe') {
+            $exePaths = $exePaths | Where-Object { $_ -notmatch 'win-unpacked' -and $_ -notmatch 'Uninstall FreeTube.exe' -and $_ -notmatch '\\old-install\\' -and $_ -notmatch '\\7z-out\\' }
         }
-        if ($targetExe -eq "Spotify.exe") {
-            $exePaths = $exePaths | Where-Object { $_ -notmatch "Minimize-" }
+        if ($targetExe -eq 'Spotify.exe') {
+            $exePaths = $exePaths | Where-Object { $_ -notmatch 'Minimize-' }
         }
         #endregion
         $exePath = $exePaths | Select-Object -First 1
-        if ($exePath -match "scoop") {
+        if ($exePath -match 'scoop') {
             $exePath = $exePath -replace "$scoopName\\[\d.\-beta]+", "$scoopName\current"
         }
     }
@@ -1466,7 +1463,7 @@ function script:New-Shortcut {
         $link = $shell.CreateShortcut($LinkPath)
 
         $PSCmdlet.MyInvocation.BoundParameters.GetEnumerator() |
-        Where-Object { $_.key -ne "LinkPath" } |
+        Where-Object { $_.key -ne 'LinkPath' } |
         ForEach-Object { Write-Verbose "Shortcuts: Asigning $_ = $LinkPath"; $link.$($_.key) = $_.value } | Out-Null
 
         New-Item -ItemType Directory (Split-Path $LinkPath) -Force | Out-Null
@@ -1482,7 +1479,7 @@ function script:Unprotect-String {
     )
 
     if (-not $script:keyString) {
-        Write-Warning "No key provided, cannot decrypt string."
+        Write-Warning 'No key provided, cannot decrypt string.'
         return
     }
 
@@ -1501,15 +1498,15 @@ function script:Unprotect-String {
 }
 
 function script:Update-EnvPath {
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+    $env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')
 }
 #endregion
 
 #region Argument Printing
 foreach ($arg in $MyInvocation.BoundParameters.keys) {
     switch -regex ($arg) {
-        "encryptString|keyString" {
-            $value = "[REDACTED]"
+        'encryptString|keyString' {
+            $value = '[REDACTED]'
             break
         }
         default {
@@ -1522,7 +1519,7 @@ foreach ($arg in $MyInvocation.BoundParameters.keys) {
 if ($arglist) {
     script:Log "Run with: $arglist" -Verbose
 } else {
-    script:Log "Run with no arguments." -Verbose
+    script:Log 'Run with no arguments.' -Verbose
 }
 #endregion
 
@@ -1537,7 +1534,7 @@ function Protect-String {
     )
 
     if (-not $script:keyString) {
-        Write-Warning "No key provided, cannot encrypt string."
+        Write-Warning 'No key provided, cannot encrypt string.'
         return
     }
 
@@ -1563,7 +1560,7 @@ if ($script:encryptString) {
 
 #region GUI
 function Show-WinForm {
-    $host.UI.RawUI.WindowTitle = "Waiting for selection"
+    $host.UI.RawUI.WindowTitle = 'Waiting for selection'
     Add-Type -AssemblyName System.Windows.Forms
 
     function Show-GroupBoxes {
@@ -1578,15 +1575,15 @@ function Show-WinForm {
             $groupBox.Text = $categoryName
             $groupBox.Size = New-Object System.Drawing.Size(360, 200)
             $groupBox.Location = New-Object System.Drawing.Point(10, $top)
-            $groupBox.BackColor = [System.Drawing.ColorTranslator]::FromHtml("#212121")
-            $groupBox.ForeColor = [System.Drawing.ColorTranslator]::FromHtml("#c8c8c8")
+            $groupBox.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#212121')
+            $groupBox.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#c8c8c8')
 
             $checkedListBox = New-Object System.Windows.Forms.CheckedListBox
             $checkedListBox.Width = 340
             $checkedListBox.Location = New-Object System.Drawing.Point(10, 20)
-            $checkedListBox.BackColor = [System.Drawing.ColorTranslator]::FromHtml("#191919")
+            $checkedListBox.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#191919')
             $checkedListBox.BorderStyle = [System.Windows.Forms.BorderStyle]::None
-            $checkedListBox.ForeColor = [System.Drawing.ColorTranslator]::FromHtml("#c8c8c8")
+            $checkedListBox.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#c8c8c8')
 
             foreach ($entry in $categoryEntries) {
                 $index = $checkedListBox.Items.Add($entry)
@@ -1616,7 +1613,7 @@ function Show-WinForm {
         $panel = New-Object System.Windows.Forms.Panel
         $panel.AutoScroll = $true
         $panel.Dock = [System.Windows.Forms.DockStyle]::Fill
-        $panel.BackColor = [System.Drawing.ColorTranslator]::FromHtml("#212121")
+        $panel.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#212121')
 
         $top = 0
         $checkedListBoxes = @()
@@ -1640,20 +1637,20 @@ function Show-WinForm {
         $panel.Height = 0
 
         $selectAllButton = New-Object System.Windows.Forms.Button
-        $selectAllButton.Text = "Select All"
+        $selectAllButton.Text = 'Select All'
         $selectAllButton.Width = 170
         $selectAllButton.Location = New-Object System.Drawing.Point(10, 0)
         $selectAllButton.FlatStyle = [System.Windows.Forms.FlatStyle]::Flat
-        $selectAllButton.BackColor = [System.Drawing.ColorTranslator]::FromHtml("#191919")
-        $selectAllButton.ForeColor = [System.Drawing.ColorTranslator]::FromHtml("#c8c8c8")
+        $selectAllButton.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#191919')
+        $selectAllButton.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#c8c8c8')
 
         $deselectAllButton = New-Object System.Windows.Forms.Button
-        $deselectAllButton.Text = "Deselect All"
+        $deselectAllButton.Text = 'Deselect All'
         $deselectAllButton.Width = 170
         $deselectAllButton.Location = New-Object System.Drawing.Point(200, 0)
         $deselectAllButton.FlatStyle = [System.Windows.Forms.FlatStyle]::Flat
-        $deselectAllButton.BackColor = [System.Drawing.ColorTranslator]::FromHtml("#191919")
-        $deselectAllButton.ForeColor = [System.Drawing.ColorTranslator]::FromHtml("#c8c8c8")
+        $deselectAllButton.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#191919')
+        $deselectAllButton.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#c8c8c8')
 
         $selectAllButton.Add_Click({
             foreach ($checkedListBox in $checkedListBoxes) {
@@ -1688,12 +1685,12 @@ function Show-WinForm {
         )
 
         $button = New-Object System.Windows.Forms.Button
-        $button.Text = "Proceed"
+        $button.Text = 'Proceed'
         $button.Dock = [System.Windows.Forms.DockStyle]::Fill
         $button.Height = 40
         $button.FlatStyle = [System.Windows.Forms.FlatStyle]::Flat
-        $button.BackColor = [System.Drawing.ColorTranslator]::FromHtml("#191919")
-        $button.ForeColor = [System.Drawing.ColorTranslator]::FromHtml("#c8c8c8")
+        $button.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#191919')
+        $button.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#c8c8c8')
 
         $button.Add_Click({
             $script:selected = @()
@@ -1709,13 +1706,13 @@ function Show-WinForm {
     }
 
     $form = New-Object System.Windows.Forms.Form
-    $form.BackColor = [System.Drawing.ColorTranslator]::FromHtml("#212121")
+    $form.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#212121')
     $form.FormBorderStyle = [System.Windows.Forms.FormBorderStyle]::FixedDialog
     $form.Icon = [System.Drawing.Icon]::ExtractAssociatedIcon("$PSScriptRoot\Icons\Transparent.ico")
     $form.MaximizeBox = $false
     $form.Size = New-Object System.Drawing.Size(420, 690)
     $form.StartPosition = [System.Windows.Forms.FormStartPosition]::CenterScreen
-    $form.Text = ""
+    $form.Text = ''
 
     $tableLayoutPanel = New-Object System.Windows.Forms.TableLayoutPanel
     $tableLayoutPanel.Dock = [System.Windows.Forms.DockStyle]::Fill
@@ -1758,11 +1755,11 @@ function Show-WinForm {
 #region Setup
 function Invoke-Setup {
     begin {
-        # $host.UI.RawUI.BackgroundColor = "Black"
-        $host.UI.RawUI.WindowTitle = "Running pre-setup"
+        # $host.UI.RawUI.BackgroundColor = 'Black'
+        $host.UI.RawUI.WindowTitle = 'Running pre-setup'
 
         function Copy-Icons {
-            Write-Host "Copying icons..."
+            Write-Host 'Copying icons...'
             New-Item -ItemType Directory "$env:USERPROFILE\Pictures\Icons" -Force | Out-Null
             New-Item -ItemType Directory "$env:USERPROFILE\Pictures\System" -Force | Out-Null
             Copy-Item "$PSScriptRoot\Icons\*" -Destination "$env:USERPROFILE\Pictures\System" -Force
@@ -1787,57 +1784,57 @@ function Invoke-Setup {
         }
 
         function Enable-DarkMode {
-            Write-Host "Enabling dark mode..."
-            Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "AppsUseLightTheme" -Value 0
-            Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "SystemUsesLightTheme" -Value 0
+            Write-Host 'Enabling dark mode...'
+            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize' -Name 'AppsUseLightTheme' -Value 0
+            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize' -Name 'SystemUsesLightTheme' -Value 0
         }
 
         function Enable-SmallTaskbarIcons {
-            Write-Host "Enabling small taskbar icons..."
-            Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarSmallIcons" -Value 1 -Type DWORD
+            Write-Host 'Enabling small taskbar icons...'
+            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'TaskbarSmallIcons' -Value 1 -Type DWORD
         }
 
         function Disable-LanguageSwitchHotkeys {
-            Write-Host "Disabling language switch hotkeys..."
-            New-Item "HKCU:\Keyboard Layout\Toggle" -Force | Out-Null
-            Set-ItemProperty "HKCU:\Keyboard Layout\Toggle" -Name "Hotkey" -Value 3 -Type String
-            Set-ItemProperty "HKCU:\Keyboard Layout\Toggle" -Name "Language Hotkey" -Value 3 -Type String
-            Set-ItemProperty "HKCU:\Keyboard Layout\Toggle" -Name "Layout Hotkey" -Value 3 -Type String
+            Write-Host 'Disabling language switch hotkeys...'
+            New-Item 'HKCU:\Keyboard Layout\Toggle' -Force | Out-Null
+            Set-ItemProperty 'HKCU:\Keyboard Layout\Toggle' -Name 'Hotkey' -Value 3 -Type String
+            Set-ItemProperty 'HKCU:\Keyboard Layout\Toggle' -Name 'Language Hotkey' -Value 3 -Type String
+            Set-ItemProperty 'HKCU:\Keyboard Layout\Toggle' -Name 'Layout Hotkey' -Value 3 -Type String
         }
 
         function Disable-MicrosoftAccounts {
-            Write-Host "Disabling Microsoft accounts..."
+            Write-Host 'Disabling Microsoft accounts...'
             reg import "$PSScriptRoot\Configs\Regedits\Microsoft-Accounts\Cant-add-or-sign-in-with-Microsoft-accounts.reg" 2>$null
         }
 
         function Disable-MouseAcceleration {
-            Write-Host "Disabling mouse acceleration..."
-            Set-ItemProperty "HKCU:\Control Panel\Mouse" -Name "MouseSpeed" -Value 0
-            Set-ItemProperty "HKCU:\Control Panel\Mouse" -Name "MouseThreshold1" -Value 0
-            Set-ItemProperty "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Value 0
+            Write-Host 'Disabling mouse acceleration...'
+            Set-ItemProperty 'HKCU:\Control Panel\Mouse' -Name 'MouseSpeed' -Value 0
+            Set-ItemProperty 'HKCU:\Control Panel\Mouse' -Name 'MouseThreshold1' -Value 0
+            Set-ItemProperty 'HKCU:\Control Panel\Mouse' -Name 'MouseThreshold2' -Value 0
         }
 
         function Disable-SuggestedNotifications {
-            Write-Host "Disabling suggested notifications..."
-            Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.Suggested" -Name "Enabled" -Value 0 -Type DWORD
+            Write-Host 'Disabling suggested notifications...'
+            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.Suggested' -Name 'Enabled' -Value 0 -Type DWORD
         }
 
         function Hide-DriveSpaceIndicators {
-            Write-Host "Hiding drive space indicators..."
+            Write-Host 'Hiding drive space indicators...'
             reg import "$PSScriptRoot\Configs\Regedits\Drive-Space-Indicator-Bar\Remove-Drive-Space-Indicator-Bar.reg" 2>$null
         }
 
         function Initialize-PackageManagers {
             function Initialize-Choco {
-                if (-not (Get-Command "choco" -ErrorAction SilentlyContinue)) {
-                    Write-Host "Initializing chocolatey..."
+                if (-not (Get-Command 'choco' -ErrorAction SilentlyContinue)) {
+                    Write-Host 'Initializing chocolatey...'
                     Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')
                 }
             }
 
             function Initialize-Scoop {
-                if (-not (Get-Command "scoop" -ErrorAction SilentlyContinue)) {
-                    Write-Host "Initializing scoop..."
+                if (-not (Get-Command 'scoop' -ErrorAction SilentlyContinue)) {
+                    Write-Host 'Initializing scoop...'
                     Start-Process powershell -WindowStyle Hidden "runas /trustlevel:0x20000 'powershell Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression'" -Wait
                     $freshScoop = $true
                 }
@@ -1850,26 +1847,26 @@ function Invoke-Setup {
 
                 if ($freshScoop) {
                     scoop bucket rm main
-                    Write-Host "Adding main bucket to scoop..."
+                    Write-Host 'Adding main bucket to scoop...'
                     Start-Process powershell -WindowStyle Hidden -Args "runas /trustlevel:0x20000 'powershell -WindowStyle Hidden scoop bucket add main'" -Wait
                 }
 
                 # https://github.com/ScoopInstaller/Scoop/blob/master/buckets.json
                 $targetBuckets = @(
-                    "extras",
-                    "games",
-                    "java",
-                    "main",
-                    "nerd-fonts",
-                    "nirsoft",
-                    "nonportable",
-                    "sysinternals",
-                    "versions",
-                    "bergbok = https://github.com/Bergbok/Scoop-Bucket.git"
+                    'extras',
+                    'games',
+                    'java',
+                    'main',
+                    'nerd-fonts',
+                    'nirsoft',
+                    'nonportable',
+                    'sysinternals',
+                    'versions',
+                    'bergbok = https://github.com/Bergbok/Scoop-Bucket.git'
                 )
 
                 foreach ($bucket in $targetBuckets) {
-                    $bucketInfo = $bucket -split " = "
+                    $bucketInfo = $bucket -split ' = '
                     $bucketName = $bucketInfo[0]
                     $bucketUrl = $bucketInfo[1]
                     while (-not (scoop bucket list | Select-String -Pattern $bucketName -SimpleMatch)) {
@@ -1878,7 +1875,7 @@ function Invoke-Setup {
                     }
                 }
 
-                if (-not (scoop alias list -like "*force-update*")) {
+                if (-not (scoop alias list -like '*force-update*')) {
                     scoop alias add force-update "scoop unhold `$args[0]; scoop update `$args[0]; scoop hold `$args[0]"
                 }
 
@@ -1886,9 +1883,9 @@ function Invoke-Setup {
             }
 
              function Initialize-WinGet {
-                if (-not (Get-Command "winget" -ErrorAction SilentlyContinue)) {
-                    Write-Host "Initializing winget..."
-                    if ($script:packageManagerPreference -match "^choco") {
+                if (-not (Get-Command 'winget' -ErrorAction SilentlyContinue)) {
+                    Write-Host 'Initializing winget...'
+                    if ($script:packageManagerPreference -match '^choco') {
                         choco install winget-cli -y
                     } else {
                         scoop install main/winget
@@ -1899,17 +1896,17 @@ function Invoke-Setup {
                 winget settings --enable InstallerHashOverride
             }
 
-            Write-Host "Initializing package managers..."
+            Write-Host 'Initializing package managers...'
             Initialize-Choco
             Initialize-Scoop
             Initialize-WinGet
         }
 
         function Invoke-Everything {
-            if (Get-Command "everything" -ErrorAction SilentlyContinue) {
-                Start-Process "everything" -WindowStyle Minimized
+            if (Get-Command 'everything' -ErrorAction SilentlyContinue) {
+                Start-Process 'everything' -WindowStyle Minimized
             } else {
-                $driveRoots = Get-PSDrive -PSProvider FileSystem |  Select-Object -ExpandProperty Root | Where-Object { $_ -notlike "*Temp*" }
+                $driveRoots = Get-PSDrive -PSProvider FileSystem |  Select-Object -ExpandProperty Root | Where-Object { $_ -notlike '*Temp*' }
                 foreach ($driveRoot in $driveRoots) {
                     $everythingPath = "$($driveRoot)Program Files\Everything\Everything.exe"
                     if (Test-Path $everythingPath) {
@@ -1921,7 +1918,7 @@ function Invoke-Setup {
         }
 
         function New-EssentialFolders {
-            Write-Host "Creating essential folders..."
+            Write-Host 'Creating essential folders...'
 
             $essentialFolders = @(
                 "$env:USERPROFILE\Audio"
@@ -1953,7 +1950,7 @@ function Invoke-Setup {
                 [int]$size = 64
             )
 
-            Write-Host "Updating cursor size..."
+            Write-Host 'Updating cursor size...'
 
             [SystemParametersInfo.WinAPICall]::SystemParametersInfo(0x2029, $null, $size, 0x01);
         }
@@ -1963,43 +1960,43 @@ function Invoke-Setup {
                 [int]$lines = 4
             )
 
-            Write-Host "Updating scroll line count..."
+            Write-Host 'Updating scroll line count...'
 
             [SystemParametersInfo.WinAPICall]::SystemParametersInfo(0x0069, $lines, $null, $null)
         }
 
         function Set-AccentColor {
             reg import "$PSScriptRoot\Configs\Regedits\Accent-Color\Gray.reg" 2>$null
-            Stop-Process -Name "explorer"
-            if (-not (Get-Process "explorer" -ErrorAction SilentlyContinue)) {
-                Start-Process "explorer"
+            Stop-Process -Name 'explorer'
+            if (-not (Get-Process 'explorer' -ErrorAction SilentlyContinue)) {
+                Start-Process 'explorer'
             }
         }
 
         function Set-ExplorerStartupLocation {
-            Write-Host "Setting Explorer startup location..."
+            Write-Host 'Setting Explorer startup location...'
             reg import "$PSScriptRoot\Configs\Regedits\Explorer-Startup-Location\Open-File-Explorer-to-This-PC.reg" 2>$null
         }
 
         function Show-ExplorerFileExtensions {
-            Write-Host "Showing file extensions..."
-            Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Value 0
+            Write-Host 'Showing file extensions...'
+            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'HideFileExt' -Value 0
         }
 
         function Sync-Time {
-            Write-Host "Syncing time..."
+            Write-Host 'Syncing time...'
             Set-TimeZone $script:timezoneID
             & "$PSScriptRoot\Scripts\Startup\Sync-Time.ps1" *>$null
         }
 
         function Show-HiddenFilesAndFolders {
-            Write-Host "Showing hidden files and folders..."
-            Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Hidden" -Value 1
+            Write-Host 'Showing hidden files and folders...'
+            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'Hidden' -Value 1
         }
 
         function Show-HiddenSystemFilesAndFolders {
-            Write-Host "Showing hidden system files and folders..."
-            Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowSuperHidden" -Value 1
+            Write-Host 'Showing hidden system files and folders...'
+            Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'ShowSuperHidden' -Value 1
         }
 
         Add-Type -MemberDefinition "[DllImport(`"user32.dll`", EntryPoint = `"SystemParametersInfo`")] public static extern bool SystemParametersInfo(uint uiAction, uint uiParam, uint pvParam, uint fWinIni);" -Name WinAPICall -Namespace SystemParametersInfo -PassThru
@@ -2029,23 +2026,23 @@ function Invoke-Setup {
             scoop install main/7zip
         }
 
-        $selectedString = $script:selected -join ", "
-        $selectedString = $selectedString.TrimEnd(", ")
+        $selectedString = $script:selected -join ', '
+        $selectedString = $selectedString.TrimEnd(', ')
 
         script:Log "Selected: $selectedString" -Verbose
     }
 
     process {
-        $host.UI.RawUI.WindowTitle = "Running setup"
+        $host.UI.RawUI.WindowTitle = 'Running setup'
 
-        $preferences = $script:packageManagerPreference -split ","
+        $preferences = $script:packageManagerPreference -split ','
 
         function Get-WingetElevationRequirement {
             param (
                 [string]$installCommand
             )
 
-            Write-Verbose "Checking winget package elevation requirement..."
+            Write-Verbose 'Checking winget package elevation requirement...'
 
             if ($installCommand -match '--id=([^\s]+)') {
                 $id = $matches[1]
@@ -2068,7 +2065,7 @@ function Invoke-Setup {
                     try {
                         $commits = Invoke-RestMethod $apiUrl
                     } catch {
-                        Write-Verbose "Could not retrieve commits, possibly rate limited."
+                        Write-Verbose 'Could not retrieve commits, possibly rate limited.'
                         return $false
                     }
                 }
@@ -2076,7 +2073,7 @@ function Invoke-Setup {
                 while (-not ($matched)) {
                     $commitMessage = ($commits | Select-Object -Index $index).commit.message
                     if ($null -eq $commitMessage) {
-                        Write-Verbose "Could not determine package elevation requirement."
+                        Write-Verbose 'Could not determine package elevation requirement.'
                         return $false
                     }
                     if ($commitMessage -match "(?<=Automatic update of|New version:|ReleaseNotes:) $owner\.$name (?:from .* to |version )?(.*?)(?= \()") {
@@ -2092,9 +2089,9 @@ function Invoke-Setup {
             Write-Verbose "Checking manifest at $manifestUrl"
             $manifest = Invoke-RestMethod -Uri $manifestUrl
 
-            Write-Verbose "Finished checking winget package elevation requirement..."
+            Write-Verbose 'Finished checking winget package elevation requirement...'
 
-            if ($manifest -match "ElevationRequirement:\s*elevationProhibited") {
+            if ($manifest -match 'ElevationRequirement:\s*elevationProhibited') {
                 return $true
             } else {
                 return $false
@@ -2109,8 +2106,8 @@ function Invoke-Setup {
                 foreach ($command in $packageManagerCommands) {
                     if ($command -match "^$pref") {
                         Write-Verbose "`nSetting up $entry with $pref`n"
-                        if ($command -match "^choco|^winget") {
-                            if ($command -match "^winget" -and ($command -match "--ignore-security-hash" -or (Get-WingetElevationRequirement $command))) {
+                        if ($command -match '^choco|^winget') {
+                            if ($command -match '^winget' -and ($command -match '--ignore-security-hash' -or (Get-WingetElevationRequirement $command))) {
                                 Write-Verbose "Executing: gsudo --integrity Medium -- $command`n"
                                 gsudo --integrity Medium -- $command
                             } else {
@@ -2131,14 +2128,14 @@ function Invoke-Setup {
             }
 
             foreach ($command in $commands) {
-                if ($command -notmatch "^(choco|scoop|winget)") {
+                if ($command -notmatch '^(choco|scoop|winget)') {
                     Write-Verbose "Executing command: $command`n"
                     Invoke-Expression $command
                 }
             }
 
             switch ($entry) {
-                "After Dark CC Theme" {
+                'After Dark CC Theme' {
                     gdown $script:afterDarkThemeGDriveID
                     script:Expand-7zArchive '.\After-Dark-CC-Theme.7z'
                     Remove-Item '.\After-Dark-CC-Theme.7z'
@@ -2196,16 +2193,16 @@ function Invoke-Setup {
                         script:Log "After-Dark-CC-Theme: Skipped Quick Access icon change registry import, you can do it manually with - reg import '$env:USERPROFILE\Icons\iPack Icon\Windows 10 - Change Quick Access Icon\custom.reg'"
                     }
                 }
-                "AutoHotkey" {
+                'AutoHotkey' {
                     Copy-Item "$PSScriptRoot\Configs\AutoHotkey" -Destination "$env:USERPROFILE\Code\Scripts" -Recurse -Force
                     foreach ($script in (Get-ChildItem "$env:USERPROFILE\Code\Scripts\AutoHotkey\Startup\*")) {
                         New-Item -ItemType SymbolicLink "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\$($script.Name)" -Target $script.FullName -Force
                     }
                 }
-                "Autologon" {
+                'Autologon' {
                     autologon
                 }
-                "BetterDiscord" {
+                'BetterDiscord' {
                     New-Item -ItemType Directory "$env:APPDATA\BetterDiscord" -Force | Out-Null
                     Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\BetterDiscord\*" -Destination "$env:APPDATA\BetterDiscord" -Recurse -Force
                     $pluginDir = "$env:APPDATA\BetterDiscord\plugins"
@@ -2254,7 +2251,7 @@ function Invoke-Setup {
                         syncthing cli config folders add --id '5rvta-4ecem' --label 'BetterDiscord' --path "$env:APPDATA\BetterDiscord"
                     }
                 }
-                "Calibre" {
+                'Calibre' {
                     if (scoop list | Select-String -Pattern 'calibre' -SimpleMatch) {
                         $destinationPath = "$env:USERPROFILE\scoop\persist\calibre\Calibre Settings"
                     } else {
@@ -2263,7 +2260,7 @@ function Invoke-Setup {
                     New-Item -ItemType Directory $destinationPath -Force | Out-Null
                     Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\Calibre\icons-dark.rcc" -Destination $destinationPath -Force
                 }
-                "CEMU" {
+                'CEMU' {
                     gdown $script:wiiUSavesGDriveID
                     script:Expand-7zArchive '.\Wii-U.7z'
                     Remove-Item '.\Wii-U.7z'
@@ -2286,7 +2283,7 @@ function Invoke-Setup {
                     }
                     Remove-Item '.\Wii-U' -Recurse -Force
                 }
-                "Chatterino2" {
+                'Chatterino2' {
                     New-Item -ItemType Directory "$env:USERPROFILE\Audio\SFX\Notifications" -Force | Out-Null
                     Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\Chatterino\default-notification.mp3" -Destination "$env:USERPROFILE\Audio\SFX\Notifications\Metroid-Data-Received.mp3" -Force
                     Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\Chatterino\jerma-notification.wav" -Destination "$env:USERPROFILE\Audio\SFX\Notifications\Jerma-UWU.wav" -Force
@@ -2308,7 +2305,7 @@ function Invoke-Setup {
                     }
                     script:Log 'Chatterino: If the log in button does nothing, manually log in with https://chatterino.com/client_login'
                 }
-                "Command Prompt Aliases" {
+                'Command Prompt Aliases' {
                     New-Item -ItemType Directory "$env:USERPROFILE\.config\cmd" -Force | Out-Null
                     $aliases = Get-Content "$PSScriptRoot\Configs\Command-Prompt\aliases.doskey"
                     if (Get-Command pwsh -ErrorAction SilentlyContinue) {
@@ -2321,14 +2318,14 @@ function Invoke-Setup {
                     New-Item 'HKCU:\Software\Microsoft\Command Processor' -Force | Out-Null
                     Set-ItemProperty 'HKCU:\Software\Microsoft\Command Processor' -Name 'AutoRun' -Type String -Value 'doskey /MACROFILE="%USERPROFILE%\.config\cmd\aliases.doskey"' -Force
                 }
-                "Cyberpunk Waifus Font" {
+                'Cyberpunk Waifus Font' {
                     Invoke-WebRequest 'https://dl.dafont.com/dl/?f=cyberpunkwaifus' -OutFile '.\CyberpunkWaifus-Font.zip'
                     Expand-Archive '.\CyberpunkWaifus-Font.zip' -DestinationPath '.' -Force
                     Remove-Item '.\CyberpunkWaifus-Font.zip'
                     script:Install-FontFile (Get-ChildItem '.\CyberpunkWaifus (1).ttf').FullName
                     Remove-Item '.\CyberpunkWaifus (1).ttf' -Force
                 }
-                "DS4Windows" {
+                'DS4Windows' {
                     if (scoop list | Select-String -Pattern 'ds4windows' -SimpleMatch) {
                         $destinationPath = "$env:USERPROFILE\scoop\persist\ds4windows"
                     } else {
@@ -2340,7 +2337,7 @@ function Invoke-Setup {
                     $ds4windows = es -i -n 1 -r '\.exe$' 'DS4Windows.exe'
                     Start-Process $ds4windows
                 }
-                "Discord" {
+                'Discord' {
                     script:Log 'Discord: Get mobile app QR code scanner ready.'
                     if ($script:selected -contains 'BetterDiscord') {
                         Write-Host 'Please log into Discord, press enter to continue when done.'
@@ -2352,10 +2349,10 @@ function Invoke-Setup {
                         Read-Host
                     }
                 }
-                "Discord OpenAsar" {
+                'Discord OpenAsar' {
                     & "$PSScriptRoot\Scripts\Install-Discord-OpenAsar.ps1"
                 }
-                "DisplayFusion" {
+                'DisplayFusion' {
                     Start-Process steam://install/227260
                     $settings = Get-Content "$PSScriptRoot\Configs\DisplayFusion\Settings.reg"
                     $settings = $settings -replace 'userprofile-here', ($env:USERPROFILE -replace '\\', '\\')
@@ -2365,7 +2362,7 @@ function Invoke-Setup {
                     reg import '.\temp-DisplayFusion-Settings.reg' 2>$null
                     Remove-Item '.\temp-DisplayFusion-Settings.reg' -Force
                 }
-                "Dolphin" {
+                'Dolphin' {
                     Invoke-WebRequest 'https://gist.github.com/Bergbok/7db0ab7cdeb96bebb9144c7a96a4c211/archive/2e21ed4a370688d1a65b0ec25483fc7be7ce2b7a.zip' -OutFile 'Dolphin-Xbox-Controller-Profiles.zip'
                     Expand-Archive '.\Dolphin-Xbox-Controller-Profiles.zip'
                     Remove-Item '.\Dolphin-Xbox-Controller-Profiles.zip'
@@ -2380,7 +2377,7 @@ function Invoke-Setup {
                     Copy-Item '.\Dolphin-Xbox-Controller-Profiles\*\Xbox Controller (Nunchuk+Wiimote).ini' -Destination "$profilePath\Wiimote" -Force
                     Remove-Item '.\Dolphin-Xbox-Controller-Profiles' -Recurse -Force
                 }
-                "Duckstation" {
+                'Duckstation' {
                     $biosPath = "$env:USERPROFILE\scoop\apps\ps2-bios\current\BIOS"
                     if (scoop list | Select-String -Pattern 'duckstation' -SimpleMatch) {
                         Remove-Item "$env:USERPROFILE\scoop\apps\duckstation\current\bios"
@@ -2390,7 +2387,7 @@ function Invoke-Setup {
                         New-Item -ItemType SymbolicLink "$env:USERPROFILE\Documents\DuckStation\bios" -Target $biosPath -Force
                     }
                 }
-                "Elden Ring Save Manager" {
+                'Elden Ring Save Manager' {
                     Copy-Item "$PSScriptRoot\Configs\Elden-Ring-Save-Manager\background.png" -Destination "$env:USERPROFILE\scoop\persist\eldenring-save-manager\data" -Force
                     Copy-Item "$PSScriptRoot\Configs\Elden-Ring-Save-Manager\config.json" -Destination "$env:USERPROFILE\scoop\persist\eldenring-save-manager\data" -Force
                     $config = Get-Content "$env:USERPROFILE\scoop\persist\eldenring-save-manager\data\config.json"
@@ -2406,7 +2403,7 @@ function Invoke-Setup {
                     Pop-Location
                     Remove-Item .\Elden-Ring-Saves -Recurse -Force
                 }
-                "Everything" {
+                'Everything' {
                     if (-not (Get-Process -Name 'Everything' -ErrorAction SilentlyContinue)) {
                         everything
                     }
@@ -2437,7 +2434,7 @@ function Invoke-Setup {
                     Start-Sleep -Seconds 1; Stop-Process -Name 'everything' -Force -ErrorAction SilentlyContinue
                     Start-Process $everything -WindowStyle Minimized
                 }
-                "ExplorerPatcher" {
+                'ExplorerPatcher' {
                     Add-MpPreference -ExclusionPath "$env:PROGRAMFILES\ExplorerPatcher"
                     Add-MpPreference -ExclusionPath "$env:APPDATA\ExplorerPatcher"
                     Add-MpPreference -ExclusionPath "$env:WINDIR\dxgi.dll"
@@ -2446,13 +2443,13 @@ function Invoke-Setup {
                     reg import "$PSScriptRoot\Configs\ExplorerPatcher\ExplorerPatcher.reg"
                     scoop install bergbok/explorer-patcher
                 }
-                "f.lux" {
+                'f.lux' {
                     Start-Sleep -Seconds 1
                     $flux = es -i -n 1 -r '\.exe$' 'flux.exe'
                     Start-Process $flux
                     script:Log "f.lux: Click the limited color popup, but don't restart!"
                 }
-                "Firefox" {
+                'Firefox' {
                     Start-Sleep -Seconds 1
                     if (Get-Command firefox -ErrorAction SilentlyContinue) {
                         $firefox = 'firefox'
@@ -2538,7 +2535,7 @@ function Invoke-Setup {
                     script:Log 'Firefox: Customize toolbar: Remove "Account", "Save to Pocket" & "Import bookmarks". Pin Simple Tab Groups & uBlock Origin.'
                     script:Log 'Firefox: Configure browser extensions: Augmented Steam, Bypass Paywalls Clean (Disable "Enable new sites by default"), Dark Reader, FFZ (manually enable 7TV, BTTV, Inline Tab-Completion & First Message Highlight add-ons), KeePassXC, LibRedirect, uBlock Origin, Violentmonkey.'
                 }
-                "Flameshot" {
+                'Flameshot' {
                     New-Item -ItemType Directory "$env:APPDATA\Flameshot" -Force | Out-Null
                     Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\Flameshot\Flameshot.ini" -Destination "$env:APPDATA\Flameshot" -Force
                     $flameshotini = Get-Content "$env:APPDATA\Flameshot\Flameshot.ini"
@@ -2546,7 +2543,7 @@ function Invoke-Setup {
                     $flameshotini = $flameshotini -replace 'imgur-client-id-here', $script:imgurClientID
                     $flameshotini | Set-Content "$env:APPDATA\flameshot\Flameshot.ini" -Force
                 }
-                "Flash-enabled Chromium" {
+                'Flash-enabled Chromium' {
                     $apiUrl = 'https://gitlab.com/api/v4/projects/cleanflash%2Finstaller/releases'
                     $response = Invoke-RestMethod -Uri $apiUrl
                     $latestCleanFlashRelease = $response | Select-Object -First 1
@@ -2565,7 +2562,7 @@ function Invoke-Setup {
                         }
                     }
                 }
-                "FreeTube" {
+                'FreeTube' {
                     New-Item -ItemType Directory "$env:APPDATA\FreeTube" -Force | Out-Null
                     Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\FreeTube\settings.db" -Destination "$env:APPDATA\FreeTube" -Force
                     gdown $script:freetubeDataGDriveID
@@ -2578,7 +2575,7 @@ function Invoke-Setup {
                         syncthing cli config folders add --id 'kqgmu-jazfm' --label 'FreeTube' --path "$env:APPDATA\FreeTube"
                     }
                 }
-                "FreeTube (Custom)" {
+                'FreeTube (Custom)' {
                     & "$PSScriptRoot\Scripts\Build-Themed-FreeTube.ps1"
                     Set-Location "$PSScriptRoot"
                     New-Item -ItemType Directory "$env:APPDATA\FreeTube" -Force | Out-Null
@@ -2593,13 +2590,13 @@ function Invoke-Setup {
                         syncthing cli config folders add --id 'kqgmu-jazfm' --label 'FreeTube' --path "$env:APPDATA\FreeTube"
                     }
                 }
-                "G.Skill Trident Z Lighting Control" {
+                'G.Skill Trident Z Lighting Control' {
                     Start-Sleep -Seconds 5
                     Get-Process -Name 'G.SKILL Trident Z Lighting Control *.tmp' -ErrorAction SilentlyContinue | Stop-Process
                     New-Item -ItemType Directory "$env:USERPROFILE\AppData\Roaming\G.SKILL\Trident Z Lighting Control" -Force | Out-Null
                     Copy-Item "$PSScriptRoot\Configs\G.Skill-Trident-Z-Lighting-Control\config" -Destination "$env:USERPROFILE\AppData\Roaming\G.SKILL\Trident Z Lighting Control" -Force
                 }
-                "git" {
+                'git' {
                     git config --global user.email $script:gitEmail
                     git config --global user.name $script:gitName
                     if (-not (git config --global user.signingKey)) {
@@ -2644,7 +2641,7 @@ function Invoke-Setup {
                         script:Log 'git: Could not set core.editor to VSCode.'
                     }
                 }
-                "Gpg4win" {
+                'Gpg4win' {
                     $gpg = (Get-Command gpg -ErrorAction SilentlyContinue).Source
                     if (-not $gpg) { $gpg = es -i -n 1 -r '\.exe$' 'gpg.exe' }
                     Start-Process $gpg -Args '--daemon' -WindowStyle Hidden
@@ -2652,7 +2649,7 @@ function Invoke-Setup {
                     if (-not $keyboxd) { $keyboxd = es -i -n 1 -r '\.exe$' 'keyboxd.exe' }
                     Start-Process $keyboxd -Args '--daemon' -WindowStyle Hidden
                 }
-                "HypnOS Cursor" {
+                'HypnOS Cursor' {
                     gdown $script:hypnosCursorGDriveID
                     script:Expand-7zArchive '.\HypnOS-Cursor.7z'
                     Remove-Item .\HypnOS-Cursor.7z
@@ -2662,14 +2659,14 @@ function Invoke-Setup {
                     Remove-Item .\HypnOS-Cursor -Recurse
                     Start-Process 'rundll32.exe' -Args 'shell32.dll,Control_RunDLL main.cpl,,1'
                 }
-                "iCloud" {
+                'iCloud' {
                     $shell = New-Object -ComObject Shell.Application
                     ($shell.Namespace('shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}').Items() | Where-Object {$_.Path -eq "$env:USERPROFILE\iCloudDrive"}).InvokeVerb('unpinfromhome')
                     ($shell.Namespace('shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}').Items() | Where-Object {$_.Name -eq 'iCloud Photos'}).InvokeVerb('unpinfromhome')
                     Remove-Item 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{F0D63F85-37EC-4097-B30D-61B4A8917118}' -Force
                     script:Log 'iCloud: If you get "Your computer is missing Media features." even though it is installed you may need to use Orca to modify iCloud64.msi (remove the "Installed OR MS_MEDIAFEATUREPACK_INSTALLED OR IGNORE_MEDIAFEATUREPACK" condition from the LaunchCondition table). You can find iCloud64.msi in TEMP while the installer is running.'
                 }
-                "iCue" {
+                'iCue' {
                     $tempPath = [System.IO.Path]::GetTempPath()
                     Copy-Item "$PSScriptRoot\Configs\iCUE\*" -Destination $tempPath -Force
                     $defaultProfile = Get-Content "$tempPath\Default.cueprofile"
@@ -2678,11 +2675,11 @@ function Invoke-Setup {
                     $defaultProfile | Set-Content "$tempPath\Default.cueprofile"
                     script:Log "iCUE: Import profiles from $tempPath"
                 }
-                "ImageGlass" {
+                'ImageGlass' {
                     script:Log 'ImageGlass: Set as default photo viewer in settings -> ms-settings:defaultapps'
                     Start-Process ms-settings:defaultapps
                 }
-                "KeePassXC" {
+                'KeePassXC' {
                     Start-Sleep -Seconds 1
                     $keepassxc = es -i -n 1 -r '\.exe$' 'KeePassXC.exe'
                     Start-Process $keepassxc
@@ -2693,34 +2690,34 @@ function Invoke-Setup {
                     }
                     script:Log 'KeePassXC: Enable auto startup, browser integration, and pair with browser extension.'
                 }
-                "khinsider.py" {
+                'khinsider.py' {
                     git clone 'https://github.com/obskyr/khinsider.git' "$env:USERPROFILE\Code\Scripts\Python\khinsiderdl"
                     Remove-Item "$env:USERPROFILE\Code\Scripts\Python\khinsiderdl\.gitignore" -ErrorAction SilentlyContinue
                     Remove-Item "$env:USERPROFILE\Code\Scripts\Python\khinsiderdl\README.md" -ErrorAction SilentlyContinue
                 }
-                "Lumafly" {
+                'Lumafly' {
                     Start-Process "$env:USERPROFILE\scoop\apps\lumafly\current\Lumafly.exe" -Args 'scarab://modpack/mPP6enEq'
                 }
-                "Media Feature Pack" {
+                'Media Feature Pack' {
                     Add-WindowsCapability -Online -Name Media.MediaFeaturePack
                 }
-                "Microsoft Activation Scripts" {
+                'Microsoft Activation Scripts' {
                     Start-Process powershell -WindowStyle Hidden -Args "Invoke-RestMethod 'https://get.activated.win' | Invoke-Expression"
                     script:Log 'MAS: Use option 1, keep window open if you selected Microsoft Office.'
                 }
-                "Microsoft Office" {
+                'Microsoft Office' {
                     Invoke-WebRequest 'https://officecdn.microsoft.com/pr/wsus/setup.exe' -OutFile '.\setup.exe'
                     Start-Process '.\setup.exe' -Args "/configure '$PSScriptRoot\Configs\Microsoft-Office\Configuration.xml'" -Wait
                     Remove-Item '.\setup.exe'
                 }
-                "Minecraft Font" {
+                'Minecraft Font' {
                     Invoke-WebRequest 'https://dl.dafont.com/dl/?f=minecraft' -OutFile '.\Minecraft-Font.zip'
                     Expand-Archive '.\Minecraft-Font.zip' -DestinationPath '.' -Force
                     Remove-Item '.\Minecraft-Font.zip'
                     script:Install-FontFile (Get-ChildItem '.\Minecraft.ttf').FullName
                     Remove-Item '.\Minecraft.ttf' -Force
                 }
-                "Mp3tag" {
+                'Mp3tag' {
                     gdown $script:mp3tagConfigGDriveID
                     script:Expand-7zArchive '.\Mp3tag.7z'
                     Remove-Item '.\Mp3tag.7z'
@@ -2735,24 +2732,24 @@ function Invoke-Setup {
                     }
                     Remove-Item '.\Mp3tag' -Recurse -Force
                 }
-                "Network Sharing" {
+                'Network Sharing' {
                     Set-NetFirewallRule -DisplayGroup 'Network Discovery' -Enabled True
                     Set-NetFirewallRule -DisplayGroup 'File and Printer Sharing' -Enabled True
                     shrpubw
                 }
-                "NoPayStation" {
+                'NoPayStation' {
                     Copy-Item "$PSScriptRoot\Configs\NoPayStation\npsSettings.dat" -Destination "$env:USERPROFILE\scoop\persist\nopaystation"
                     script:Log "NoPayStation: You need to manually set download location and pkg2zip path to '$(scoop prefix pkg2zip)\pkg2zip.exe' in settings."
                 }
-                "Notepad++" {
+                'Notepad++' {
                     New-Item -ItemType Directory "$env:USERPROFILE\scoop\persist\notepadplusplus\cloud" -Force | Out-Null
                     Copy-Item "$PSScriptRoot\Configs\Notepad++\*" -Destination "$env:USERPROFILE\scoop\persist\notepadplusplus\cloud" -Force -Recurse
                     script:Log 'Notepad++: You need to manually import settings by going to Settings -> Preferences -> Cloud & Link and setting the path to: "$env:USERPROFILE\scoop\persist\notepadplusplus\cloud" and set up file associations (launch as admin).'
                 }
-                "NVIDIA Drivers" {
+                'NVIDIA Drivers' {
                     Start-Process 'https://www.nvidia.com/en-us/drivers'
                 }
-                "OBS Studio" {
+                'OBS Studio' {
                     if (scoop list | Select-String -Pattern 'obs-studio') {
                         $confPath = "$env:USERPROFILE\scoop\persist\obs-studio\config\obs-studio"
                     } else {
@@ -2777,18 +2774,18 @@ function Invoke-Setup {
                     $basic = $basic -replace 'save-path-here', ("$env:USERPROFILE\Videos" -replace '\\', '/')
                     $basic | Set-Content "$confPath\basic\profiles\Main\basic.ini"
                 }
-                "Obsidian" {
+                'Obsidian' {
                     New-Item -ItemType Directory "$env:USERPROFILE\Documents\Obsidian" -Force | Out-Null
                     Start-Process 'https://github.com/Bergbok/Obsidian-Vault'
                     if (Get-Command syncthing -ErrorAction SilentlyContinue) {
                         syncthing cli config folders add --id 'd4xqu-hqmrt' --label 'Obsidian' --path "$env:USERPROFILE\Documents\Obsidian"
                     }
                 }
-                "oh-my-posh" {
+                'oh-my-posh' {
                     New-Item -ItemType Directory "$env:USERPROFILE\Themes\oh-my-posh" -Force | Out-Null
                     Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\oh-my-posh\*" -Destination "$env:USERPROFILE\Themes\oh-my-posh" -Force
                 }
-                "Open-Shell" {
+                'Open-Shell' {
                     New-Item -ItemType Directory "$env:APPDATA\OpenShell\Pinned" -Force | Out-Null
                     $shortcuts = @{
                         'calibre.lnk' = @{ target = 'calibre.exe'; scoopName = 'calibre' }
@@ -2827,7 +2824,7 @@ function Invoke-Setup {
                     Start-Process (es -i -n 1 -r '\.exe$' 'ClassicExplorerSettings.exe') -Args "-xml '$PSScriptRoot\Configs\Open-Shell\Explorer Settings.xml'"
                     Start-Process (es -i -n 1 -r '\.exe$' 'StartMenu.exe') -Args "-xml '$PSScriptRoot\Configs\Open-Shell\Menu Settings.xml'"
                 }
-                "PCSX2" {
+                'PCSX2' {
                     if (scoop list | Select-String -Pattern 'pcsx2' -SimpleMatch) {
                         $biosPath = "$env:USERPROFILE\scoop\apps\ps2-bios\current\BIOS"
                         $destinationPath = "$env:USERPROFILE\scoop\persist\pcsx2\bios"
@@ -2835,7 +2832,7 @@ function Invoke-Setup {
                         New-Item -ItemType SymbolicLink $destinationPath -Target $biosPath -Force
                     }
                 }
-                "PeaZip" {
+                'PeaZip' {
                     $conf = "$(Split-Path $PSScriptRoot)\Cross-Platform\Configs\PeaZip\conf.txt"
                     if (scoop list | Select-String -Pattern 'peazip' -SimpleMatch) {
                         $destinationPath = "$env:USERPROFILE\scoop\persist\peazip\res\conf"
@@ -2846,15 +2843,15 @@ function Invoke-Setup {
                     Copy-Item $conf -Destination $destinationPath -Recurse -Force
                     script:Log 'PeaZip: Set extended mode for "Browse path with PeaZip" with ShellMenuView.'
                 }
-                "Photoshop" {
+                'Photoshop' {
                     Start-Process $script:adobePhotoshopURL
                     script:Log 'Photoshop: Be sure to disable CCXProcess in Task Manager -> Startup.'
                     script:Log 'Photoshop: Alt+Shift+Ctrl+K -> File -> Quick Export as PNG'
                 }
-                "PowerShell Update" {
+                'PowerShell Update' {
                     Start-Process powershell -Args 'Update-Help'
                 }
-                "PowerShell Profile" {
+                'PowerShell Profile' {
                     if (!(Test-Path $PROFILE)) {
                         New-Item -ItemType File $PROFILE -Force | Out-Null
                     }
@@ -2877,33 +2874,33 @@ function Invoke-Setup {
                     $modifiedContent | Set-Content $PROFILE -Force
                     $modifiedContent | Set-Content "$(Split-Path $PROFILE)\Microsoft.VSCode_profile.ps1" -Force
                 }
-                "PowerToys" {
+                'PowerToys' {
                     New-Item -ItemType Directory "$env:LOCALAPPDATA\Microsoft\PowerToys" -Force | Out-Null
                     Copy-Item "$PSScriptRoot\Configs\PowerToys\*" -Destination "$env:LOCALAPPDATA\Microsoft\PowerToys" -Recurse -Force
                     $runsettings = Get-Content "$PSScriptRoot\Configs\PowerToys\PowerToys Run\settings.json"
                     $runsettings = $runsettings -replace 'runplugins-here', ((es -i -n 1 -r 'RunPlugins$' /ad 'PowerToys\RunPlugins') -replace '\\', '\\')
                     $runsettings | Set-Content "$env:LOCALAPPDATA\Microsoft\PowerToys\PowerToys Run\settings.json"
                 }
-                "Premiere Pro" {
+                'Premiere Pro' {
                     Start-Process $script:adobePremiereProURL
                     script:Log 'Photoshop: Be sure to disable CCXProcess in Task Manager -> Startup.'
                 }
-                "ps2exe" {
+                'ps2exe' {
                     New-Item -ItemType Directory "$env:USERPROFILE\Code\Scripts\ps2exe" -Force | Out-Null
                     Add-MpPreference -ExclusionPath "$env:USERPROFILE\Code\Scripts\ps2exe"
                 }
-                "Python" {
+                'Python' {
                     script:Update-EnvPath
                     python -m ensurepip --upgrade
                     python -m pip install --upgrade pip
                 }
-                "qBittorrent" {
+                'qBittorrent' {
                     script:Log 'qBittorrent: Disable "Check for program updates" in settings.'
                 }
-                "qBittorrent Enhanced" {
+                'qBittorrent Enhanced' {
                     script:Log 'qBittorrent: Disable "Check for program updates" in settings.'
                 }
-                "QTTabBar" {
+                'QTTabBar' {
                     Enable-WindowsOptionalFeature -Online -FeatureName 'NetFx3' -NoRestart
                     Copy-Item "$PSScriptRoot\Configs\QTTabBar\QTTabBarTab.png" "$env:USERPROFILE\Pictures\System" -Force
                     $settings = Get-Content "$PSScriptRoot\Configs\QTTabBar\QTTabBarSettings.reg"
@@ -2938,7 +2935,7 @@ function Invoke-Setup {
                     Remove-Item '.\temp-QTTabBar-Settings.reg'
                     script:Log 'QTTabBar: If appearance is off, go to Options -> Appearance and set tab image to "$env:USERPROFILE\Pictures\System\QTTabBarTab.png", disable "Solid color" under Toolbar Background and change text color/font.'
                 }
-                "Rainmeter" {
+                'Rainmeter' {
                     git clone 'https://github.com/JoeSiu/RainmeterAutoLayout.git'
                     $autolayoutVars = Get-Content .\RainmeterAutoLayout\AutoLayout\@Resources\Variables.inc
                     $autolayoutVars = $autolayoutVars -replace 'LayoutMap=".*"', 'LayoutMap="4695x3324=Custom|3840x2160=CustomTV|3840x3240=CustomTV|3840x1182=CustomCENTER_DELL+LEFT_SAMSUNG|3840x1245=CustomTV_DISABLED|"'
@@ -2978,7 +2975,7 @@ function Invoke-Setup {
                     Start-Process 'https://www.mapcoordinates.net'
                     Start-Process 'https://in-the-sky.org/data/planets.php'
                 }
-                "RPCS3" {
+                'RPCS3' {
                     gdown $script:ps3SavesGDriveID
                     script:Expand-7zArchive '.\PS3.7z'
                     Remove-Item '.\PS3.7z'
@@ -3002,7 +2999,7 @@ function Invoke-Setup {
                     script:Log 'RPCS3: File -> Install Firmware -> "$env:USERPROFILE\scoop\apps\ps3-system-software\current\PS3UPDAT.PUP"'
                     script:Log 'RPSC3: Disable shader compiling popups -> Config -> Emulator -> Show * compilation hint'
                 }
-                "Ryujinx" {
+                'Ryujinx' {
                     gdown $script:switchFilesGDriveID
                     script:Expand-7zArchive '.\Switch.7z'
                     Remove-Item '.\Switch.7z'
@@ -3033,13 +3030,13 @@ function Invoke-Setup {
                         syncthing cli config folders add --id 'z3qjr-yw9j5' --label 'Ryujinx' --path $confPath
                     }
                 }
-                "scdl" {
+                'scdl' {
                     New-Item -ItemType Directory "$env:USERPROFILE\Downloads\Audio\SoundCloud" -Force | Out-Null
                     New-Item -ItemType Directory "$env:USERPROFILE\.config\scdl" -Force | Out-Null
                     Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\scdl\scdl.cfg" -Destination "$env:USERPROFILE\.config\scdl" -Force
                     (Get-Content "$env:USERPROFILE\.config\scdl\scdl.cfg") -replace 'path-here', "$env:USERPROFILE\Downloads\Audio\Soundcloud" | Set-Content "$env:USERPROFILE\.config\scdl\scdl.cfg"
                 }
-                "Sekiro" {
+                'Sekiro' {
                     Write-Host 'Downloading Sekiro...'
                     gdown $script:sekiroGDriveID
                     script:Expand-7zArchive '.\Sekiro.7z'
@@ -3048,26 +3045,26 @@ function Invoke-Setup {
                     Remove-Item '.\Sekiro' -Recurse -Force
                     script:Log "Sekiro: For autostarting unlocker with game ensure 'Local Policies/Audit Policy/Audit process tracking' is set to 'Success'"
                 }
-                "SGDBoop" {
+                'SGDBoop' {
                     Start-Process "$env:USERPROFILE\scoop\apps\sgdboop\current\SGDBoop.exe"
                     Start-Sleep -Seconds 1
                     Stop-Process -Name SGDBoop
                 }
-                "ShellExView" {
+                'ShellExView' {
                     winget install --id=NirSoft.ShellExView --exact --accept-source-agreements --accept-package-agreements
                     script:Log 'ShellExView: Disable GpgEx shell extension.'
                 }
-                "ShellMenuView" {
+                'ShellMenuView' {
                     script:Log 'ShellMenuView: Set extended mode for: Take Ownership'
                 }
-                "Ship of Harkinian" {
+                'Ship of Harkinian' {
                     gdown $script:sohGDriveID
                     script:Expand-7zArchive '.\SoH.7z'
                     Remove-Item '.\SoH.7z'
                     Copy-Item '.\SoH\*' -Destination "$env:USERPROFILE\scoop\persist\shipwright" -Recurse -ErrorAction SilentlyContinue
                     Remove-Item '.\SoH' -Recurse -Force
                 }
-                "Sophia Script" {
+                'Sophia Script' {
                     Write-Host 'Running Sophia Script...'
                     $preSophiaWindowTitle = $host.UI.RawUI.WindowTitle
                     $latestRelease = Invoke-RestMethod -Uri 'https://api.github.com/repos/farag2/Sophia-Script-for-Windows/releases/latest'
@@ -3205,7 +3202,7 @@ function Invoke-Setup {
                     Remove-Item '.\Sophia' -Recurse -Force
                     $host.UI.RawUI.WindowTitle = $preSophiaWindowTitle
                 }
-                "SoS Optimize Harden Debloat" {
+                'SoS Optimize Harden Debloat' {
                     # I don't recommend running this on home PCs.
                     Write-Host 'Running SoS Windows Optimize Harden Debloat...'
                     Set-Location $PSScriptRoot
@@ -3264,14 +3261,14 @@ function Invoke-Setup {
                     # reenable lock screen username preview
                     Set-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System' -Name 'DontDisplayLastUsername' -Type 'DWORD' -Value 0 -Force
                 }
-                "Spicetify" {
+                'Spicetify' {
                     & "$PSScriptRoot\Scripts\Initialize-Spicetify.ps1" -Full
                     Start-Process 'spotify:marketplace'
                     Start-Process 'https://raw.githubusercontent.com/Bergbok/Configs/refs/heads/main/Cross-Platform/Spicetify/marketplace.json'
                     Start-Process 'https://gist.githubusercontent.com/Bergbok/c7503bcb7ba2699ae10830b5aacbf333/raw/excluding-%255Bcontains-local-files%255D'
                     Start-Process 'https://gist.githubusercontent.com/Bergbok/c7503bcb7ba2699ae10830b5aacbf333/raw/including-%255Bcontains-local-files%255D'
                 }
-                "Spotify" {
+                'Spotify' {
                     if ($script:selected -contains 'Spicetify') {
                         Write-Host 'Please log into Spotify, press enter to continue when done.'
                         Start-Sleep -Seconds 2
@@ -3281,7 +3278,7 @@ function Invoke-Setup {
                     }
                     script:Log 'Spotify: Set local files location.'
                 }
-                "ssh" {
+                'ssh' {
                     if (scoop list | Select-String 'openssh' -SimpleMatch) {
                         & "$env:USERPROFILE\scoop\apps\openssh\current\install-sshd.ps1"
                     }
@@ -3302,7 +3299,7 @@ function Invoke-Setup {
                     New-Item -Path "$env:SYSTEMDRIVE\ProgramData\ssh" -ItemType Directory -Force | Out-Null
                     Add-Content "$env:USERPROFILE\.ssh\authorized_keys", "$env:SYSTEMDRIVE\ProgramData\ssh\administrators_authorized_keys" -Value ($script:authorizedSshPubkeys -split ',')
                 }
-                "Steam" {
+                'Steam' {
                     script:Log 'Steam: Get mobile app QR code scanner ready.'
                     Start-Sleep -Seconds 1
                     $steam = es -i -n 1 -r '\.exe$' 'steam.exe'
@@ -3336,7 +3333,7 @@ function Invoke-Setup {
                     Start-Process $steam
                     script:Log 'Steam: Add additional drives in settings -> Storage.'
                 }
-                "Steam ROM Manager" {
+                'Steam ROM Manager' {
                     if (scoop list | Select-String -Pattern 'steam-rom-manager') {
                         $configPath = "$env:USERPROFILE\scoop\persist\steam-rom-manager\userData"
                     } else {
@@ -3399,17 +3396,17 @@ function Invoke-Setup {
                     script:Log 'Steam ROM Manager: Double check parsers/exceptions before adding games.'
                     script:Log 'Steam ROM Manager: You might need to manually select artwork & set up exceptions for the Windows Non-Steam parser. Or just disable it.'
                 }
-                "Stremio" {
+                'Stremio' {
                     Start-Process 'https://stremio-addons.netlify.app'
                 }
-                "gsudo" {
+                'gsudo' {
                     gsudo config CacheMode Auto
                 }
-                "Syncthing" {
+                'Syncthing' {
                     syncthing generate --no-default-folder
                     Start-Process powershell -Args 'syncthing --no-browser --no-console'
                 }
-                "Syncthing Tray" {
+                'Syncthing Tray' {
                     Start-Sleep -Seconds 2
                     Stop-Process -Name 'syncthingtray*' -ErrorAction SilentlyContinue
                     # won't work unless it's already been configured :/
@@ -3421,19 +3418,19 @@ function Invoke-Setup {
                     $syncthingtrayini | Set-Content "$syncthingtrayiniPath"
                     script:Log 'SyncthingTray: Set syncthingAutostart=false, notifyOnDisconnect=false, stopOnMetered=true.'
                 }
-                "TaskbarX" {
+                'TaskbarX' {
                     Start-Sleep -Seconds 2
                     $taskbarxConfigurator = es -i -n 1 -r '\.exe$' 'TaskbarX Configurator.exe'
                     runas.exe /trustlevel:0x20000 "powershell -Command Start-Process $taskbarxConfigurator"
                 }
-                "Terraria Font" {
+                'Terraria Font' {
                     Invoke-WebRequest 'https://www.ffonts.net/Andy-Bold.font.zip' -OutFile '.\Terraria-Font.zip'
                     Expand-Archive '.\Terraria-Font.zip' -DestinationPath '.\Terraria-Font' -Force
                     Remove-Item '.\Terraria-Font.zip'
                     script:Install-FontFile (Get-ChildItem '.\Terraria-Font\ANDYB.TTF').FullName
                     Remove-Item '.\Terraria-Font' -Recurse -Force
                 }
-                "Uninstall Edge" {
+                'Uninstall Edge' {
                     # https://github.com/ChrisTitusTech/winutil/issues/2672
                     # "Invoke-WebRequest 'https://raw.githubusercontent.com/ChrisTitusTech/winutil/refs/heads/main/functions/private/Uninstall-WinUtilEdgeBrowser.ps1' -OutFile '.\Uninstall-WinUtilEdgeBrowser.ps1'"
                     # ". '.\Uninstall-WinUtilEdgeBrowser.ps1'"
@@ -3446,7 +3443,7 @@ function Invoke-Setup {
                     .\UninstallEdge.ps1
                     Remove-Item .\UninstallEdge.ps1
                 }
-                "Uninstall OneDrive" {
+                'Uninstall OneDrive' {
                     # modified from: https://github.com/ChrisTitusTech/winutil/blob/main/docs/dev/tweaks/z--Advanced-Tweaks---CAUTION/RemoveOnedrive.md
                     # not currently using this, but keeping here in case Sophia's implementation fails
                     Write-Host 'Uninstalling OneDrive...'
@@ -3508,22 +3505,22 @@ function Invoke-Setup {
                         Write-Host 'Something went wrong during the unistallation of OneDrive' -ForegroundColor Red
                     }
                 }
-                "USBHelper" {
+                'USBHelper' {
                     $tempPath = [System.IO.Path]::GetTempPath() + 'USBHelperInstaller.exe'
                     Invoke-WebRequest 'https://github.com/FailedShack/USBHelperInstaller/releases/latest/download/USBHelperInstaller.exe' -OutFile $tempPath
                     Start-Process $tempPath
                     Set-Clipboard 'titlekeys.ovh'
                     script:Log 'USBHelper: Set title key site to titlekeys.ovh'
                 }
-                "veadotube mini" {
+                'veadotube mini' {
                     Start-Process 'https://olmewe.itch.io/veadotube-mini/purchase'
                     Copy-Item "$(Split-Path $PSScriptRoot)\Cross-Platform\veadotube-mini\*" -Destination "$env:USERPROFILE\Pictures\pngtubers" -Recurse -Force
                     script:Log "veadotube mini: pngtubers have been copied to '$env:USERPROFILE\Pictures\pngtubers'"
                 }
-                "VirtualBox" {
+                'VirtualBox' {
                     Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart
                 }
-                "Visual Studio Code" {
+                'Visual Studio Code' {
                     if (Get-Command code -ErrorAction SilentlyContinue) {
                         gsudo --integrity Medium -- code
                     } else {
@@ -3532,10 +3529,10 @@ function Invoke-Setup {
                     }
                     script:Log "VSCode: Change git.defaultCloneDirectory to $($env:USERPROFILE -replace '\\', '\\')\\Code"
                 }
-                "Voicemod" {
+                'Voicemod' {
                     script:Log 'Voicemod: Disable auto startup in Task Manager'
                 }
-                "Wallpaper" {
+                'Wallpaper' {
                     Write-Host 'Setting wallpaper...'
                     Invoke-WebRequest $script:wallpaperUrl -OutFile "$env:USERPROFILE\Pictures\Wallpapers\$script:wallpaperFilename"
                     New-Item -ItemType SymbolicLink "$env:USERPROFILE\Pictures\Wallpapers\Current" -Target "$env:USERPROFILE\Pictures\Wallpapers\$script:wallpaperFilename" -Force
@@ -3545,11 +3542,11 @@ function Invoke-Setup {
                     [Wallpaper]::SetWallpaper("$env:USERPROFILE\Pictures\Wallpapers\Current")
                     # couldn't manage to change the lock screen programmatically, tried changing registry keys and overwriting the files in $env:WINDIR\Web\Screen
                 }
-                "Wallpaper Engine" {
+                'Wallpaper Engine' {
                     Start-Process steam://install/431960
                     script:Log 'Wallpaper Engine: Open before script ends to set it up.'
                 }
-                "WinAero Tweaker" {
+                'WinAero Tweaker' {
                     $winaerotweaker = es -i -n 1 -r '\.exe$' 'WinaeroTweaker.exe'
                     $winaerotweakerini = Get-Content "$PSScriptRoot\Configs\Winaero-Tweaker\Winaero Tweaker.ini"
                     $winaerotweakerini = $winaerotweakerini -replace 'lockscreenimage-here', "$env:USERPROFILE\Pictures\Wallpapers\Current"
@@ -3560,7 +3557,7 @@ function Invoke-Setup {
                     Set-Clipboard "$(Split-Path $winaerotweaker)\Winaero Tweaker.ini"
                     Start-Process $winaerotweaker
                 }
-                "Windows Terminal" {
+                'Windows Terminal' {
                     if (Get-Command wt -ErrorAction SilentlyContinue) {
                         wt
                     } else {
@@ -3588,7 +3585,7 @@ function Invoke-Setup {
                     New-Item -ItemType Directory $destinationPath -Force | Out-Null
                     Set-Content "$destinationPath\settings.json" -Value $config -Force | Out-Null
                 }
-                "WinRAR" {
+                'WinRAR' {
                     Invoke-WebRequest 'https://github.com/bitcookies/winrar-keygen/releases/latest/download/winrar-keygen-x64.exe' -OutFile '.\winrar-keygen.exe'
                     .\winrar-keygen.exe 'Bergbok' 'Anti-Nagware License' | Out-File -Encoding ascii rarreg.key
                     if (scoop list | Select-String -Pattern 'winrar' -SimpleMatch) {
@@ -3615,10 +3612,10 @@ function Invoke-Setup {
                     reg import '.\temp-WinRAR-Settings.reg' 2>$null
                     Remove-Item '.\temp-WinRAR-Settings.reg'
                 }
-                "WinSetView" {
+                'WinSetView' {
                     reg import "$PSScriptRoot\Configs\WinSetView\WinViewBak.reg" 2>$null
                 }
-                "WizTree" {
+                'WizTree' {
                     if (scoop list | Select-String -Pattern 'wiztree' -SimpleMatch) {
                         $destinationPath = "$env:USERPROFILE\scoop\persist\wiztree"
                     } else {
@@ -3628,12 +3625,12 @@ function Invoke-Setup {
                     Copy-Item "$PSScriptRoot\Configs\WizTree\WizTree3.ini" -Destination $destinationPath -Force
                     script:Log 'WizTree: Set context menu extended mode with ShellMenuView.'
                 }
-                "WSL" {
+                'WSL' {
                     wsl --install --no-distribution --no-launch --web-download
                     wsl --update
                     wsl --unregister Ubuntu
                 }
-                "WSL - Debian" {
+                'WSL - Debian' {
                     script:Log 'Debian: You may need to run the following for internet connection: sudo setcap cap_net_raw+p /bin/ping^'
                 }
             }
@@ -3641,36 +3638,36 @@ function Invoke-Setup {
     }
 
     end {
-        $host.UI.RawUI.WindowTitle = "Running post-setup"
+        $host.UI.RawUI.WindowTitle = 'Running post-setup'
 
         function Add-QuickAccessPins {
             $shell = New-Object -ComObject Shell.Application
-            $shell.Namespace($env:USERPROFILE).Self.InvokeVerb("pintohome")
-            $shell.Namespace("$env:USERPROFILE\AppData").Self.InvokeVerb("pintohome")
-            $shell.Namespace("$env:USERPROFILE\Audio").Self.InvokeVerb("pintohome")
-            $shell.Namespace("$env:USERPROFILE\scoop").Self.InvokeVerb("pintohome")
-            $shell.Namespace("$env:USERPROFILE\Videos").Self.InvokeVerb("pintohome")
-            $shell.Namespace("$env:SYSTEMDRIVE\`$Recycle.Bin\$((Get-LocalUser -Name $env:USERNAME).SID.Value)").Self.InvokeVerb("pintohome")
+            $shell.Namespace($env:USERPROFILE).Self.InvokeVerb('pintohome')
+            $shell.Namespace("$env:USERPROFILE\AppData").Self.InvokeVerb('pintohome')
+            $shell.Namespace("$env:USERPROFILE\Audio").Self.InvokeVerb('pintohome')
+            $shell.Namespace("$env:USERPROFILE\scoop").Self.InvokeVerb('pintohome')
+            $shell.Namespace("$env:USERPROFILE\Videos").Self.InvokeVerb('pintohome')
+            $shell.Namespace("$env:SYSTEMDRIVE\`$Recycle.Bin\$((Get-LocalUser -Name $env:USERNAME).SID.Value)").Self.InvokeVerb('pintohome')
         }
 
         function Confirm-SysinternalsEula {
-            if ($script:selected | Where-Object { $script:selection["Sysinternals"] -contains $_ }) {
-                Write-Host "Accepting Sysinternals EULA..."
-                if (-not (Test-Path "HKCU:\Software\Sysinternals")) {
-                    New-Item "HKCU:\Software\Sysinternals" -Force | Out-Null
+            if ($script:selected | Where-Object { $script:selection['Sysinternals'] -contains $_ }) {
+                Write-Host 'Accepting Sysinternals EULA...'
+                if (-not (Test-Path 'HKCU:\Software\Sysinternals')) {
+                    New-Item 'HKCU:\Software\Sysinternals' -Force | Out-Null
                 }
-                Set-ItemProperty "HKCU:\Software\Sysinternals" -Name "EulaAccepted" -Value 1 -Force
+                Set-ItemProperty 'HKCU:\Software\Sysinternals' -Name 'EulaAccepted' -Value 1 -Force
             }
         }
 
         function Copy-Scripts {
-            Write-Host "Copying scripts..."
+            Write-Host 'Copying scripts...'
             New-Item -ItemType Directory "$env:USERPROFILE\Code\Scripts" -Force | Out-Null
-            Copy-Item "$PSScriptRoot\Scripts\*" -Exclude "Startup", "Close-SekiroFpsUnlockAndMore.ps1", "Install-Discord-OpenAsar.ps1", "ps2exe-exe2ps.ps1", "Sophia-Script-Uninstall-Bloat.ps1", "Open-Volume-Mixer.ps1", "Refresh-Rainmeter.ps1" -Destination "$env:USERPROFILE\Code\Scripts" -Force
+            Copy-Item "$PSScriptRoot\Scripts\*" -Exclude 'Startup', 'Close-SekiroFpsUnlockAndMore.ps1', 'Install-Discord-OpenAsar.ps1', 'ps2exe-exe2ps.ps1', 'Sophia-Script-Uninstall-Bloat.ps1', 'Open-Volume-Mixer.ps1', 'Refresh-Rainmeter.ps1' -Destination "$env:USERPROFILE\Code\Scripts" -Force
         }
 
         function Edit-Icons {
-            Write-Host "Editing icons..."
+            Write-Host 'Editing icons...'
             function Out-IniFile {
                 # modified from: https://devblogs.microsoft.com/scripting/use-powershell-to-work-with-any-ini-file/
                 param (
@@ -3679,14 +3676,14 @@ function Invoke-Setup {
                 )
                 $outFile = New-Item -ItemType File -Path $filepath -Force
                 foreach ($i in $inputObject.keys) {
-                    if (!(($inputObject[$i].GetType().Name) -eq "Hashtable")) {
+                    if (!(($inputObject[$i].GetType().Name) -eq 'Hashtable')) {
                     #No Sections
                     Add-Content -Path $outFile -Value "$i=$($inputObject[$i])"
                     } else {
                     #Sections
                     Add-Content -Path $outFile -Value "[$i]"
                     foreach ($j in ($inputObject[$i].keys | Sort-Object)) {
-                        if ($j -match "^Comment[\d]+") {
+                        if ($j -match '^Comment[\d]+') {
                         Add-Content -Path $outFile -Value "$($inputObject[$i][$j])"
                         } else {
                         Add-Content -Path $outFile -Value "$j=$($inputObject[$i][$j])"
@@ -3697,272 +3694,272 @@ function Invoke-Setup {
             }
 
             $desktopInis = @{
-                "Home" = @{
-                    "Path" = $env:USERPROFILE
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\imageres.dll,74"
+                'Home' = @{
+                    'Path' = $env:USERPROFILE
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\imageres.dll,74"
                         }
                     }
                 }
-                "Home - Audio" = @{
-                    "Path" = "$env:USERPROFILE\Audio"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\imageres.dll,77"
+                'Home - Audio' = @{
+                    'Path' = "$env:USERPROFILE\Audio"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\imageres.dll,77"
                         }
                     }
                 }
-                "Home - Code" = @{
-                    "Path" = "$env:USERPROFILE\Code"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:USERPROFILE\Pictures\System\Chevron-Brackets-File.ico,0"
+                'Home - Code' = @{
+                    'Path' = "$env:USERPROFILE\Code"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:USERPROFILE\Pictures\System\Chevron-Brackets-File.ico,0"
                         }
                     }
                 }
-                "Home - Games" = @{
-                    "Path" = "$env:USERPROFILE\Games"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\imageres.dll,10"
+                'Home - Games' = @{
+                    'Path' = "$env:USERPROFILE\Games"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\imageres.dll,10"
                         }
                     }
                 }
-                "Home - scoop" = @{
-                    "Path" = "$env:USERPROFILE\scoop"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:USERPROFILE\Pictures\System\Scoop.ico,0"
+                'Home - scoop' = @{
+                    'Path' = "$env:USERPROFILE\scoop"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:USERPROFILE\Pictures\System\Scoop.ico,0"
                         }
                     }
                 }
-                "Home - Videos" = @{
-                    "Path" = "$env:USERPROFILE\Videos"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "LocalizedResourceName" = "@%SystemRoot%\system32\shell32.dll,-21791"
-                            "InfoTip" = "@%SystemRoot%\system32\shell32.dll,-12690"
-                            "IconResource" = "%SystemRoot%\system32\imageres.dll,-189"
-                            "IconFile" = "%SystemRoot%\system32\shell32.dll"
-                            "IconIndex" = "-238"
+                'Home - Videos' = @{
+                    'Path' = "$env:USERPROFILE\Videos"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'LocalizedResourceName' = '@%SystemRoot%\system32\shell32.dll,-21791'
+                            'InfoTip' = '@%SystemRoot%\system32\shell32.dll,-12690'
+                            'IconResource' = '%SystemRoot%\system32\imageres.dll,-189'
+                            'IconFile' = '%SystemRoot%\system32\shell32.dll'
+                            'IconIndex' = '-238'
                         }
                     }
                 }
-                "Documents - Adobe" = @{
-                    "Path" = "$env:USERPROFILE\Documents\Adobe"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:USERPROFILE\Pictures\System\Adobe.ico,0"
+                'Documents - Adobe' = @{
+                    'Path' = "$env:USERPROFILE\Documents\Adobe"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:USERPROFILE\Pictures\System\Adobe.ico,0"
                         }
                     }
                 }
-                "Documents - Aseprite" = @{
-                    "Path" = "$env:USERPROFILE\Documents\Aseprite"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:USERPROFILE\Pictures\System\Aseprite.ico,0"
+                'Documents - Aseprite' = @{
+                    'Path' = "$env:USERPROFILE\Documents\Aseprite"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:USERPROFILE\Pictures\System\Aseprite.ico,0"
                         }
                     }
                 }
-                "Documents - Books" = @{
-                    "Path" = "$env:USERPROFILE\Documents\Books"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:USERPROFILE\Pictures\System\Calibre.ico,0"
+                'Documents - Books' = @{
+                    'Path' = "$env:USERPROFILE\Documents\Books"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:USERPROFILE\Pictures\System\Calibre.ico,0"
                         }
                     }
                 }
-                "Documents - Cheat Engine Tables" = @{
-                    "Path" = "$env:USERPROFILE\Documents\Cheat Engine Tables"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:USERPROFILE\Pictures\System\Cheat-Engine.ico,0"
+                'Documents - Cheat Engine Tables' = @{
+                    'Path' = "$env:USERPROFILE\Documents\Cheat Engine Tables"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:USERPROFILE\Pictures\System\Cheat-Engine.ico,0"
                         }
                     }
                 }
-                "Documents - Dolphin" = @{
-                    "Path" = "$env:USERPROFILE\Documents\Dolphin Emulator"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\imageres.dll,10"
+                'Documents - Dolphin' = @{
+                    'Path' = "$env:USERPROFILE\Documents\Dolphin Emulator"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\imageres.dll,10"
                         }
                     }
                 }
-                "Documents - FromSoftware" = @{
-                    "Path" = "$env:USERPROFILE\Documents\FromSoftware"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\imageres.dll,10"
-                            "InfoTip" = "YOU DIED"
+                'Documents - FromSoftware' = @{
+                    'Path' = "$env:USERPROFILE\Documents\FromSoftware"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\imageres.dll,10"
+                            'InfoTip' = 'YOU DIED'
                         }
                     }
                 }
-                "Documents - Fonts" = @{
-                    "Path" = "$env:USERPROFILE\Documents\Fonts"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\imageres.dll,123"
+                'Documents - Fonts' = @{
+                    'Path' = "$env:USERPROFILE\Documents\Fonts"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\imageres.dll,123"
                         }
                     }
                 }
-                "Documents - KeePass" = @{
-                    "Path" = "$env:USERPROFILE\Documents\KeePass"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:USERPROFILE\Pictures\System\KeePassXC-File.ico,0"
+                'Documents - KeePass' = @{
+                    'Path' = "$env:USERPROFILE\Documents\KeePass"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:USERPROFILE\Pictures\System\KeePassXC-File.ico,0"
                         }
                     }
                 }
-                "Documents - Koei Tecmo" = @{
-                    "Path" = "$env:USERPROFILE\Documents\KoeiTecmo"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\imageres.dll,10"
+                'Documents - Koei Tecmo' = @{
+                    'Path' = "$env:USERPROFILE\Documents\KoeiTecmo"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\imageres.dll,10"
                         }
                     }
                 }
-                "Documents - LoversInADangerousSpacetime" = @{
-                    "Path" = "$env:USERPROFILE\Documents\LoversInADangerousSpacetime"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\imageres.dll,10"
+                'Documents - LoversInADangerousSpacetime' = @{
+                    'Path' = "$env:USERPROFILE\Documents\LoversInADangerousSpacetime"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\imageres.dll,10"
                         }
                     }
                 }
-                "Documents - My Games" = @{
-                    "Path" = "$env:USERPROFILE\Documents\My Games"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\imageres.dll,10"
+                'Documents - My Games' = @{
+                    'Path' = "$env:USERPROFILE\Documents\My Games"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\imageres.dll,10"
                         }
                     }
                 }
-                "Documents - NGBI " = @{
-                    "Path" = "$env:USERPROFILE\Documents\NGBI"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\imageres.dll,10"
+                'Documents - NGBI ' = @{
+                    'Path' = "$env:USERPROFILE\Documents\NGBI"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\imageres.dll,10"
                         }
                     }
                 }
-                "Documents - Obsidian" = @{
-                    "Path" = "$env:USERPROFILE\Documents\Obsidian"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$(es -i -n 1 -r "\.exe$" "Obsidian.exe"),0"
+                'Documents - Obsidian' = @{
+                    'Path' = "$env:USERPROFILE\Documents\Obsidian"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$(es -i -n 1 -r '\.exe$' 'Obsidian.exe'),0"
                         }
                     }
                 }
-                "Documents - Overwatch" = @{
-                    "Path" = "$env:USERPROFILE\Documents\Overwatch"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\imageres.dll,10"
+                'Documents - Overwatch' = @{
+                    'Path' = "$env:USERPROFILE\Documents\Overwatch"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\imageres.dll,10"
                         }
                     }
                 }
-                "Documents - PowerShell" = @{
-                    "Path" = "$env:USERPROFILE\Documents\PowerShell"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:USERPROFILE\Pictures\System\PowerShell.ico,0"
+                'Documents - PowerShell' = @{
+                    'Path' = "$env:USERPROFILE\Documents\PowerShell"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:USERPROFILE\Pictures\System\PowerShell.ico,0"
                         }
                     }
                 }
-                "Documets - PPSSPP" = @{
-                    "Path" = "$env:USERPROFILE\Documents\PPSSPP"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\imageres.dll,10"
+                'Documets - PPSSPP' = @{
+                    'Path' = "$env:USERPROFILE\Documents\PPSSPP"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\imageres.dll,10"
                         }
                     }
                 }
-                "Documents - Rockstar Games" = @{
-                    "Path" = "$env:USERPROFILE\Documents\Rockstar Games"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\imageres.dll,10"
+                'Documents - Rockstar Games' = @{
+                    'Path' = "$env:USERPROFILE\Documents\Rockstar Games"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\imageres.dll,10"
                         }
                     }
                 }
-                "Documents - Salt and Sanctuary" = @{
-                    "Path" = "$env:USERPROFILE\Documents\Salt and Sanctuary"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\imageres.dll,10"
+                'Documents - Salt and Sanctuary' = @{
+                    'Path' = "$env:USERPROFILE\Documents\Salt and Sanctuary"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\imageres.dll,10"
                         }
                     }
                 }
-                "Documents - Saved Games" = @{
-                    "Path" = "$env:USERPROFILE\Documents\Saved Games"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\imageres.dll,10"
+                'Documents - Saved Games' = @{
+                    'Path' = "$env:USERPROFILE\Documents\Saved Games"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\imageres.dll,10"
                         }
                     }
                 }
-                "Documents - Skullgirls" = @{
-                    "Path" = "$env:USERPROFILE\Documents\Skullgirls"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\imageres.dll,10"
+                'Documents - Skullgirls' = @{
+                    'Path' = "$env:USERPROFILE\Documents\Skullgirls"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\imageres.dll,10"
                         }
                     }
                 }
-                "Documents - The Witcher 3" = @{
-                    "Path" = "$env:USERPROFILE\Documents\The Witcher 3"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\imageres.dll,10"
+                'Documents - The Witcher 3' = @{
+                    'Path' = "$env:USERPROFILE\Documents\The Witcher 3"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\imageres.dll,10"
                         }
                     }
                 }
-                "Documents - WindowsPowerShell" = @{
-                    "Path" = "$env:USERPROFILE\Documents\WindowsPowerShell"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:USERPROFILE\Pictures\System\PowerShell.ico,0"
+                'Documents - WindowsPowerShell' = @{
+                    'Path' = "$env:USERPROFILE\Documents\WindowsPowerShell"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:USERPROFILE\Pictures\System\PowerShell.ico,0"
                         }
                     }
                 }
-                "Downloads - Audio" = @{
-                    "Path" = "$env:USERPROFILE\Downloads\Audio"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "%SystemRoot%\System32\imageres.dll,25"
+                'Downloads - Audio' = @{
+                    'Path' = "$env:USERPROFILE\Downloads\Audio"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = '%SystemRoot%\System32\imageres.dll,25'
                         }
                     }
                 }
-                "Games - Steam Libraries" = @{
-                    "Path" = "$env:USERPROFILE\Games\Steam Libraries"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:USERPROFILE\Pictures\System\Steam.ico,0"
+                'Games - Steam Libraries' = @{
+                    'Path' = "$env:USERPROFILE\Games\Steam Libraries"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:USERPROFILE\Pictures\System\Steam.ico,0"
                         }
                     }
                 }
-                "Open-Shell Start Menu - Calibre" = @{
-                    "Path" = "$env:APPDATA\OpenShell\Pinned\Open Shell"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:USERPROFILE\Pictures\System\Open-Shell.ico,0"
+                'Open-Shell Start Menu - Calibre' = @{
+                    'Path' = "$env:APPDATA\OpenShell\Pinned\Open Shell"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:USERPROFILE\Pictures\System\Open-Shell.ico,0"
                         }
                     }
                 }
-                "Open-Shell Start Menu - OpenShell" = @{
-                    "Path" = "$env:APPDATA\OpenShell\Pinned\Open Shell"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:USERPROFILE\Pictures\System\Open-Shell.ico,0"
+                'Open-Shell Start Menu - OpenShell' = @{
+                    'Path' = "$env:APPDATA\OpenShell\Pinned\Open Shell"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:USERPROFILE\Pictures\System\Open-Shell.ico,0"
                         }
                     }
                 }
-                "Pictures - Screenshots" = @{
-                    "Path" = "$env:USERPROFILE\Pictures\Screenshots"
-                    "ini" = @{
-                        ".ShellClassInfo" = @{
-                            "IconResource" = "$env:WINDIR\System32\SHELL32.dll,326"
+                'Pictures - Screenshots' = @{
+                    'Path' = "$env:USERPROFILE\Pictures\Screenshots"
+                    'ini' = @{
+                        '.ShellClassInfo' = @{
+                            'IconResource' = "$env:WINDIR\System32\SHELL32.dll,326"
                         }
                     }
                 }
@@ -3970,26 +3967,26 @@ function Invoke-Setup {
 
             foreach ($key in $desktopInis.Keys) {
                 $hashtable = $desktopInis[$key]
-                $filePath = "$($hashtable["Path"])\desktop.ini"
-                New-Item -ItemType Directory $hashtable["Path"] -Force | Out-Null
-                attrib +R $hashtable["Path"] | Out-Null
+                $filePath = "$($hashtable['Path'])\desktop.ini"
+                New-Item -ItemType Directory $hashtable['Path'] -Force | Out-Null
+                attrib +R $hashtable['Path'] | Out-Null
                 attrib -H -S $filePath | Out-Null
-                Out-IniFile $hashtable["ini"] "$($hashtable["Path"])\desktop.ini"
-                Set-ItemProperty $filePath -Name "Attributes" -Value "Archive,Hidden,System"
+                Out-IniFile $hashtable['ini'] "$($hashtable['Path'])\desktop.ini"
+                Set-ItemProperty $filePath -Name 'Attributes' -Value 'Archive,Hidden,System'
             }
         }
 
         function Hide-DesktopIcons {
-            Write-Host "Hiding desktop icons..."
-            Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideIcons" -Value 1 -Force
-            Stop-Process -Name "explorer"
-            if (-not (Get-Process "explorer" -ErrorAction SilentlyContinue)) {
-                Start-Process "explorer"
+            Write-Host 'Hiding desktop icons...'
+            Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'HideIcons' -Value 1 -Force
+            Stop-Process -Name 'explorer'
+            if (-not (Get-Process 'explorer' -ErrorAction SilentlyContinue)) {
+                Start-Process 'explorer'
             }
         }
 
         function Hide-FoldersAndFiles {
-            Write-Host "Hiding folders and files..."
+            Write-Host 'Hiding folders and files...'
 
             $itemsToHide = @(
                 "$env:USERPROFILE\.azuredatastudio"
@@ -4082,13 +4079,13 @@ function Invoke-Setup {
 
             # Hides Recycle Bin on desktop
             if (-not (Test-Path -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\NonEnum)) {
-                New-Item -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies -Name "NonEnum"
+                New-Item -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies -Name 'NonEnum'
             }
-            if ((Get-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\NonEnum | Select-Object -ExpandProperty "{645FF040-5081-101B-9F08-00AA002F954E}") -ne 1) {
-                Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\NonEnum -Name "{645FF040-5081-101B-9F08-00AA002F954E}" -Value 1 -Type DWORD
-                Stop-Process -Name "explorer"
-                if (-not (Get-Process "explorer" -ErrorAction SilentlyContinue)) {
-                    Start-Process "explorer"
+            if ((Get-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\NonEnum | Select-Object -ExpandProperty '{645FF040-5081-101B-9F08-00AA002F954E}') -ne 1) {
+                Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\NonEnum -Name '{645FF040-5081-101B-9F08-00AA002F954E}' -Value 1 -Type DWORD
+                Stop-Process -Name 'explorer'
+                if (-not (Get-Process 'explorer' -ErrorAction SilentlyContinue)) {
+                    Start-Process 'explorer'
                 }
             }
         }
@@ -4096,15 +4093,15 @@ function Invoke-Setup {
         function Invoke-Debloat {
             function Disable-WindowsFeatures {
                 $featureNames = @(
-                    "Print.Fax.Scan~~~~0.0.1.0"
-                    "MathRecognizer~~~~0.0.1.0"
-                    "Hello.Face.18967~~~~0.0.1.0"
-                    "OneCoreUAP.OneSync~~~~0.0.1.0"
-                    "Language.Speech~~~en-US~0.0.1.0"
-                    "App.Support.QuickAssist~~~~0.0.1.0"
-                    "Language.Handwriting~~~en-US~0.0.1.0"
-                    "Microsoft.Windows.Notepad~~~~0.0.1.0"
-                    "Microsoft.Windows.PowerShell.ISE~~~~0.0.1.0"
+                    'Print.Fax.Scan~~~~0.0.1.0'
+                    'MathRecognizer~~~~0.0.1.0'
+                    'Hello.Face.18967~~~~0.0.1.0'
+                    'OneCoreUAP.OneSync~~~~0.0.1.0'
+                    'Language.Speech~~~en-US~0.0.1.0'
+                    'App.Support.QuickAssist~~~~0.0.1.0'
+                    'Language.Handwriting~~~en-US~0.0.1.0'
+                    'Microsoft.Windows.Notepad~~~~0.0.1.0'
+                    'Microsoft.Windows.PowerShell.ISE~~~~0.0.1.0'
                 )
 
                 foreach ($featureName in $featureNames) {
@@ -4112,9 +4109,9 @@ function Invoke-Setup {
                 }
 
                 $optionalFeatureNames = @(
-                    "MSRDC-Infrastructure"
-                    "Microsoft-SnippingTool"
-                    "Microsoft-RemoteDesktopConnection"
+                    'MSRDC-Infrastructure'
+                    'Microsoft-SnippingTool'
+                    'Microsoft-RemoteDesktopConnection'
                 )
 
                 foreach ($featureName in $optionalFeatureNames) {
@@ -4123,10 +4120,10 @@ function Invoke-Setup {
             }
 
             function Disable-ScheduledTasks {
-                # Write-Host "Disabling unneeded scheduled tasks..."
+                # Write-Host 'Disabling unneeded scheduled tasks...'
 
                 # $tasks = @(
-                #     ""
+                #     ''
                 # )
 
                 # foreach ($task in $tasks) {
@@ -4138,22 +4135,22 @@ function Invoke-Setup {
                 # from: https://github.com/W4RH4WK/Debloat-Windows-10/blob/master/scripts/disable-services.ps1
                 # License: THE BEER-WARE LICENSE https://github.com/W4RH4WK/Debloat-Windows-10/blob/master/LICENSE
                 # Excluded some services which are included in Sophia/SoS Optimize Harden Debloat
-                Write-Host "Disabling unneeded services..."
+                Write-Host 'Disabling unneeded services...'
                 $services = @(
-                    "lfsvc"                                    # Geolocation Service
-                    "NetTcpPortSharing"                        # Net.Tcp Port Sharing Service
-                    "RemoteAccess"                             # Routing and Remote Access
-                    "RemoteRegistry"                           # Remote Registry
-                    "SharedAccess"                             # Internet Connection Sharing (ICS)
-                    "TrkWks"                                   # Distributed Link Tracking Client
-                    "WbioSrvc"                                 # Windows Biometric Service (required for Fingerprint reader / facial detection)
-                    # "WlanSvc"                                # WLAN AutoConfig (Disabling this can cause issues with wifi connectivity)
-                    # "wscsvc"                                 # Windows Security Center Service
-                    # "WSearch"                                # Windows Search
-                    "XblAuthManager"                           # Xbox Live Auth Manager
-                    "XblGameSave"                              # Xbox Live Game Save Service
-                    "XboxNetApiSvc"                            # Xbox Live Networking Service
-                    "ndu"                                      # Windows Network Data Usage Monitor
+                    'lfsvc'                                    # Geolocation Service
+                    'NetTcpPortSharing'                        # Net.Tcp Port Sharing Service
+                    'RemoteAccess'                             # Routing and Remote Access
+                    'RemoteRegistry'                           # Remote Registry
+                    'SharedAccess'                             # Internet Connection Sharing (ICS)
+                    'TrkWks'                                   # Distributed Link Tracking Client
+                    'WbioSrvc'                                 # Windows Biometric Service (required for Fingerprint reader / facial detection)
+                    # 'WlanSvc'                                # WLAN AutoConfig (Disabling this can cause issues with wifi connectivity)
+                    # 'wscsvc'                                 # Windows Security Center Service
+                    # 'WSearch'                                # Windows Search
+                    'XblAuthManager'                           # Xbox Live Auth Manager
+                    'XblGameSave'                              # Xbox Live Game Save Service
+                    'XboxNetApiSvc'                            # Xbox Live Networking Service
+                    'ndu'                                      # Windows Network Data Usage Monitor
                 )
 
                 foreach ($service in $services) {
@@ -4162,14 +4159,14 @@ function Invoke-Setup {
             }
 
             function Disable-StickyKeys {
-                Write-Host "Disabling sticky keys..."
-                Set-ItemProperty "HKCU:\Control Panel\Accessibility\StickyKeys" -Name "Flags" -Value 58
+                Write-Host 'Disabling sticky keys...'
+                Set-ItemProperty 'HKCU:\Control Panel\Accessibility\StickyKeys' -Name 'Flags' -Value 58
             }
 
             function Optimize-ContextMenu {
-                Write-Host "Optimizing context menu..."
+                Write-Host 'Optimizing context menu...'
                 # https://www.tenforums.com/tutorials/61525-how-add-remove-cast-device-context-menu-windows-10-a.html
-                New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" -Name "{7AD84985-87B4-4a16-BE58-8B72A5B390F7}" -PropertyType String -Value "Play to Menu" -Force # Removes 'Cast to Device', to restore run: Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" -Name "{7AD84985-87B4-4a16-BE58-8B72A5B390F7}"
+                New-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked' -Name '{7AD84985-87B4-4a16-BE58-8B72A5B390F7}' -PropertyType String -Value 'Play to Menu' -Force # Removes 'Cast to Device', to restore run: Remove-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked' -Name '{7AD84985-87B4-4a16-BE58-8B72A5B390F7}'
                 reg import "$PSScriptRoot\Configs\Regedits\Context-Menu\Drive-Autoplay\Disable-AutoPlay-For-All-Drives.reg" 2>$null
                 reg import "$PSScriptRoot\Configs\Regedits\Context-Menu\Edit-with-Paint-3D\Remove-Edit-With-Paint-3D-From-Context-Menu.reg" 2>$null
                 reg import "$PSScriptRoot\Configs\Regedits\Context-Menu\Open-in-Windows-Terminal\Remove-Open-In-Windows-Terminal-Context-Menu-For-Current-User.reg" 2>$null
@@ -4182,18 +4179,18 @@ function Invoke-Setup {
                 reg import "$PSScriptRoot\Configs\Regedits\Context-Menu\Share\Remove-Share-From-Context-Menu.reg" 2>$null
                 reg import "$PSScriptRoot\Configs\Regedits\Context-Menu\Troubleshoot-Compatibility\Remove-Troubleshoot-Compatibility-Context-Menu.reg" 2>$null
                 $newBlankFileReg = Get-Content "$PSScriptRoot\Configs\Regedits\Context-Menu\New-Blank-File\New-Blank-File.reg"
-                $newBlankFileReg = $newBlankFileReg -replace "icon-path-here", ("$env:USERPROFILE\Pictures\System\File.ico" -replace "\\", "\\")
-                $newBlankFileReg | Set-Content ".\tempNewBlankFile.reg"
-                reg import ".\tempNewBlankFile.reg" 2>$null
-                Remove-Item ".\tempNewBlankFile.reg"
-                Stop-Process -Name "explorer"
-                if (-not (Get-Process "explorer" -ErrorAction SilentlyContinue)) {
-                    Start-Process "explorer"
+                $newBlankFileReg = $newBlankFileReg -replace 'icon-path-here', ("$env:USERPROFILE\Pictures\System\File.ico" -replace '\\', '\\')
+                $newBlankFileReg | Set-Content '.\tempNewBlankFile.reg'
+                reg import '.\tempNewBlankFile.reg' 2>$null
+                Remove-Item '.\tempNewBlankFile.reg'
+                Stop-Process -Name 'explorer'
+                if (-not (Get-Process 'explorer' -ErrorAction SilentlyContinue)) {
+                    Start-Process 'explorer'
                 }
             }
 
             function Remove-ThisPCFolders {
-                Write-Host "Removing This PC folders..."
+                Write-Host 'Removing This PC folders...'
                 reg import "$PSScriptRoot\Configs\Regedits\Remove-Folders-from-This-PC\Remove-All-User-Folders-From-This-PC.reg" 2>$null
             }
 
@@ -4214,19 +4211,19 @@ function Invoke-Setup {
         function Invoke-PostSetup {
             foreach ($entry in $script:selected) {
                 switch ($entry) {
-                    "Steam" {
-                        foreach ($steamappsFolder in (es -i /ad "steamapps")) {
-                            if ($steamappsFolder -match "SteamLibrary") {
+                    'Steam' {
+                        foreach ($steamappsFolder in (es -i /ad 'steamapps')) {
+                            if ($steamappsFolder -match 'SteamLibrary') {
                                 New-Item -ItemType SymbolicLink "$env:USERPROFILE\Games\Steam Libraries\$($steamappsFolder.Substring(0,1))" -Target "$steamappsFolder\common" -Force | Out-Null
                             }
                         }
                     }
-                    "Wallpaper Engine" {
-                        Write-Host "Waiting for Steam to finish downloading..."
+                    'Wallpaper Engine' {
+                        Write-Host 'Waiting for Steam to finish downloading...'
                         $downloading = $false
                         $zeroCount = 0
                         while ($downloading) {
-                        $state = Get-Counter -Counter "\Process(steam)\IO Write Bytes/sec"
+                        $state = Get-Counter -Counter '\Process(steam)\IO Write Bytes/sec'
                         if ($state.CounterSamples.CookedValue -eq 0.00) {
                             $zeroCount++
                             if ($zeroCount -ge 5) {
@@ -4238,7 +4235,7 @@ function Invoke-Setup {
                         }
                         Start-Sleep -Seconds 0.5
                         }
-                        $slideClockWallpaperDir = es -i -n 1 /ad "steamapps\workshop\content\431960\1854057384"
+                        $slideClockWallpaperDir = es -i -n 1 /ad 'steamapps\workshop\content\431960\1854057384'
                         if (Test-Path $slideClockWallpaperDir -ErrorAction SilentlyContinue) {
                             $style = Get-Content "$slideClockWallpaperDir\style.css"
                             $style = $style -replace '@import url\("https:\/\/fonts\.googleapis\.com\/css\?family=Roboto\+Condensed:300"\);', ''
@@ -4247,15 +4244,15 @@ function Invoke-Setup {
                             $style = $style -replace 'overflow: hidden;', "overflow:hidden;`n`ttransform: translateY(-58%);"
                             $style | Set-Content "$slideClockWallpaperDir\style.css"
                         } else {
-                            Write-Host "Wallpaper Engine: Couldn't modify Slide Clock wallpaper, probably hasn't downloaded yet."
+                            Write-Host 'Wallpaper Engine: Couldn't modify Slide Clock wallpaper, probably hasn't downloaded yet.'
                         }
-                        $wallpaperengine = es -i -n 1 -r "\.exe$" "wallpaper64.exe"
+                        $wallpaperengine = es -i -n 1 -r '\.exe$' 'wallpaper64.exe'
                         if ($wallpaperengine) {
                             $slideClockWallpaper = "$slideClockWallpaperDir\project.json"
                             if (Test-Path $slideClockWallpaper) {
                                 Start-Process $wallpaperengine -Args "-control openWallpaper -file `"$slideClockWallpaper`" -monitor 1"
                             }
-                            $terrariaWallpaper = es -i -n 1 /a-d "steamapps\workshop\content\431960\2100929026\project.json"
+                            $terrariaWallpaper = es -i -n 1 /a-d 'steamapps\workshop\content\431960\2100929026\project.json'
                             if (Test-Path $terrariaWallpaper -ErrorAction SilentlyContinue) {
                                 Start-Process $wallpaperengine -Args "-control openWallpaper -file `"$terrariaWallpaper`" -monitor 0"
                                 Start-Process $wallpaperengine -Args "-control applyProperties -properties RAW~({`"wec_brs`":20})~END -monitor 0"
@@ -4266,8 +4263,8 @@ function Invoke-Setup {
                             } else {
                                 Write-Host "Wallpaper Engine: Couldn't modify Terraria wallpaper."
                             }
-                            Start-Process $wallpaperengine -Args "-control hideIcons"
-                            Start-Process $wallpaperengine -Args "-control mute"
+                            Start-Process $wallpaperengine -Args '-control hideIcons'
+                            Start-Process $wallpaperengine -Args '-control mute'
                         } else {
                             Write-Host "Wallpaper Engine: Couldn't find Wallpaper Engine executable."
                         }
@@ -4287,48 +4284,48 @@ function Invoke-Setup {
                 Invoke-ps2exe -inputFile $inputFile -outputFile $outputFile -iconFile "$PSScriptRoot\Icons\PowerShell.ico" -noConsole -noError -noOutput
             }
 
-            Write-Host "Compiling scripts with ps2exe..."
+            Write-Host 'Compiling scripts with ps2exe...'
 
             foreach ($entry in $script:selected) {
                 switch ($entry) {
-                    "BetterDiscord" {
+                    'BetterDiscord' {
                         New-PsExe "$PSScriptRoot\Scripts\Startup\BetterDiscord-AutoInstaller.ps1"
                     }
-                    "Chatterino2" {
+                    'Chatterino2' {
                         New-PsExe "$PSScriptRoot\Scripts\Startup\Chatterino.ps1"
                     }
-                    "Discord OpenAsar" {
+                    'Discord OpenAsar' {
                         New-PsExe "$PSScriptRoot\Scripts\Install-Discord-OpenAsar.ps1"
                     }
-                    "Firefox" {
+                    'Firefox' {
                         New-PsExe "$PSScriptRoot\Scripts\Startup\STG-Backup-Mover.ps1"
                     }
-                    "G.Skill Trident Z Lighting Control" {
+                    'G.Skill Trident Z Lighting Control' {
                         New-PsExe "$PSScriptRoot\Scripts\Startup\Close-GSkill-RGB.ps1"
                     }
-                    "Gpg4win" {
+                    'Gpg4win' {
                         New-PsExe "$PSScriptRoot\Scripts\Startup\GPG-Agent.ps1"
                         New-PsExe "$PSScriptRoot\Scripts\Startup\Keybox-Daemon.ps1"
                     }
-                    "Rainmeter" {
+                    'Rainmeter' {
                         New-PsExe "$PSScriptRoot\Scripts\Startup\Refresh-Rainmeter-On-Audio-Device-Change.ps1"
                     }
-                    "Spicetify" {
+                    'Spicetify' {
                         New-PsExe "$PSScriptRoot\Scripts\Initialize-Spicetify.ps1"
                     }
-                    "Spotify" {
+                    'Spotify' {
                         New-PsExe "$PSScriptRoot\Scripts\Startup\Minimize-Spotify.ps1"
                     }
-                    "SoulseekQt" {
+                    'SoulseekQt' {
                         New-PsExe "$PSScriptRoot\Scripts\Startup\SoulseekQt.ps1"
                     }
-                    "Sekiro" {
+                    'Sekiro' {
                         New-PsExe "$PSScriptRoot\Scripts\Close-SekiroFpsUnlockAndMore.ps1"
                     }
-                    "Steam" {
+                    'Steam' {
                         New-PsExe "$PSScriptRoot\Scripts\Startup\Steam.ps1"
                     }
-                    "Syncthing" {
+                    'Syncthing' {
                         New-PsExe "$PSScriptRoot\Scripts\Startup\Syncthing.ps1"
                     }
                 }
@@ -4354,7 +4351,7 @@ function Invoke-Setup {
                     [Microsoft.Management.Infrastructure.CimInstance]$trigger = (New-ScheduledTaskTrigger -AtLogOn -User ([System.Security.Principal.WindowsIdentity]::GetCurrent().Name)),
                     [Microsoft.Management.Infrastructure.CimInstance]$principal = (New-ScheduledTaskPrincipal -UserId $([System.Security.Principal.WindowsIdentity]::GetCurrent().Name) -LogonType Interactive -RunLevel Limited),
                     [Microsoft.Management.Infrastructure.CimInstance]$settings = (New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable),
-                    [string]$taskPath = "\Custom"
+                    [string]$taskPath = '\Custom'
                 )
 
                 if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
@@ -4368,7 +4365,7 @@ function Invoke-Setup {
                     [string]$query
                 )
 
-                $CIMTriggerClass = Get-CimClass -ClassName "MSFT_TaskEventTrigger" -Namespace "root/Microsoft/Windows/TaskScheduler:MSFT_TaskEventTrigger"
+                $CIMTriggerClass = Get-CimClass -ClassName 'MSFT_TaskEventTrigger' -Namespace 'root/Microsoft/Windows/TaskScheduler:MSFT_TaskEventTrigger'
 
                 $trigger = New-CimInstance -CimClass $CIMTriggerClass -ClientOnly
                 $trigger.Subscription = $query
@@ -4377,206 +4374,206 @@ function Invoke-Setup {
                 return $trigger
             }
 
-            Write-Host "Creating scheduled tasks..."
+            Write-Host 'Creating scheduled tasks...'
 
             foreach ($entry in $script:selected) {
                 switch ($entry) {
-                    "BetterDiscord" {
-                        $taskName = "BetterDiscord AutoInstaller"
+                    'BetterDiscord' {
+                        $taskName = 'BetterDiscord AutoInstaller'
                         $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\Code\Scripts\ps2exe\BetterDiscord-AutoInstaller.exe"
                         New-Task -taskName $taskName -action $action
                     }
-                    "Chatterino2" {
-                        $taskName = "Chatterino"
+                    'Chatterino2' {
+                        $taskName = 'Chatterino'
                         $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\Code\Scripts\ps2exe\Chatterino.exe"
                         New-Task -taskName $taskName -action $action
                     }
-                    "Discord OpenAsar" {
-                        $taskName = "Discord OpenAsar"
+                    'Discord OpenAsar' {
+                        $taskName = 'Discord OpenAsar'
                         $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\Code\Scripts\ps2exe\Install-Discord-OpenAsar.exe"
                         $trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Friday -At 4:20pm
                         New-Task -taskName $taskName -action $action -trigger $trigger
                     }
-                    "Firefox" {
-                        $taskName = "STG Backup Mover"
+                    'Firefox' {
+                        $taskName = 'STG Backup Mover'
                         $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\Code\Scripts\ps2exe\STG-Backup-Mover.exe"
                         New-Task -taskName $taskName -action $action
                     }
-                    "G.Skill Trident Z Lighting Control" {
-                        $taskName = "Close GSkill RGB"
+                    'G.Skill Trident Z Lighting Control' {
+                        $taskName = 'Close GSkill RGB'
                         $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\Code\Scripts\ps2exe\Close-GSkill-RGB.exe"
                         New-Task -taskName $taskName -action $action
                     }
-                    "Gpg4win" {
-                        $taskName = "GPG Agent"
+                    'Gpg4win' {
+                        $taskName = 'GPG Agent'
                         $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\Code\Scripts\ps2exe\GPG-Agent.exe"
                         New-Task -taskName $taskName -action $action
 
-                        $taskName = "Keybox Daemon"
+                        $taskName = 'Keybox Daemon'
                         $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\Code\Scripts\ps2exe\Keybox-Daemon.exe"
                         New-Task -taskName $taskName -action $action
                     }
-                    "Rainmeter" {
-                        $taskName = "Refresh Rainmeter On Audio Device Change"
+                    'Rainmeter' {
+                        $taskName = 'Refresh Rainmeter On Audio Device Change'
                         $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\Code\Scripts\ps2exe\Refresh-Rainmeter-On-Audio-Device-Change.exe"
                         New-Task -taskName $taskName -action $action
                     }
-                    "Sekiro" {
-                        $sekiro = es -i -n 1 -r "\.exe$" "sekiro.exe"
+                    'Sekiro' {
+                        $sekiro = es -i -n 1 -r '\.exe$' 'sekiro.exe'
                         if ($sekiro) {
-                            $sekiroUnlocker = $sekiro -replace "sekiro\.exe$", "SekiroFpsUnlockAndMore.exe"
+                            $sekiroUnlocker = $sekiro -replace 'sekiro\.exe$', 'SekiroFpsUnlockAndMore.exe'
 
-                            $taskName = "SekiroFpsUnlockAndMore Autoclose"
+                            $taskName = 'SekiroFpsUnlockAndMore Autoclose'
                             $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\Code\Scripts\ps2exe\Close-SekiroFpsUnlockAndMore.exe"
                             $query = "<QueryList><Query Id='0' Path='Security'><Select Path='Security'>*[System[Provider[@Name='Microsoft-Windows-Security-Auditing'] and (band(Keywords,9007199254740992)) and (EventID=4689)]] and *[EventData[(Data='$sekiro')]]</Select></Query></QueryList>"
                             $trigger = New-EventTrigger -query $query
                             New-Task -taskName $taskName -action $action -trigger $trigger
 
-                            $taskName = "SekiroFpsUnlockAndMore Autostart"
+                            $taskName = 'SekiroFpsUnlockAndMore Autostart'
                             $action = New-ScheduledTaskAction -Execute "$sekiroUnlocker"
                             $query = "<QueryList><Query Id='0' Path='Security'><Select Path='Security'>*[System[Provider[@Name='Microsoft-Windows-Security-Auditing'] and Task = 13312 and (band(Keywords,9007199254740992)) and (EventID=4688)]] and *[EventData[Data[@Name='NewProcessName'] and (Data='$sekiro')]]</Select></Query></QueryList>"
                             $trigger = New-EventTrigger -query $query
                             New-Task -taskName $taskName -action $action -trigger $trigger
                         }
                     }
-                    "Spotify" {
-                        $taskName = "Minimize Spotify"
+                    'Spotify' {
+                        $taskName = 'Minimize Spotify'
                         $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\Code\Scripts\ps2exe\Minimize-Spotify.exe"
                         New-Task -taskName $taskName -action $action
                     }
-                    "Spicetify" {
-                        $taskName = "Initialize Spicetify"
+                    'Spicetify' {
+                        $taskName = 'Initialize Spicetify'
                         $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\Code\Scripts\ps2exe\Initialize-Spicetify.exe"
                         New-Task -taskName $taskName -action $action
                     }
-                    "SoulseekQt" {
-                        $taskName = "SoulseekQt"
+                    'SoulseekQt' {
+                        $taskName = 'SoulseekQt'
                         $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\Code\Scripts\ps2exe\SoulseekQt.exe"
                         New-Task -taskName $taskName -action $action
                     }
-                    "Steam" {
-                        $taskName = "Steam"
+                    'Steam' {
+                        $taskName = 'Steam'
                         $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\Code\Scripts\ps2exe\Steam.exe"
                         New-Task -taskName $taskName -action $action
                     }
-                    "Syncthing" {
-                        $taskName = "Syncthing"
+                    'Syncthing' {
+                        $taskName = 'Syncthing'
                         $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\Code\Scripts\ps2exe\Syncthing.exe"
                         New-Task -taskName $taskName -action $action
                     }
                 }
             }
 
-            $taskName = "Explorer"
+            $taskName = 'Explorer'
             $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\Code\Scripts\ps2exe\Explorer.exe"
             New-Task -taskName $taskName -action $action
 
-            $taskName = "Delete Persistent Files & Folders"
+            $taskName = 'Delete Persistent Files & Folders'
             $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\Code\Scripts\ps2exe\Delete-Persistent-Files-and-Folders.exe"
             New-Task -taskName $taskName -action $action
 
-            $taskName = "Sync Time"
+            $taskName = 'Sync Time'
             $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\Code\Scripts\ps2exe\Sync-Time.exe"
             New-Task -taskName $taskName -action $action
         }
 
         function New-TaskbarEntries {
-            Write-Host "Creating taskbar entries..."
+            Write-Host 'Creating taskbar entries...'
 
-            $tempDir = Join-Path ([System.IO.Path]::GetTempPath()) -ChildPath "Taskbar Shortcuts"
+            $tempDir = Join-Path ([System.IO.Path]::GetTempPath()) -ChildPath 'Taskbar Shortcuts'
             New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
 
             foreach ($entry in $script:selected) {
                 switch ($entry) {
-                    "Chatterino2" {
-                        script:New-Shortcut -linkPath "$tempDir\Chatterino.lnk" -targetPath (script:Get-ShortcutPath "chatterino.exe" -scoopName "chatterino")
+                    'Chatterino2' {
+                        script:New-Shortcut -linkPath "$tempDir\Chatterino.lnk" -targetPath (script:Get-ShortcutPath 'chatterino.exe' -scoopName 'chatterino')
                     }
-                    "Cheat Engine" {
-                        script:New-Shortcut -linkPath "$tempDir\Cheat Engine.lnk" -targetPath (script:Get-ShortcutPath "Cheat Engine.exe" -scoopName "cheat-engine")
+                    'Cheat Engine' {
+                        script:New-Shortcut -linkPath "$tempDir\Cheat Engine.lnk" -targetPath (script:Get-ShortcutPath 'Cheat Engine.exe' -scoopName 'cheat-engine')
                     }
-                    "Discord" {
-                        script:New-Shortcut -linkPath "$tempDir\Discord.lnk" -targetPath (script:Get-ShortcutPath "Discord.exe" -scoopName "discord")
+                    'Discord' {
+                        script:New-Shortcut -linkPath "$tempDir\Discord.lnk" -targetPath (script:Get-ShortcutPath 'Discord.exe' -scoopName 'discord')
                     }
-                    "Everything" {
-                        script:New-Shortcut -linkPath "$tempDir\Everything.lnk" -targetPath (script:Get-ShortcutPath "Everything.exe" -scoopName "everything")
+                    'Everything' {
+                        script:New-Shortcut -linkPath "$tempDir\Everything.lnk" -targetPath (script:Get-ShortcutPath 'Everything.exe' -scoopName 'everything')
                     }
-                    "Firefox" {
-                        script:New-Shortcut -linkPath "$tempDir\Firefox.lnk" -targetPath (script:Get-ShortcutPath "firefox.exe" -scoopName "firefox")
+                    'Firefox' {
+                        script:New-Shortcut -linkPath "$tempDir\Firefox.lnk" -targetPath (script:Get-ShortcutPath 'firefox.exe' -scoopName 'firefox')
                     }
-                    "FreeTube" {
-                        script:New-Shortcut -linkPath "$tempDir\FreeTube.lnk" -targetPath (script:Get-ShortcutPath "FreeTube.exe" -scoopName "freetube") -iconLocation "$env:USERPROFILE\Pictures\System\YouTube.ico"
+                    'FreeTube' {
+                        script:New-Shortcut -linkPath "$tempDir\FreeTube.lnk" -targetPath (script:Get-ShortcutPath 'FreeTube.exe' -scoopName 'freetube') -iconLocation "$env:USERPROFILE\Pictures\System\YouTube.ico"
                     }
-                    "FreeTube (Custom)" {
-                        script:New-Shortcut -linkPath "$tempDir\FreeTube.lnk" -targetPath (script:Get-ShortcutPath "FreeTube.exe" -scoopName "freetube") -iconLocation "$env:USERPROFILE\Pictures\System\YouTube.ico"
+                    'FreeTube (Custom)' {
+                        script:New-Shortcut -linkPath "$tempDir\FreeTube.lnk" -targetPath (script:Get-ShortcutPath 'FreeTube.exe' -scoopName 'freetube') -iconLocation "$env:USERPROFILE\Pictures\System\YouTube.ico"
                     }
-                    "Godot" {
-                        script:New-Shortcut -linkPath "$tempDir\Godot.lnk" -targetPath (script:Get-ShortcutPath "godot*.exe" -scoopName "godot")
+                    'Godot' {
+                        script:New-Shortcut -linkPath "$tempDir\Godot.lnk" -targetPath (script:Get-ShortcutPath 'godot*.exe' -scoopName 'godot')
                     }
-                    "Godot (Mono)" {
-                        script:New-Shortcut -linkPath "$tempDir\Godot.lnk" -targetPath (script:Get-ShortcutPath "godot*.exe" -scoopName "godot-mono")
+                    'Godot (Mono)' {
+                        script:New-Shortcut -linkPath "$tempDir\Godot.lnk" -targetPath (script:Get-ShortcutPath 'godot*.exe' -scoopName 'godot-mono')
                     }
-                    "KeePassXC" {
-                        script:New-Shortcut -linkPath "$tempDir\KeePassXC.lnk" -targetPath (script:Get-ShortcutPath "KeePassXC.exe" -scoopName "keepassxc")
+                    'KeePassXC' {
+                        script:New-Shortcut -linkPath "$tempDir\KeePassXC.lnk" -targetPath (script:Get-ShortcutPath 'KeePassXC.exe' -scoopName 'keepassxc')
                     }
-                    "Mp3tag" {
-                        script:New-Shortcut -linkPath "$tempDir\Mp3Tag.lnk" -targetPath (script:Get-ShortcutPath "Mp3tag.exe" -scoopName "mp3tag")
+                    'Mp3tag' {
+                        script:New-Shortcut -linkPath "$tempDir\Mp3Tag.lnk" -targetPath (script:Get-ShortcutPath 'Mp3tag.exe' -scoopName 'mp3tag')
                     }
-                    "Nicotine+" {
-                        script:New-Shortcut -linkPath "$tempDir\Nicotine+.lnk" -targetPath (script:Get-ShortcutPath "Nicotine+.exe" -scoopName "nicotine-plus")
+                    'Nicotine+' {
+                        script:New-Shortcut -linkPath "$tempDir\Nicotine+.lnk" -targetPath (script:Get-ShortcutPath 'Nicotine+.exe' -scoopName 'nicotine-plus')
                     }
-                    "Notepad++" {
-                        script:New-Shortcut -linkPath "$tempDir\Notepad++.lnk" -targetPath (script:Get-ShortcutPath "notepad++.exe" -scoopName "notepadplusplus")
+                    'Notepad++' {
+                        script:New-Shortcut -linkPath "$tempDir\Notepad++.lnk" -targetPath (script:Get-ShortcutPath 'notepad++.exe' -scoopName 'notepadplusplus')
                     }
-                    "OBS Studio" {
-                        script:New-Shortcut -linkPath "$tempDir\OBS Studio.lnk" -targetPath (script:Get-ShortcutPath "obs64.exe" -scoopName "obs-studio") -arguments "--startreplaybuffer --startvirtualcam --multi"
+                    'OBS Studio' {
+                        script:New-Shortcut -linkPath "$tempDir\OBS Studio.lnk" -targetPath (script:Get-ShortcutPath 'obs64.exe' -scoopName 'obs-studio') -arguments '--startreplaybuffer --startvirtualcam --multi'
                     }
-                    "Obsidian" {
-                        script:New-Shortcut -linkPath "$tempDir\Obsidian.lnk" -targetPath (script:Get-ShortcutPath "Obsidian.exe" -scoopName "obsidian")
+                    'Obsidian' {
+                        script:New-Shortcut -linkPath "$tempDir\Obsidian.lnk" -targetPath (script:Get-ShortcutPath 'Obsidian.exe' -scoopName 'obsidian')
                     }
-                    "Photoshop" {
-                        script:New-Shortcut -linkPath "$tempDir\Photoshop.lnk" -targetPath (script:Get-ShortcutPath "Photoshop.exe")
+                    'Photoshop' {
+                        script:New-Shortcut -linkPath "$tempDir\Photoshop.lnk" -targetPath (script:Get-ShortcutPath 'Photoshop.exe')
                     }
-                    "PowerToys" {
-                        script:New-Shortcut -linkPath "$tempDir\PowerToys.lnk" -targetPath (script:Get-ShortcutPath "PowerToys.Settings.exe" -scoopName "powertoys")
+                    'PowerToys' {
+                        script:New-Shortcut -linkPath "$tempDir\PowerToys.lnk" -targetPath (script:Get-ShortcutPath 'PowerToys.Settings.exe' -scoopName 'powertoys')
                     }
-                    "Premiere Pro" {
-                        script:New-Shortcut -linkPath "$tempDir\Premiere Pro.lnk" -targetPath (script:Get-ShortcutPath "Adobe Premiere Pro.exe")
+                    'Premiere Pro' {
+                        script:New-Shortcut -linkPath "$tempDir\Premiere Pro.lnk" -targetPath (script:Get-ShortcutPath 'Adobe Premiere Pro.exe')
                     }
-                    "qBittorrent" {
-                        script:New-Shortcut -linkPath "$tempDir\qBittorrent.lnk" -targetPath (script:Get-ShortcutPath "qbittorrent.exe" -scoopName "qbittorrent")
+                    'qBittorrent' {
+                        script:New-Shortcut -linkPath "$tempDir\qBittorrent.lnk" -targetPath (script:Get-ShortcutPath 'qbittorrent.exe' -scoopName 'qbittorrent')
                     }
-                    "qBittorrent Enhanced" {
-                        script:New-Shortcut -linkPath "$tempDir\qBittorrent Enhanced.lnk" -targetPath (script:Get-ShortcutPath "qbittorrent.exe" -scoopName "qbittorrent")
+                    'qBittorrent Enhanced' {
+                        script:New-Shortcut -linkPath "$tempDir\qBittorrent Enhanced.lnk" -targetPath (script:Get-ShortcutPath 'qbittorrent.exe' -scoopName 'qbittorrent')
                     }
-                    "SoulseekQt" {
-                        script:New-Shortcut -linkPath "$tempDir\SoulseekQt.lnk" -targetPath (script:Get-ShortcutPath "SoulseekQt.exe" -scoopName "soulseek")
+                    'SoulseekQt' {
+                        script:New-Shortcut -linkPath "$tempDir\SoulseekQt.lnk" -targetPath (script:Get-ShortcutPath 'SoulseekQt.exe' -scoopName 'soulseek')
                     }
-                    "Spotify" {
-                        script:New-Shortcut -linkPath "$tempDir\Spotify.lnk" -targetPath (script:Get-ShortcutPath "Spotify.exe" -scoopName "spotify")
+                    'Spotify' {
+                        script:New-Shortcut -linkPath "$tempDir\Spotify.lnk" -targetPath (script:Get-ShortcutPath 'Spotify.exe' -scoopName 'spotify')
                     }
-                    "Steam" {
-                        script:New-Shortcut -linkPath "$tempDir\Steam.lnk" -targetPath (script:Get-ShortcutPath "steam.exe" -scoopName "steam") -arguments "-console -nochatui -nofriendsui -forcedesktopscaling 0.69"
+                    'Steam' {
+                        script:New-Shortcut -linkPath "$tempDir\Steam.lnk" -targetPath (script:Get-ShortcutPath 'steam.exe' -scoopName 'steam') -arguments '-console -nochatui -nofriendsui -forcedesktopscaling 0.69'
                     }
-                    "Visual Studio Code" {
-                        script:New-Shortcut -linkPath "$tempDir\VSCode.lnk" -targetPath (script:Get-ShortcutPath "Microsoft VS Code\Code.exe" -scoopName "vscode")
+                    'Visual Studio Code' {
+                        script:New-Shortcut -linkPath "$tempDir\VSCode.lnk" -targetPath (script:Get-ShortcutPath 'Microsoft VS Code\Code.exe' -scoopName 'vscode')
                     }
-                    "Windows Terminal" {
+                    'Windows Terminal' {
                         script:Log 'Taskbar: Manually pin Windows Terminal and set shortcut key to "Ctrl+Alt+T" (if not using AHK).'
                     }
                 }
             }
 
             script:Log "Taskbar: Manually pin Explorer and set icon to '$env:USERPROFILE\Pictures\System\Grey-Explorer.ico'"
-            script:Log "Taskbar: Open calculator and pin from taskbar instead of drag and drop."
-            script:New-Shortcut -linkPath "$tempDir\Download.lnk" -targetPath "$env:USERPROFILE\Code\Scripts\ps2exe\Download.exe" -iconLocation "%SystemRoot%\System32\SHELL32.dll,178"
+            script:Log 'Taskbar: Open calculator and pin from taskbar instead of drag and drop.'
+            script:New-Shortcut -linkPath "$tempDir\Download.lnk" -targetPath "$env:USERPROFILE\Code\Scripts\ps2exe\Download.exe" -iconLocation '%SystemRoot%\System32\SHELL32.dll,178'
             script:New-Shortcut -linkPath "$tempDir\Calculator.lnk" -targetPath "$env:WINDIR\System32\calc.exe"
             Start-Process $tempDir
         }
 
         function Remove-DesktopShortcuts {
-            Write-Host "Removing desktop shortcuts..."
-            $desktopShortcuts = @(Get-ChildItem "$env:USERPROFILE\Desktop" -Include "*.lnk", "*.url" -Recurse)
-            $desktopShortcuts += Get-ChildItem "$env:PUBLIC\Desktop" -Include "*.lnk", "*.url" -Recurse
+            Write-Host 'Removing desktop shortcuts...'
+            $desktopShortcuts = @(Get-ChildItem "$env:USERPROFILE\Desktop" -Include '*.lnk', '*.url' -Recurse)
+            $desktopShortcuts += Get-ChildItem "$env:PUBLIC\Desktop" -Include '*.lnk', '*.url' -Recurse
 
             foreach ($shortcut in $desktopShortcuts) {
                 Remove-Item $shortcut.FullName
@@ -4584,7 +4581,7 @@ function Invoke-Setup {
         }
 
         function Set-PreferredAssociations {
-            Write-Host "Setting file associations..."
+            Write-Host 'Setting file associations...'
             function Set-Association {
                 # from: https://stackoverflow.com/a/59048942/22410757
                 # not currently using this, but keeping it here for if I ever need it
@@ -4595,7 +4592,7 @@ function Invoke-Setup {
 
                 $name = cmd /c "assoc $ext 2>NUL"
                 if ($name) {
-                    $name = $name.Split("=")[1]
+                    $name = $name.Split('=')[1]
                 } else {
                     $name = "$($ext.Replace('.',''))file" # ".log.1" becomes "log1file"
                     cmd /c "assoc $ext=$name"
@@ -4605,28 +4602,28 @@ function Invoke-Setup {
 
             foreach ($entry in $script:selected) {
                 switch ($entry) {
-                    "Notepad++" {
-                        cmd /c "assoc .bash_history=Notepad++_file"
-                        cmd /c "assoc .cfg=Notepad++_file"
-                        cmd /c "assoc .gitconfig=Notepad++_file"
-                        cmd /c "assoc .gtk-bookmarks=Notepad++_file"
-                        cmd /c "assoc .ini=Notepad++_file"
-                        cmd /c "assoc .lesshst=Notepad++_file"
-                        cmd /c "assoc .minttyrc=Notepad++_file"
-                        cmd /c "assoc .node_repl_history=Notepad++_file"
-                        cmd /c "assoc .txt=Notepad++_file"
-                        cmd /c "assoc .viminfo=Notepad++_file"
-                        cmd /c "assoc .yarnrc=Notepad++_file"
+                    'Notepad++' {
+                        cmd /c 'assoc .bash_history=Notepad++_file'
+                        cmd /c 'assoc .cfg=Notepad++_file'
+                        cmd /c 'assoc .gitconfig=Notepad++_file'
+                        cmd /c 'assoc .gtk-bookmarks=Notepad++_file'
+                        cmd /c 'assoc .ini=Notepad++_file'
+                        cmd /c 'assoc .lesshst=Notepad++_file'
+                        cmd /c 'assoc .minttyrc=Notepad++_file'
+                        cmd /c 'assoc .node_repl_history=Notepad++_file'
+                        cmd /c 'assoc .txt=Notepad++_file'
+                        cmd /c 'assoc .viminfo=Notepad++_file'
+                        cmd /c 'assoc .yarnrc=Notepad++_file'
                     }
-                    "Rainmeter" {
-                        cmd /c "assoc .rmskin=skininstaller.exe"
-                        cmd /c "ftype Rainmeter.SkinInstaller='$((es -i -n 1 -r "\.exe$" "SkinInstaller.exe") -replace "rainmeter\\[\d.]+", "rainmeter\current")' %1"
+                    'Rainmeter' {
+                        cmd /c 'assoc .rmskin=skininstaller.exe'
+                        cmd /c "ftype Rainmeter.SkinInstaller='$((es -i -n 1 -r '\.exe$' 'SkinInstaller.exe') -replace 'rainmeter\\[\d.]+', 'rainmeter\current')' %1"
                     }
                 }
             }
 
-            cmd /c "assoc .=blank"
-            cmd /c "assoc .ps1=Microsoft.PowerShellScript.1"
+            cmd /c 'assoc .=blank'
+            cmd /c 'assoc .ps1=Microsoft.PowerShellScript.1'
             cmd /c "ftype Microsoft.PowerShellScript.1=`"$env:WINDIR\System32\WindowsPowerShell\v1.0\powershell.exe`" -ExecutionPolicy Bypass -File `"%1`""
         }
 
