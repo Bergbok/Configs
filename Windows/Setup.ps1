@@ -96,6 +96,10 @@ $script:packageManagerCommands = @{
         'choco install bfg-repo-cleaner -y'
         'scoop install main/bfg'
     )
+    'BTRFS Driver' = @(
+        'choco install winbtrfs -y'
+        'scoop install nonportable/winbtrfs-np -g'
+    )
     'Bun' = @(
         'choco install bun -y'
         'scoop install main/bun'
