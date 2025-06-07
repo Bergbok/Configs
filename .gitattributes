@@ -1,3 +1,4 @@
+.git-blame-ignore-revs  blame=ignoreRevsFile
 .gitattributes linguist-detectable
 *requirements.txt linguist-detectable
 *.cfg linguist-detectable
