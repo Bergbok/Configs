@@ -2601,6 +2601,8 @@ function Invoke-Setup {
                     Copy-Item "$PSScriptRoot\Configs\G.Skill-Trident-Z-Lighting-Control\config" -Destination "$env:USERPROFILE\AppData\Roaming\G.SKILL\Trident Z Lighting Control" -Force
                 }
                 'git' {
+                    git config --global alias.please 'push --force-with-lease'
+                    git config --global core.symlinks true
                     git config --global user.email $script:gitEmail
                     git config --global user.name $script:gitName
                     if (-not (git config --global user.signingKey)) {
