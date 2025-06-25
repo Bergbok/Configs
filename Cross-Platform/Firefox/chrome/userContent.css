@@ -194,6 +194,10 @@
 		--color-text-overlay: #c8c8c8 !important;
 	}
 
+	button[aria-label="Collapse Chat"] {
+		opacity: 0 !important;
+	}
+
 	.hcBory {
 		background-color: #212121 !important
 	}
@@ -315,13 +319,15 @@
 
 	.cFdOrq,
 	.tc-upsell,
-    div.video-chat__header,
-	.onsite-notifications__badge,
+    div.stream-chat-header,
 	[data-tooltip-type="blocked"],
 	div.Layout-sc-1xcs6mc-0 czRfnU,
 	li:has(a[href="/settings/prime"]),
 	a.side-nav-card[href="/slwalekop"],
-	.tw-mg-t-05.tw-border-t.tw-pd-t-05 {
+	.tw-mg-t-05.tw-border-t.tw-pd-t-05,
+    div:has(> .channel-points-icon):has(svg),
+    div[data-test-selector="bits-balance-string"],
+    div[data-test-selector="follow-panel-overlay"] {
 		display: none !important;
 	}
 }
