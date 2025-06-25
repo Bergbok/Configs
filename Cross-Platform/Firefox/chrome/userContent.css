@@ -354,3 +354,17 @@
 		--ig-primary-background: 33, 33, 33 !important;
 	}
 }
+
+@-moz-document domain("proton.me") {
+    div[data-testid="storage-banner:pooled-storage"] {
+        display: none !important;
+    }
+
+    .meter-bar-thumb--danger {
+        background: var(--meter-bar-thumb-color-success) !important;
+    }
+
+    .used-space.color-danger {
+        color: var(--text-weak) !important;
+    }
+}
