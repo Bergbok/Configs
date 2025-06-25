@@ -341,12 +341,6 @@
 		margin: 0 !important;
 		max-width: none !important;
 	}
-
-	._al_d,
-	.xz9dl7a,
-	span.x1okw0bk>div:nth-child(1)>span:nth-child(1)>div:nth-child(1)>div:nth-child(1) {
-		display: none !important;
-	}
 }
 
 @-moz-document domain("instagram.com") {
@@ -354,70 +348,3 @@
 		--ig-primary-background: 33, 33, 33 !important;
 	}
 }
-
-@-moz-document domain("gemini.google.com") {
-	.sidenav-with-history-container,
-	bard-sidenav-container.ng-star-inserted>bard-sidenav-content:nth-child(2) {
-		background-color: #212121 !important;
-	}
-
-	.capabilities-disclaimer {
-		opacity: 0 !important;
-	}
-
-	zero-state-v2,
-	announcement-banner,
-	.xap-count-badge-dot {
-		display: none !important;
-	}
-}
-
-@-moz-document domain("mail.google.com") {
-    .z0>.L3 {
-		background-color: #595959 !important;
-	}
-    
-    .WR .z0>.L3 {
-		min-width: 208px !important;
-		color: white !important;
-	}
-
-	.z0>.L3::before {
-		background-image: url('https://www.gstatic.com/images/icons/material/colored_icons/1x/create_32dp.png') !important;
-	}
-}
-
-/* 600% Volume Boost */
-/* @-moz-document  url("moz-extension://VOLUME-BOOST-ID-HERE/popup/index.html"),
-                url("moz-extension://LAPTOP-VOLUME-BOOST-ID-HERE/popup/index.html") {
-	body {
-		background-color: #212121 !important;
-	}
-    .header__name {
-        display: none !important;
-    }
-	.header__description {
-		display: none !important;
-	}
-	.volume-slider > button:nth-child(1) {
-		display: none !important;
-	}
-	.volume-slider > button:nth-child(2) {
-		display: none !important;
-	}
-	.volume-info__volume-current {
-		color: #c8c8c8 !important;
-	}
-	#app > footer:nth-child(6) {
-		display: none !important;
-	}
-	.tabs__title {
-		color: #c8c8c8 !important;
-	}
-	.tabs {
-		margin-top: 0.69em !important;
-	}
-	.tab__title {
-		color: #c8c8c8 !important;
-	}
-} */
