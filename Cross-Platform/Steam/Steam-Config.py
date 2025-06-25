@@ -28,7 +28,14 @@ def edit_install_config(install_config_path):
             "Software": {
                 "Valve": {
                     "Steam": {
-                        "DownloadThrottleKbps": "20000"
+                        "DownloadThrottleKbps": "20000",
+                        "CompatToolMapping": {
+                            "0": {
+                                "name": "proton_hotfix",
+                                "config": "",
+                                "priority": "75"
+                            }
+                        }
                     }
                 }
             }
