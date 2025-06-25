@@ -101,6 +101,7 @@ def main():
     if not os.path.exists(install_config_path):
         print("No config.vdf found.")
     else:
+        print(f"Editing {install_config_path}")
         edit_install_config(install_config_path)
 
     localconfig_paths = glob.glob(os.path.join(args.steampath, "userdata", "*", "config", "localconfig.vdf"))
