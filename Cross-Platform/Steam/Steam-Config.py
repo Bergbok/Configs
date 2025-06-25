@@ -79,7 +79,10 @@ def edit_shared_config(sharedconfig_path):
             "Software": {
                 "Valve": {
                     "Steam": {
-                        "SteamDefaultDialog": "#app_games"
+                        "SteamDefaultDialog": "#app_games",
+                        "friendsui": {
+                            "FriendsUIJSON": "{\"bNotifications_ShowIngame\":false,\"bNotifications_ShowOnline\":false,\"bNotifications_ShowMessage\":true,\"bNotifications_EventsAndAnnouncements\":true,\"bSounds_PlayIngame\":false,\"bSounds_PlayOnline\":false,\"bSounds_PlayMessage\":true,\"bSounds_EventsAndAnnouncements\":false,\"bAlwaysNewChatWindow\":false,\"bForceAlphabeticFriendSorting\":false,\"nChatFlashMode\":0,\"bRememberOpenChats\":false,\"bCompactQuickAccess\":false,\"bCompactFriendsList\":false,\"bNotifications_ShowChatRoomNotification\":true,\"bSounds_PlayChatRoomNotification\":true,\"bHideOfflineFriendsInTagGroups\":false,\"bHideCategorizedFriends\":false,\"bCategorizeInGameFriendsByGame\":true,\"nChatFontSize\":2,\"b24HourClock\":true,\"bDoNotDisturbMode\":false,\"bDisableEmbedInlining\":false,\"bSignIntoFriends\":true,\"bDisableSpellcheck\":false,\"bDisableRoomEffects\":false,\"bAnimatedAvatars\":false,\"featuresEnabled\":{\"DoNotDisturb\":1,\"LoaderWindowSynchronization\":1,\"NonFriendMessageHandling\":1,\"NewVoiceHotKeyState\":1,\"PersonaNotifications\":1,\"ServerVirtualizedMemberLists\":1,\"SteamworksChatAPI\":1,\"FriendsFilter\":1}}"
+                        }
                     }
                 }
             }
