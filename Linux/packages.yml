@@ -1,0 +1,2140 @@
+- name: 7zip
+  description: File archiver with a high compression ratio
+  url: https://www.7-zip.org
+  tags: [compression]
+  install:
+    - apt: apt
+      id: 7zip
+    - manager: dnf
+      id: 7zip-reduced
+    - manager: pacman
+      id: extra/7zip
+
+- name: aalib
+  description: ASCII art library
+  url: https://aa-project.sourceforge.net/index.html
+  tags: [command line, fun]
+  install:
+    - manager: pacman
+      id: extra/aalib
+
+- name: act
+  description: Runs GitHub Actions locally
+  url: https://github.com/nektos/act
+  tags: [command line, development]
+  install:
+    - manager: pacman
+      id: extra/act
+
+- name: Alacritty
+  description: Fast, cross-platform, OpenGL terminal emulator
+  url: https://alacritty.org
+  tags: [terminal emulators]
+  install:
+    - manager: pacman
+      id: extra/alacritty
+
+- name: Alpaca
+  description: Ollama client where you can manage and chat with multiple models
+  url: https://github.com/Jeffser/Alpaca
+  tags: [artificial intelligence]
+  install:
+    - manager: flatpak
+      id: flathub com.github.jeffser.alpaca
+
+- name: AltServer
+  description: Sideloads apps to iOS devices
+  url: https://github.com/NyaMisty/AltServer-Linux
+  tags: [hardware control]
+  install:
+    - manager: aur
+      id: altserver-bin
+
+- name: AppImageLauncher
+  description: Helper for running and integrating AppImages
+  url: https://github.com/TheAssassin/AppImageLauncher
+  tags: [quality of life]
+  install:
+    - manager: aur
+      id: appimagelauncher
+
+- name: Ares
+  description: Cross-platform, open source, multi-system emulator by Near and Ares team, focusing on accuracy and preservation
+  url: https://ares-emu.net
+  tags: [emulators, gaming]
+  install:
+    - manager: aur
+      id: ares-emu
+
+- name: ASCIIQuarium
+  description: Enjoy the mysteries of the sea from the safety of your own terminal!
+  url: https://robobunny.com/projects/asciiquarium/html
+  tags: [command line, fun]
+  install:
+    - manager: pacman
+      id: extra/asciiquarium
+
+- name: Azahar
+  description: 3DS emulator
+  url: https://github.com/azahar-emu/azahar
+  tags: [emulators, gaming]
+  install:
+    - manager: aur
+      id: azahar
+    - manager: flatpak
+      id: flathub org.azahar_emu.Azahar
+
+- name: Bash Completion
+  description: Programmable completion for the bash shell
+  url: https://github.com/scop/bash-completion
+  tags: [command line, quality of life]
+  install:
+    - manager: pacman
+      id: extra/bash-completion
+
+- name: bat
+  description: Cat clone with syntax highlighting and git integration
+  url: https://github.com/sharkdp/bat
+  tags: [command line, standard tool replacements]
+  install:
+    - manager: pacman
+      id: extra/bat
+
+- name: BetterDiscord
+  description: A utility for managing BetterDiscord on Linux
+  url: https://github.com/bb010g/betterdiscordctl
+  tags: [command line, modding, ricing]
+  install:
+    - manager: aur
+      id: betterdiscordctl-git
+
+- name: BFG Repo-Cleaner
+  description: Removes large or troublesome blobs like git-filter-branch does, but faster
+  url: http://rtyley.github.io/bfg-repo-cleaner
+  tags: [command line, development]
+  install:
+    - manager: aur
+      id: bfg
+
+- name: Blender
+  description: 3D creation suite
+  url: https://www.blender.org
+  tags: [editors, media creation]
+  install:
+    - manager: flatpak
+      id: flathub org.blender.Blender
+    - manager: pacman
+      id: extra/blender
+
+- name: Bluedevil
+  description: KDE Bluetooth integration
+  url: https://invent.kde.org/plasma/bluedevil
+  tags: [hardware control]
+  install:
+    - manager: pacman
+      id: extra/bluedevil
+
+- name: BlueZ
+  description: Bluetooth protocol stack
+  url: https://www.bluez.org
+  tags: [hardware control]
+  install:
+    - manager: pacman
+      id: extra/bluez extra/bluez-utils
+
+- name: Bottles
+  description: Run Windows software
+  url: https://github.com/bottlesdevs/Bottles
+  tags: [compatibility]
+  install:
+    - manager: flatpak
+      id: flathub com.usebottles.bottles
+
+- name: btop
+  description: A monitor of system resources, bpytop ported to C++
+  url: https://github.com/aristocratos/btop
+  tags: [command line, standard tool replacements]
+  install:
+    - manager: pacman
+      id: extra/btop
+
+- name: BTRFS Programs
+  description: Userspace tools for managing btrfs filesystems
+  url: https://github.com/kdave/btrfs-progs
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: core/btrfs-progs extra/compsize
+
+- name: Bun
+  description: Bun is a fast JavaScript all-in-one toolkit
+  url: https://github.com/oven-sh/bun
+  tags: [command line, development]
+  install:
+    - manager: aur
+      id: bun-bin
+
+- name: Calibre
+  description: Ebook management application
+  url: https://calibre-ebook.com
+  tags: [viewers]
+  install:
+    - manager: flatpak
+      id: flathub com.calibre_ebook.calibre
+    - manager: pacman
+      id: extra/calibre
+
+- name: Cava
+  description: Console-based audio visualizer
+  url: https://github.com/karlstav/cava
+  tags: [command line, fun]
+  install:
+    - manager: pacman
+      id: extra/cava
+
+- name: cbonsai
+  description: A bonsai tree generator
+  url: https://gitlab.com/jallbrit/cbonsai
+  tags: [command line, fun]
+  install:
+    - manager: aur
+      id: cbonsai
+
+- name: CEMU
+  description: Software to emulate Wii U games and applications on PC
+  url: https://cemu.info
+  tags: [emulators, gaming]
+  install:
+    - manager: aur
+      id: cemu
+
+- name: Chatterino2
+  description: Chat client for Twitch
+  url: https://chatterino.com
+  tags: [social]
+  install:
+    - manager: aur
+      id: chatterino2-bin
+
+- name: ckb-next
+  description: Corsair keyboard and mouse driver
+  url: https://github.com/ckb-next/ckb-next
+  tags: [hardware control]
+  install:
+    - manager: aur
+      id: ckb-next
+
+- name: CMatrix
+  description: Terminal based "The Matrix"-like implementation
+  url: https://github.com/abishekvashok/cmatrix
+  tags: [command line, fun]
+  install:
+    - manager: pacman
+      id: extra/cmatrix
+
+- name: Conky
+  description: Light-weight system monitor
+  url: https://github.com/brndnmtthws/conky
+  tags: [command line, system monitors]
+  install:
+    - manager: pacman
+      id: extra/conky
+
+- name: CoolerControl
+  description: A program to monitor and control your cooling devices
+  url: https://gitlab.com/coolercontrol/coolercontrol
+  tags: [system monitors, hardware control]
+  install:
+    - manager: aur
+      id: coolercontrol-bin
+
+- name: CoolerControl liqctld
+  description: Service integration for liquidctl device support (AIOs, USB fan hubs, etc)
+  url: https://gitlab.com/coolercontrol/coolercontrol
+  tags: [system monitors, hardware control]
+  install:
+    - manager: aur
+      id: coolercontrol-liqctld
+
+- name: cowsay
+  description: Configurable talking cow (and a bit more)
+  url: https://github.com/cowsay-org/cowsay
+  tags: [command line, fun]
+  install:
+    - manager: pacman
+      id: extra/cowsay
+
+- name: CUDA
+  description: NVIDIA's GPU programming toolkit
+  url: https://developer.nvidia.com/cuda-zone
+  tags: [development]
+  install:
+    - manager: dnf
+      run: |
+        # https://docs.nvidia.com/cuda/cuda-installation-guide-linux/#fedora
+        dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/fedora$(rpm -E %fedora)/x86_64/cuda-fedora$(rpm -E %fedora).repo
+        $install_command cuda-toolkit
+    - manager: pacman
+      id: extra/cuda
+
+- name: cURL
+  description: Client for URL
+  url: https://github.com/curl/curl
+  tags: [command line]
+  install:
+    - manager: [apt, dnf]
+      id: curl
+    - manager: pacman
+      id: core/curl
+
+- name: Cyberpunk Waifus Font
+  description: 'From VA-11 HALL-A: Cyberpunk Bartender Action'
+  url: https://www.dafont.com/cyberpunkwaifus.font
+  tags: [fonts]
+  install:
+    - manager: bash
+      run: install_font 'https://dl.dafont.com/dl/?f=cyberpunkwaifus'
+
+- name: Czkawka
+  description: Detects duplicate files, empty folders, similar images etc.
+  url: https://github.com/qarmin/czkawka
+  tags: [storage analysis]
+  install:
+    - manager: aur
+      id: czkawka-gui-bin
+    - manager: flatpak
+      id: flathub com.github.qarmin.czkawka
+
+- name: ddgr
+  description: DuckDuckGo from the terminal
+  url: https://github.com/jarun/ddgr
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/ddgr
+
+- name: Discord
+  description: All-in-one voice and text chat for gamers
+  url: https://discord.com
+  tags: [social]
+  install:
+    - manager: flatpak
+      id: flathub com.discordapp.Discord
+    - manager: pacman
+      id: extra/discord
+
+- name: Discord OpenAsar
+  description: Lightweight app.asar for Discord's desktop client
+  url: https://github.com/GooseMod/OpenAsar
+  tags: [modding]
+  install:
+    - manager: bash
+      run: |
+        chmod +x "$SCRIPT_DIR/Scripts/setup-discord-openasar.sh"
+        bash "$SCRIPT_DIR/Scripts/setup-discord-openasar.sh"
+
+- name: DLCUnlockerScript
+  description: Interactive script for installing SmokeAPI or CreamLinux on Linux
+  url: https://github.com/prismatica-dev/DLCUnlockerScript
+  tags: [command line, gaming]
+  install:
+    - manager: aur
+      id: dlcunlockerscript
+
+- name: Docker
+  description: Pack, ship and run any application as a lightweight container
+  url: https://github.com/docker/cli
+  tags: [command line, development]
+  install:
+    - manager: apt
+      run: |
+        $install_command ca-certificates curl
+        sudo install -m 0755 -d /etc/apt/keyrings
+        sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+        sudo chmod a+r /etc/apt/keyrings/docker.asc
+        echo deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+        sudo apt-get update
+        $install_command docker-ce docker-ce-cli containerd.io docker-buildx-plugin
+    - manager: dnf
+      run: |
+        sudo dnf -y install dnf-plugins-core
+        sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+        $install_command docker-ce docker-ce-cli containerd.io docker-buildx-plugin
+    - manager: pacman
+      id: extra/docker
+
+- name: Docker Compose
+  description: Define and run multi-container applications with Docker
+  url: https://github.com/docker/compose
+  tags: [command line, development]
+  install:
+    - manager: apt
+      id: docker-compose-plugin
+    - manager: dnf
+      id: docker-compose-plugin
+    - manager: pacman
+      id: extra/docker-compose
+
+- name: Docker Desktop
+  description: GUI for managing Docker containers
+  url: https://www.docker.com/products/docker-desktop
+  tags: [development]
+  install:
+    - manager: aur
+      id: docker-desktop
+
+- name: doge
+  description: wow very terminal doge
+  url: https://github.com/Olivia5k/doge
+  tags: [command line, fun]
+  install:
+    - manager: pacman
+      id: extra/doge
+
+- name: Dolphin Emulator
+  description: Gamecube and Wii emulator
+  url: https://dolphin-emu.org
+  tags: [emulators, gaming]
+  install:
+    - manager: flatpak
+      id: flathub org.DolphinEmu.dolphin-emu
+    - manager: pacman
+      id: extra/dolphin-emu
+
+- name: dua
+  description: Disk usage analyzer similar to ncdu
+  url: https://github.com/Byron/dua-cli
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/dua-cli
+
+- name: DualSense Control
+  description: Tool for interacting with Sony's PlayStation 5 DualSense controllers
+  url: https://github.com/nowrep/dualsensectl
+  tags: [command line, hardware]
+  install:
+    - manager: aur
+      id: dualsensectl-git
+
+- name: duck
+  description: File transfer client for FTP, SFTP, WebDAV, Amazon S3, OpenStack Swift, Backblaze B2, Microsoft Azure & OneDrive, Google Drive and Dropbox
+  url: https://duck.sh
+  tags: [file transfer]
+  install:
+    - manager: aur
+      id: duck
+
+- name: DuckStation
+  description: PlayStation 1 emulator
+  url: https://github.com/stenzek/duckstation
+  tags: [emulators, gaming]
+  install:
+    - manager: aur
+      id: duckstation
+    - manager: flatpak
+      id: flathub org.duckstation.DuckStation
+
+- name: Dust
+  description: A more intuitive version of du
+  url: https://github.com/bootandy/dust
+  tags: [command line, standard tool replacements]
+  install:
+    - manager: pacman
+      id: extra/dust
+
+- name: eva
+  description: Command-line calculator
+  url: https://github.com/nerdypepper/eva
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/eva
+
+- name: eza
+  description: Modern replacement for ls
+  url: https://github.com/eza-community/eza
+  tags: [command line, standard tool replacements]
+  install:
+    - manager: pacman
+      id: extra/eza
+
+- name: Fail2Ban
+  description: Bans IPs that cause multiple authentication errors
+  url: https://github.com/fail2ban/fail2ban
+  tags: [networking]
+  install:
+    - manager: apt
+      id: fail2ban
+    - manager: dnf
+      id: fail2ban
+    - manager: pacman
+      id: extra/fail2ban
+
+- name: Fastfetch
+  description: Feature-rich and performance oriented neofetch-like system information tool
+  url: https://github.com/fastfetch-cli/fastfetch
+  tags: [command line, system monitors]
+  install:
+    - manager: pacman
+      id: extra/fastfetch
+
+- name: fd
+  description: Simple, fast and user-friendly alternative to find
+  url: https://github.com/sharkdp/fd
+  tags: [command line, standard tool replacements]
+  install:
+    - manager: pacman
+      id: extra/fd
+
+- name: FFDec
+  description: Flash SWF decompiler and editor
+  url: https://github.com/jindrapetrik/jpexs-decompiler/releases
+  tags: [development]
+  install:
+    - manager: aur
+      id: ffdec-bin
+    - manager: flatpka
+      id: com.jpexs.decompiler.flash
+
+- name: ffmpeg
+  description: Complete solution to record, convert and stream audio and video
+  url: https://ffmpeg.org
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/ffmpeg
+
+- name: FIGlet
+  description: Program for making large letters out of ordinary text
+  url: https://github.com/cmatsuoka/figlet
+  tags: [command line, fun]
+  install:
+    - manager: pacman
+      id: extra/figlet
+
+- name: Firefox
+  description: The best browser
+  url: https://www.mozilla.org/firefox
+  tags: [viewers]
+  install:
+    - manager: flatpak
+      id: flathub org.mozilla.firefox
+    - manager: pacman
+      id: extra/firefox
+
+- name: fish
+  description: Smart and user friendly shell intended mostly for interactive use
+  url: https://github.com/fish-shell/fish-shell
+  tags: [command line]
+  install:
+    - manager: apt
+      run: |
+        debian_version=$(grep '^VERSION_ID=' /etc/os-release | cut -d= -f2 | tr -d '"')
+        echo deb http://download.opensuse.org/repositories/shells:/fish/Debian_$debian_version/ / | sudo tee /etc/apt/sources.list.d/shells:fish.list
+        curl -fsSL https://download.opensuse.org/repositories/shells:fish/Debian_$debian_version/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_fish.gpg > /dev/null
+        sudo apt update
+        sudo apt install fish
+    - manager: dnf
+      id: fish
+    - manager: pacman
+      id: extra/fish
+
+- name: Flameshot
+  description: Powerful yet simple to use screenshot software
+  url: https://github.com/flameshot-org/flameshot
+  tags: [quality of life]
+  install:
+    - manager: flatpak
+      id: flathub org.flameshot.Flameshot
+    - manager: pacman
+      id: extra/flameshot
+
+- name: Flashpoint
+  description: Launcher for BlueMaxima's Flashpoint - Infinity Edition
+  url: https://flashpointarchive.org
+  tags: [gaming]
+  install:
+    - manager: aur
+      id: flashpoint-bin
+
+- name: Flatpak
+  description: Linux application sandboxing and distribution framework
+  url: https://flatpak.org
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/flatpak
+
+- name: Flatseal
+  description: GUI for managing Flatpak permissions
+  url: https://github.com/tchx84/Flatseal
+  tags: [quality of life]
+  install:
+    - manager: aur
+      id: flatseal
+    - manager: dnf
+      id: flatseal
+    - manager: flatpak
+      id: flathub com.github.tchx84.Flatseal
+
+- name: fortune
+  description: Displays random poignant, inspirational, silly or snide phrases from a database of quotations
+  url: https://www.shlomifish.org/open-source/projects/fortune-mod
+  tags: [command line, fun]
+  install:
+    - manager: pacman
+      id: extra/fortune-mod
+
+- name: FreeTube
+  description: An open source desktop YouTube player built with privacy in mind
+  url: https://github.com/FreeTubeApp/FreeTube
+  tags: [viewers]
+  install:
+    - manager: aur
+      id: freetube-bin
+    - manager: flatpak
+      id: flathub io.freetubeapp.FreeTube
+
+- name: GameMode
+  description: Daemon and library combo for Linux that allows games to request a set of optimisations be temporarily applied to the host OS and/or a game proces
+  url: https://github.com/FeralInteractive/gamemode
+  tags: [gaming]
+  install:
+    - manager: pacman
+      id: extra/gamemode multilib/lib32-gamemode
+
+- name: GameScope
+  description: Microcompositor that supports many gaming-centric features
+  url: https://github.com/ValveSoftware/gamescope
+  tags: [gaming]
+  install:
+    - manager: pacman
+      id: extra/gamescope
+
+- name: Gear Lever
+  description: Utility to manage AppImages with ease
+  url: https://github.com/mijorus/gearlever
+  tags: [quality of life]
+  install:
+    - manager: flatpak
+      id: flathub it.mijorus.gearlever
+
+- name: gh
+  description: GitHub’s official command line tool
+  url: https://github.com/cli/cli
+  tags: [command line, development]
+  install:
+    - manager: pacman
+      id: extra/github-cli
+
+- name: Gifsicle
+  description: Command-line tool for creating, editing, and getting information about GIF images and animations
+  url: https://www.lcdf.org/gifsicle
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/gifsicle
+
+- name: GIMP
+  description: GNU Image Manipulation Program
+  url: https://www.gimp.org
+  tags: [editors, media creation]
+  install:
+    - manager: flatpak
+      id: flathub org.gimp.GIMP
+    - manager: pacman
+      id: extra/gimp
+
+- name: git
+  description: Distributed version control system designed to handle everything from small to very large projects with speed and efficiency
+  url: https://git-scm.com
+  tags: [command line, development]
+  install:
+    - manager: pacman
+      id: extra/git
+
+- name: git filter-repo
+  description: Quickly rewrite git repository history (filter-branch replacement)
+  url: https://github.com/newren/git-filter-repo
+  tags: [command line, development]
+  install:
+    - manager: pacman
+      id: extra/git-filter-repo
+
+- name: GitHub Desktop
+  description: GUI for managing Git and GitHub
+  url: https://desktop.github.com
+  tags: [development]
+  install:
+    - manager: aur
+      id: github-desktop-bin
+    - manager: flatpak
+      id: flathub io.github.shiftey.Desktop
+
+- name: GnuPG
+  description: Complete and free implementation of the OpenPGP standard
+  url: https://www.gnupg.org
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: core/gnupg
+
+- name: Go
+  description: Go programming language
+  url: https://golang.org
+  tags: [development]
+  install:
+    - manager: pacman
+      id: extra/go
+
+- name: Godot
+  description: Advanced cross-platform 2D and 3D game engine
+  url: https://godotengine.org
+  tags: [development, media creation]
+  install:
+    - manager: flatpak
+      id: flathub org.godotengine.Godot
+    - manager: pacman
+      id: extra/godot
+
+- name: Godot (Mono)
+  description: Advanced cross-platform 2D and 3D game engine with support for C#
+  url: https://godotengine.org
+  tags: [development, media creation]
+  install:
+    - manager: flatpak
+      id: flathub org.godotengine.GodotSharp
+    - manager: pacman
+      id: extra/godot-mono
+
+- name: GOverlay
+  description: GUI for managing Vulkan/OpenGL overlays
+  url: https://github.com/benjamimgois/goverlay
+  tags: [quality of life]
+  install:
+    - manager: dnf
+      id: goverlay
+    - manager: pacman
+      id: extra/goverlay
+
+- name: gpustat
+  description: A simple command-line utility for querying and monitoring GPU status
+  url: https://github.com/wookayin/gpustat
+  tags: [system monitors]
+  install:
+    - manager: pypi
+      id: gpustat
+
+- name: gum
+  description: A tool for glamorous shell scripts
+  url: https://github.com/charmbracelet/gum
+  tags: [command line]
+  install:
+    - manager: apt
+      run: |
+        sudo mkdir -p /etc/apt/keyrings
+        curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
+        echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
+        sudo apt-get update
+        $install_command gum
+    - manager: dnf
+      run: |
+        echo '[charm]
+        name=Charm
+        baseurl=https://repo.charm.sh/yum/
+        enabled=1
+        gpgcheck=1
+        gpgkey=https://repo.charm.sh/yum/gpg.key' | sudo tee /etc/yum.repos.d/charm.repo > /dev/null
+        sudo rpm --import https://repo.charm.sh/yum/gpg.key
+        $install_command gum
+    - manager: pacman
+      id: extra/gum
+
+- name: Handbrake
+  description: GUI frontend for ffmpeg
+  url: https://handbrake.fr
+  tags: [quality of life]
+  install:
+    - manager: flatpak
+      id: flathub fr.handbrake.ghb
+    - manager: pacman
+      id: extra/handbrake
+
+- name: HeidiSQL
+  description: A lightweight GUI for managing MySQL, PostgreSQL, and Microsoft SQL databases
+  url: http://www.heidisql.com
+  tags: [database, development]
+  install:
+    - manager: aur
+      id: heidisql
+
+- name: hexyl
+  description: Colored command-line hex viewer
+  url: https://github.com/sharkdp/hexyl
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/hexyl
+
+- name: Hollywood
+  description: Fill your console with Hollywood melodrama technobabble
+  url: https://github.com/dustinkirkland/hollywood
+  tags: [command line, fun]
+  install:
+    - manager: aur
+      id: hollywood
+
+- name: HypnOS Cursor
+  description: Cursor theme based on HypnOS
+  url: https://github.com/Bergbok/HypnOS-Linux-Cursor
+  tags: [ricing]
+  install:
+    - manager: bash
+      run: curl -fsSL https://raw.githubusercontent.com/Bergbok/HypnOS-Linux-Cursor/main/install | bash
+
+- name: Inkscape
+  description: Vector graphics editor
+  url: https://gitlab.com/inkscape/inkscape
+  tags: [editors]
+  install:
+    - manager: flatpak
+      id: flathub org.inkscape.Inkscape
+
+- name: Internet Archive CLI
+  description: Python interface to archive.org
+  url: https://archive.org/developers/internetarchive
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: python-internetarchive
+    - manager: pypi
+      id: internetarchive
+
+- name: itch.io desktop app
+  description: Installer for the itch.io desktop app
+  url: https://itch.io
+  tags: [gaming]
+  install:
+    - manager: aur
+      id: itch-setup-bin
+    - manager: flatpak
+      id: flathub io.itch.itch
+
+- name: JDownloader
+  description: Download manager, written in Java, for one-click hosting sites like Rapidshare and MEGA
+  url: https://jdownloader.org
+  tags: [file transfer]
+  install:
+    - manager: aur
+      id: jdownloader2
+
+- name: Jellyfin Server
+  description: Media solution that puts you in control of your media
+  url: https://github.com/jellyfin/jellyfin
+  tags: [file transfer, networking]
+  install:
+    - manager: dnf
+      id: jellyfin
+    - manager: flatpak
+      id: flathub org.jellyfin.JellyfinServer
+    - manager: pacman
+      id: jellyfin-server
+
+- name: Jitterbug
+  description: Launches JIT enabled iOS app with a second iOS device and generates pairing files
+  url: https://github.com/osy/Jitterbug
+  tags: [hardware control]
+  install:
+    - manager: aur
+      id: jitterbugpair-bin
+
+- name: jq
+  description: Command-line JSON processor
+  url: https://jqlang.github.io/jq
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/jq
+
+- name: KDE Connect
+  description: Allows communication between KDE and your smartphone
+  url: https://kdeconnect.kde.org
+  tags: [hardware control, quality of life]
+  install:
+    - manager: pacman
+      id: extra/kdeconnect
+
+- name: KDE ISO Image Writer
+  description: Program to write hybrid ISO files onto USB disks
+  url: https://apps.kde.org/isoimagewriter
+  tags: [hardware control]
+  install:
+    - manager: flatpak
+      id: flathub org.kde.isoimagewriter
+    - manager: pacman
+      id: extra/isoimagewriter
+
+- name: Kdenlive
+  description: KDE Non-Linear Video Editor
+  url: https://kdenlive.org
+  tags: [editors, media creation]
+  install:
+    - manager: flatpak
+      id: flathub org.kde.kdenlive
+    - manager: pacman
+      id: extra/kdenlive
+
+- name: KeePassXC
+  description: Modern, secure, and open-source password manager that stores and manages your most sensitive information
+  url: https://keepassxc.org
+  tags: [quality of life]
+  install:
+    - manager: flatpak
+      id: flathub org.keepassxc.KeePassXC
+    - manager: pacman
+      id: extra/keepassxc
+
+- name: kitty
+  description: Fast, feature-rich, cross-platform, GPU based terminal emulator
+  url: https://sw.kovidgoyal.net/kitty
+  tags: [terminal emulators]
+  install:
+    - manager: pacman
+      id: extra/kitty
+
+- name: Komikku
+  description: GTK manga reader
+  url: https://codeberg.org/valos/Komikku
+  tags: [viewers]
+  install:
+    - manager: dnf
+      id: komikku
+    - manager: flatpak
+      id: flathub info.febvre.Komikku
+    - manager: pacman
+      id: extra/komikku
+
+- name: Legendary
+  description: Epic Games Launcher replacement
+  url: https://github.com/derrod/legendary
+  tags: [gaming]
+  install:
+    - manager: aur
+      id: legendary
+
+- name: libimobiledevice
+  description: Library to communicate with services on iOS devices using native protocols
+  url: https://libimobiledevice.org
+  tags: [hardware control]
+  install:
+    - manager: pacman
+      id: extra/libimobiledevice
+
+- name: LibreOffice
+  description: LibreOffice branch which contains new features and program enhancements
+  url: https://www.libreoffice.org
+  tags: [editors]
+  install:
+    - manager: flatpak
+      id: flathub org.libreoffice.LibreOffice
+    - manager: pacman
+      id: extra/libreoffice-fresh
+
+- name: LocalSend
+  description: Securely shares files and messages with devices over local networks
+  url: https://github.com/localsend/localsend
+  tags: [file transfer, networking]
+  install:
+    - manager: aur
+      id: localsend-bin
+    - manager: flatpak
+      id: flathub org.localsend.localsend_app
+
+- name: lolcat
+  description: Rainbows and unicorns!
+  url: https://github.com/busyloop/lolcat
+  tags: [command line, fun]
+  install:
+    - manager: pacman
+      id: extra/lolcat
+
+- name: Lumafly
+  description: A cross platform mod manager for Hollow Knight written in Avalonia
+  url: https://github.com/TheMulhima/Lumafly
+  tags: [gaming]
+  install:
+    - manager: aur
+      id: lumafly
+
+- name: Lutris
+  description: Gaming platform for Linux
+  url: https://lutris.net
+  tags: [gaming]
+  install:
+    - manager: dnf
+      id: lutris
+    - manager: flatpak
+      id: flathub net.lutris.Lutris
+    - manager: pacman
+      id: extra/lutris
+
+- name: Majora's Mask
+  description: Static recompilation of Majora's Mask
+  url: https://github.com/Mr-Wiseguy/Zelda64Recomp
+  tags: [gaming]
+  install:
+    - manager: aur
+      id: zelda64recomp-bin
+
+- name: MangoHud
+  description: A Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more
+  url: https://github.com/flightlessmango/MangoHud
+  tags: [gaming]
+  install:
+    - manager: pacman
+      id: extra/mangohud
+
+- name: MariaDB
+  description: Fast SQL database server, forked from MySQL
+  url: https://github.com/MariaDB/server
+  tags: [database]
+  install:
+    - manager: apt
+      id: mariadb-server mariadb-server-core
+    - manager: pacman
+      id: extra/mariadb
+
+- name: MegaBasterd
+  description: Yet another MEGA downloader/uploader/streaming suite
+  url: https://github.com/tonikelope/megabasterd
+  tags: [file transfer]
+  install:
+    - manager: aur
+      id: megabasterd-bin
+
+- name: melonDS
+  description: DS emulator, sorta
+  url: http://melonds.kuribo64.net
+  tags: [emulators, gaming]
+  install:
+    - manager: aur
+      id: melonds
+    - manager: flatpak
+      id: flathub net.kuribo64.melonDS
+
+- name: Meslo Nerd Font
+  url: https://github.com/romkatv/powerlevel10k-media
+  tags: [fonts]
+  install:
+    - manager: aur
+      id: ttf-meslo-nerd-font-powerlevel10k
+
+- name: Minecraft Font
+  description: Rendition of the font used in Minecraft
+  url: https://github.com/IdreesInc/Minecraft-Font
+  tags: [fonts]
+  install:
+    - manager: aur
+      id: otf-minecraft
+
+- name: Minecraft Font
+  description: Keyboard compatible!
+  url: https://www.dafont.com/minecraft.font
+  tags: [fonts]
+  install:
+    - manager: bash
+      run: install_font 'https://dl.dafont.com/dl/?f=minecraft'
+
+- name: Miracode
+  description: A sharp, readable, vector-y version of Monocraft, the monospace programming font based on Minecraft
+  url: https://github.com/IdreesInc/Miracode
+  tags: [fonts]
+  install:
+    - manager: aur
+      id: ttf-miracode
+
+- name: Monocraft Font
+  description: A programming font based on the typeface used in Minecraft
+  url: https://github.com/IdreesInc/Monocraft
+  tags: [fonts]
+  install:
+    - manager: aur
+      id: otf-monocraft
+
+- name: Mousai
+  description: Music recognition using audd.io's API
+  url: https://github.com/SeaDve/Mousai
+  tags: [quality of life]
+  install:
+    - manager: flatpak
+      id: flathub io.github.seadve.Mousai
+    - manager: pacman
+      id: extra/mousai
+
+- name: mpv
+  description: Video player based on MPlayer/mplayer2
+  url: https://mpv.io
+  tags: [viewers]
+  install:
+    - manager: flatpak
+      id: flathub io.mpv.Mpv
+    - manager: pacman
+      id: extra/mpv
+
+- name: MusicBrainz Picard
+  description: Cross-platform music tagger
+  url: https://github.com/metabrainz/picard
+  tags: [viewers]
+  install:
+    - manager: aur
+      id: picard-git
+    - manager: flatpak
+      id: flathub org.musicbrainz.Picard
+    - manager: pacman
+      id: extra/pizard
+
+- name: NAPS2
+  description: Scan documents to PDF and more, as simply as possible
+  url: https://www.naps2.com
+  tags: [hardware control]
+  install:
+    - manager: aur
+      id: naps2
+
+- name: ncdu
+  description: Disk usage analyzer with an ncurses interface
+  url: https://dev.yorhel.nl/ncdu
+  tags: [command line]
+  install:
+    - manager: [apt, dnf]
+      id: ncdu
+    - manager: pacman
+      id: extra/ncdu
+
+- name: Nicotine+
+  description: Soulseek music-sharing client
+  url: https://github.com/Nicotine-Plus/nicotine-plus
+  tags: [file transfer, social]
+  install:
+    - manager: flatpak
+      id: flathub org.nicotine_plus.Nicotine
+    - manager: pacman
+      id: extra/nicotine+
+
+- name: Nix
+  description: A purely functional package manager
+  url: https://github.com/NixOS/nix
+  tags: [command line]
+  install:
+    - manager: bash
+      run: curl -L https://nixos.org/nix/install | sh -s -- --daemon
+    - manager: pacman
+      id: extra/nix
+
+- name: Node.js
+  description: JavaScript runtime environment
+  url: https://nodejs.org
+  tags: [development]
+  install:
+    - manager: pacman
+      id: extra/nodejs
+
+- name: nomino
+  description: Batch rename utility for developers
+  url: https://github.com/yaa110/nomino
+  tags: [command line]
+  install:
+    - manager: aur
+      id: nomino-bin
+
+- name: ntfs2btrfs
+  description: In-place conversion of NTFS filesystems to btrfs
+  url: https://github.com/maharmstone/ntfs2btrfs
+  tags: [command line]
+  install:
+    - manager: [apt, dnf]
+      id: ntfs2btrfs
+    - manager: aur
+      id: ntfs2btrfs-git
+
+- name: nvitop
+  description: An interactive NVIDIA GPU process viewer and beyond, the one-stop solution for GPU process management
+  url: https://github.com/XuehaiPan/nvitop
+  tags: [system monitors]
+  install:
+    - manager: pypi
+      id: nvitop
+
+- name: nyancat
+  description: Nyan Cat rendered in your terminal
+  url: https://nyancat.dakko.us
+  tags: [command line, fun]
+  install:
+    - manager: pacman
+      id: extra/nyancat
+
+- name: OBS Studio
+  description: Software for live streaming and recording
+  url: https://obsproject.com
+  tags: [media creation]
+  install:
+    - manager: flatpak
+      id: flathub com.obsproject.Studio
+    - manager: pacman
+      id: extra/obs-studio
+
+- name: Obsidian
+  description: A powerful, extensible, and customizable note-taking app
+  url: https://obsidian.md
+  tags: [editors]
+  install:
+    - manager: flatpak
+      id: flathub md.obsidian.Obsidian
+
+- name: Oh My Posh
+  description: A prompt theme engine for any shell
+  url: https://github.com/JanDeDobbeleer/oh-my-posh
+  tags: [command line, ricing]
+  install:
+    - manager: aur
+      id: oh-my-posh-bin
+
+- name: Ollama
+  description: Create, run and share LLMs
+  url: https://github.com/ollama/ollama
+  tags: [artificial intelligence]
+  install:
+    - manager: flatpak
+      id: flathub com.jeffser.Alpaca.Plugins.Ollama
+    - manager: pacman
+      id: extra/ollama
+
+- name: onefetch
+  description: Command-line git information tool
+  url: https://github.com/o2sh/onefetch
+  tags: [command line, development]
+  install:
+    - manager: pacman
+      id: extra/onefetch
+
+- name: OpenDoas
+  description: Minimal replacement for the venerable sudo
+  url: https://github.com/Duncaen/OpenDoas
+  tags: [command line, standard tool replacements]
+  install:
+    - manager: pacman
+      id: extra/opendoas
+
+- name: OpenMW
+  description: 'Reimplemented engine for The Elder Scrolls 3: Morrowind'
+  url: https://gitlab.com/OpenMW/openmw
+  tags: [gaming]
+  install:
+    - manager: flatpak
+      id: flathub org.openmw.OpenMW
+
+- name: OpenRazer
+  description: Driver and user-space daemon to control Razer device lighting and other features
+  url: https://openrazer.github.io
+  tags: [hardware control]
+  install:
+    - manager: apt
+      id: openrazer-daemon
+    - manager: dnf
+      run: |
+        $install_command kernel-devel
+        sudo dnf config-manager addrepo --from-repofile=https://openrazer.github.io/hardware:razer.repo
+        $install_command openrazer-meta
+    - manager: pacman
+      id: extra/openrazer-daemon
+
+- name: OpenRGB
+  description: RGB lighting control that doesn't depend on manufacturer software
+  url: https://gitlab.com/CalcProgrammer1/OpenRGB
+  tags: [hardware control]
+  install:
+    - manager: flatpak
+      id: flathub org.openrgb.OpenRGB
+    - manager: pacman
+      id: extra/openrgb
+
+- name: OpenSSH
+  description: SSH protocol implementation for remote login, command execution and file transfer
+  url: https://www.openssh.com
+  tags: [command line, networking]
+  install:
+    - manager: pacman
+      id: core/openssh
+
+- name: OpenVPN
+  description: Easy-to-use, robust and highly configurable VPN
+  url: https://github.com/OpenVPN/openvpn
+  tags: [networking]
+  install:
+    - manager: pacman
+      id: extra/openvpn
+
+- name: Pacman Contrib
+  description: Contributed scripts and tools for pacman systems
+  url: https://gitlab.archlinux.org/pacman/pacman-contrib
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/pacman-contrib
+
+- name: PCSX2
+  description: PlayStation 2 emulator
+  url: https://github.com/PCSX2/pcsx2
+  tags: [emulators, gaming]
+  install:
+    - manager: aur
+      id: pcsx2
+    - manager: flatpak
+      id: flathub net.pcsx2.PCSX2
+
+- name: PeaZip
+  description: File and archive manager
+  url: https://github.com/peazip/PeaZip
+  tags: [compression]
+  install:
+    - manager: aur
+      id: peazip
+    - manager: flatpak
+      id: flathub io.github.peazip.PeaZip
+
+- name: Pinta
+  description: Simple GTK# paint program
+  url: https://github.com/PintaProject/Pinta
+  tags: [viewers]
+  install:
+    - manager: [aur, dnf]
+      id: pinta
+    - manager: flatpak
+      id: flathub com.github.PintaProject.Pinta
+
+- name: pipes
+  description: Animated pipes terminal screensaver
+  url: https://github.com/lhvy/pipes-rs
+  tags: [fun]
+  install:
+    - manager: aur
+      id: pipes-rs
+
+- name: PostgreSQL
+  description: Sophisticated object-relational DBMS
+  url: https://github.com/postgres/postgres
+  tags: [database]
+  install:
+    - manager: apt
+      id: postgresql
+    - manager: pacman
+      id: extra/postgresql
+
+- name: PPSSPP
+  description: PSP emulator
+  url: https://www.ppsspp.org
+  tags: [emulators, gaming]
+  install:
+    - manager: flatpak
+      id: flathub org.ppsspp.PPSSPP
+    - manager: pacman
+      id: extra/ppsspp
+
+- name: Prism Launcher
+  description: Minecraft launcher with the ability to manage multiple instances, accounts and mods
+  url: https://prismlauncher.org
+  tags: [gaming]
+  install:
+    - manager: flatpak
+      id: flathub org.prismlauncher.PrismLauncher
+    - manager: pacman
+      id: extra/prismlauncher
+
+- name: procs
+  description: Modern replacement for ps
+  url: https://github.com/dalance/procs
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/procs
+
+- name: Proton Mail
+  description: Private email
+  url: https://proton.me/mail
+  tags: [quality of life, social]
+  install:
+    - manager: aur
+      id: proton-mail
+    - manager: flatpak
+      id: flathub me.proton.Mail
+
+- name: Proton VPN
+  description: Trusted and easy-to-use VPN
+  url: https://github.com/ProtonVPN/proton-vpn-gtk-app
+  tags: [networking]
+  install:
+    - manager: aur
+      run: |
+        ${PACKAGE_MANAGERS[pacman]} extra/networkmanager extra/network-manager-applet
+        $install_command proton-vpn-gtk-app
+    - manager: flatpak
+      id: flathub com.protonvpn.www
+
+- name: ProtonPlus
+  description: GTK compatibility tools manager
+  url: https://github.com/Vysp3r/protonplus
+  tags: [compatibility, gaming]
+  install:
+    - manager: aur
+      id: protonplus-bin
+    - manager: flatpak
+      id: flathub com.vysp3r.ProtonPlus
+
+- name: ProtonUp
+  description: QT compatibility tools manager
+  url: https://github.com/DavidoTek/ProtonUp-Qt
+  tags: [compatibility, gaming]
+  install:
+    - manager: aur
+      id: protonup-qt
+    - manager: flatpak
+      id: flathub net.davidotek.pupgui2
+
+- name: Puddletag
+  description: Audio tag editor
+  url: https://docs.puddletag.net
+  tags: [viewers]
+  install:
+    - manager: [apt, aur, dnf]
+      id: puddletag
+    - manager: flatpak
+      id: flathub net.puddletag.puddletag
+
+- name: pwsh
+  description: Automation and configuration tool/framework
+  url: https://github.com/Powershell/Powershell
+  tags: [command line]
+  install:
+    - manager: aur
+      id: powershell-bin
+
+- name: py7zr
+  description: Pure Python 7-zip library
+  url: https://github.com/miurahr/py7zr
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/python-py7zr
+    - manager: pypi
+      id: py7zr
+
+- name: pypi
+  description: Tool for using end-user applications written in Python in isolated environments
+  url: https://github.com/pipxproject/pipx
+  tags: [development]
+  install:
+    - manager: pacman
+      id: extra/python-pipx
+
+- name: Python
+  description: The Python programming language
+  url: https://www.python.org
+  tags: [development]
+  install:
+    - manager: pacman
+      id: core/python
+
+- name: qBittorrent
+  description: BitTorrent client
+  url: https://www.qbittorrent.org
+  tags: [file transfer]
+  install:
+    - manager: flatpak
+      id: flathub org.qbittorrent.qBittorrent
+    - manager: pacman
+      id: extra/qbittorrent
+
+- name: qBittorrent Enhanced
+  description: qBittorrent with additional features aimed at blocking leeching clients automatically
+  url: https://github.com/c0re100/qBittorrent-Enhanced-Edition
+  tags: [file transfer]
+  install:
+    - manager: aur
+      id: qbittorrent-enhanced
+
+- name: r2modman
+  description: Mod manager for several games using Thunderstore
+  url: https://github.com/ebkr/r2modmanPlus
+  tags: [gaming, modding]
+  install:
+    - manager: aur
+      id: r2modman-bin
+
+- name: ripgrep
+  description: Recursively searches directories for a regex pattern while respecting your .gitignore
+  url: https://github.com/BurntSushi/ripgrep
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/ripgrep
+
+- name: RPCS3
+  description: PlayStation 3 emulator
+  url: https://rpcs3.net
+  tags: [emulators, gaming]
+  install:
+    - manager: aur
+      id: rpcs3-bin
+    - manager: flatpak
+      id: flathub net.rpcs3.RPCS3
+
+- name: Rsync
+  description: Fast and extraordinarily versatile file copying tool
+  url: https://github.com/RsyncProject/rsync
+  tags: [command line, file transfer]
+  install:
+    - manager: pacman
+      id: extra/rsync
+
+- name: Ruby
+  description: Ruby programming language
+  url: https://www.ruby-lang.org/en
+  tags: [development]
+  install:
+    - manager: pacman
+      id: extra/ruby
+
+- name: Ruffle
+  description: Flash Player emulator
+  url: https://ruffle.rs
+  tags: [viewers]
+  install:
+    - manager: aur
+      id: ruffle-nightly-bin
+    - manager: flatpak
+      id: flathub rs.ruffle.Ruffle
+
+- name: Rust
+  description: Systems programming language focused on safety, speed and concurrency
+  url: https://www.rust-lang.org
+  tags: [development]
+  install:
+    - manager: apt
+      id: rustc
+    - manager: bash
+      run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    - manager: dnf
+      id: rust cargo
+    - manager: pacman
+      id: extra/rust
+
+- name: RustDesk
+  description: Remote desktop application designed for self-hosting
+  url: https://github.com/rustdesk/rustdesk
+  tags: [file transfer]
+  install:
+    - manager: aur
+      id: rustdesk-bin
+    - manager: flatpak
+      id: flathub com.rustdesk.RustDesk
+
+- name: Rusty PSN CLI
+  description: Tool for downloading PS3 and PS4 game updates
+  url: https://github.com/RainbowCookie32/rusty-psn
+  tags: [gaming]
+  install:
+    - manager: aur
+      id: rusty-psn-cli-git
+
+- name: Rusty PSN GUI
+  description: Tool for downloading PS3 and PS4 game updates
+  url: https://github.com/RainbowCookie32/rusty-psn
+  tags: [gaming]
+  install:
+    - manager: aur
+      id: rusty-psn-gui-git
+
+- name: Ryujinx
+  description: Switch emulator
+  url: https://git.ryujinx.app/ryubing/ryujinx
+  tags: [emulators, gaming]
+  install:
+    - manager: aur
+      id: ryujinx
+
+- name: SAM
+  description: Steam Achievement Manager
+  url: https://github.com/PaulCombal/SamRewritten
+  tags: [gaming]
+  install:
+    - manager: aur
+      id: samrewritten-git
+
+- name: Samba Client
+  description: Tools to access a server's filespace and printers via SMB
+  url: https://www.samba.org
+  tags: [file transfer, networking]
+  install:
+    - manager: pacman
+      id: extra/smbclient
+
+- name: Samba Server
+  description: SMB fileserver and AD domain server
+  url: https://www.samba.org
+  tags: [file transfer, networking]
+  install:
+    - manager: pacman
+      id: extra/samba
+
+- name: Sameboy
+  description: Game Boy and Game Boy Color emulator
+  url: https://github.com/LIJI32/SameBoy
+  tags: [emulators, gaming]
+  install:
+    - manager: aur
+      id: sameboy
+
+- name: Sans Bullshit Sans
+  description: Font that replaces every buzzword by a Comic Sans-styled censorship bar
+  url: https://github.com/RoelN/SansBullshitSans
+  tags: [fonts]
+  install:
+    - manager: aur
+      id: ttf-sans-bullshit-sans
+
+- name: scdl
+  description: SoundCloud music Downloader
+  url: https://github.com/scdl-org/scdl
+  tags: [file transfer]
+  install:
+    - manager: pypi
+      id: scdl
+
+- name: sd
+  description: Intuitive find & replace CLI tool
+  url: https://github.com/chmln/sd
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/sd
+
+- name: SGDBoop
+  description: A program used for applying custom artwork to Steam, using SteamGridDB
+  url: https://www.steamgriddb.com/boop
+  tags: [gaming]
+  install:
+    - manager: aur
+      id: sgdboop
+    - manager: flatpak
+      id: flathub com.steamgriddb.SGDBoop
+
+- name: shadPS4
+  description: PlayStation 4 emulator
+  url: https://github.com/shadps4-emu/shadPS4
+  tags: [emulators, gaming]
+  install:
+    - manager: flatpak
+      id: flathub net.shadps4.shadPS4
+
+- name: ShellCheck
+  description: A shell script static analysis tool
+  url: https://github.com/koalaman/shellcheck
+  tags: [development]
+  install:
+    - manager: aur
+      id: shellcheck-bin
+    - manager: pacman
+      id: shellcheck
+
+- name: Ship of Harkinian
+  description: 'An unofficial port of The Legend of Zelda: Ocarina of Time'
+  url: https://shipofharkinian.com
+  tags: [gaming]
+  install:
+    - manager: aur
+      id: soh-bin
+
+- name: sl
+  description: Steam locomotive that runs across your terminal when you mistype ls
+  url: https://github.com/eyJhb/sl
+  tags: [fun]
+  install:
+    - manager: pacman
+      id: extra/sl
+
+- name: Solaar
+  description: Device manager for a wide range of Logitech devices
+  url: https://pwr-solaar.github.io/Solaar
+  tags: [hardware control]
+  install:
+    - manager: pacman
+      id: extra/solaar
+
+- name: SongRec
+  description: Shazam client
+  url: https://github.com/marin-m/SongRec
+  tags: [quality of life]
+  install:
+    - manager: flatpak
+      id: flathub com.github.marinm.songrec
+    - manager: pacman
+      id: extra/songrec
+
+- name: Space Cadet Pinball
+  description: Classic pinball game that was bundled Windows 95-XP
+  url: https://github.com/k4zmu2a/SpaceCadetPinball
+  tags: [gaming]
+  install:
+    - manager: aur
+      id: spacecadetpinball-git
+    - manager: flatpak
+      id: flathub com.github.k4zmu2a.spacecadetpinball
+
+- name: Spicetify
+  description: Command-line tool to customize the official Spotify client
+  url: https://github.com/spicetify/cli
+  tags: [modding, ricing]
+  install:
+    - manager: aur
+      id: spicetify-cli
+    - manager: bash
+      run: curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh
+
+- name: Spotify
+  description: Desktop app for playing music
+  url: https://www.spotify.com
+  tags: [viewers]
+  install:
+    - manager: flatpak
+      id: flathub com.spotify.Client
+
+- name: Starship
+  description: Minimal, blazing-fast, and infinitely customizable prompt for any shell
+  url: https://starship.rs
+  tags: [terminal emulators]
+  install:
+    - manager: pacman
+      id: extra/starship
+
+- name: Steam
+  description: Valve's digital software delivery system
+  url: https://steampowered.com
+  tags: [gaming]
+  install:
+    - manager: flatpak
+      id: flathub com.valvesoftware.Steam
+    - manager: pacman
+      id: multilib/steam
+
+- name: Steam ROM Manager
+  description: Super flexible tool for adding non-Steam games to Steam in bulk and managing game artwork and controller templates
+  url: https://github.com/SteamGridDB/steam-rom-manager
+  tags: [gaming]
+  install:
+    - manager: aur
+      id: steam-rom-manager-bin
+    - manager: flatpak
+      id: flathub com.steamgriddb.steam-rom-manager
+
+- name: Stellarium
+  description: Planetarium for your computer
+  url: https://github.com/Stellarium/stellarium
+  tags: [fun]
+  install:
+    - manager: flatpak
+      id: flathub org.stellarium.Stellarium
+
+- name: Streamlink
+  description: CLI program that opens streams from various streaming services in custom video players
+  url: https://streamlink.github.io
+  tags: [viewers]
+  install:
+    - manager: pacman
+      id: extra/streamlink
+
+- name: Streamlink Twitch GUI
+  description: twitch.tv browser for Streamlink
+  url: https://github.com/streamlink/streamlink-twitch-gui
+  tags: [viewers]
+  install:
+    - manager: aur
+      id: streamlink-twitch-gui-bin
+
+- name: Stremio
+  description: A one-stop hub for video content aggregation (movies, TV shows, series, live television or web channels)
+  url: https://www.stremio.com
+  tags: [viewers]
+  install:
+    - manager: aur
+      id: stremio
+    - manager: flatpak
+      id: flathub com.stremio.Stremio
+
+- name: SuperTuxKart
+  description: 3D kart racing game
+  url: https://github.com/supertuxkart/stk-code
+  tags: [gaming]
+  install:
+    - manager: flatpak
+      id: flathub net.supertuxkart.SuperTuxKart
+
+- name: Syncthing
+  description: Continuous file synchronization
+  url: https://syncthing.net
+  tags: [file transfer]
+  install:
+    - manager: pacman
+      id: extra/syncthing
+
+- name: Syncthing Tray
+  description: Tray application for Syncthing
+  url: https://github.com/Martchus/syncthingtray
+  tags: [file transfer]
+  install:
+    - manager: aur
+      id: syncthingtray
+    - manager: flatpak
+      id: flathub io.github.martchus.syncthingtray
+
+- name: Tailscale
+  description: A mesh VPN that makes it easy to connect your devices, wherever they are
+  url: https://tailscale.com
+  tags: [networking]
+  install:
+    - manager: bash
+      run: curl -fsSL https://tailscale.com/install.sh | sh
+    - manager: pacman
+      id: tailscale
+
+- name: tealdeer
+  description: Fast tldr client
+  url: https://github.com/tealdeer-rs/tealdeer
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/tealdeer
+
+- name: TeamViewer
+  description: Remote desktop service
+  url: https://www.teamviewer.com
+  tags: [networking]
+  install:
+    - manager: aur
+      id: teamviewer
+
+- name: Tenacity
+  description: Multi-track audio editor and recorder (fork of Audacity)
+  url: https://tenacityaudacity.org
+  tags: [editors, media creation]
+  install:
+    - manager: flatpak
+      id: flathub org.tenacityaudio.Tenacity
+    - manager: pacman
+      id: extra/tenacity
+
+- name: Terraria Font
+  description: The Grass is Greener on This Side
+  url: https://www.ffonts.net/Andy-Bold.font
+  tags: [fonts]
+  install:
+    - manager: bash
+      run: install_font 'https://www.ffonts.net/Andy-Bold.font.zip'
+
+- name: The Fuck
+  description: Magnificent app which corrects your previous console command
+  url: https://github.com/nvbn/thefuck
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/thefuck
+
+- name: The Powder Toy
+  description: Physics sandbox game
+  url: https://github.com/The-Powder-Toy/The-Powder-Toy
+  tags: [fun]
+  install:
+    - manager: aur
+      id: powder-toy
+    - manager: flatpak
+      id: flathub uk.co.powdertoy.tpt
+
+- name: Timeshift
+  description: System restore tool
+  url: https://github.com/linuxmint/timeshift
+  tags: [command line]
+  install:
+    - manager: [apt, dnf]
+      id: timeshift
+    - manager: pacman
+      id: extra/timeshift
+
+- name: TLP
+  description: Power management daemon for optimizing battery life
+  url: https://github.com/linrunner/TLP
+  tags: [system monitors]
+  install:
+    - manager: dnf
+      run: |
+        $install_command https://repo.linrunner.de/fedora/tlp/repos/releases/tlp-release.fc$(rpm -E %fedora).noarch.rpm
+        $install_command tlp
+        sudo dnf remove -y power-profiles-daemon tuned tuned-ppd
+    - manager: pacman
+      id: extra/tlp
+
+- name: TLP UI
+  description: GTK interface for configuring TLP
+  url: https://github.com/d4nj1/TLPUI
+  tags: [quality of life]
+  install:
+    - manager: aur
+      id: tlpui
+    - manager: flatpak
+      id: flathub com.github.d4nj1.tlpui
+
+- name: toilet
+  description: FIGlet-like program with filters
+  url: https://github.com/cacalabs/toilet
+  tags: [fun]
+  install:
+    - manager: pacman
+      id: extra/toilet
+
+- name: Tokei
+  description: Displays statistics about code files
+  url: https://github.com/XAMPPRocky/tokei
+  tags: [development]
+  install:
+    - manager: pacman
+      id: extra/tokei
+
+- name: Turso
+  description: CLI for Turso Cloud, the next evolution of SQLite
+  url: https://docs.turso.tech/cli
+  tags: [command line, development]
+  install:
+    - manager: aur
+      id: turso-cli-bin
+    - manager: bash
+      run: curl -sSfL https://get.tur.so/install.sh | bash
+    - manager: brew
+      id: tursodatabase/tap/turso
+
+- name: Twitch Downloader CLI
+  description: Twitch VOD/clip/chat downloader and chat renderer
+  url: https://github.com/lay295/TwitchDownloader
+  tags: [viewers]
+  install:
+    - manager: aur
+      id: twitch-downloader-bin
+
+- name: Twitch Downloader GUI
+  description: Twitch VOD/clip/chat downloader and chat renderer
+  url: https://github.com/mohad12211/twitch-downloader-gui
+  tags: [viewers]
+  install:
+    - manager: aur
+      id: twitch-downloader-gui
+
+- name: UnRAR
+  description: The RAR uncompression program
+  url: https://www.rarlab.com/rar_add.htm
+  tags: [file transfer]
+  install:
+    - manager: pacman
+      id: extra/unrar
+
+- name: UnZip
+  description: For extracting and viewing files in zip archives
+  url: http://infozip.sourceforge.net/UnZip.html
+  tags: [file transfer]
+  install:
+    - manager: pacman
+      id: extra/unzip
+
+- name: Upscayl
+  description: AI image upscaler
+  url: https://github.com/upscayl/upscayl
+  tags: [artificial intelligence, editors]
+  install:
+    - manager: aur
+      id: upscayl-bin
+    - manager: flatpak
+      id: flathub org.upscayl.Upscayl
+
+- name: usbmuxd
+  description: USB Multiplex Daemon
+  url: https://marcansoft.com/blog/iphonelinux/usbmuxd
+  tags: [hardware control]
+  install:
+    - manager: pacman
+      id: extra/usbmuxd
+
+- name: uv
+  description: Extremely fast Python package and project manager
+  url: https://github.com/astral-sh/uv
+  tags: [development]
+  install:
+    - manager: bash
+      run: curl -LsSf https://astral.sh/uv/install.sh | sh
+    - manager: pacman
+      id: extra/uv
+    - manager: pypi
+      id: uv
+
+- name: Ventoy
+  description: A new bootable USB solution
+  url: http://www.ventoy.net
+  tags: [command line]
+  install:
+    - manager: aur
+      id: ventoy-bin
+
+- name: Vesktop
+  description: Snappier Discord desktop app with Vencord preinstalled
+  url: https://github.com/Vencord/Vesktop
+  tags: [social]
+  install:
+    - manager: aur
+      id: vesktop-bin
+    - manager: flatpak
+      id: flathub dev.vencord.Vesktop
+
+- name: VirtualBox
+  description: Powerful x86 virtualization
+  url: https://virtualbox.org
+  tags: [development, virtualization]
+  install:
+    - manager: pacman
+      id: extra/virtualbox extra/virtualbox-host-modules-arch extra/virtualbox-guest-iso
+
+- name: Visual Studio Code
+  description: Powerful text editor
+  url: https://code.visualstudio.com
+  tags: [development, editors]
+  install:
+    - manager: aur
+      id: visual-studio-code-bin
+    - manager: flatpak
+      id: flathub com.visualstudio.code
+
+- name: Vita3K
+  description: PlayStation Vita emulator
+  url: https://github.com/Vita3K/Vita3K
+  tags: [emulators, gaming]
+  install:
+    - manager: aur
+      id: vita3k-git
+
+- name: VLC
+  description: Multimedia player that plays most multimedia files as well as DVDs, Audio CDs, VCDs, and various streaming protocols
+  url: https://www.videolan.org/vlc
+  tags: [viewers]
+  install:
+    - manager: flatpak
+      id: flathub org.videolan.VLC
+    - manager: pacman
+      id: extra/vlc
+
+- name: Waydroid
+  description: Uses a container-based approach to boot a full Android system
+  url: https://github.com/waydroid/waydroid
+  tags: [emulators]
+  install:
+    - manager: apt
+      run: |
+        $install_command curl ca-certificates
+        curl -s https://repo.waydro.id | sudo bash
+        $install_command waydroid
+    - manager: dnf
+      id: waydroid
+    - manager: pacman
+      id: extra/waydroid
+
+- name: whois
+  description: Intelligent WHOIS client
+  url: https://github.com/rfc1036/whois
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/whois
+
+- name: Wine
+  description: Windows compatibility layer
+  url: https://www.winehq.org
+  tags: [compatibility, gaming]
+  install:
+    - manager: flatpak
+      id: flathub org.winehq.Wine
+
+- name: Wireshark
+  description: Network protocol analyzer
+  url: https://www.wireshark.org
+  tags: [networking]
+  install:
+    - manager: flatpak
+      id: flathub org.wireshark.Wireshark
+
+- name: wtf
+  description: Acronym dictionary
+  url: https://sourceforge.net/projects/bsdwtf
+  tags: [fun]
+  install:
+    - manager: aur
+      id: wtf
+
+- name: WTFUtil
+  description: Personal information dashboard for your terminal
+  url: https://wtfutil.com
+  tags: [system monitors]
+  install:
+    - manager: aur
+      id: wtfutil
+
+- name: xdman
+  description: Xtreme Download Manager
+  url: https://xtremedownloadmanager.com
+  tags: [file transfer]
+  install:
+    - manager: aur
+      id: xdman
+
+- name: XMousePasteBlock
+  description: Userspace tool to disable middle mouse button paste in Xorg
+  url: https://github.com/milaq/XMousePasteBlock
+  tags: [quality of life]
+  install:
+    - manager: aur
+      id: xmousepasteblock
+
+- name: yarn
+  description: Fast, reliable, and secure dependency management
+  url: https://classic.yarnpkg.com
+  tags: [development]
+  install:
+    - manager: pacman
+      id: extra/yarn
+
+- name: yt-dlp
+  description: Feature-rich command-line audio/video downloader
+  url: https://github.com/yt-dlp/yt-dlp
+  tags: [file transfer]
+  install:
+    - manager: pypi
+      id: yt-dlp
+
+- name: zoxide
+  description: A smarter cd command that learns your habits
+  url: https://github.com/ajeetdsouza/zoxide
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/zoxide
+
+- name: zsh
+  description: Z shell, a powerful shell with scripting capabilities
+  url: https://github.com/zsh-users/zsh
+  tags: [command line]
+  install:
+    - manager: pacman
+      id: extra/zsh extra/zsh-completions
