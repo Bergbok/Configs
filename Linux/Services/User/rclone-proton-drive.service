@@ -1,0 +1,12 @@
+[Unit]
+Description=Mounts Proton Drive using rclone
+AssertPathIsDirectory=/mnt/Proton-Drive
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=rclone mount --vfs-cache-mode writes pdrive: /mnt/Proton-Drive
+ExecStop=fusermount -zu /mnt/Proton-Drive
+
+[Install]
+WantedBy=default.target
