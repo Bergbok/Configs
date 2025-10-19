@@ -3,6 +3,7 @@
 user_pref("apz.overscroll.enabled", false);
 user_pref("browser.display.background_color.dark", "#212121");
 user_pref("browser.download.autohideButton", false);
+user_pref("browser.tabs.groups.enabled", false);
 user_pref("browser.toolbars.bookmarks.showOtherBookmarks", false);
 user_pref("browser.toolbars.bookmarks.visibility", "always");
 user_pref("devtools.chrome.enabled", true);
