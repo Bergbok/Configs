@@ -183,7 +183,7 @@
 
 @-moz-document domain("twitch.tv") {
 	:root {
-		--color-twitch-purple-6: #191919;
+		--color-twitch-purple-6: #191919 !important;
 		--color-twitch-purple-8: transparent !important;
 		--color-twitch-purple-9: transparent !important;
 		--color-hinted-grey-1: #101010 !important;
@@ -319,7 +319,9 @@
 
 	.cFdOrq,
 	.tc-upsell,
+    div.video-chat__header,
     div.stream-chat-header,
+    button[aria-label="Cheer"],
 	[data-tooltip-type="blocked"],
 	div.Layout-sc-1xcs6mc-0 czRfnU,
 	li:has(a[href="/settings/prime"]),

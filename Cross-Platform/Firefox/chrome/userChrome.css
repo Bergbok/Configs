@@ -87,9 +87,10 @@ panelview,
 
 .toolbarbutton-icon[src="page-icon:https://www.icloud.com/"],
 .toolbarbutton-icon[src="page-icon:https://web.whatsapp.com/"],
-.toolbarbutton-icon[src="page-icon:http://radio.garden/search"],
-.toolbarbutton-icon[src="page-icon:http://pi-hostname-here.local/admin/"],
-.toolbarbutton-icon[src="page-icon:http://phone-hostname-here.local/"] {
+.toolbarbutton-icon[src="page-icon:https://radio.garden/search"],
+.toolbarbutton-icon[src="page-icon:https://login.tailscale.com/admin/machines"],
+.toolbarbutton-icon[src="page-icon:http://pi-hostname-here.local/admin"],
+.toolbarbutton-icon[src="page-icon:http://phone-hostname-here.local"] {
 	width: 0 !important;
 	height: 0 !important;
 	padding: 0 0 16px 16px !important;
@@ -104,11 +105,15 @@ panelview,
 	background: url("./Icons/apple.png") !important;
 }
 
+.toolbarbutton-icon[src="page-icon:https://login.tailscale.com/admin/machines"] {
+	background: url("./Icons/tailscale.png") !important;
+}
+
 .toolbarbutton-icon[src="page-icon:https://web.whatsapp.com/"] {
 	background: url("./Icons/whatsapp.png") !important;
 }
 
-.toolbarbutton-icon[src="page-icon:http://radio.garden/search"] {
+.toolbarbutton-icon[src="page-icon:https://radio.garden/search"] {
 	background: url("./Icons/radiogarden.png") !important;
 }
 
