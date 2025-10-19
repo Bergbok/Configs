@@ -2641,7 +2641,7 @@ function Invoke-Setup {
                             Write-Warning "gpg.exe not found, couldn't set up git gpg signing"
                         }
                     }
-                    if (Get-Command code -ErrorAction SilentlyContinue) {
+                    if (Get-Command code -ErrorAction SilentlyContinue || $script:selected -contains 'Visual Studio Code') {
                         git config --global core.editor 'code --wait'
                     } else {
                         script:Log 'git: Could not set core.editor to VSCode.'
