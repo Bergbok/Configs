@@ -2,8 +2,8 @@
     "windows": [
         {
             "emotePopup": {
-                "height": 490,
-                "width": 973,
+                "height": 481,
+                "width": 1251,
                 "x": 1920,
                 "y": 0
             },
@@ -12,9 +12,126 @@
             "tabs": [
                 {
                     "highlightsEnabled": false,
+                    "selected": true,
+                    "splits2": {
+                        "flexh": 1,
+                        "flexv": 1,
+                        "items": [
+                            {
+                                "data": {
+                                    "name": "greatsphynx",
+                                    "type": "twitch"
+                                },
+                                "filters": [
+                                ],
+                                "flexh": 1,
+                                "flexv": 1,
+                                "moderationMode": false,
+                                "type": "split"
+                            },
+                            {
+                                "flexh": 1,
+                                "flexv": 1,
+                                "items": [
+                                    {
+                                        "data": {
+                                            "name": "dumbmoths",
+                                            "type": "twitch"
+                                        },
+                                        "filters": [
+                                        ],
+                                        "flexh": 1,
+                                        "flexv": 1,
+                                        "moderationMode": false,
+                                        "type": "split"
+                                    },
+                                    {
+                                        "data": {
+                                            "name": "llugnuto779",
+                                            "type": "twitch"
+                                        },
+                                        "filters": [
+                                        ],
+                                        "flexh": 1,
+                                        "flexv": 1,
+                                        "moderationMode": false,
+                                        "type": "split"
+                                    }
+                                ],
+                                "type": "vertical"
+                            },
+                            {
+                                "flexh": 1,
+                                "flexv": 1,
+                                "items": [
+                                    {
+                                        "data": {
+                                            "name": "big_noli",
+                                            "type": "twitch"
+                                        },
+                                        "filters": [
+                                        ],
+                                        "flexh": 1,
+                                        "flexv": 1,
+                                        "moderationMode": false,
+                                        "type": "split"
+                                    },
+                                    {
+                                        "data": {
+                                            "name": "budderdog_",
+                                            "type": "twitch"
+                                        },
+                                        "filters": [
+                                        ],
+                                        "flexh": 1,
+                                        "flexv": 1,
+                                        "moderationMode": false,
+                                        "type": "split"
+                                    }
+                                ],
+                                "type": "vertical"
+                            },
+                            {
+                                "flexh": 1,
+                                "flexv": 1,
+                                "items": [
+                                    {
+                                        "data": {
+                                            "name": "skulljackie",
+                                            "type": "twitch"
+                                        },
+                                        "filters": [
+                                        ],
+                                        "flexh": 1,
+                                        "flexv": 1,
+                                        "moderationMode": false,
+                                        "type": "split"
+                                    },
+                                    {
+                                        "data": {
+                                            "name": "thezomo",
+                                            "type": "twitch"
+                                        },
+                                        "filters": [
+                                        ],
+                                        "flexh": 1,
+                                        "flexv": 1,
+                                        "moderationMode": false,
+                                        "type": "split"
+                                    }
+                                ],
+                                "type": "vertical"
+                            }
+                        ],
+                        "type": "horizontal"
+                    },
+                    "title": "gongo"
+                },
+                {
+                    "highlightsEnabled": false,
                     "splits2": {
                         "data": {
-                            "name": "greatsphynx",
+                            "name": "budderdog_",
                             "type": "twitch"
                         },
                         "filters": [
@@ -24,13 +141,13 @@
                         "moderationMode": false,
                         "type": "split"
                     },
-                    "title": "gongo"
+                    "title": "buddadog"
                 },
                 {
                     "highlightsEnabled": false,
                     "splits2": {
                         "data": {
-                            "name": "big_noli",
+                            "name": "dumbmoths",
                             "type": "twitch"
                         },
                         "filters": [
@@ -43,23 +160,6 @@
                 },
                 {
                     "highlightsEnabled": false,
-                    "splits2": {
-                        "data": {
-                            "name": "thezomo",
-                            "type": "twitch"
-                        },
-                        "filters": [
-                        ],
-                        "flexh": 1,
-                        "flexv": 1,
-                        "moderationMode": false,
-                        "type": "split"
-                    },
-                    "title": "zomo"
-                },
-                {
-                    "highlightsEnabled": false,
-                    "selected": true,
                     "splits2": {
                         "data": {
                             "name": "dunkstream",
@@ -78,7 +178,7 @@
                     "highlightsEnabled": false,
                     "splits2": {
                         "data": {
-                            "name": "vinesauce",
+                            "name": "gigguk",
                             "type": "twitch"
                         },
                         "filters": [
@@ -88,7 +188,39 @@
                         "moderationMode": false,
                         "type": "split"
                     },
-                    "title": "vinny"
+                    "title": "gigguk"
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "name": "llugnuto779",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "gondal"
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "name": "skulljackie",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "jackie"
                 },
                 {
                     "highlightsEnabled": false,
@@ -105,22 +237,6 @@
                         "type": "split"
                     },
                     "title": "jerma"
-                },
-                {
-                    "highlightsEnabled": false,
-                    "splits2": {
-                        "data": {
-                            "name": "jabroni_mike",
-                            "type": "twitch"
-                        },
-                        "filters": [
-                        ],
-                        "flexh": 1,
-                        "flexv": 1,
-                        "moderationMode": false,
-                        "type": "split"
-                    },
-                    "title": "jmike"
                 },
                 {
                     "highlightsEnabled": false,
@@ -158,7 +274,22 @@
                     "highlightsEnabled": false,
                     "splits2": {
                         "data": {
-                            "name": "shrimps247",
+                            "name": "meatcanyon",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    }
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "name": "big_noli",
                             "type": "twitch"
                         },
                         "filters": [
@@ -168,7 +299,39 @@
                         "moderationMode": false,
                         "type": "split"
                     },
-                    "title": "shrimps"
+                    "title": "noli"
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "name": "greatsphynx",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "sphynx"
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "name": "skurrypls",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "skurry"
                 },
                 {
                     "highlightsEnabled": false,
@@ -205,6 +368,158 @@
                     "highlightsEnabled": false,
                     "splits2": {
                         "data": {
+                            "name": "vinesauce",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "vinny"
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
+                            "name": "thezomo",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "zomo"
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "flexh": 1,
+                        "flexv": 1,
+                        "items": [
+                            {
+                                "flexh": 1,
+                                "flexv": 1,
+                                "items": [
+                                    {
+                                        "data": {
+                                            "name": "thesecretingredients",
+                                            "type": "twitch"
+                                        },
+                                        "filters": [
+                                        ],
+                                        "flexh": 1,
+                                        "flexv": 1,
+                                        "moderationMode": false,
+                                        "type": "split"
+                                    },
+                                    {
+                                        "data": {
+                                            "name": "notgccx",
+                                            "type": "twitch"
+                                        },
+                                        "filters": [
+                                        ],
+                                        "flexh": 1,
+                                        "flexv": 1,
+                                        "moderationMode": false,
+                                        "type": "split"
+                                    }
+                                ],
+                                "type": "vertical"
+                            },
+                            {
+                                "flexh": 1,
+                                "flexv": 1,
+                                "items": [
+                                    {
+                                        "data": {
+                                            "name": "yugioh_official",
+                                            "type": "twitch"
+                                        },
+                                        "filters": [
+                                        ],
+                                        "flexh": 1,
+                                        "flexv": 1,
+                                        "moderationMode": false,
+                                        "type": "split"
+                                    },
+                                    {
+                                        "data": {
+                                            "name": "zcomdy21",
+                                            "type": "twitch"
+                                        },
+                                        "filters": [
+                                        ],
+                                        "flexh": 1,
+                                        "flexv": 1,
+                                        "moderationMode": false,
+                                        "type": "split"
+                                    }
+                                ],
+                                "type": "vertical"
+                            },
+                            {
+                                "flexh": 1,
+                                "flexv": 1,
+                                "items": [
+                                    {
+                                        "data": {
+                                            "name": "shrimps247",
+                                            "type": "twitch"
+                                        },
+                                        "filters": [
+                                        ],
+                                        "flexh": 1,
+                                        "flexv": 1,
+                                        "moderationMode": false,
+                                        "type": "split"
+                                    },
+                                    {
+                                        "data": {
+                                            "name": "mst3k",
+                                            "type": "twitch"
+                                        },
+                                        "filters": [
+                                        ],
+                                        "flexh": 1,
+                                        "flexv": 1,
+                                        "moderationMode": false,
+                                        "type": "split"
+                                    }
+                                ],
+                                "type": "vertical"
+                            }
+                        ],
+                        "type": "horizontal"
+                    },
+                    "title": "24/7"
+                },
+                {
+                    "highlightsEnabled": true,
+                    "splits2": {
+                        "data": {
+                            "name": "bergbok",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    },
+                    "title": "⠀"
+                },
+                {
+                    "highlightsEnabled": false,
+                    "splits2": {
+                        "data": {
                             "type": "mentions"
                         },
                         "filters": [
@@ -213,7 +528,8 @@
                         "flexv": 1,
                         "moderationMode": false,
                         "type": "split"
-                    }
+                    },
+                    "title": "mentions"
                 },
                 {
                     "highlightsEnabled": false,
@@ -227,29 +543,14 @@
                         "flexv": 1,
                         "moderationMode": false,
                         "type": "split"
-                    }
-                },
-                {
-                    "highlightsEnabled": true,
-                    "splits2": {
-                        "data": {
-                            "name": "bergbok",
-                            "type": "twitch"
-                        },
-                        "filters": [
-                        ],
-                        "flexh": 1,
-                        "flexv": 1,
-                        "moderationMode": true,
-                        "type": "split"
                     },
-                    "title": "      "
+                    "title": "whispers"
                 }
             ],
             "type": "main",
             "width": 1920,
-            "x": 1920,
-            "y": 0
+            "x": 0,
+            "y": 95
         }
     ]
 }
