@@ -45,6 +45,7 @@ toolbarbutton#downloads-button>stack.toolbarbutton-badge-stack>box>image {
 }
 
 #alltabs-button,
+#context-sendimage,
 #unified-extensions-view>box:nth-child(1),
 #unified-extensions-view>toolbarseparator:nth-child(2) {
 	display: none !important;
