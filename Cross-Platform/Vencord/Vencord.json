@@ -3,7 +3,10 @@
         "autoUpdate": true,
         "autoUpdateNotification": true,
         "useQuickCss": true,
-        "themeLinks": [],
+        "themeLinks": [
+            "https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Themes/DiscordRecolor/DiscordRecolor.theme.css",
+            "https://raw.githubusercontent.com/NYRI4/Discolored/refs/heads/master/support/discolored.theme.css"
+        ],
         "eagerPatches": false,
         "enabledThemes": [],
         "enableReactDevtools": false,
@@ -73,11 +76,11 @@
                 "enabled": false
             },
             "BetterFolders": {
-                "enabled": true,
+                "enabled": false,
                 "sidebar": false,
                 "showFolderIcon": 1,
                 "keepIcons": false,
-                "closeAllHomeButton": true,
+                "closeAllHomeButton": false,
                 "closeAllFolders": false,
                 "forceOpen": false,
                 "sidebarAnim": false,
@@ -264,7 +267,12 @@
                 "enabled": false
             },
             "ImageZoom": {
-                "enabled": true
+                "enabled": true,
+                "size": 100,
+                "zoom": 2,
+                "saveZoomValues": true,
+                "nearestNeighbour": false,
+                "square": false
             },
             "ImplicitRelationships": {
                 "enabled": false
@@ -513,7 +521,8 @@
                 "enabled": true,
                 "displayNames": false,
                 "mode": "user-nick",
-                "inReplies": false
+                "inReplies": false,
+                "friendNicknames": "dms"
             },
             "ShowTimeoutDuration": {
                 "enabled": false
@@ -659,6 +668,12 @@
             },
             "ExpressionCloner": {
                 "enabled": false
+            },
+            "CopyStickerLinks": {
+                "enabled": false
+            },
+            "ImageFilename": {
+                "enabled": false
             }
         },
         "notifications": {
@@ -671,7 +686,7 @@
             "authenticated": false,
             "url": "https://api.vencord.dev/",
             "settingsSync": false,
-            "settingsSyncVersion": 1749400363401
+            "settingsSyncVersion": 1761671580969
         }
     },
     "quickCss": ""
