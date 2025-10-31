@@ -47,7 +47,8 @@ toolbarbutton#downloads-button>stack.toolbarbutton-badge-stack>box>image {
 #alltabs-button,
 #context-sendimage,
 #unified-extensions-view>box:nth-child(1),
-#unified-extensions-view>toolbarseparator:nth-child(2) {
+#unified-extensions-view>toolbarseparator:nth-child(2),
+#pinned-tabs-container > tab[label^="Wplace"] > .tab-stack > .tab-content > .tab-icon-stack > .tab-icon-overlay[muted] {
 	display: none !important;
 }
 
