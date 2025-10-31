@@ -368,7 +368,10 @@
                 "enabled": false
             },
             "NoPendingCount": {
-                "enabled": false
+                "enabled": true,
+                "hideFriendRequestsCount": false,
+                "hideMessageRequestsCount": false,
+                "hidePremiumOffersCount": true
             },
             "NoProfileThemes": {
                 "enabled": true
@@ -686,8 +689,8 @@
             "authenticated": false,
             "url": "https://api.vencord.dev/",
             "settingsSync": false,
-            "settingsSyncVersion": 1761671580969
+            "settingsSyncVersion": 1761742650868
         }
     },
-    "quickCss": ""
+    "quickCss": "a[href='/shop'],\n.actionButton_e01b91,\n[aria-label='GET_PREMIUM'],\n[class*='burstReactionTooltipUpsell'],\n[class*='burstReactionTooltipSpacer'],\n[class*='reactionEmojiDetailsDivider'],\n[aria-label='super reaction tooltip upsell'],\n[aria-label='A better way to react on Discord'],\ndiv.scroller_c47fa9.thin_eed6a8.scrollerBase_eed6a8.fade_eed6a8 > ul > li:nth-child(n+3):nth-child(-n+4),\ndiv.flex_dc333f.horizontal_dc333f.justifyCenter_ec1a20.alignCenter_ec1a20.wrap_ec1a20.otherEmojisContainer_e58351 > button,\n#app-mount > div.appAsidePanelWrapper_bd26cc > div.notAppAsidePanel_bd26cc > div.app_bd26cc > div > div.layers_d4b6c5.layers_a01fb1 > div:nth-child(2) > div > div.sidebarRegion_c25c6d > div > nav > div > div.premiumTab_c10c74.item_a0.themed_a0 > div.premiumLabel_ae3c77 > div {\n    display: none !important;\n}\n\n.notice_be03aa,\n[class*='header'],\t\t\t\t\t\t\t/* Line between server title and Events */\n[class*='searchBar'] {\t\t\t\t\t\t/* Line between \"Find or start a conversation\" and Friends */\n    box-shadow: none !important;\n}\n\ndiv[class^='folder'],\ndiv[class^='friendsBadge'],\nspan[class^='expandedFolderBackground'] {\n    background: none !important;\n}\n\n.bd-addon-error,\n[class*='outer'] {\t\t\t\t\t\t\t/* Background of active users on friends tab */\n    background-color: #191919 !important;\n}\n\n[class*='colorInfo'] {\n    background-color: #212121 !important;\n}\n\n[class*='fileNameLink'],\ndiv.reactionCount_ec6b19,\n.blockedSystemMessage_c09d0f:hover .blockedAction_c09d0f {\n    color: #c8c8c8 !important;\n}\n\n.operations_baf0d6 > a,\n.ephemeralMessage_eccadc a,\n#guild-context-invite-people > div,\n.reset_fa7401.lookLink_dd4f85.colorLink_dd4f85,\n.colorBrand_d90b3d:not(.focused_d90b3d):not(:active) {\n    color: var(--interactive-normal) !important;\n}\n\n/* # EMOTE PICKER */\n/* ## Nitro Hiding */\n[class*='upsellContainer'],\t\t\t\t\t/* Nitro ad that appears when scrolling down */\n[class*='nitroBottomDivider'],\t\t\t\t/* Thin line between servers */\n[class*='emojiLockIconContainer'],\t\t\t/* Lock icons on emojis & darkening overlay */\n[class*='nitroTopDividerContainer'],\t\t/* Divider between \"Frequently Used\" and server emojis */\n[class*='categoryItemLockIconContainer'] {\t/* Lock icons on server icons */\n    display: none !important;\n}\n[class*='categorySectionNitroLocked'] {\t\t/* Pink background */\n    background-color: transparent !important;\n}\n/* ## Misc */\n[class*='positionLayer'] {\t\t\t\t\t/* Enlarge emoji/sticker/gif drawer */\n    height: calc(100vh - 220px) !important;\n}\nbutton[aria-label='Send a gift'] {\n    display: none !important;\n}\n"
 }
