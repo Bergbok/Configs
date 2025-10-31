@@ -1,14 +1,4 @@
 {
-    "behaviour": {
-        "autorun": false,
-        "pauseChatModifier": 67108864,
-        "autocompletion": {
-            "userCompletionOnlyWithAt": true,
-            "emoteCompletionWithColon": true
-        },
-        "showJoins": false,
-        "showParts": false
-    },
     "hotkeys": {
         "addedDefaults": [
             "change channel",
@@ -73,7 +63,6 @@
             "send message and keep text",
             "show global search",
             "show search",
-            "toggle live tabs only",
             "toggle local r9k",
             "toggle overlay click-through",
             "toggle tab visibility",
@@ -575,15 +564,12 @@
         }
     },
     "misc": {
-        "currentVersion": "2.5.2",
+        "currentVersion": "2.5.4",
         "lockNotebookLayout": false,
-        "attachExtensionToAnyProcess": false,
-        "emotesTooltipPreview": 1,
         "scrollback": {
-            "usercardLimit": 6969,
-            "splitLimit": 6969
+            "splitLimit": 9001,
+            "usercardLimit": 9001
         },
-        "askOnImageUpload": false,
         "askOnTabVisibilityToggle": false
     },
     "accounts": {
@@ -595,136 +581,27 @@
             "oauthToken": ""
         }
     },
-    "ui": {
-        "lastSelectChannelTab": 0,
-        "lastSelectIrcConn": -1,
-        "showSendButton": false
-    },
     "appearance": {
-        "uiScale2": 1.0,
-        "currentFontSize": 10,
-        "tabDirection": 0,
-        "showReplyButton": false,
-        "showTabCloseButton": false,
         "messages": {
-            "separateMessages": true,
-            "alternateMessageBackground": true,
-            "hideModerated": false,
-            "showTimestamps": true,
-            "timestampFormat": "h:mm",
-            "lastMessagePattern": 1,
-            "findAllUsernames": true,
-            "lastMessageColor": "#ff7f2026",
-            "showLastMessageIndicator": false
+            "separateMessages": false,
+            "alternateMessageBackground": true
         },
-        "smoothScrollingNewMessages": true,
         "splitheader": {
-            "showUptime": true,
             "showViewerCount": true,
-            "showGame": true,
-            "showTitle": false
+            "showTitle": true,
+            "showUptime": true
         },
-        "thumbnailSize": 200,
-        "thumbnailSizeStream": 3,
-        "boldScale": 50.0,
-        "tabVisibility": 0,
-        "currentFontFamily": "Arial",
-        "showTabLiveButton": true,
-        "hidePreferencesButton": false,
-        "hideUserButton": true
+        "uiScale2": 1.200000047683716,
+        "currentFontFamily": "BigBlueTerm437 Nerd Font Mono",
+        "theme": {
+            "name": "System"
+        },
+        "tabStyle": "compact",
+        "tabVisibility": 0
     },
     "emotes": {
-        "scale": 1.0,
         "showUnlistedSevenTVEmotes": true,
-        "removeSpacesBetweenEmotes": true,
-        "emojiSet": "Apple"
-    },
-    "notifications": {
-        "enableToast": true,
-        "twitch": [
-            "Jerma985",
-            "GreatSphynx"
-        ],
-        "enableFlashTaskbar": true,
-        "onAnyChannel": false,
-        "highlightSoundPath": "",
-        "customPlaySound": false,
-        "enablePlaySound": true
-    },
-    "ignore": {
-        "phrases": [
-            {
-                "pattern": "(Link Your Account Here|keep updated with sleepy|Thank you for smashing it|Resub hype!|NEW YOUTUBE VIDEO pokeU|pokeING GO ON THE REDDIT RIGHT NOW AND POST MEMES|You can find Poke on twitter|Amazon Prime members get a free Twitch subscription each month.|Follow me on Instagram|Join my Discord|If you're enjoying the stream, don't forget to follow|follow dizzy on social media|dizzy is not making a comeback on Apex|Please ask for permission to post a link.)",
-                "regex": true,
-                "isBlock": true,
-                "replaceWith": "",
-                "caseSensitive": true
-            }
-        ]
-    },
-    "highlighting": {
-        "users": [
-            {
-                "pattern": "Jerma985",
-                "showInMentions": true,
-                "alert": true,
-                "sound": true,
-                "regex": false,
-                "case": false,
-                "soundUrl": "file:///jerma-notification-path-here",
-                "color": "#7f7f3f49"
-            }
-        ],
-        "blacklist": [
-            {
-                "pattern": "Klastixs",
-                "regex": false
-            },
-            {
-                "pattern": "nosracnek",
-                "regex": false
-            },
-            {
-                "pattern": "Fossabot",
-                "regex": false
-            }
-        ],
-        "highlightSoundPath": "default-notification-path-here",
-        "alwaysPlaySound": true,
-        "alerts": true,
-        "selfHighlight": {
-            "enableTaskbarFlashing": false
-        },
-        "thread": {
-            "enableTaskbarFlashing": false
-        }
-    },
-    "links": {
-        "linkInfoTooltip": true
-    },
-    "streamerMode": {
-        "enabled": 0
-    },
-    "external": {
-        "imageUploader": {
-            "enabled": true,
-            "url": "https://api.imgur.com/3/image",
-            "formField": "image",
-            "headers": "Authorization: Client-ID imgur-client-id-here",
-            "link": "{data.link}",
-            "deletionLink": "https://imgur.com/delete/{data.deletehash}"
-        }
-    },
-    "filtering": {
-        "filters": []
-    },
-    "experiments": {
-        "useSmartEmoteCompletion": true
-    },
-    "commands": {
-        "allowCommandsAtEnd": false
-    },
-    "similarity": {
-        "hideSimilar": false
+        "emojiSet": "apple",
+        "removeSpacesBetweenEmotes": true
     }
 }
